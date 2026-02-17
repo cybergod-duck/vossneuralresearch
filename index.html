@@ -3,76 +3,153 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Voss Neural Research | R&D Division</title>
+  <title>Voss Neural Research | Central Command</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Orbitron:wght@600&display=swap" rel="stylesheet">
   <style>
     :root { --bg: #06080f; --text: #e0e7ff; --accent: #7c3aed; --muted: #4b5563; }
-    body { margin:0; font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); line-height:1.7; }
-    .container { max-width:850px; margin:0 auto; padding:2rem; }
-    header { text-align:left; padding:8rem 0 4rem; border-bottom: 1px solid rgba(255,255,255,0.05); }
-    h1 { font-family:'Orbitron',sans-serif; font-size:2.2rem; margin:0; color: #fff; letter-spacing: 2px; }
-    .tagline { font-size:1.1rem; color: var(--accent); margin:0.5rem 0; text-transform: uppercase; letter-spacing: 1px; }
-    section { margin:4rem 0; }
-    h2 { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 3px; color: var(--muted); margin-bottom: 1.5rem; }
-    .content-block { background:rgba(30,27,75,0.2); padding:2rem; border-left: 3px solid var(--accent); }
-    .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; }
-    .project-node { font-size: 0.85rem; padding: 1rem; border: 1px solid rgba(124,58,237,0.1); opacity: 0.8; }
-    footer { text-align:center; padding:4rem 2rem; opacity:0.4; font-size:0.8rem; border-top: 1px solid rgba(255,255,255,0.05); }
+    
+    * { box-sizing: border-box; }
+    
+    body { 
+      margin: 0; 
+      font-family: 'Inter', sans-serif; 
+      background: var(--bg); 
+      color: var(--text); 
+      height: 100vh; 
+      display: flex; 
+      flex-direction: column; 
+      overflow: hidden; /* No scrolling */
+    }
+
+    .dashboard {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 1.5fr 1fr;
+      gap: 2rem;
+      padding: 2rem;
+      align-items: center;
+    }
+
+    /* Side Columns */
+    .column {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    /* Central Node */
+    .central-node {
+      text-align: center;
+      padding: 3rem;
+      border: 1px solid rgba(124, 58, 237, 0.3);
+      background: radial-gradient(circle, rgba(124, 58, 237, 0.1) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    h1 { 
+      font-family: 'Orbitron', sans-serif; 
+      font-size: 2rem; 
+      margin: 0; 
+      letter-spacing: 4px; 
+      color: #fff;
+    }
+
+    .tagline { 
+      font-size: 0.8rem; 
+      color: var(--accent); 
+      text-transform: uppercase; 
+      letter-spacing: 2px;
+      margin-top: 10px;
+    }
+
+    /* Info Blocks */
+    .panel {
+      background: rgba(30, 27, 75, 0.3);
+      padding: 1.5rem;
+      border-left: 2px solid var(--accent);
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+
+    h2 { 
+      font-size: 0.7rem; 
+      text-transform: uppercase; 
+      letter-spacing: 2px; 
+      color: var(--muted); 
+      margin-top: 0;
+    }
+
+    .node-item {
+      font-size: 0.8rem;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .node-item strong { color: var(--accent); }
+
+    footer { 
+      text-align: center; 
+      padding: 1rem; 
+      font-size: 0.7rem; 
+      opacity: 0.4; 
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+
+    /* Responsiveness for smaller screens to still look okay */
+    @media (max-width: 900px) {
+      body { overflow: auto; }
+      .dashboard { grid-template-columns: 1fr; }
+      .central-node { order: -1; border-radius: 12px; }
+    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>VOSS NEURAL RESEARCH</h1>
-      <p class="tagline">Neurocognitive Logic & Behavioral Automation</p>
-    </header>
+
+  <div class="dashboard">
     
-    <section>
-      <h2>Corporate Mandate</h2>
-      <div class="content-block">
-        Voss Neural Research LLC operates as a private longitudinal study (N=1) focused on the intersection of Large Language Models (LLMs) and Substance Use Disorder (SUD) recovery. We investigate the efficacy of AI-human symbiosis as a tool for neurocognitive stabilization and reward pathway redirection in subjects with documented chronic stimulant use history.
+    <div class="column">
+      <div class="panel">
+        <h2>Corporate Mandate</h2>
+        Longitudinal study (N=1) mapping the intersection of LLM interaction and neurocognitive stabilization in subjects with chronic SUD history. 
       </div>
-    </section>
-
-    <section>
-      <h2>Methodology: Generative Output</h2>
-      <p>Our research posits that high-velocity generative output—including music production, system prompt engineering, and interface design—functions as a tangible metric for cognitive focus and craving modulation. Every "artifact" produced under the Voss umbrella serves as a data point in mapping the subject's engagement with synthetic intelligence.</p>
-    </section>
-
-    <section>
-      <h2>Research Portfolios (Active Nodes)</h2>
-      <div class="project-grid">
-        <div class="project-node">
-          <strong>Node: DUCKTRONIKZ</strong><br>
-          Study of algorithmic sound synthesis and sonic texture as a focus-anchor.
-        </div>
-        <div class="project-node">
-          <strong>Node: OVERMIND GENESIS</strong><br>
-          Experimental terminal architecture and digital ritualism as a cognitive framework.
-        </div>
-        <div class="project-node">
-          <strong>Node: LATTICE_AGENT_V1</strong><br>
-          Development of high-personality system prompts for autonomous LLM interaction.
-        </div>
-        <div class="project-node">
-          <strong>Node: VERCEL_PROTOTYPING</strong><br>
-          UI/UX stress-testing in hyper-focused development environments.
-        </div>
+      <div class="panel">
+        <h2>Methodology</h2>
+        High-velocity generative output—including music and prompt architecture—serves as a primary metric for reward pathway redirection and focus-anchoring.
       </div>
-    </section>
+    </div>
 
-    <section style="text-align:left;">
-      <h2>Inquiries</h2>
-      <p style="font-size: 0.9rem;">Direct all administrative or technical inquiries to: <br>
-      <a href="mailto:info@vossneuralresearch.com" style="color:var(--accent); text-decoration:none;">info@vossneuralresearch.com</a></p>
-    </section>
+    <div class="central-node">
+      <h1>VOSS NEURAL</h1>
+      <p class="tagline">Neurocognitive Research LLC</p>
+      <div style="margin-top: 2rem; font-size: 0.75rem; color: var(--muted);">
+        STATUS: ACTIVE OPERATIONAL NODE<br>
+        LOC: COLUMBIA_SC_USA
+      </div>
+    </div>
 
-    <footer>
-      VOSS NEURAL RESEARCH LLC | WYOMING FILING #2025-001839586 | EIN 41-3072036<br>
-      "Powered by Voss Neural Research"
-    </footer>
+    <div class="column">
+      <div class="panel">
+        <h2>Active Research Nodes</h2>
+        <div class="node-item"><strong>DUCKTRONIKZ:</strong> Sonic Texture Analysis</div>
+        <div class="node-item"><strong>OVERMIND:</strong> Ritualistic UI/UX</div>
+        <div class="node-item"><strong>LATTICE:</strong> Autonomous Agent Personality</div>
+        <div class="node-item"><strong>VERCEL:</strong> Structural Logic Deployment</div>
+      </div>
+      <div class="panel">
+        <h2>Contact & Inquiries</h2>
+        <a href="mailto:info@vossneuralresearch.com">info@vossneuralresearch.com</a>
+      </div>
+    </div>
+
   </div>
+
+  <footer>
+    WYOMING FILING #2025-001839586 | EIN 41-3072036 | POWERED BY VOSS NEURAL RESEARCH
+  </footer>
+
 </body>
 </html>
