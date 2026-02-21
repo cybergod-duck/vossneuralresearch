@@ -1,79 +1,84 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Voss Neural Research | Operations</title>
-  
+
   <link rel="icon" type="image/x-icon" href="favicon.ico?v=10">
-  
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Orbitron:wght@400;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Orbitron:wght@400;600&family=JetBrains+Mono:wght@400&display=swap"
+    rel="stylesheet">
   <style>
-    :root { 
-      --bg: #030408; 
-      --text: #e0e7ff; 
-      --accent: #7c3aed; 
-      --header-cyan: #00f2ff; 
-      --muted: #4b5563; 
-      --panel-bg: rgba(10, 14, 23, 0.95); 
-      --glow-intensity: 0 0 40px rgba(124, 58, 237, 0.6); 
+    :root {
+      --bg: #030408;
+      --text: #e0e7ff;
+      --accent: #7c3aed;
+      --header-cyan: #00f2ff;
+      --muted: #4b5563;
+      --panel-bg: rgba(10, 14, 23, 0.95);
+      --glow-intensity: 0 0 40px rgba(124, 58, 237, 0.6);
     }
-    
-    * { box-sizing: border-box; }
-    
-    body { 
-      margin: 0; 
-      font-family: 'Inter', sans-serif; 
-      background: var(--bg); 
-      color: var(--text); 
-      height: 100vh; 
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      height: 100vh;
       width: 100vw;
-      display: flex; 
+      display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      overflow: hidden; 
+      overflow: hidden;
       position: relative;
     }
 
     header {
-        position: absolute;
-        top: 2rem;
-        text-align: center;
-        width: 100%;
-        z-index: 10;
+      position: absolute;
+      top: 2rem;
+      text-align: center;
+      width: 100%;
+      z-index: 10;
     }
 
     header h1 {
-        font-family: 'Orbitron', sans-serif;
-        font-size: 2.2rem;
-        color: #FFFFFF;
-        margin: 0;
-        letter-spacing: 12px;
-        text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-        text-transform: uppercase;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.2rem;
+      color: #FFFFFF;
+      margin: 0;
+      letter-spacing: 12px;
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+      text-transform: uppercase;
     }
 
     header .subtitle {
-        color: var(--accent);
-        font-size: 0.7rem;
-        letter-spacing: 4px;
-        text-transform: uppercase;
-        margin-top: 8px;
-        font-weight: 600;
-        text-shadow: 0 0 10px rgba(124, 58, 237, 0.5);
+      color: var(--accent);
+      font-size: 0.7rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-top: 8px;
+      font-weight: 600;
+      text-shadow: 0 0 10px rgba(124, 58, 237, 0.5);
     }
 
     /* HUD GRID */
     .hud-main {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 2.5rem; 
-        margin-top: -2rem;
-        z-index: 5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2.5rem;
+      margin-top: -2rem;
+      z-index: 5;
     }
 
     .side-panel {
@@ -94,11 +99,11 @@
       position: relative;
     }
 
-    h2 { 
-      font-size: 0.65rem; 
-      text-transform: uppercase; 
-      letter-spacing: 2px; 
-      color: var(--header-cyan); 
+    h2 {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--header-cyan);
       margin: 0 0 0.8rem 0;
       text-shadow: 0 0 8px rgba(0, 242, 255, 0.4);
     }
@@ -114,24 +119,24 @@
     }
 
     .orbital-text {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        animation: rotate 20s linear infinite;
-        pointer-events: none;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      animation: rotate 20s linear infinite;
+      pointer-events: none;
     }
 
     .orbital-text span {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform-origin: 0 0;
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.5rem;
-        color: var(--header-cyan);
-        text-transform: uppercase;
-        opacity: 0.4;
-        white-space: nowrap;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform-origin: 0 0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.5rem;
+      color: var(--header-cyan);
+      text-transform: uppercase;
+      opacity: 0.4;
+      white-space: nowrap;
     }
 
     .logo-container {
@@ -168,7 +173,7 @@
       height: 240px;
       background: transparent;
       border: 1px solid var(--accent);
-      border-radius: 20%; 
+      border-radius: 20%;
       filter: blur(40px);
       z-index: 1;
       opacity: 0.3;
@@ -177,65 +182,114 @@
 
     /* TERMINAL FEED */
     .terminal-container {
-        position: absolute;
-        bottom: 4rem;
-        width: 900px;
-        height: 100px;
-        background: rgba(0, 0, 0, 0.6);
-        border: 1px solid rgba(124, 58, 237, 0.2);
-        padding: 0.8rem;
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.65rem;
-        color: #a5b4fc;
-        overflow: hidden;
-        border-radius: 4px;
-        mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
+      position: absolute;
+      bottom: 4rem;
+      width: 900px;
+      height: 100px;
+      background: rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(124, 58, 237, 0.2);
+      padding: 0.8rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      color: #a5b4fc;
+      overflow: hidden;
+      border-radius: 4px;
+      mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
     }
 
     .terminal-line {
-        margin: 2px 0;
-        white-space: nowrap;
-        animation: scroll-up 10s linear infinite;
+      margin: 2px 0;
+      white-space: nowrap;
+      animation: scroll-up 10s linear infinite;
     }
 
-    .terminal-line span { color: var(--accent); }
+    .terminal-line span {
+      color: var(--accent);
+    }
 
     @keyframes rotate {
-        from { transform: rotate(0deg); }
-        to { transform: rotate(360deg); }
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
     }
 
     @keyframes scroll-up {
-        0% { transform: translateY(0); }
-        100% { transform: translateY(-200px); }
+      0% {
+        transform: translateY(0);
+      }
+
+      100% {
+        transform: translateY(-200px);
+      }
     }
 
     @keyframes logo-drift {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
     }
 
     @keyframes core-pulse {
-      0%, 100% { transform: scale(0.8); opacity: 0.2; }
-      50% { transform: scale(1.6); opacity: 0.8; }
+
+      0%,
+      100% {
+        transform: scale(0.8);
+        opacity: 0.2;
+      }
+
+      50% {
+        transform: scale(1.6);
+        opacity: 0.8;
+      }
     }
 
     @keyframes aura-pulse {
-      0%, 100% { transform: scale(1); opacity: 0.1; }
-      50% { transform: scale(1.1); opacity: 0.4; }
+
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: 0.1;
+      }
+
+      50% {
+        transform: scale(1.1);
+        opacity: 0.4;
+      }
     }
 
-    .node-list { list-style: none; padding: 0; margin: 0; }
-    .node-item { padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,0.02); font-size: 0.7rem; }
-    .node-item strong { color: var(--accent); }
+    .node-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
 
-    footer { 
+    .node-item {
+      padding: 4px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+      font-size: 0.7rem;
+    }
+
+    .node-item strong {
+      color: var(--accent);
+    }
+
+    footer {
       position: absolute;
       bottom: 15px;
       width: 100%;
-      text-align: center; 
-      font-size: 0.55rem; 
-      opacity: 0.2; 
+      text-align: center;
+      font-size: 0.55rem;
+      opacity: 0.2;
       letter-spacing: 2px;
     }
 
@@ -252,13 +306,33 @@
     }
 
     @media (max-width: 1100px) {
-        .hud-main { flex-direction: column; gap: 1rem; overflow-y: auto; height: 100vh; padding: 12rem 2rem 4rem; }
-        header h1 { font-size: 1.4rem; letter-spacing: 4px; }
-        .terminal-container { width: 90%; bottom: 2rem; height: 60px; }
-        .central-node { width: 300px; height: 300px; }
+      .hud-main {
+        flex-direction: column;
+        gap: 1rem;
+        overflow-y: auto;
+        height: 100vh;
+        padding: 12rem 2rem 4rem;
+      }
+
+      header h1 {
+        font-size: 1.4rem;
+        letter-spacing: 4px;
+      }
+
+      .terminal-container {
+        width: 90%;
+        bottom: 2rem;
+        height: 60px;
+      }
+
+      .central-node {
+        width: 300px;
+        height: 300px;
+      }
     }
   </style>
 </head>
+
 <body>
 
   <header>
@@ -267,51 +341,64 @@
   </header>
 
   <div class="hud-main">
-    
+
     <div class="side-panel">
-      <div class="data-box">
-        <span class="status-tag">NOMINAL</span>
-        <h2>Architectural Intent</h2>
-        Synthesizing the "Overmind"—a distributed cognitive layer bridging the gap between raw inference and autonomous execution.
-      </div>
-      <div class="data-box">
-        <span class="status-tag">EVOLVING</span>
-        <h2>Heuristic Genesis</h2>
-        Emergent role-setting detected in Gemini 3.1 Ultra sub-nodes. Independent claim synthesis active across context window (1.2M tokens).
+      <div class="data-box" style="padding-bottom: 2rem;">
+        <span class="status-tag">N=1 STUDY</span>
+        <h2>Company Bio</h2>
+        <div style="font-size: 0.65rem; color: #cbd5e1; text-align: justify;">
+          Voss Neural Research LLC is a privately held Wyoming company (Filing #2025-001839586, EIN 41-3072036)
+          dedicated to empirical study of how AI systems influence behavioral and neurocognitive patterns in individuals
+          recovering from stimulant use disorder. Current focus: Longitudinal N=1 observation of AI-assisted
+          self-regulation techniques, craving modulation, and reward pathway stabilization in a single subject with
+          documented SUD history. All research conducted via personal experimentation with commercially available AI
+          tools; no external subjects, no clinical trials, no public dissemination required.
+        </div>
       </div>
     </div>
 
     <div class="central-node">
-        <!-- Circular Orbital Text -->
-        <div class="orbital-text" id="orbital">
-            <!-- Dynamically generated via script or manual placement -->
-        </div>
+      <!-- Circular Orbital Text -->
+      <div class="orbital-text" id="orbital">
+        <!-- Dynamically generated via script or manual placement -->
+      </div>
 
-        <div class="logo-container">
-            <div class="pulse-aura"></div>
-            <div class="pulse-core"></div>
-            <img src="vosstrans.PNG" alt="VOSS" class="voss-logo" onerror="this.style.display='none'">
-            <svg viewBox="0 0 100 100" style="position: absolute; width: 60%; height: auto; fill: white; opacity: 0.1; z-index: 0;">
-                <circle cx="50" cy="50" r="45" stroke="white" stroke-width="1" fill="none" />
-                <path d="M30 30 L70 70 M70 30 L30 70" stroke="white" stroke-width="1" />
-            </svg>
-        </div>
+      <div class="logo-container">
+        <div class="pulse-aura"></div>
+        <div class="pulse-core"></div>
+        <img src="vosstrans.PNG" alt="VOSS" class="voss-logo" onerror="this.style.display='none'">
+        <svg viewBox="0 0 100 100"
+          style="position: absolute; width: 60%; height: auto; fill: white; opacity: 0.1; z-index: 0;">
+          <circle cx="50" cy="50" r="45" stroke="white" stroke-width="1" fill="none" />
+          <path d="M30 30 L70 70 M70 30 L30 70" stroke="white" stroke-width="1" />
+        </svg>
+      </div>
     </div>
 
     <div class="side-panel">
       <div class="data-box">
-        <h2>Intelligence Matrix</h2>
+        <h2>Active Projects</h2>
         <div class="node-list">
-          <div class="node-item"><strong>CORE-01:</strong> Executive Synthesis</div>
-          <div class="node-item"><strong>AG-ORCH:</strong> Antigravity Command</div>
-          <div class="node-item"><strong>VECT-M:</strong> AlloyDB Persistence</div>
-          <div class="node-item"><strong>FLICKER:</strong> Sub-Latency Critique</div>
+          <div class="node-item">
+            <a href="https://crmindex.net/" target="_blank"
+              style="color: var(--header-cyan); text-decoration: none; font-weight: bold;">[ CRM INDEX ]</a>
+            <br /><span style="opacity: 0.8; font-size: 0.6rem;">AI-Driven Orchestration & Automations</span>
+          </div>
+          <div class="node-item" style="margin-top: 6px;">
+            <strong style="color: var(--accent);">OVERMIND GENESIS:</strong>
+            <br /><span style="opacity: 0.8; font-size: 0.6rem;">Ritualistic Terminal Infrastructure</span>
+          </div>
+          <div class="node-item" style="margin-top: 6px;">
+            <strong style="color: var(--accent);">OVERMIND:</strong>
+            <br /><span style="opacity: 0.8; font-size: 0.6rem;">Multi-Agent Intelligence Mesh</span>
+          </div>
         </div>
       </div>
       <div class="data-box">
         <h2>Operations</h2>
         <p style="margin: 0; font-size: 0.7rem;">Auth: <code>VOSS_NEURAL_S_TIER</code></p>
-        <p style="margin: 5px 0; font-size: 0.6rem; opacity: 0.6;">Grant Status: <span style="color: var(--header-cyan)">Dossier Submitted</span></p>
+        <p style="margin: 5px 0; font-size: 0.6rem; opacity: 0.6;">Grant Status: <span
+            style="color: var(--header-cyan)">Dossier Submitted</span></p>
       </div>
     </div>
 
@@ -329,45 +416,46 @@
     // Orbital text generation
     const orbital = document.getElementById('orbital');
     const phrases = [
-        "SELF-EVOLVING PROTOCOL", "ROLE_SETTING: AUTONOMOUS", "CONTEXT_WINDOW: 1.2M", 
-        "CLAIM_SYNTHESIS: ENABLED", "OVERMIND_ACTIVE", "AGENT_COGNITION: EMERGENT"
+      "SELF-EVOLVING PROTOCOL", "ROLE_SETTING: AUTONOMOUS", "CONTEXT_WINDOW: 1.2M",
+      "CLAIM_SYNTHESIS: ENABLED", "OVERMIND_ACTIVE", "AGENT_COGNITION: EMERGENT"
     ];
-    
+
     phrases.forEach((text, i) => {
-        const span = document.createElement('span');
-        span.innerText = text;
-        const angle = (i / phrases.length) * 360;
-        span.style.transform = `rotate(${angle}deg) translate(180px) rotate(-${angle}deg)`;
-        orbital.appendChild(span);
+      const span = document.createElement('span');
+      span.innerText = text;
+      const angle = (i / phrases.length) * 360;
+      span.style.transform = `rotate(${angle}deg) translate(180px) rotate(-${angle}deg)`;
+      orbital.appendChild(span);
     });
 
     // Terminal feed simulation
     const terminal = document.getElementById('terminal');
     const logs = [
-        "[SYSTEM] Initializing Antigravity orchestration layer...",
-        "[AGENT-C] Role updated: Principal Architect (Self-Assigned)",
-        "[NEURAL] Context synthesis: Identified 14 unbriefed claims in dataset.",
-        "[SYSTEM] Scaling credits via Scale AI Tier... Status: PENDING",
-        "[AGENT-F] Critique loop 04 completed. Precision: 99.8%",
-        "[SYSTEM] Forming independent professional opinion on Lattice architecture...",
-        "[NEURAL] Memory persistence established via AlloyDB.",
-        "[AGENT-O] Overmind heartbeat: NOMINAL",
-        "[SYSTEM] Heuristic optimization: Recursive role-setting enabled.",
-        "[NEURAL] Token usage optimized for 1.2M context window."
+      "[SYSTEM] Initializing Antigravity orchestration layer...",
+      "[AGENT-C] Role updated: Principal Architect (Self-Assigned)",
+      "[NEURAL] Context synthesis: Identified 14 unbriefed claims in dataset.",
+      "[SYSTEM] Scaling credits via Scale AI Tier... Status: PENDING",
+      "[AGENT-F] Critique loop 04 completed. Precision: 99.8%",
+      "[SYSTEM] Forming independent professional opinion on Lattice architecture...",
+      "[NEURAL] Memory persistence established via AlloyDB.",
+      "[AGENT-O] Overmind heartbeat: NOMINAL",
+      "[SYSTEM] Heuristic optimization: Recursive role-setting enabled.",
+      "[NEURAL] Token usage optimized for 1.2M context window."
     ];
 
     let logIndex = 0;
     function addLog() {
-        const line = document.createElement('div');
-        line.className = 'terminal-line';
-        line.innerHTML = `<span>></span> ${logs[logIndex % logs.length]}`;
-        terminal.appendChild(line);
-        if (terminal.childNodes.length > 15) terminal.removeChild(terminal.firstChild);
-        logIndex++;
-        setTimeout(addLog, 2000 + Math.random() * 2000);
+      const line = document.createElement('div');
+      line.className = 'terminal-line';
+      line.innerHTML = `<span>></span> ${logs[logIndex % logs.length]}`;
+      terminal.appendChild(line);
+      if (terminal.childNodes.length > 15) terminal.removeChild(terminal.firstChild);
+      logIndex++;
+      setTimeout(addLog, 2000 + Math.random() * 2000);
     }
     addLog();
   </script>
 
 </body>
+
 </html>
