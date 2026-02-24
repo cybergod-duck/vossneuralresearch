@@ -15,7 +15,7 @@
     rel="stylesheet">
   <style>
     :root {
-      --bg: #030408;
+      --bg: #0A0A0A;
       --text: #e0e7ff;
       --accent: #7c3aed;
       --header-cyan: #00f2ff;
@@ -34,13 +34,14 @@
       font-size: 18px;
       background: var(--bg);
       color: var(--text);
-      height: 100vh;
+      min-height: 100vh;
       width: 100vw;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
-      overflow: hidden;
+      overflow-x: hidden;
+      overflow-y: auto;
       position: relative;
     }
 
@@ -114,31 +115,33 @@
       flex: 1;
       width: 100%;
       display: flex;
-      align-items: center;
-      justify-content: center;
+      align-items: flex-start;
+      justify-content: flex-start;
       position: relative;
       z-index: 5;
+      padding-top: 1.5rem;
     }
 
     .page {
       display: none;
       width: 100%;
-      max-width: 1600px;
+      max-width: 100%;
       padding: 0 2rem;
       animation: fadeIn 0.5s ease forwards;
     }
 
     .page.active {
       display: flex;
-      align-items: center;
-      justify-content: center;
+      align-items: flex-start;
+      justify-content: flex-start;
       gap: 2.5rem;
+      flex-wrap: wrap;
     }
 
     .page-scrollable {
       display: none;
       width: 100%;
-      max-width: 1600px;
+      max-width: 100%;
       height: 60vh;
       overflow-y: auto;
       padding: 1rem 2rem;
@@ -200,6 +203,11 @@
       margin: 0 0 0.5rem 0;
     }
 
+    /* Monospaced enforcement for technical data points */
+    .data-box strong {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
     /* SILO GALLERY GRID */
     .silo-gallery {
       display: grid;
@@ -225,24 +233,11 @@
     }
 
     .orbital-text {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      animation: rotate 30s linear infinite;
-      pointer-events: none;
+      display: none;
     }
 
     .orbital-text span {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform-origin: 0 0;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.5rem;
-      color: var(--header-cyan);
-      text-transform: uppercase;
-      opacity: 0.4;
-      white-space: nowrap;
+      display: none;
     }
 
     .logo-container {
@@ -258,61 +253,27 @@
       width: 100%;
       height: auto;
       z-index: 3;
-      filter: drop-shadow(0 0 15px rgba(124, 58, 237, 0.5));
-      animation: logo-drift 6s infinite ease-in-out;
     }
 
     .pulse-core {
-      position: absolute;
-      width: 40px;
-      height: 40px;
-      background: var(--accent);
-      border-radius: 50%;
-      filter: blur(20px);
-      z-index: 2;
-      animation: core-pulse 4s infinite ease-in-out;
+      display: none;
     }
 
     .pulse-aura {
-      position: absolute;
-      width: 240px;
-      height: 240px;
-      background: transparent;
-      border: 1px solid var(--accent);
-      border-radius: 20%;
-      filter: blur(40px);
-      z-index: 1;
-      opacity: 0.3;
-      animation: aura-pulse 4s infinite ease-in-out;
+      display: none;
     }
 
-    /* TERMINAL FEED */
+    /* TERMINAL FEED — DISABLED */
     .terminal-container {
-      position: absolute;
-      bottom: 4rem;
-      width: 1400px;
-      max-width: 90%;
-      height: 100px;
-      background: rgba(0, 0, 0, 0.6);
-      border: 1px solid rgba(124, 58, 237, 0.2);
-      padding: 0.8rem;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.8rem;
-      color: #a5b4fc;
-      overflow: hidden;
-      border-radius: 4px;
-      mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
-      z-index: 10;
+      display: none;
     }
 
     .terminal-line {
-      margin: 2px 0;
-      white-space: nowrap;
-      animation: scroll-up 10s linear infinite;
+      display: none;
     }
 
     .terminal-line span {
-      color: var(--accent);
+      display: none;
     }
 
     /* ANIMATIONS */
@@ -536,16 +497,23 @@
 
     <!-- PAGE 1: HOME -->
     <div id="page-home" class="page active">
+
+      <!-- HERO: Founders Directive Audio — Centered & Prominent -->
+      <div style="width: 100%; display: flex; justify-content: center; margin-bottom: 2rem;">
+        <div class="command-audio"
+          style="max-width: 700px; width: 100%; padding: 2rem; border: 1px solid rgba(0, 242, 255, 0.25); box-shadow: 0 0 40px rgba(0, 242, 255, 0.1);">
+          <audio controls preload="none" style="width: 100%; min-height: 48px; filter: grayscale(100%) contrast(1.2);">
+            <source src="VNR_Founders_Directive.mp3" type="audio/mpeg">
+          </audio>
+          <span class="command-label" style="font-size: 0.8rem; letter-spacing: 4px; margin-top: 10px;">VNR FOUNDER —
+            AUDIO PROXY</span>
+        </div>
+      </div>
+
       <div class="side-panel">
         <div class="data-box" style="padding-bottom: 2rem;">
           <span class="status-tag">ACTIVE</span>
           <h2>The High-Output Isolate Archetype</h2>
-          <div class="command-audio">
-            <audio controls preload="none">
-              <source src="VNR_Founders_Directive.mp3" type="audio/mpeg">
-            </audio>
-            <span class="command-label">VNR Founder — Audio Proxy</span>
-          </div>
           <div style="font-size: 0.85rem; color: #cbd5e1; text-align: justify;">
             <strong>Core Theory:</strong> We research and engineer AI not as an oracle, but as a life-saving
             <strong>Cognitive Prosthetic</strong>—an externalized prefrontal cortex.<br /><br />
@@ -557,17 +525,14 @@
       </div>
 
       <div class="central-node">
-        <div class="orbital-text" id="orbital"></div>
         <div class="logo-container">
-          <div class="pulse-aura"></div>
-          <div class="pulse-core"></div>
           <img src="vosstrans.PNG" alt="VOSS" class="voss-logo" onerror="this.style.display='none'">
         </div>
       </div>
 
       <div class="side-panel">
         <div class="data-box">
-          <h2>Safety Consulting Framework</h2>
+          <h2 style="font-size: 2rem;">Safety Consulting Framework</h2>
           <div
             style="margin-top: 5px; margin-bottom: 12px; border-bottom: 1px solid rgba(124, 58, 237, 0.2); padding-bottom: 8px;">
             <audio controls preload="none"
@@ -588,7 +553,8 @@
           </div>
         </div>
         <div class="data-box" style="border-color: #ef4444; box-shadow: 0 0 20px rgba(239, 68, 68, 0.15);">
-          <h2 style="color: #ef4444; text-shadow: 0 0 8px rgba(239, 68, 68, 0.4);">Is Your AI Model an Assistant or a
+          <h2 style="color: #ef4444; text-shadow: 0 0 8px rgba(239, 68, 68, 0.4); font-size: 2rem;">Is Your AI Model an
+            Assistant or a
             Casino?</h2>
           <div style="font-size: 0.65rem; color: #cbd5e1; text-align: justify; margin-bottom: 8px;">
             <strong>The Suno Exception:</strong> While most foundations struggle with accidental vectors, Suno is
@@ -603,7 +569,7 @@
               accidental behavioral vectors or systemic engagement-centric risks?"</span>
           </div>
         </div>
-        <div class="data-box">
+        <div class="data-box" style="padding-bottom: 100px;">
           <h2>Operations</h2>
           <p style="margin: 0; font-size: 0.7rem;">Auth: <code>VOSS_NEURAL_S_TIER</code></p>
           <p style="margin: 5px 0; font-size: 0.55rem; opacity: 0.6; text-align: justify;">Tax Shield Sync: Section 174
@@ -916,6 +882,11 @@ IF session_duration > 45_MINUTES OR prompt_velocity > 5_per_minute:
   </div>
 
   <footer>
+    <div style="margin-bottom: 8px;">
+      <span
+        style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--muted); border: 1px dashed rgba(75,85,99,0.5); padding: 4px 12px; border-radius: 2px; letter-spacing: 2px; text-transform: uppercase;">MONITORING
+        &amp; VALIDATION — SYSTEMS ONLY</span>
+    </div>
     POWERED BY VOSS NEURAL RESEARCH | VERSION: 3.0.0-ALIGNMENT
   </footer>
 
@@ -931,47 +902,7 @@ IF session_duration > 45_MINUTES OR prompt_velocity > 5_per_minute:
       document.getElementById('page-' + pageId).classList.add('active');
     }
 
-    // Orbital text generation (Only visible on Home)
-    const orbital = document.getElementById('orbital');
-    const phrases = [
-      "ALIGNMENT_PROTOCOL: ACTIVE", "SOMATIC_ANCHOR: VERIFIED", "DIGITAL_NARCAN: DEPLOYED",
-      "BEHAVIORAL_VECTOR: MAPPED", "EXECUTIVE_SCAFFOLD: ONLINE", "BINGE_MECHANIC: SEVERED"
-    ];
-
-    phrases.forEach((text, i) => {
-      const span = document.createElement('span');
-      span.innerText = text;
-      const angle = (i / phrases.length) * 360;
-      span.style.transform = `rotate(${angle}deg) translate(180px) rotate(-${angle}deg)`;
-      orbital.appendChild(span);
-    });
-
-    // Terminal feed
-    const terminal = document.getElementById('terminal');
-    const logs = [
-      "[SYSTEM] Initializing Voss Protocols...",
-      "[NEURAL] Somatic Anchor deployed. Intercepting high-velocity loop.",
-      "[AGENT-O] Warning: Binge Mechanic detected in session 42. Applying friction.",
-      "[SYSTEM] Re-routing user to externalized prefrontal cortex module.",
-      "[NEURAL] Dopaminergic stabilization target reached.",
-      "[AGENT-C] Executive Scaffolding blueprint finalized for simple-as-that.org",
-      "[SYSTEM] Black Box data anonymized for proprietary stress-test modeling.",
-      "[NEURAL] Narrative Repair sequence initialized via Overmind Genesis.",
-      "[SYSTEM] Temporal friction (Time-Boxing) applied to generation loop.",
-      "[NEURAL] Risk Mitigation mapping complete for VNR-TR-2026-03."
-    ];
-
-    let logIndex = 0;
-    function addLog() {
-      const line = document.createElement('div');
-      line.className = 'terminal-line';
-      line.innerHTML = `<span>></span> ${logs[logIndex % logs.length]}`;
-      terminal.appendChild(line);
-      if (terminal.childNodes.length > 15) terminal.removeChild(terminal.firstChild);
-      logIndex++;
-      setTimeout(addLog, 2000 + Math.random() * 2000);
-    }
-    addLog();
+    // Orbital text + Terminal feed — DISABLED per VNR_UI_EMERGENCY_CORRECTION
   </script>
 
 </body>
