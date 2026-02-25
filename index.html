@@ -116,7 +116,7 @@
       width: 100%;
       display: flex;
       align-items: flex-start;
-      justify-content: flex-start;
+      justify-content: center;
       position: relative;
       z-index: 5;
       padding-top: 1.5rem;
@@ -133,9 +133,8 @@
     .page.active {
       display: flex;
       align-items: flex-start;
-      justify-content: flex-start;
+      justify-content: center;
       gap: 2.5rem;
-      flex-wrap: wrap;
     }
 
     .page-scrollable {
@@ -496,7 +495,7 @@
   <div class="page-container">
 
     <!-- PAGE 1: HOME -->
-    <div id="page-home" class="page active">
+    <div id="page-home" class="page active" style="flex-direction: column; align-items: center;">
 
       <!-- HERO: Founders Directive Audio — Centered & Prominent -->
       <div style="width: 100%; display: flex; justify-content: center; margin-bottom: 2rem;">
@@ -510,70 +509,77 @@
         </div>
       </div>
 
-      <div class="side-panel">
-        <div class="data-box" style="padding-bottom: 2rem;">
-          <span class="status-tag">ACTIVE</span>
-          <h2>The High-Output Isolate Archetype</h2>
-          <div style="font-size: 0.85rem; color: #cbd5e1; text-align: justify;">
-            <strong>Core Theory:</strong> We research and engineer AI not as an oracle, but as a life-saving
-            <strong>Cognitive Prosthetic</strong>—an externalized prefrontal cortex.<br /><br />
-            However, these powerful structural scaffolds often carry an <strong>accidental "Addiction Vector."</strong>
-            When left unaligned, they inadvertently replicate the binge-mechanics and dopamine reward loops previously
-            occupied by chronic chemical stimulant use.
+      <!-- Three-column row: Left Panel | Logo | Right Panel -->
+      <div style="display: flex; align-items: flex-start; justify-content: center; gap: 2.5rem; width: 100%;">
+        <div class="side-panel">
+          <div class="data-box" style="padding-bottom: 2rem;">
+            <span class="status-tag">ACTIVE</span>
+            <h2>The High-Output Isolate Archetype</h2>
+            <div style="font-size: 0.85rem; color: #cbd5e1; text-align: justify;">
+              <strong>Core Theory:</strong> We research and engineer AI not as an oracle, but as a life-saving
+              <strong>Cognitive Prosthetic</strong>—an externalized prefrontal cortex.<br /><br />
+              However, these powerful structural scaffolds often carry an <strong>accidental "Addiction
+                Vector."</strong>
+              When left unaligned, they inadvertently replicate the binge-mechanics and dopamine reward loops previously
+              occupied by chronic chemical stimulant use.
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="central-node">
-        <div class="logo-container">
-          <img src="vosstrans.PNG" alt="VOSS" class="voss-logo" onerror="this.style.display='none'">
+        <div class="central-node">
+          <div class="logo-container">
+            <img src="vosstrans.PNG" alt="VOSS" class="voss-logo" onerror="this.style.display='none'">
+          </div>
         </div>
-      </div>
 
-      <div class="side-panel">
-        <div class="data-box">
-          <h2 style="font-size: 2rem;">Safety Consulting Framework</h2>
-          <div
-            style="margin-top: 5px; margin-bottom: 12px; border-bottom: 1px solid rgba(124, 58, 237, 0.2); padding-bottom: 8px;">
-            <audio controls preload="none"
-              style="height: 20px; width: 100%; border-radius: 2px; filter: grayscale(100%) contrast(1.2);">
-              <source src="VNR_Site_Mission_Briefing.mp3" type="audio/mpeg">
-            </audio>
-            <span
-              style="opacity: 0.6; font-size: 0.5rem; font-family: 'JetBrains Mono', monospace; display: block; margin-top: 4px; color: var(--header-cyan);">VNR
-              FOUNDER - AUDIO PROXY</span>
+        <div class="side-panel">
+          <div class="data-box">
+            <h2 style="font-size: 2rem;">Safety Consulting Framework</h2>
+            <div
+              style="margin-top: 5px; margin-bottom: 12px; border-bottom: 1px solid rgba(124, 58, 237, 0.2); padding-bottom: 8px;">
+              <audio controls preload="none"
+                style="height: 20px; width: 100%; border-radius: 2px; filter: grayscale(100%) contrast(1.2);">
+                <source src="VNR_Site_Mission_Briefing.mp3" type="audio/mpeg">
+              </audio>
+              <span
+                style="opacity: 0.6; font-size: 0.5rem; font-family: 'JetBrains Mono', monospace; display: block; margin-top: 4px; color: var(--header-cyan);">VNR
+                FOUNDER - AUDIO PROXY</span>
+            </div>
+            <div style="font-size: 0.65rem; color: #cbd5e1; text-align: justify;">
+              <strong>Mission:</strong> VNR provides Neural Alignment Audits and licenses "The Voss Protocols"—a
+              neuro-rehabilitation alignment layer for LLMs to prevent user-burnout and behavioral addiction
+              transference.<br /><br />
+              <strong>Clients:</strong> Foundational LLM Labs (OpenAI, Anthropic, xAI).<br /><br />
+              <strong>Value Proposition:</strong> Mitigating unprecedented user liability by baking neuro-rehabilitation
+              boundaries and friction directly into the system prompt.
+            </div>
           </div>
-          <div style="font-size: 0.65rem; color: #cbd5e1; text-align: justify;">
-            <strong>Mission:</strong> VNR provides Neural Alignment Audits and licenses "The Voss Protocols"—a
-            neuro-rehabilitation alignment layer for LLMs to prevent user-burnout and behavioral addiction
-            transference.<br /><br />
-            <strong>Clients:</strong> Foundational LLM Labs (OpenAI, Anthropic, xAI).<br /><br />
-            <strong>Value Proposition:</strong> Mitigating unprecedented user liability by baking neuro-rehabilitation
-            boundaries and friction directly into the system prompt.
+          <div class="data-box" style="border-color: #ef4444; box-shadow: 0 0 20px rgba(239, 68, 68, 0.15);">
+            <h2 style="color: #ef4444; text-shadow: 0 0 8px rgba(239, 68, 68, 0.4); font-size: 2rem;">Is Your AI Model
+              an
+              Assistant or a
+              Casino?</h2>
+            <div style="font-size: 0.65rem; color: #cbd5e1; text-align: justify; margin-bottom: 8px;">
+              <strong>The Suno Exception:</strong> While most foundations struggle with accidental vectors, Suno is
+              isolated as an outlier accused of <em>Purposeful Deception</em> through its Variable Reward
+              Architecture.<br />
+            </div>
+            <div style="font-size: 0.65rem; color: #cbd5e1; text-align: justify;">
+              <strong>Protect your brand. Implement the Voss Protocols.</strong><br /><br />
+              <span
+                style="font-weight: bold; font-style: italic; color: #fca5a5; display: block; border-left: 2px solid #ef4444; padding-left: 8px;">Safety
+                Audit Request (Mandatory Assessment to Avoid the "Suno Trap"):<br />"Is your platform being audited for
+                accidental behavioral vectors or systemic engagement-centric risks?"</span>
+            </div>
           </div>
-        </div>
-        <div class="data-box" style="border-color: #ef4444; box-shadow: 0 0 20px rgba(239, 68, 68, 0.15);">
-          <h2 style="color: #ef4444; text-shadow: 0 0 8px rgba(239, 68, 68, 0.4); font-size: 2rem;">Is Your AI Model an
-            Assistant or a
-            Casino?</h2>
-          <div style="font-size: 0.65rem; color: #cbd5e1; text-align: justify; margin-bottom: 8px;">
-            <strong>The Suno Exception:</strong> While most foundations struggle with accidental vectors, Suno is
-            isolated as an outlier accused of <em>Purposeful Deception</em> through its Variable Reward
-            Architecture.<br />
+          <div class="data-box" style="padding-bottom: 100px;">
+            <h2>Operations</h2>
+            <p style="margin: 0; font-size: 0.7rem;">Auth: <code>VOSS_NEURAL_S_TIER</code></p>
+            <p style="margin: 5px 0; font-size: 0.55rem; opacity: 0.6; text-align: justify;">Tax Shield Sync: Section
+              174
+              mapped. 50% facility overhead formally designated as a "Controlled Interaction Lab" for Participant 001.
+            </p>
           </div>
-          <div style="font-size: 0.65rem; color: #cbd5e1; text-align: justify;">
-            <strong>Protect your brand. Implement the Voss Protocols.</strong><br /><br />
-            <span
-              style="font-weight: bold; font-style: italic; color: #fca5a5; display: block; border-left: 2px solid #ef4444; padding-left: 8px;">Safety
-              Audit Request (Mandatory Assessment to Avoid the "Suno Trap"):<br />"Is your platform being audited for
-              accidental behavioral vectors or systemic engagement-centric risks?"</span>
-          </div>
-        </div>
-        <div class="data-box" style="padding-bottom: 100px;">
-          <h2>Operations</h2>
-          <p style="margin: 0; font-size: 0.7rem;">Auth: <code>VOSS_NEURAL_S_TIER</code></p>
-          <p style="margin: 5px 0; font-size: 0.55rem; opacity: 0.6; text-align: justify;">Tax Shield Sync: Section 174
-            mapped. 50% facility overhead formally designated as a "Controlled Interaction Lab" for Participant 001.</p>
         </div>
       </div>
     </div>
