@@ -16,74 +16,89 @@
   <style>
     :root {
       --bg: #0A0A0A;
-      --text: #e0e7ff;
+      --text: #E0E0E0;
       --accent: #7c3aed;
-      --header-cyan: #00f2ff;
+      --header-cyan: #7c3aed;
       --muted: #4b5563;
-      --panel-bg: rgba(10, 14, 23, 0.95);
-      --glow-intensity: 0 0 40px rgba(124, 58, 237, 0.6);
+      --panel-bg: rgba(10, 10, 10, 0.95);
+      --glow-intensity: none;
     }
 
     * {
       box-sizing: border-box;
+      font-family: 'JetBrains Mono', monospace !important;
     }
 
     body {
       margin: 0;
-      font-family: 'Inter', sans-serif;
-      font-size: 18px;
-      background: var(--bg);
+      padding: 0;
+      font-size: 14px;
+      background: #0A0A0A;
       color: var(--text);
-      min-height: 100vh;
+      height: 100vh;
       width: 100vw;
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align-items: flex-start;
       justify-content: flex-start;
-      overflow-x: hidden;
-      overflow-y: auto;
+      overflow: hidden;
       position: relative;
     }
 
     header {
-      margin-top: 2rem;
-      text-align: center;
+      margin-top: 1rem;
+      text-align: left;
       width: 100%;
+      padding: 0 2rem;
       z-index: 10;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header-title-container {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      /* Anchor VNR Sigil 8px to the left of the word VOSS */
+    }
+
+    .header-sigil {
+      height: 32px;
+      width: auto;
     }
 
     header h1 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 3.3rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 24px;
+      font-weight: bold;
       color: #FFFFFF;
       margin: 0;
-      letter-spacing: 12px;
-      text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+      letter-spacing: 2px;
       text-transform: uppercase;
     }
 
     header .subtitle {
       color: var(--accent);
-      font-size: 1rem;
-      letter-spacing: 4px;
+      font-size: 0.85rem;
+      letter-spacing: 2px;
       text-transform: uppercase;
       margin-top: 8px;
-      font-weight: 600;
-      text-shadow: 0 0 10px rgba(124, 58, 237, 0.5);
+      font-weight: bold;
     }
 
     /* NAVIGATION */
     .main-nav {
       display: flex;
       gap: 2rem;
-      margin-top: 1.5rem;
+      margin-top: 1rem;
+      justify-content: flex-start;
       z-index: 10;
     }
 
     .nav-btn {
-      background: transparent;
-      border: 1px solid rgba(124, 58, 237, 0.3);
-      color: var(--text);
+      background: #1a1a1a;
+      border: 1px solid var(--accent);
+      color: var(--accent);
       padding: 0.75rem 2rem;
       min-height: 48px;
       min-width: 48px;
@@ -98,52 +113,52 @@
     }
 
     .nav-btn:hover {
-      background: rgba(124, 58, 237, 0.1);
-      border-color: var(--header-cyan);
-      box-shadow: 0 0 15px rgba(0, 242, 255, 0.2);
+      background: var(--accent);
+      color: #000;
     }
 
     .nav-btn.active {
-      background: rgba(124, 58, 237, 0.2);
-      border-color: var(--header-cyan);
-      color: var(--header-cyan);
-      box-shadow: 0 0 20px rgba(0, 242, 255, 0.3);
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #000;
     }
 
     /* PAGE CONTAINER */
     .page-container {
       flex: 1;
-      width: 100%;
+      width: 100vw;
       display: flex;
       align-items: flex-start;
       justify-content: center;
       position: relative;
       z-index: 5;
-      padding-top: 1.5rem;
+      padding: 0;
+      margin: 0;
+      min-height: 0;
     }
 
     .page {
       display: none;
       width: 100%;
-      max-width: 100%;
-      padding: 0 2rem;
+      height: 100%;
+      padding: 0;
+      margin: 0;
       animation: fadeIn 0.5s ease forwards;
     }
 
     .page.active {
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      gap: 2.5rem;
+      display: grid;
+      width: 100%;
+      height: 100%;
+      min-height: 0;
     }
 
     .page-scrollable {
       display: none;
       width: 100%;
-      max-width: 100%;
-      height: 60vh;
+      height: 100%;
       overflow-y: auto;
-      padding: 1rem 2rem;
+      padding-right: 1rem;
       flex-direction: column;
       gap: 1.5rem;
       animation: fadeIn 0.5s ease forwards;
@@ -163,26 +178,69 @@
 
     .page-scrollable::-webkit-scrollbar-thumb {
       background: var(--accent);
-      border-radius: 4px;
+      border-radius: 0px;
+    }
+
+    .home-bento {
+      grid-template-columns: 1.2fr 1fr 1.2fr;
+      grid-template-rows: 1fr 1fr;
+      grid-template-areas:
+        "audit audio theory"
+        "audit logo framework";
+      gap: 0;
+    }
+
+    .box-audit {
+      grid-area: audit;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .box-audio {
+      grid-area: audio;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+    }
+
+    .box-theory {
+      grid-area: theory;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .box-logo {
+      grid-area: logo;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .box-framework {
+      grid-area: framework;
+      display: flex;
+      flex-direction: column;
     }
 
     /* PANELS & BOXES */
     .side-panel {
-      width: 420px;
+      flex: 1 1 300px;
+      max-width: 420px;
       display: flex;
       flex-direction: column;
-      gap: 1.5rem;
+      gap: 0;
     }
 
     .data-box {
       background: var(--panel-bg);
       padding: 1.5rem;
-      font-size: 0.9rem;
-      line-height: 1.6;
+      font-size: 14px;
+      line-height: 1.4;
       border: 1px solid rgba(124, 58, 237, 0.25);
-      box-shadow: 0 0 25px rgba(124, 58, 237, 0.15);
-      border-radius: 6px;
+      box-shadow: none;
+      border-radius: 0;
       position: relative;
+      overflow: hidden;
     }
 
     h2 {
@@ -190,8 +248,7 @@
       text-transform: uppercase;
       letter-spacing: 2px;
       color: var(--header-cyan);
-      margin: 0 0 0.8rem 0;
-      text-shadow: 0 0 8px rgba(0, 242, 255, 0.4);
+      margin: 0 0 0.5rem 0;
     }
 
     h3 {
@@ -223,21 +280,17 @@
 
     /* CENTRAL HUB (HOME PAGE ONLY) */
     .central-node {
-      width: 450px;
-      height: 450px;
+      width: 100%;
+      height: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
       position: relative;
     }
 
-    .orbital-text {
-      display: none;
-    }
 
-    .orbital-text span {
-      display: none;
-    }
+
+
 
     .logo-container {
       position: relative;
@@ -254,97 +307,25 @@
       z-index: 3;
     }
 
-    .pulse-core {
-      display: none;
-    }
 
-    .pulse-aura {
-      display: none;
-    }
+
+
 
     /* TERMINAL FEED — DISABLED */
-    .terminal-container {
-      display: none;
-    }
 
-    .terminal-line {
-      display: none;
-    }
 
-    .terminal-line span {
-      display: none;
-    }
 
-    /* ANIMATIONS */
+
+
+
+    /* ANIMATIONS - DISABLED FOR CLINICAL PROTOCOL */
     @keyframes fadeIn {
       from {
         opacity: 0;
-        transform: translateY(10px);
       }
 
       to {
         opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes rotate {
-      from {
-        transform: rotate(0deg);
-      }
-
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    @keyframes scroll-up {
-      0% {
-        transform: translateY(0);
-      }
-
-      100% {
-        transform: translateY(-200px);
-      }
-    }
-
-    @keyframes logo-drift {
-
-      0%,
-      100% {
-        transform: translateY(0);
-      }
-
-      50% {
-        transform: translateY(-10px);
-      }
-    }
-
-    @keyframes core-pulse {
-
-      0%,
-      100% {
-        transform: scale(0.8);
-        opacity: 0.2;
-      }
-
-      50% {
-        transform: scale(1.6);
-        opacity: 0.8;
-      }
-    }
-
-    @keyframes aura-pulse {
-
-      0%,
-      100% {
-        transform: scale(1);
-        opacity: 0.1;
-      }
-
-      50% {
-        transform: scale(1.1);
-        opacity: 0.4;
       }
     }
 
@@ -370,40 +351,34 @@
 
     footer {
       position: absolute;
-      bottom: 15px;
+      bottom: 0;
       width: 100%;
       text-align: center;
-      font-size: 0.7rem;
-      opacity: 0.2;
+      font-size: 0.85rem;
       letter-spacing: 2px;
       z-index: 10;
+      padding: 10px 0;
+      background: #0A0A0A;
+      border-top: 1px solid var(--accent);
+      min-height: 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      cursor: pointer;
     }
 
     .status-tag {
       position: absolute;
       top: 10px;
       right: 10px;
-      font-size: 0.65rem;
-      background: rgba(0, 242, 255, 0.08);
+      font-size: 0.75rem;
+      background: #1a1a1a;
       color: var(--header-cyan);
-      padding: 3px 8px;
-      border-radius: 2px;
-      border: 1px solid rgba(0, 242, 255, 0.25);
-      box-shadow: 0 0 12px rgba(0, 242, 255, 0.15), inset 0 0 8px rgba(0, 242, 255, 0.05);
-      animation: glow-pulse 3s ease-in-out infinite alternate;
+      padding: 4px 8px;
+      border-radius: 0px;
+      border: 1px solid var(--accent);
     }
 
-    @keyframes glow-pulse {
-      from {
-        box-shadow: 0 0 8px rgba(0, 242, 255, 0.1), inset 0 0 4px rgba(0, 242, 255, 0.05);
-      }
-
-      to {
-        box-shadow: 0 0 18px rgba(0, 242, 255, 0.3), inset 0 0 10px rgba(0, 242, 255, 0.1);
-      }
-    }
-
-    /* COMMAND AUDIO INTERFACE */
     .command-audio {
       display: flex;
       flex-direction: column;
@@ -411,20 +386,30 @@
       justify-content: center;
       text-align: center;
       padding: 1.5rem;
-      border: 1px solid rgba(0, 242, 255, 0.15);
-      border-radius: 6px;
-      background: rgba(0, 10, 20, 0.6);
-      box-shadow: 0 0 30px rgba(0, 242, 255, 0.08);
+      border: 1px solid var(--accent);
+      border-radius: 0px;
+      background: #1a1a1a;
       margin: 1rem auto;
       max-width: 500px;
     }
 
-    .command-audio audio {
-      height: 28px;
+    audio {
+      height: 40px;
       width: 100%;
-      border-radius: 2px;
-      filter: grayscale(100%) contrast(1.2);
+      border-radius: 0px;
       min-height: 48px;
+    }
+
+    audio::-webkit-media-controls-panel {
+      background-color: #1A1A1A;
+    }
+
+    audio::-webkit-media-controls-current-time-display,
+    audio::-webkit-media-controls-time-remaining-display,
+    audio::-webkit-media-controls-play-button,
+    audio::-webkit-media-controls-mute-button,
+    audio::-webkit-media-controls-timeline {
+      filter: sepia(100%) hue-rotate(90deg) saturate(500%);
     }
 
     .command-audio .command-label {
@@ -444,6 +429,7 @@
     .nav-btn,
     audio {
       min-height: 48px;
+      min-width: 48px;
     }
 
     @media (max-width: 1100px) {
@@ -459,11 +445,7 @@
         letter-spacing: 4px;
       }
 
-      .terminal-container {
-        width: 90%;
-        bottom: 2rem;
-        height: 60px;
-      }
+
 
       .central-node {
         width: 300px;
@@ -476,13 +458,91 @@
         gap: 1rem;
       }
     }
+
+    /* OPERATIONS DRAWER */
+    #operations-drawer {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100vw;
+      height: 48px;
+      /* Hit box requirement */
+      background: #0A0A0A;
+      border-top: 1px solid var(--accent);
+      z-index: 100;
+      transition: height 0.3s ease;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    #operations-drawer.open {
+      height: 40vh;
+      /* Increased to prevent clipping content */
+      cursor: default;
+    }
+
+    .drawer-header {
+      height: 48px;
+      min-height: 48px;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 0 2rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      cursor: pointer;
+    }
+
+    .drawer-content {
+      padding: 1rem 2rem;
+      flex: 1;
+      opacity: 0;
+      transition: opacity 0.3s;
+      overflow-y: auto;
+      /* Enable scrolling if content is too large */
+      background: #1a1a1a;
+      border-top: 1px solid var(--accent);
+    }
+
+    #operations-drawer.open .drawer-content {
+      opacity: 1;
+    }
+
+    /* Hide footer if it takes up space */
+    footer {
+      display: none;
+    }
+
+    .restricted-watermark {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-45deg);
+      font-size: 4rem;
+      color: rgba(255, 0, 0, 0.05);
+      border: 6px solid rgba(255, 0, 0, 0.05);
+      padding: 1rem 2rem;
+      pointer-events: none;
+      z-index: 0;
+      white-space: nowrap;
+      font-weight: bold;
+      letter-spacing: 10px;
+    }
   </style>
 </head>
 
 <body>
 
   <header>
-    <h1>VOSS NEURAL RESEARCH</h1>
+    <div class="header-title-container">
+      <img src="voss.png" alt="Sigil" class="header-sigil" onerror="this.style.display='none'">
+      <h1>VOSS NEURAL RESEARCH</h1>
+    </div>
     <div class="subtitle">High-Stakes Safety Consulting | The Authoritative Narcan for Digital Fentanyl</div>
     <nav class="main-nav">
       <button class="nav-btn active" onclick="switchPage('home')">HOME</button>
@@ -495,100 +555,86 @@
   <div class="page-container">
 
     <!-- PAGE 1: HOME -->
-    <div id="page-home" class="page active" style="flex-direction: column; align-items: center;">
+    <div id="page-home" class="page active home-bento">
 
-      <!-- HERO: Founders Directive Audio — Centered & Prominent -->
-      <div style="width: 100%; display: flex; justify-content: center; margin-bottom: 2rem;">
+      <!-- AUDIO (Center Top) -->
+      <div class="box-audio">
         <div class="command-audio"
-          style="max-width: 700px; width: 100%; padding: 2rem; border: 1px solid rgba(0, 242, 255, 0.25); box-shadow: 0 0 40px rgba(0, 242, 255, 0.1);">
-          <audio controls preload="none" style="width: 100%; min-height: 48px; filter: grayscale(100%) contrast(1.2);">
+          style="max-width: 500px; width: 100%; padding: 1.2rem; border: 1px solid rgba(0, 242, 255, 0.25); box-shadow: 0 0 30px rgba(0, 242, 255, 0.1); margin: 0; background: rgba(0, 10, 20, 0.6);">
+          <audio controls preload="none">
             <source src="VNR_Founders_Directive.mp3" type="audio/mpeg">
           </audio>
-          <span class="command-label" style="font-size: 0.8rem; letter-spacing: 4px; margin-top: 10px;">VNR FOUNDER —
-            AUDIO PROXY</span>
+          <span class="command-label"
+            style="font-size: 0.8rem; letter-spacing: 4px; margin-top: 10px; display: block; text-align: center; color: var(--header-cyan); font-family: 'JetBrains Mono', monospace;">VNR
+            FOUNDER — AUDIO PROXY</span>
         </div>
       </div>
 
-      <!-- Three-column row: Left Panel | Logo | Right Panel -->
-      <div style="display: flex; align-items: flex-start; justify-content: center; gap: 2.5rem; width: 100%;">
-        <div class="side-panel">
-          <div class="data-box" style="padding-bottom: 2rem;">
-            <span class="status-tag">ACTIVE</span>
-            <h2>The High-Output Isolate Archetype</h2>
-            <div style="font-size: 0.85rem; color: #cbd5e1; text-align: justify;">
-              <strong>Core Theory:</strong> We research and engineer AI not as an oracle, but as a life-saving
-              <strong>Cognitive Prosthetic</strong>—an externalized prefrontal cortex.<br /><br />
-              However, these powerful structural scaffolds often carry an <strong>accidental "Addiction
-                Vector."</strong>
-              When left unaligned, they inadvertently replicate the binge-mechanics and dopamine reward loops previously
-              occupied by chronic chemical stimulant use.
-            </div>
-          </div>
+      <!-- AUDIT (High-impact left column) -->
+      <div class="data-box box-audit" style="border-color: #ef4444; box-shadow: 0 0 20px rgba(239, 68, 68, 0.15);">
+        <h2 style="color: #ef4444; font-size: 2rem; margin-bottom: 1rem;">
+          Is Your AI Model an Assistant or a Casino?</h2>
+        <div style="font-size: 1rem; color: #cbd5e1; text-align: justify; margin-bottom: 1rem;">
+          <strong>The Suno Exception:</strong> While most foundations struggle with accidental vectors, Suno is isolated
+          as an outlier accused of <em>Purposeful Deception</em> through its Variable Reward Architecture.
         </div>
-
-        <div class="central-node">
-          <div class="logo-container">
-            <img src="vosstrans.PNG" alt="VOSS" class="voss-logo" onerror="this.style.display='none'">
-          </div>
-        </div>
-
-        <div class="side-panel">
-          <div class="data-box">
-            <h2 style="font-size: 2rem;">Safety Consulting Framework</h2>
-            <div
-              style="margin-top: 5px; margin-bottom: 12px; border-bottom: 1px solid rgba(124, 58, 237, 0.2); padding-bottom: 8px;">
-              <audio controls preload="none"
-                style="height: 20px; width: 100%; border-radius: 2px; filter: grayscale(100%) contrast(1.2);">
-                <source src="VNR_Site_Mission_Briefing.mp3" type="audio/mpeg">
-              </audio>
-              <span
-                style="opacity: 0.6; font-size: 0.5rem; font-family: 'JetBrains Mono', monospace; display: block; margin-top: 4px; color: var(--header-cyan);">VNR
-                FOUNDER - AUDIO PROXY</span>
-            </div>
-            <div style="font-size: 0.65rem; color: #cbd5e1; text-align: justify;">
-              <strong>Mission:</strong> VNR provides Neural Alignment Audits and licenses "The Voss Protocols"—a
-              neuro-rehabilitation alignment layer for LLMs to prevent user-burnout and behavioral addiction
-              transference.<br /><br />
-              <strong>Clients:</strong> Foundational LLM Labs (OpenAI, Anthropic, xAI).<br /><br />
-              <strong>Value Proposition:</strong> Mitigating unprecedented user liability by baking neuro-rehabilitation
-              boundaries and friction directly into the system prompt.
-            </div>
-          </div>
-          <div class="data-box" style="border-color: #ef4444; box-shadow: 0 0 20px rgba(239, 68, 68, 0.15);">
-            <h2 style="color: #ef4444; text-shadow: 0 0 8px rgba(239, 68, 68, 0.4); font-size: 2rem;">Is Your AI Model
-              an
-              Assistant or a
-              Casino?</h2>
-            <div style="font-size: 0.65rem; color: #cbd5e1; text-align: justify; margin-bottom: 8px;">
-              <strong>The Suno Exception:</strong> While most foundations struggle with accidental vectors, Suno is
-              isolated as an outlier accused of <em>Purposeful Deception</em> through its Variable Reward
-              Architecture.<br />
-            </div>
-            <div style="font-size: 0.65rem; color: #cbd5e1; text-align: justify;">
-              <strong>Protect your brand. Implement the Voss Protocols.</strong><br /><br />
-              <span
-                style="font-weight: bold; font-style: italic; color: #fca5a5; display: block; border-left: 2px solid #ef4444; padding-left: 8px;">Safety
-                Audit Request (Mandatory Assessment to Avoid the "Suno Trap"):<br />"Is your platform being audited for
-                accidental behavioral vectors or systemic engagement-centric risks?"</span>
-            </div>
-          </div>
-          <div class="data-box" style="padding-bottom: 100px;">
-            <h2>Operations</h2>
-            <p style="margin: 0; font-size: 0.7rem;">Auth: <code>VOSS_NEURAL_S_TIER</code></p>
-            <p style="margin: 5px 0; font-size: 0.55rem; opacity: 0.6; text-align: justify;">Tax Shield Sync: Section
-              174
-              mapped. 50% facility overhead formally designated as a "Controlled Interaction Lab" for Participant 001.
-            </p>
-          </div>
+        <div
+          style="font-size: 1rem; color: #cbd5e1; text-align: justify; flex: 1; display: flex; flex-direction: column; justify-content:center;">
+          <strong>Protect your brand. Implement the Voss Protocols.</strong>
+          <span
+            style="font-weight: bold; font-style: italic; color: #fca5a5; display: block; border-left: 2px solid #ef4444; padding-left: 12px; margin-top: 1.5rem; font-size: 1.1rem; line-height: 1.5;">Safety
+            Audit Request (Mandatory Assessment to Avoid the "Suno Trap"):<br /><br />"Is your platform being audited
+            for accidental behavioral vectors or systemic engagement-centric risks?"</span>
         </div>
       </div>
+
+      <!-- THEORY (Right Top) -->
+      <div class="data-box box-theory">
+        <span class="status-tag">ACTIVE</span>
+        <h2 style="font-size: 1.4rem;">The High-Output Isolate Archetype</h2>
+        <div style="font-size: 1rem; color: #cbd5e1; text-align: justify;">
+          <strong>Core Theory:</strong> We engineer AI not as an oracle, but as a life-saving <strong>Cognitive
+            Prosthetic</strong>—an externalized prefrontal cortex.<br /><br />
+          These structural scaffolds carry an <strong>accidental "Addiction Vector."</strong> When unaligned, they
+          replicate binge-mechanics and dopamine reward loops previously occupied by chronic stimulant use.
+        </div>
+      </div>
+
+      <!-- LOGO (Center Bottom) -->
+      <div class="box-logo">
+        <div class="logo-container" style="width: 220px; height: 220px;">
+          <img src="vosstrans.PNG" alt="VOSS" class="voss-logo" style="width: 100%; height: auto;"
+            onerror="this.style.display='none'">
+        </div>
+      </div>
+
+      <!-- FRAMEWORK (Right Bottom) -->
+      <div class="data-box box-framework">
+        <h2 style="font-size: 1.6rem;">Safety Consulting Framework</h2>
+        <div
+          style="margin-top: 5px; margin-bottom: 12px; border-bottom: 1px solid rgba(124, 58, 237, 0.2); padding-bottom: 8px;">
+          <audio controls preload="none">
+            <source src="VNR_Site_Mission_Briefing.mp3" type="audio/mpeg">
+          </audio>
+          <span
+            style="opacity: 0.6; font-size: 0.6rem; font-family: 'JetBrains Mono', monospace; display: block; margin-top: 4px; color: var(--header-cyan);">VNR
+            FOUNDER - AUDIO PROXY</span>
+        </div>
+        <div style="font-size: 1rem; color: #cbd5e1; text-align: justify; flex: 1;">
+          <strong>Mission:</strong> Neural Alignment Audits & licensing "The Voss Protocols" to prevent LLM behavioral
+          addiction transference.<br /><br />
+          <strong>Value Proposition:</strong> Mitigating extreme user liability by baking neuro-rehabilitation
+          boundaries & friction directly into system prompts.
+        </div>
+      </div>
+
     </div>
 
     <!-- PAGE 2: RESEARCH — SILO GALLERY -->
     <div id="page-research" class="page-scrollable">
       <div class="data-box" style="max-width: 100%;">
         <span class="status-tag">RESTRICTED</span>
-        <h2 style="color: var(--accent);">Technical Repository for Industry Safety Leads</h2>
+        <h2 style="color: var(--accent);">TECHNICAL DATA UPLINK</h2>
         <p style="font-size: 0.8rem; color: rgba(255,255,255,0.5); margin-bottom: 1.5rem;">System Archive — Monographs
           classified by behavioral vector analysis and strategic risk assessment.</p>
 
@@ -598,6 +644,7 @@
           <!-- SILO 1: VNR-TR-2026-02 -->
           <div class="data-box"
             style="border-color: rgba(124, 58, 237, 0.4); box-shadow: 0 0 20px rgba(124, 58, 237, 0.1);">
+            <div class="restricted-watermark">RESTRICTED</div>
             <span class="status-tag">ACCIDENTAL VECTOR</span>
             <strong
               style="font-family: 'JetBrains Mono', monospace; color: var(--header-cyan); font-size: 0.85rem; display: block; margin-bottom: 8px;">VNR-TR-2026-02</strong>
@@ -608,8 +655,7 @@
             <p style="font-size: 0.75rem; color: rgba(255,255,255,0.7); margin: 0 0 12px 0;">Clinical Abstract:
               Generative AI as a Behavioral Vector in Severe Stimulant Use Disorder Recovery.</p>
             <div style="margin-bottom: 12px;">
-              <audio controls preload="none"
-                style="width: 100%; border-radius: 2px; filter: grayscale(100%) contrast(1.2);">
+              <audio controls preload="none">
                 <source src="VNR_Technical_Briefing.mp3" type="audio/mpeg">
               </audio>
               <span
@@ -627,17 +673,18 @@
               use.
             </div>
             <div style="margin-top: 15px;">
-              <a href="0%20Research%20Papers/VNR-TR-2026-02_Cognitive_Prosthetic_Vector.pdf" download
-                style="display: inline-flex; align-items: center; gap: 8px; color: var(--header-cyan); text-decoration: none; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; border: 1px solid rgba(0,242,255,0.4); background: rgba(0,242,255,0.05); padding: 8px 14px; border-radius: 4px; min-height: 48px;">
+              <a href="/0 Research Papers/VNR-TR-2026-02_Cognitive_Prosthetic_Vector.pdf" download
+                style="display: inline-flex; align-items: center; gap: 8px; color: var(--header-cyan); text-decoration: none; font-family: 'JetBrains Mono', monospace; font-size: 0.70rem; border: 1px solid var(--header-cyan); background: #1a1a1a; padding: 8px 14px; border-radius: 0px; min-height: 48px; text-transform: uppercase;">
                 <span
-                  style="background: #FF0000; color: #fff; padding: 2px 6px; border-radius: 2px; font-size: 0.55rem; font-weight: bold;">RESTRICTED</span>
-                DOWNLOAD PDF
+                  style="background: #FF0000; color: #fff; padding: 2px 6px; border-radius: 0px; font-size: 0.55rem; font-weight: bold;">RESTRICTED</span>
+                [DL] VNR-TR-2026-02
               </a>
             </div>
           </div>
 
           <!-- SILO 2: VNR-TR-2026-03 (Suno Autopsy) -->
           <div class="data-box" style="border-color: #ef4444; box-shadow: 0 0 25px rgba(239, 68, 68, 0.15);">
+            <div class="restricted-watermark">RESTRICTED</div>
             <span class="status-tag"
               style="background: rgba(239,68,68,0.1); color: #ef4444; border-color: #ef4444;">PURPOSEFUL
               DECEPTION</span>
@@ -649,8 +696,7 @@
             <p style="font-size: 0.75rem; color: rgba(255,255,255,0.7); margin: 0 0 12px 0;">Technical Autopsy of
               Purposeful Deception in Generative Audio Platforms.</p>
             <div style="margin-bottom: 12px;">
-              <audio controls preload="none"
-                style="width: 100%; border-radius: 2px; filter: grayscale(100%) contrast(1.2);">
+              <audio controls preload="none">
                 <source src="VNR_Suno_Audit_Technical.mp3" type="audio/mpeg">
               </audio>
               <span
@@ -666,11 +712,11 @@
               <a href="#" onclick="switchPage('vnr-tr-2026-03')"
                 style="display: inline-flex; align-items: center; color: #ef4444; text-decoration: none; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; border: 1px dashed #ef4444; padding: 8px 14px; border-radius: 4px; min-height: 48px;">[
                 FULL AUTOPSY ]</a>
-              <a href="0%20Research%20Papers/VNR-TR-2026-03_The_Velvet_Casino.pdf" download
-                style="display: inline-flex; align-items: center; gap: 8px; color: #ef4444; text-decoration: none; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; border: 1px solid #ef4444; background: rgba(239,68,68,0.05); padding: 8px 14px; border-radius: 4px; min-height: 48px;">
+              <a href="/0 Research Papers/VNR-TR-2026-03_The_Velvet_Casino.pdf" download
+                style="display: inline-flex; align-items: center; gap: 8px; color: #ef4444; text-decoration: none; font-family: 'JetBrains Mono', monospace; font-size: 0.70rem; border: 1px solid #ef4444; background: #1a1a1a; padding: 8px 14px; border-radius: 0px; min-height: 48px; text-transform: uppercase;">
                 <span
-                  style="background: #FF0000; color: #fff; padding: 2px 6px; border-radius: 2px; font-size: 0.55rem; font-weight: bold;">RESTRICTED</span>
-                DOWNLOAD PDF
+                  style="background: #FF0000; color: #fff; padding: 2px 6px; border-radius: 0px; font-size: 0.55rem; font-weight: bold;">RESTRICTED</span>
+                [DL] VNR-TR-2026-03
               </a>
             </div>
           </div>
@@ -678,6 +724,7 @@
           <!-- SILO 3: VNR-SA-2026-01 (Somatic Anchoring) -->
           <div class="data-box"
             style="border-color: rgba(0, 242, 255, 0.3); box-shadow: 0 0 20px rgba(0, 242, 255, 0.1);">
+            <div class="restricted-watermark">RESTRICTED</div>
             <span class="status-tag">IMPLEMENTATION</span>
             <strong
               style="font-family: 'JetBrains Mono', monospace; color: var(--header-cyan); font-size: 0.85rem; display: block; margin-bottom: 8px;">VNR-SA-2026-01</strong>
@@ -694,11 +741,11 @@
               <strong>III. Time-Boxing:</strong> Hard-coded temporal friction to sever the Binge-Loop.
             </div>
             <div style="margin-top: 15px;">
-              <a href="0%20Research%20Papers/VNR-SA-2026-01_Somatic_Anchoring_Guide.pdf" download
-                style="display: inline-flex; align-items: center; gap: 8px; color: var(--header-cyan); text-decoration: none; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; border: 1px solid rgba(0,242,255,0.4); background: rgba(0,242,255,0.05); padding: 8px 14px; border-radius: 4px; min-height: 48px;">
+              <a href="/0 Research Papers/VNR-SA-2026-01_Somatic_Anchoring_Guide.pdf" download
+                style="display: inline-flex; align-items: center; gap: 8px; color: var(--header-cyan); text-decoration: none; font-family: 'JetBrains Mono', monospace; font-size: 0.70rem; border: 1px solid var(--header-cyan); background: #1a1a1a; padding: 8px 14px; border-radius: 0px; min-height: 48px; text-transform: uppercase;">
                 <span
-                  style="background: #FF0000; color: #fff; padding: 2px 6px; border-radius: 2px; font-size: 0.55rem; font-weight: bold;">RESTRICTED</span>
-                DOWNLOAD PDF
+                  style="background: #FF0000; color: #fff; padding: 2px 6px; border-radius: 0px; font-size: 0.55rem; font-weight: bold;">RESTRICTED</span>
+                [DL] VNR-SA-2026-01
               </a>
             </div>
           </div>
@@ -828,8 +875,7 @@ IF session_duration > 45_MINUTES OR prompt_velocity > 5_per_minute:
 
         <div
           style="margin-top: 10px; margin-bottom: 15px; border-bottom: 1px solid rgba(239, 68, 68, 0.3); padding-bottom: 10px;">
-          <audio controls preload="none"
-            style="height: 20px; width: 100%; border-radius: 2px; filter: grayscale(100%) contrast(1.2) sepia(100%) hue-rotate(300deg);">
+          <audio controls preload="none">
             <source src="VNR_Suno_Audit_Technical.mp3" type="audio/mpeg">
           </audio>
           <span
@@ -895,6 +941,24 @@ IF session_duration > 45_MINUTES OR prompt_velocity > 5_per_minute:
     </div>
     POWERED BY VOSS NEURAL RESEARCH | VERSION: 3.0.0-ALIGNMENT
   </footer>
+
+
+  <!-- OPERATIONS DRAWER -->
+  <div id="operations-drawer">
+    <div class="drawer-header" onclick="document.getElementById('operations-drawer').classList.toggle('open')">
+      > SYS.OP.ACCESS // CLICK TO EXPAND
+    </div>
+    <div class="drawer-content">
+      <h2 style="font-size: 1.5rem; margin-top:0; color: var(--accent);">Operations</h2>
+      <p style="margin: 0; font-size: 1rem; font-family: 'JetBrains Mono', monospace; color: var(--header-cyan);">Auth:
+        <code>VOSS_NEURAL_S_TIER</code>
+      </p>
+      <p style="margin: 10px 0; font-size: 1rem; opacity: 0.8; text-align: left; max-width: 800px; line-height: 1.5;">
+        Tax Shield Sync:
+        Section 174 mapped. 50% facility overhead formally designated as a "Controlled Interaction Lab" for Participant
+        001.</p>
+    </div>
+  </div>
 
   <script>
     // Navigation Logic
