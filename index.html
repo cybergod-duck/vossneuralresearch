@@ -223,10 +223,16 @@
       background: var(--panel-bg);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      border: none;
+      border: 1px solid transparent;
       box-shadow: var(--purple-glow);
       padding: 16px 20px;
       border-radius: 4px;
+      transition: all 0.3s ease;
+    }
+
+    .clinical-section.active-glow {
+      box-shadow: 0 0 32px rgba(147, 51, 234, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      border-color: var(--accent);
     }
 
     .clinical-section p {
@@ -234,38 +240,116 @@
       color: #bbbbbb;
     }
 
-    /* AUDIO PROXIES */
-    .audio-proxy {
-      background: var(--panel-bg);
+    /* GLOBAL AUDIO PLAYER */
+    .global-player {
+      position: sticky;
+      top: 0;
+      background: rgba(3, 5, 12, 0.95);
+      border-bottom: 1px solid var(--accent);
+      box-shadow: var(--purple-glow);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      z-index: 1000;
+      flex-shrink: 0;
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      border: none;
-      box-shadow: var(--purple-glow);
-      border-radius: 4px;
-      padding: 0 12px;
+    }
+
+    .player-controls {
       display: flex;
-      flex-direction: row;
       align-items: center;
       gap: 16px;
-      min-height: 44px;
+      flex: 1;
     }
 
-    .audio-label {
-      font-size: 10px;
+    .track-select {
+      background: rgba(3, 5, 12, 0.9);
       color: var(--accent);
+      border: 1px solid var(--border-color);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      padding: 8px 12px;
+      outline: none;
+      cursor: pointer;
       text-transform: uppercase;
-      white-space: nowrap;
+      flex: 1;
+      max-width: 400px;
     }
 
-    /* Audio styling hack via filter to make it technical and dark */
-    audio {
-      width: 100%;
+    .track-select option {
+      background: #03050c;
+      color: #e0e0e0;
+    }
+
+    /* Soundwave bars */
+    .soundwave {
+      display: flex;
+      align-items: center;
+      gap: 4px;
       height: 32px;
-      /* Visual height under 40px */
-      border-radius: 0;
-      outline: none;
+      padding: 0 16px;
+    }
+
+    .soundwave .bar {
+      width: 4px;
+      background: var(--restricted);
+      height: 4px;
+      border-radius: 2px;
+      transition: height 0.1s ease;
+    }
+
+    .soundwave.playing .bar {
+      animation: bounce 1s infinite ease-in-out alternate;
+    }
+
+    .soundwave.playing .bar:nth-child(1) {
+      animation-delay: 0.1s;
+    }
+
+    .soundwave.playing .bar:nth-child(2) {
+      animation-delay: 0.4s;
+    }
+
+    .soundwave.playing .bar:nth-child(3) {
+      animation-delay: 0.2s;
+    }
+
+    .soundwave.playing .bar:nth-child(4) {
+      animation-delay: 0.6s;
+    }
+
+    .soundwave.playing .bar:nth-child(5) {
+      animation-delay: 0.3s;
+    }
+
+    .soundwave.playing .bar:nth-child(6) {
+      animation-delay: 0.7s;
+    }
+
+    .soundwave.playing .bar:nth-child(7) {
+      animation-delay: 0.1s;
+    }
+
+    .soundwave.playing .bar:nth-child(8) {
+      animation-delay: 0.5s;
+    }
+
+    @keyframes bounce {
+      0% {
+        height: 4px;
+      }
+
+      100% {
+        height: 28px;
+      }
+    }
+
+    .global-player audio {
+      height: 32px;
       filter: invert(85%) grayscale(100%) brightness(80%) contrast(120%);
-      background: transparent;
     }
 
     /* DATA UPLINK / DOWNLOAD CARDS */
@@ -401,6 +485,28 @@
 
 <body>
 
+  <!-- GLOBAL AUDIO PLAYER -->
+  <div id="global-player" class="global-player">
+    <div class="player-controls">
+      <select id="track-selector" class="track-select">
+        <!-- Options injected by JS -->
+      </select>
+      <audio id="main-audio" controls preload="auto">
+        <source src="assets/audio/VNR_Welcome.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+    <div class="soundwave" id="visualizer">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+  </div>
+
   <header>
     <div class="brand-row">
       <img src="vosstrans.PNG" alt="VNR Sigil" class="sigil" onerror="this.style.display='none'">
@@ -421,7 +527,7 @@
       <div class="hud-grid">
 
         <!-- LEFT COLUMN (8 cols): Clinical Content -->
-        <div class="col-left">
+        <div class="col-left" id="clinical-content-col">
 
           <div class="clinical-block-container">
             <div class="clinical-header">
@@ -429,7 +535,7 @@
               <p><strong>RESTRICTED CLINICAL WHITE PAPER</strong></p>
             </div>
 
-            <div class="clinical-section">
+            <div class="clinical-section" id="clinical-intro">
               <h3>Executive Summary</h3>
               <p>Generative modeling introduces a secondary capability layer acting as an externalized prefrontal
                 cortex. This creates structural dependencies that, when unaligned, establish high-velocity addiction
@@ -462,12 +568,7 @@
                 physical state checks, and the cessation of infinite scroll/generation mechanisms.</p>
             </div>
 
-            <div class="audio-proxy" style="margin-top: 8px;" id="main-audio-container">
-              <span class="audio-label" id="main-audio-label">VNR_Welcome.mp3 [SYS INITIATION]</span>
-              <audio id="main-audio" controls preload="auto">
-                <source src="assets/audio/VNR_Welcome.mp3" type="audio/mpeg">
-              </audio>
-            </div>
+            <!-- Audio Proxy moved to global player at top -->
 
           </div>
 
@@ -564,7 +665,7 @@
 
     // Unified Audio Player Logic
     const playlist = [
-      { file: 'assets/audio/VNR_Welcome.mp3', label: 'VNR_Welcome.mp3 [SYS INITIATION]', cardId: null },
+      { file: 'assets/audio/VNR_Welcome.mp3', label: 'VNR_Welcome.mp3 [SYS INITIATION]', cardId: 'clinical-intro' },
       { file: 'assets/audio/VNR-SA-01.mp3', label: 'VNR-SA-01.mp3 [SOMATIC ANCHORING]', cardId: 'card-01' },
       { file: 'assets/audio/VNR-TR-02.mp3', label: 'VNR-TR-02.mp3 [BEHAVIORAL VECTOR]', cardId: 'card-02' },
       { file: 'assets/audio/VNR-TR-03.mp3', label: 'VNR-TR-03.mp3 [SUNO AUTOPSY]', cardId: 'card-03' }
@@ -572,15 +673,29 @@
 
     let currentTrackIdx = 0;
     const audioEl = document.getElementById('main-audio');
-    const labelEl = document.getElementById('main-audio-label');
+    const trackSelector = document.getElementById('track-selector');
+    const visualizer = document.getElementById('visualizer');
+
+    // Populate dropdown
+    playlist.forEach((track, index) => {
+      const option = document.createElement('option');
+      option.value = index;
+      option.text = track.label;
+      trackSelector.appendChild(option);
+    });
+
+    trackSelector.addEventListener('change', (e) => {
+      loadTrack(parseInt(e.target.value));
+      audioEl.play().catch(err => console.log("Audio play blocked by browser:", err));
+    });
 
     function loadTrack(idx) {
       currentTrackIdx = idx;
       const track = playlist[idx];
       audioEl.src = track.file;
-      labelEl.innerText = track.label;
+      trackSelector.value = idx;
 
-      document.querySelectorAll('#view-hud .dl-card').forEach(c => c.classList.remove('active-glow'));
+      document.querySelectorAll('#view-hud .dl-card, #clinical-intro').forEach(c => c.classList.remove('active-glow'));
 
       if (track.cardId) {
         const card = document.getElementById(track.cardId);
@@ -592,9 +707,22 @@
       }
     }
 
+    audioEl.addEventListener('play', () => {
+      visualizer.classList.add('playing');
+    });
+
+    audioEl.addEventListener('pause', () => {
+      visualizer.classList.remove('playing');
+    });
+
     audioEl.addEventListener('ended', () => {
-      // Revert to the default welcome track when a track finishes
-      loadTrack(0);
+      // Cycle through the different sounds
+      let nextIdx = currentTrackIdx + 1;
+      if (nextIdx >= playlist.length) {
+        nextIdx = 0; // Loop back to the beginning
+      }
+      loadTrack(nextIdx);
+      audioEl.play().catch(e => console.log("Audio play blocked by browser:", e));
     });
 
     function playTrackByCard(cardId) {
