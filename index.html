@@ -161,7 +161,7 @@
     }
 
     .col-left {
-      grid-column: span 7;
+      grid-column: span 8;
       display: flex;
       flex-direction: column;
       height: 100%;
@@ -171,7 +171,7 @@
     }
 
     .col-right {
-      grid-column: 9 / 13;
+      grid-column: span 4;
       display: flex;
       flex-direction: column;
       height: 100%;
@@ -306,6 +306,11 @@
       gap: 8px;
     }
 
+    .dl-card.active-glow {
+      box-shadow: 0 0 24px rgba(6, 182, 212, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      border: 1px solid var(--restricted);
+    }
+
     .dl-card:last-child {
       margin-bottom: 0;
     }
@@ -418,13 +423,6 @@
         <!-- LEFT COLUMN (8 cols): Clinical Content -->
         <div class="col-left">
 
-          <div class="audio-proxy">
-            <span class="audio-label">VNR_Founders_Directive.mp3 [PRIMARY DIRECTIVE]</span>
-            <audio controls preload="none">
-              <source src="VNR_Founders_Directive.mp3" type="audio/mpeg">
-            </audio>
-          </div>
-
           <div class="clinical-block-container">
             <div class="clinical-header">
               <h2>VNR-TR-2026-02: Cognitive Prosthetic & Behavioral Vector</h2>
@@ -464,10 +462,10 @@
                 physical state checks, and the cessation of infinite scroll/generation mechanisms.</p>
             </div>
 
-            <div class="audio-proxy" style="margin-top: 8px;">
-              <span class="audio-label">VNR_Site_Mission_Briefing.mp3 [ABOUT/MISSION]</span>
-              <audio controls preload="none">
-                <source src="VNR_Site_Mission_Briefing.mp3" type="audio/mpeg">
+            <div class="audio-proxy" style="margin-top: 8px;" id="main-audio-container">
+              <span class="audio-label" id="main-audio-label">VNR_Welcome.mp3 [SYS INITIATION]</span>
+              <audio id="main-audio" controls preload="auto">
+                <source src="assets/audio/VNR_Welcome.mp3" type="audio/mpeg">
               </audio>
             </div>
 
@@ -483,15 +481,17 @@
 
             <div class="uplink-watermark">RESTRICTED</div>
 
-            <div class="audio-proxy" style="margin-bottom: 16px; box-shadow: var(--cyan-glow);">
-              <span class="audio-label" style="color: var(--restricted);">VNR_Technical_Briefing.mp3 [GATING]</span>
-              <audio controls preload="none">
-                <source src="VNR_Technical_Briefing.mp3" type="audio/mpeg">
-              </audio>
+            <!-- Card 1 -->
+            <div class="dl-card restricted" id="card-01">
+              <span class="code" style="color: var(--restricted);">VNR-SA-2026-01</span>
+              <span class="title">Somatic Anchoring Guide</span>
+              <span class="desc">Implementation Protocol for Neuro-rehab</span>
+              <a href="/0 Research Papers/VNR-SA-2026-01_Somatic_Anchoring_Guide.pdf" class="dl-btn" download><span
+                  class="dl-icon"></span> DOWNLOAD</a>
             </div>
 
-            <!-- Card 1 -->
-            <div class="dl-card restricted" style="border-color: var(--restricted);">
+            <!-- Card 2 -->
+            <div class="dl-card restricted" id="card-02">
               <span class="code" style="color: var(--restricted);">VNR-TR-2026-02</span>
               <span class="title">Cognitive Prosthetic & Behavioral Vector</span>
               <span class="desc">Clinical Abstract: AI as a Behavioral Vector</span>
@@ -499,28 +499,12 @@
                   class="dl-icon"></span> DOWNLOAD</a>
             </div>
 
-            <!-- Card 2 -->
-            <div class="dl-card restricted" style="border-color: var(--restricted);">
+            <!-- Card 3 -->
+            <div class="dl-card restricted" id="card-03">
               <span class="code" style="color: var(--restricted);">VNR-TR-2026-03</span>
               <span class="title">The Velvet Casino: Suno Autopsy</span>
               <span class="desc">Technical Autopsy of Purposeful Deception</span>
-              <div class="audio-proxy"
-                style="margin: 8px 0; background: #01050a; box-shadow: var(--cyan-glow); border: none;">
-                <span class="audio-label" style="color: var(--restricted);">VNR_Suno_Audit_Technical.mp3</span>
-                <audio controls preload="none">
-                  <source src="VNR_Suno_Audit_Technical.mp3" type="audio/mpeg">
-                </audio>
-              </div>
               <a href="/0 Research Papers/VNR-TR-2026-03_The_Velvet_Casino.pdf" class="dl-btn" download><span
-                  class="dl-icon"></span> DOWNLOAD</a>
-            </div>
-
-            <!-- Card 3 -->
-            <div class="dl-card restricted" style="border-color: var(--restricted);">
-              <span class="code" style="color: var(--restricted);">VNR-SA-2026-01</span>
-              <span class="title">Somatic Anchoring Guide</span>
-              <span class="desc">Implementation Protocol for Neuro-rehab</span>
-              <a href="/0 Research Papers/VNR-SA-2026-01_Somatic_Anchoring_Guide.pdf" class="dl-btn" download><span
                   class="dl-icon"></span> DOWNLOAD</a>
             </div>
 
@@ -537,7 +521,16 @@
       <div class="silo-grid">
         <div class="uplink-watermark" style="left: 50%; opacity: 0.03; font-size: 72px;">RESTRICTED</div>
         <!-- Card 1 -->
-        <div class="dl-card restricted" style="border-color: var(--restricted);">
+        <div class="dl-card restricted">
+          <span class="code" style="color: var(--restricted);">VNR-SA-2026-01</span>
+          <span class="title">Somatic Anchoring Guide</span>
+          <span class="desc">Implementation Protocol for Neuro-rehab</span>
+          <a href="/0 Research Papers/VNR-SA-2026-01_Somatic_Anchoring_Guide.pdf" class="dl-btn" download><span
+              class="dl-icon"></span> DOWNLOAD</a>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="dl-card restricted">
           <span class="code" style="color: var(--restricted);">VNR-TR-2026-02</span>
           <span class="title">Cognitive Prosthetic & Behavioral Vector</span>
           <span class="desc">Clinical Abstract: AI as a Behavioral Vector</span>
@@ -545,21 +538,12 @@
               class="dl-icon"></span> DOWNLOAD</a>
         </div>
 
-        <!-- Card 2 -->
-        <div class="dl-card restricted" style="border-color: var(--restricted);">
+        <!-- Card 3 -->
+        <div class="dl-card restricted">
           <span class="code" style="color: var(--restricted);">VNR-TR-2026-03</span>
           <span class="title">The Velvet Casino: Suno Autopsy</span>
           <span class="desc">Technical Autopsy of Purposeful Deception</span>
           <a href="/0 Research Papers/VNR-TR-2026-03_The_Velvet_Casino.pdf" class="dl-btn" download><span
-              class="dl-icon"></span> DOWNLOAD</a>
-        </div>
-
-        <!-- Card 3 -->
-        <div class="dl-card restricted" style="border-color: var(--restricted);">
-          <span class="code" style="color: var(--restricted);">VNR-SA-2026-01</span>
-          <span class="title">Somatic Anchoring Guide</span>
-          <span class="desc">Implementation Protocol for Neuro-rehab</span>
-          <a href="/0 Research Papers/VNR-SA-2026-01_Somatic_Anchoring_Guide.pdf" class="dl-btn" download><span
               class="dl-icon"></span> DOWNLOAD</a>
         </div>
       </div>
@@ -577,6 +561,69 @@
       document.getElementById('view-' + viewId).classList.add('active');
       event.target.classList.add('active');
     }
+
+    // Unified Audio Player Logic
+    const playlist = [
+      { file: 'assets/audio/VNR_Welcome.mp3', label: 'VNR_Welcome.mp3 [SYS INITIATION]', cardId: null },
+      { file: 'assets/audio/VNR-SA-01.mp3', label: 'VNR-SA-01.mp3 [SOMATIC ANCHORING]', cardId: 'card-01' },
+      { file: 'assets/audio/VNR-TR-02.mp3', label: 'VNR-TR-02.mp3 [BEHAVIORAL VECTOR]', cardId: 'card-02' },
+      { file: 'assets/audio/VNR-TR-03.mp3', label: 'VNR-TR-03.mp3 [SUNO AUTOPSY]', cardId: 'card-03' }
+    ];
+
+    let currentTrackIdx = 0;
+    const audioEl = document.getElementById('main-audio');
+    const labelEl = document.getElementById('main-audio-label');
+
+    function loadTrack(idx) {
+      currentTrackIdx = idx;
+      const track = playlist[idx];
+      audioEl.src = track.file;
+      labelEl.innerText = track.label;
+
+      document.querySelectorAll('#view-hud .dl-card').forEach(c => c.classList.remove('active-glow'));
+
+      if (track.cardId) {
+        const card = document.getElementById(track.cardId);
+        if (card) {
+          card.classList.add('active-glow');
+          // Scroll card into view if needed
+          card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      }
+    }
+
+    audioEl.addEventListener('ended', () => {
+      // Revert to the default welcome track when a track finishes
+      loadTrack(0);
+    });
+
+    function playTrackByCard(cardId) {
+      const idx = playlist.findIndex(t => t.cardId === cardId);
+      if (idx > -1) {
+        if (currentTrackIdx !== idx) {
+          loadTrack(idx);
+          audioEl.play().catch(e => console.log("Audio play blocked by browser:", e));
+        } else {
+          audioEl.play().catch(e => console.log("Audio play blocked by browser:", e));
+        }
+      }
+    }
+
+    // Attach onclick to right cards
+    document.getElementById('card-01').onclick = () => playTrackByCard('card-01');
+    document.getElementById('card-02').onclick = () => playTrackByCard('card-02');
+    document.getElementById('card-03').onclick = () => playTrackByCard('card-03');
+
+    // Prevent download button from triggering the card's audio click
+    document.querySelectorAll('.dl-btn').forEach(btn => {
+      btn.onclick = (e) => e.stopPropagation();
+    });
+
+    // Make cards feel clickable
+    document.querySelectorAll('#view-hud .dl-card').forEach(c => c.style.cursor = 'pointer');
+
+    // Init player
+    loadTrack(0);
 
   </script>
 
