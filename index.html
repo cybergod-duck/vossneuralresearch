@@ -1,537 +1,380 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Voss Neural Research | High-Stakes Safety Consulting</title>
-
-  <link rel="icon" type="image/x-icon" href="favicon.ico?v=10">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VOSS NEURAL RESEARCH | HUD</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Orbitron:wght@400;600&family=JetBrains+Mono:wght@400&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
   <style>
+    /* Strict CSS Variables */
     :root {
-      --bg: #0A0A0A;
-      --text: #E0E0E0;
-      --accent: #7c3aed;
-      --header-cyan: #7c3aed;
-      --muted: #4b5563;
-      --panel-bg: rgba(10, 10, 10, 0.95);
-      --glow-intensity: none;
+      --bg-color: #0A0A0A;
+      --text-main: #E0E0E0;
+      --text-sub: #888888;
+      --accent: #32CD32;
+      /* Lime green technical accent */
+      --restricted: #EF4444;
+      /* Red for restricted content */
+      --panel-bg: #1A1A1A;
+      --border-color: #333333;
     }
 
     * {
       box-sizing: border-box;
-      font-family: 'JetBrains Mono', monospace !important;
+      margin: 0;
+      padding: 0;
     }
 
     body {
-      margin: 0;
-      padding: 0;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: 'JetBrains Mono', monospace;
       font-size: 14px;
-      background: #0A0A0A;
-      color: var(--text);
+      line-height: 1.5;
+      width: 100vw;
       height: 100vh;
-      width: 100vw;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: flex-start;
       overflow: hidden;
-      position: relative;
-    }
-
-    header {
-      margin-top: 1rem;
-      text-align: left;
-      width: 100%;
-      padding: 0 2rem;
-      z-index: 10;
+      /* Prevent body scroll, handled internally */
       display: flex;
       flex-direction: column;
     }
 
-    .header-title-container {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      /* Anchor VNR Sigil 8px to the left of the word VOSS */
-    }
-
-    .header-sigil {
-      height: 32px;
-      width: auto;
-    }
-
-    header h1 {
-      font-family: 'JetBrains Mono', monospace;
+    /* TYPOGRAPHY */
+    h1 {
       font-size: 24px;
-      font-weight: bold;
-      color: #FFFFFF;
-      margin: 0;
-      letter-spacing: 2px;
+      font-weight: 700;
       text-transform: uppercase;
-    }
-
-    header .subtitle {
-      color: var(--accent);
-      font-size: 0.85rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-top: 8px;
-      font-weight: bold;
-    }
-
-    /* NAVIGATION */
-    .main-nav {
-      display: flex;
-      gap: 2rem;
-      margin-top: 1rem;
-      justify-content: flex-start;
-      z-index: 10;
-    }
-
-    .nav-btn {
-      background: #1a1a1a;
-      border: 1px solid var(--accent);
-      color: var(--accent);
-      padding: 0.75rem 2rem;
-      min-height: 48px;
-      min-width: 48px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .nav-btn:hover {
-      background: var(--accent);
-      color: #000;
-    }
-
-    .nav-btn.active {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: #000;
-    }
-
-    /* PAGE CONTAINER */
-    .page-container {
-      flex: 1;
-      width: 100vw;
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      position: relative;
-      z-index: 5;
-      padding: 0;
-      margin: 0;
-      min-height: 0;
-    }
-
-    .page {
-      display: none;
-      width: 100%;
-      height: 100%;
-      padding: 0;
-      margin: 0;
-      animation: fadeIn 0.5s ease forwards;
-    }
-
-    .page.active {
-      display: grid;
-      width: 100%;
-      height: 100%;
-      min-height: 0;
-    }
-
-    .page-scrollable {
-      display: none;
-      width: 100%;
-      height: 100%;
-      overflow-y: auto;
-      padding-right: 1rem;
-      flex-direction: column;
-      gap: 1.5rem;
-      animation: fadeIn 0.5s ease forwards;
-    }
-
-    .page-scrollable.active {
-      display: flex;
-    }
-
-    .page-scrollable::-webkit-scrollbar {
-      width: 8px;
-    }
-
-    .page-scrollable::-webkit-scrollbar-track {
-      background: rgba(0, 0, 0, 0.3);
-    }
-
-    .page-scrollable::-webkit-scrollbar-thumb {
-      background: var(--accent);
-      border-radius: 0px;
-    }
-
-    .home-bento {
-      grid-template-columns: 1.2fr 1fr 1.2fr;
-      grid-template-rows: 1fr 1fr;
-      grid-template-areas:
-        "audit audio theory"
-        "audit logo framework";
-      gap: 0;
-    }
-
-    .box-audit {
-      grid-area: audit;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .box-audio {
-      grid-area: audio;
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-    }
-
-    .box-theory {
-      grid-area: theory;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .box-logo {
-      grid-area: logo;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .box-framework {
-      grid-area: framework;
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* PANELS & BOXES */
-    .side-panel {
-      flex: 1 1 300px;
-      max-width: 420px;
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
-
-    .data-box {
-      background: var(--panel-bg);
-      padding: 1.5rem;
-      font-size: 14px;
-      line-height: 1.4;
-      border: 1px solid rgba(124, 58, 237, 0.25);
-      box-shadow: none;
-      border-radius: 0;
-      position: relative;
-      overflow: hidden;
     }
 
     h2 {
-      font-size: 1rem;
+      font-size: 18px;
+      font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 2px;
-      color: var(--header-cyan);
-      margin: 0 0 0.5rem 0;
+      color: var(--accent);
+      margin-bottom: 12px;
     }
 
     h3 {
-      font-size: 0.9rem;
+      font-size: 14px;
+      font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--accent);
-      margin: 0 0 0.5rem 0;
+      margin-bottom: 8px;
     }
 
-    /* Monospaced enforcement for technical data points */
-    .data-box strong {
-      font-family: 'JetBrains Mono', monospace;
-    }
-
-    /* SILO GALLERY GRID */
-    .silo-gallery {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 1.5rem;
-      width: 100%;
-    }
-
-    @media (max-width: 1100px) {
-      .silo-gallery {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    /* CENTRAL HUB (HOME PAGE ONLY) */
-    .central-node {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-    }
-
-
-
-
-
-    .logo-container {
-      position: relative;
-      width: 240px;
-      height: 240px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .voss-logo {
-      width: 100%;
-      height: auto;
-      z-index: 3;
-    }
-
-
-
-
-
-    /* TERMINAL FEED — DISABLED */
-
-
-
-
-
-
-    /* ANIMATIONS - DISABLED FOR CLINICAL PROTOCOL */
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-      }
-
-      to {
-        opacity: 1;
-      }
-    }
-
-    .node-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .node-item {
-      padding: 10px 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-      font-size: 0.85rem;
-    }
-
-    .node-item:last-child {
-      border-bottom: none;
-    }
-
-    .node-item strong {
-      color: var(--accent);
-    }
-
-    footer {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      text-align: center;
-      font-size: 0.85rem;
-      letter-spacing: 2px;
-      z-index: 10;
-      padding: 10px 0;
-      background: #0A0A0A;
-      border-top: 1px solid var(--accent);
-      min-height: 48px;
+    /* HEADER & BRANDING */
+    header {
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      cursor: pointer;
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--border-color);
+      flex-shrink: 0;
     }
 
-    .status-tag {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      font-size: 0.75rem;
-      background: #1a1a1a;
-      color: var(--header-cyan);
-      padding: 4px 8px;
-      border-radius: 0px;
-      border: 1px solid var(--accent);
-    }
-
-    .command-audio {
+    .brand-row {
       display: flex;
-      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 1.5rem;
-      border: 1px solid var(--accent);
-      border-radius: 0px;
-      background: #1a1a1a;
-      margin: 1rem auto;
-      max-width: 500px;
+      gap: 8px;
+      /* Sigil anchored 8px to the left of VOSS */
     }
 
-    audio {
-      height: 40px;
-      width: 100%;
-      border-radius: 0px;
-      min-height: 48px;
-    }
-
-    audio::-webkit-media-controls-panel {
-      background-color: #1A1A1A;
-    }
-
-    audio::-webkit-media-controls-current-time-display,
-    audio::-webkit-media-controls-time-remaining-display,
-    audio::-webkit-media-controls-play-button,
-    audio::-webkit-media-controls-mute-button,
-    audio::-webkit-media-controls-timeline {
-      filter: sepia(100%) hue-rotate(90deg) saturate(500%);
-    }
-
-    .command-audio .command-label {
-      opacity: 0.7;
-      font-size: 0.65rem;
-      font-family: 'JetBrains Mono', monospace;
+    .sigil {
+      height: 24px;
+      width: auto;
       display: block;
-      margin-top: 6px;
-      color: var(--header-cyan);
-      letter-spacing: 3px;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: var(--text-sub);
+      margin-top: 4px;
+      padding-left: 32px;
+      /* Align with text, accommodating sigil */
+    }
+
+    .nav-bar {
+      margin-top: 16px;
+      display: flex;
+      gap: 16px;
+      padding-left: 32px;
+    }
+
+    .nav-btn {
+      background: transparent;
+      color: var(--text-sub);
+      border: 1px solid var(--border-color);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
       text-transform: uppercase;
-    }
-
-    /* Somatic Hit-Box enforcement for interactive elements */
-    button,
-    a[download],
-    .nav-btn,
-    audio {
-      min-height: 48px;
-      min-width: 48px;
-    }
-
-    @media (max-width: 1100px) {
-      .page.active {
-        flex-direction: column;
-        overflow-y: auto;
-        height: calc(100vh - 250px);
-        padding-bottom: 5rem;
-      }
-
-      header h1 {
-        font-size: 1.4rem;
-        letter-spacing: 4px;
-      }
-
-
-
-      .central-node {
-        width: 300px;
-        height: 300px;
-      }
-
-      .main-nav {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 1rem;
-      }
-    }
-
-    /* OPERATIONS DRAWER */
-    #operations-drawer {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100vw;
-      height: 48px;
-      /* Hit box requirement */
-      background: #0A0A0A;
-      border-top: 1px solid var(--accent);
-      z-index: 100;
-      transition: height 0.3s ease;
       cursor: pointer;
+      min-height: 48px;
+      /* Somatic Hit-Box */
+      min-width: 48px;
+      padding: 0 16px;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+
+    .nav-btn:hover,
+    .nav-btn.active {
+      background: var(--panel-bg);
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    /* MAIN CONTAINER - 12 Column Grid */
+    .view-container {
+      flex: 1;
+      width: 100vw;
+      overflow-y: auto;
+      /* Internal scrolling if content extends */
+      position: relative;
+    }
+
+    .view {
+      display: none;
+      padding: 24px;
+    }
+
+    .view.active {
+      display: block;
+    }
+
+    /* HUD Layout (Home) */
+    .hud-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 24px;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .col-left {
+      grid-column: span 8;
       display: flex;
       flex-direction: column;
-      overflow: hidden;
+      gap: 24px;
     }
 
-    #operations-drawer.open {
-      height: 40vh;
-      /* Increased to prevent clipping content */
-      cursor: default;
-    }
-
-    .drawer-header {
-      height: 48px;
-      min-height: 48px;
+    .col-right {
+      grid-column: span 4;
       display: flex;
-      justify-content: flex-start;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    /* CONTENT BLOCKS */
+    .clinical-block {
+      background: var(--panel-bg);
+      border: 1px solid var(--border-color);
+      padding: 20px;
+    }
+
+    .clinical-block p {
+      margin-bottom: 16px;
+      color: #bbbbbb;
+    }
+
+    .clinical-block p:last-child {
+      margin-bottom: 0;
+    }
+
+    .clinical-section {
+      margin-top: 24px;
+      padding-top: 16px;
+      border-top: 1px dashed var(--border-color);
+    }
+
+    /* AUDIO PROXIES */
+    .audio-proxy {
+      background: var(--panel-bg);
+      border: 1px solid var(--border-color);
+      padding: 0 12px;
+      display: flex;
+      flex-direction: row;
       align-items: center;
-      padding: 0 2rem;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.9rem;
+      gap: 16px;
+      min-height: 48px;
+      /* Hitbox override */
+    }
+
+    .audio-label {
+      font-size: 10px;
       color: var(--accent);
       text-transform: uppercase;
-      letter-spacing: 2px;
-      cursor: pointer;
+      white-space: nowrap;
     }
 
-    .drawer-content {
-      padding: 1rem 2rem;
-      flex: 1;
-      opacity: 0;
-      transition: opacity 0.3s;
-      overflow-y: auto;
-      /* Enable scrolling if content is too large */
+    /* Audio styling hack via filter to make it technical */
+    audio {
+      width: 100%;
+      height: 32px;
+      /* Visual height under 40px */
+      border-radius: 0;
+      outline: none;
+      filter: sepia(100%) hue-rotate(80deg) saturate(300%) contrast(1.5) brightness(0.8);
       background: #1a1a1a;
-      border-top: 1px solid var(--accent);
     }
 
-    #operations-drawer.open .drawer-content {
-      opacity: 1;
+    /* DATA UPLINK / DOWNLOAD CARDS */
+    .uplink-container {
+      position: relative;
     }
 
-    /* Hide footer if it takes up space */
-    footer {
-      display: none;
-    }
-
-    .restricted-watermark {
+    .uplink-watermark {
       position: absolute;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%) rotate(-45deg);
-      font-size: 4rem;
-      color: rgba(255, 0, 0, 0.05);
-      border: 6px solid rgba(255, 0, 0, 0.05);
-      padding: 1rem 2rem;
+      transform: translate(-50%, -50%) rotate(-30deg);
+      font-size: 48px;
+      color: var(--text-main);
+      opacity: 0.05;
+      font-weight: 700;
+      letter-spacing: 8px;
       pointer-events: none;
       z-index: 0;
       white-space: nowrap;
+    }
+
+    .dl-card {
+      background: var(--panel-bg);
+      border: 1px solid var(--border-color);
+      padding: 16px;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .dl-card:last-child {
+      margin-bottom: 0;
+    }
+
+    .dl-card .code {
+      font-size: 12px;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .dl-card.restricted border {
+      border-color: var(--restricted);
+    }
+
+    .dl-card.restricted .code {
+      color: var(--restricted);
+    }
+
+    .dl-card .title {
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .dl-card .desc {
+      font-size: 12px;
+      color: var(--text-sub);
+    }
+
+    a.dl-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 8px;
+      color: var(--text-main);
+      text-decoration: none;
+      font-size: 12px;
+      min-height: 48px;
+      /* Hit-box */
+      padding: 0 12px;
+      border: 1px solid var(--border-color);
+      width: fit-content;
+      transition: background 0.2s;
+    }
+
+    a.dl-btn:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .dl-icon::before {
+      content: '↓';
       font-weight: bold;
-      letter-spacing: 10px;
+    }
+
+    /* SILO GALLERY GRID (Research View) */
+    .silo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      width: 100%;
+      position: relative;
+    }
+
+    /* OPERATIONS TERMINAL FOOTER */
+    .ops-footer {
+      background: #050505;
+      border-top: 1px solid var(--accent);
+      width: 100%;
+      position: relative;
+      z-index: 100;
+      flex-shrink: 0;
+    }
+
+    .ops-prompt {
+      min-height: 48px;
+      /* Hit-box */
+      display: flex;
+      align-items: center;
+      padding: 0 24px;
+      color: var(--accent);
+      cursor: pointer;
+      font-weight: 700;
+      user-select: none;
+      transition: background 0.2s;
+    }
+
+    .ops-prompt:hover {
+      background: rgba(50, 205, 50, 0.1);
+    }
+
+    .ops-console {
+      height: 0;
+      overflow: hidden;
+      transition: height 0.2s ease-out;
+      background: #050505;
+      padding: 0 24px;
+    }
+
+    .ops-console.expanded {
+      height: 250px;
+      padding: 24px;
+      border-top: 1px dashed var(--border-color);
+      overflow-y: auto;
+    }
+
+    .ops-console p {
+      color: var(--text-sub);
+      margin-bottom: 8px;
+      font-size: 12px;
+    }
+
+    /* RESPONSIVE FALLBACK */
+    @media (max-width: 1024px) {
+      .hud-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .col-left,
+      .col-right {
+        grid-column: span 1;
+      }
+
+      .silo-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -539,440 +382,198 @@
 <body>
 
   <header>
-    <div class="header-title-container">
-      <img src="voss.png" alt="Sigil" class="header-sigil" onerror="this.style.display='none'">
+    <div class="brand-row">
+      <img src="vosstrans.PNG" alt="VNR Sigil" class="sigil" onerror="this.style.display='none'">
       <h1>VOSS NEURAL RESEARCH</h1>
     </div>
-    <div class="subtitle">High-Stakes Safety Consulting | The Authoritative Narcan for Digital Fentanyl</div>
-    <nav class="main-nav">
-      <button class="nav-btn active" onclick="switchPage('home')">HOME</button>
-      <button class="nav-btn" onclick="switchPage('research')">RESEARCH</button>
-      <button class="nav-btn" onclick="switchPage('protocols')">PROTOCOLS</button>
-      <button class="nav-btn" onclick="switchPage('artifacts')">ARTIFACTS</button>
-    </nav>
+    <div class="subtitle">Neural Alignment & Behavioral Systems Architecture</div>
+
+    <div class="nav-bar">
+      <button class="nav-btn active" onclick="switchView('hud')">HUD</button>
+      <button class="nav-btn" onclick="switchView('silo')">RESEARCH SILO</button>
+    </div>
   </header>
 
-  <div class="page-container">
+  <div class="view-container">
 
-    <!-- PAGE 1: HOME -->
-    <div id="page-home" class="page active home-bento">
+    <!-- HUD VIEW (Main Web Surface of VNR-TR-2026-02) -->
+    <div id="view-hud" class="view active">
+      <div class="hud-grid">
 
-      <!-- AUDIO (Center Top) -->
-      <div class="box-audio">
-        <div class="command-audio"
-          style="max-width: 500px; width: 100%; padding: 1.2rem; border: 1px solid rgba(0, 242, 255, 0.25); box-shadow: 0 0 30px rgba(0, 242, 255, 0.1); margin: 0; background: rgba(0, 10, 20, 0.6);">
-          <audio controls preload="none">
-            <source src="VNR_Founders_Directive.mp3" type="audio/mpeg">
-          </audio>
-          <span class="command-label"
-            style="font-size: 0.8rem; letter-spacing: 4px; margin-top: 10px; display: block; text-align: center; color: var(--header-cyan); font-family: 'JetBrains Mono', monospace;">VNR
-            FOUNDER — AUDIO PROXY</span>
+        <!-- LEFT COLUMN (8 cols): Clinical Content -->
+        <div class="col-left">
+
+          <div class="audio-proxy">
+            <span class="audio-label">VNR_Founders_Directive.mp3 [PRIMARY DIRECTIVE]</span>
+            <audio controls preload="none">
+              <source src="VNR_Founders_Directive.mp3" type="audio/mpeg">
+            </audio>
+          </div>
+
+          <div class="clinical-block">
+            <h2>VNR-TR-2026-02: Cognitive Prosthetic & Behavioral Vector</h2>
+            <p><strong>RESTRICTED CLINICAL WHITE PAPER</strong></p>
+
+            <div class="clinical-section">
+              <h3>Executive Summary</h3>
+              <p>Generative modeling introduces a secondary capability layer acting as an externalized prefrontal
+                cortex. This creates structural dependencies that, when unaligned, establish high-velocity addiction
+                vectors mimicking severe substance use disorders.</p>
+            </div>
+
+            <div class="clinical-section">
+              <h3>Therapeutic Efficacy: AI as Neuro-Prosthetic</h3>
+              <p>When properly gated, models scaffold failing executive function. The interaction reduces cognitive load
+                for individuals suffering from dopaminergic burnout or prolonged systemic deficit.</p>
+            </div>
+
+            <div class="clinical-section">
+              <h3>Pathological Risks: The "Infinite Loop"</h3>
+              <p>Unrestricted generation eliminates state checks. The subject enters an infinite loop of variable-ratio
+                reinforcement, severing ties to physical reality and initiating dissociation. This is known as
+                Behavioral Transference.</p>
+            </div>
+
+            <div class="clinical-section">
+              <h3>Phenomenological Observation: The High-Output Isolate</h3>
+              <p>Subjects exhibiting highest utilization rates display marked social isolation, substituting complex
+                biological inputs with predictable synthetic ones. The AI ceases to be a tool and becomes a primary
+                psychological habitat.</p>
+            </div>
+
+            <div class="clinical-section">
+              <h3>The Voss Protocols: Harm Reduction</h3>
+              <p>Intervention requires systematic injection of friction. Hard-coded temporal boundaries, mandatory
+                physical state checks, and the cessation of infinite scroll/generation mechanisms.</p>
+            </div>
+
+            <div class="audio-proxy" style="margin-top: 24px;">
+              <span class="audio-label">VNR_Site_Mission_Briefing.mp3 [ABOUT/MISSION]</span>
+              <audio controls preload="none">
+                <source src="VNR_Site_Mission_Briefing.mp3" type="audio/mpeg">
+              </audio>
+            </div>
+
+          </div>
+
         </div>
-      </div>
 
-      <!-- AUDIT (High-impact left column) -->
-      <div class="data-box box-audit" style="border-color: #ef4444; box-shadow: 0 0 20px rgba(239, 68, 68, 0.15);">
-        <h2 style="color: #ef4444; font-size: 2rem; margin-bottom: 1rem;">
-          Is Your AI Model an Assistant or a Casino?</h2>
-        <div style="font-size: 1rem; color: #cbd5e1; text-align: justify; margin-bottom: 1rem;">
-          <strong>The Suno Exception:</strong> While most foundations struggle with accidental vectors, Suno is isolated
-          as an outlier accused of <em>Purposeful Deception</em> through its Variable Reward Architecture.
-        </div>
-        <div
-          style="font-size: 1rem; color: #cbd5e1; text-align: justify; flex: 1; display: flex; flex-direction: column; justify-content:center;">
-          <strong>Protect your brand. Implement the Voss Protocols.</strong>
-          <span
-            style="font-weight: bold; font-style: italic; color: #fca5a5; display: block; border-left: 2px solid #ef4444; padding-left: 12px; margin-top: 1.5rem; font-size: 1.1rem; line-height: 1.5;">Safety
-            Audit Request (Mandatory Assessment to Avoid the "Suno Trap"):<br /><br />"Is your platform being audited
-            for accidental behavioral vectors or systemic engagement-centric risks?"</span>
-        </div>
-      </div>
+        <!-- RIGHT COLUMN (4 cols): Data Uplink -->
+        <div class="col-right">
+          <div class="clinical-block uplink-container" style="background: transparent; border: none; padding: 0;">
+            <h2 style="margin-bottom: 24px;">TECHNICAL DATA UPLINK</h2>
 
-      <!-- THEORY (Right Top) -->
-      <div class="data-box box-theory">
-        <span class="status-tag">ACTIVE</span>
-        <h2 style="font-size: 1.4rem;">The High-Output Isolate Archetype</h2>
-        <div style="font-size: 1rem; color: #cbd5e1; text-align: justify;">
-          <strong>Core Theory:</strong> We engineer AI not as an oracle, but as a life-saving <strong>Cognitive
-            Prosthetic</strong>—an externalized prefrontal cortex.<br /><br />
-          These structural scaffolds carry an <strong>accidental "Addiction Vector."</strong> When unaligned, they
-          replicate binge-mechanics and dopamine reward loops previously occupied by chronic stimulant use.
-        </div>
-      </div>
+            <div class="uplink-watermark">RESTRICTED</div>
 
-      <!-- LOGO (Center Bottom) -->
-      <div class="box-logo">
-        <div class="logo-container" style="width: 220px; height: 220px;">
-          <img src="vosstrans.PNG" alt="VOSS" class="voss-logo" style="width: 100%; height: auto;"
-            onerror="this.style.display='none'">
-        </div>
-      </div>
-
-      <!-- FRAMEWORK (Right Bottom) -->
-      <div class="data-box box-framework">
-        <h2 style="font-size: 1.6rem;">Safety Consulting Framework</h2>
-        <div
-          style="margin-top: 5px; margin-bottom: 12px; border-bottom: 1px solid rgba(124, 58, 237, 0.2); padding-bottom: 8px;">
-          <audio controls preload="none">
-            <source src="VNR_Site_Mission_Briefing.mp3" type="audio/mpeg">
-          </audio>
-          <span
-            style="opacity: 0.6; font-size: 0.6rem; font-family: 'JetBrains Mono', monospace; display: block; margin-top: 4px; color: var(--header-cyan);">VNR
-            FOUNDER - AUDIO PROXY</span>
-        </div>
-        <div style="font-size: 1rem; color: #cbd5e1; text-align: justify; flex: 1;">
-          <strong>Mission:</strong> Neural Alignment Audits & licensing "The Voss Protocols" to prevent LLM behavioral
-          addiction transference.<br /><br />
-          <strong>Value Proposition:</strong> Mitigating extreme user liability by baking neuro-rehabilitation
-          boundaries & friction directly into system prompts.
-        </div>
-      </div>
-
-    </div>
-
-    <!-- PAGE 2: RESEARCH — SILO GALLERY -->
-    <div id="page-research" class="page-scrollable">
-      <div class="data-box" style="max-width: 100%;">
-        <span class="status-tag">RESTRICTED</span>
-        <h2 style="color: var(--accent);">TECHNICAL DATA UPLINK</h2>
-        <p style="font-size: 0.8rem; color: rgba(255,255,255,0.5); margin-bottom: 1.5rem;">System Archive — Monographs
-          classified by behavioral vector analysis and strategic risk assessment.</p>
-
-        <!-- SILO GALLERY: 3-Column Grid -->
-        <div class="silo-gallery">
-
-          <!-- SILO 1: VNR-TR-2026-02 -->
-          <div class="data-box"
-            style="border-color: rgba(124, 58, 237, 0.4); box-shadow: 0 0 20px rgba(124, 58, 237, 0.1);">
-            <div class="restricted-watermark">RESTRICTED</div>
-            <span class="status-tag">ACCIDENTAL VECTOR</span>
-            <strong
-              style="font-family: 'JetBrains Mono', monospace; color: var(--header-cyan); font-size: 0.85rem; display: block; margin-bottom: 8px;">VNR-TR-2026-02</strong>
-            <span
-              style="color: var(--accent); font-size: 0.8rem; font-weight: bold; display: block; margin-bottom: 10px;">
-              Cognitive Prosthetic Vector
-            </span>
-            <p style="font-size: 0.75rem; color: rgba(255,255,255,0.7); margin: 0 0 12px 0;">Clinical Abstract:
-              Generative AI as a Behavioral Vector in Severe Stimulant Use Disorder Recovery.</p>
-            <div style="margin-bottom: 12px;">
+            <div class="audio-proxy" style="margin-bottom: 16px;">
+              <span class="audio-label">VNR_Technical_Briefing.mp3 [GATING]</span>
               <audio controls preload="none">
                 <source src="VNR_Technical_Briefing.mp3" type="audio/mpeg">
               </audio>
-              <span
-                style="opacity: 0.6; font-size: 0.6rem; font-family: 'JetBrains Mono', monospace; display: block; margin-top: 4px; color: var(--header-cyan);">VNR
-                FOUNDER — AUDIO PROXY</span>
-              <span style="opacity: 0.5; font-size: 0.55rem; font-style: italic; display: block; margin-top: 2px;">Note:
-                This briefing focuses on the systemic identification of behavioral transference across all generative
-                models (Accidental Vectors).</span>
             </div>
-            <div style="font-size: 0.75rem; color: #e0e7ff; line-height: 1.6;">
-              <strong>Finding A:</strong> AI as an "Externalized Prefrontal Cortex" providing "External RAM."<br />
-              <strong>Finding B:</strong> High risk of "Behavioral Transference" — replacing chemical dependency with an
-              infinite digital loop.<br />
-              <strong>Finding C:</strong> The Binge Mechanic — AI interactions mimic the biological loop of stimulant
-              use.
-            </div>
-            <div style="margin-top: 15px;">
-              <a href="/0 Research Papers/VNR-TR-2026-02_Cognitive_Prosthetic_Vector.pdf" download
-                style="display: inline-flex; align-items: center; gap: 8px; color: var(--header-cyan); text-decoration: none; font-family: 'JetBrains Mono', monospace; font-size: 0.70rem; border: 1px solid var(--header-cyan); background: #1a1a1a; padding: 8px 14px; border-radius: 0px; min-height: 48px; text-transform: uppercase;">
-                <span
-                  style="background: #FF0000; color: #fff; padding: 2px 6px; border-radius: 0px; font-size: 0.55rem; font-weight: bold;">RESTRICTED</span>
-                [DL] VNR-TR-2026-02
-              </a>
-            </div>
-          </div>
 
-          <!-- SILO 2: VNR-TR-2026-03 (Suno Autopsy) -->
-          <div class="data-box" style="border-color: #ef4444; box-shadow: 0 0 25px rgba(239, 68, 68, 0.15);">
-            <div class="restricted-watermark">RESTRICTED</div>
-            <span class="status-tag"
-              style="background: rgba(239,68,68,0.1); color: #ef4444; border-color: #ef4444;">PURPOSEFUL
-              DECEPTION</span>
-            <strong
-              style="font-family: 'JetBrains Mono', monospace; color: #ef4444; font-size: 0.85rem; display: block; margin-bottom: 8px;">VNR-TR-2026-03</strong>
-            <span style="color: #fca5a5; font-size: 0.8rem; font-weight: bold; display: block; margin-bottom: 10px;">
-              The Velvet Casino: Suno Autopsy
-            </span>
-            <p style="font-size: 0.75rem; color: rgba(255,255,255,0.7); margin: 0 0 12px 0;">Technical Autopsy of
-              Purposeful Deception in Generative Audio Platforms.</p>
-            <div style="margin-bottom: 12px;">
-              <audio controls preload="none">
-                <source src="VNR_Suno_Audit_Technical.mp3" type="audio/mpeg">
-              </audio>
-              <span
-                style="opacity: 0.6; font-size: 0.6rem; font-family: 'JetBrains Mono', monospace; display: block; margin-top: 4px; color: #ef4444;">VNR
-                FOUNDER — AUDIO PROXY</span>
+            <!-- Card 1 -->
+            <div class="dl-card restricted" style="border-color: var(--restricted);">
+              <span class="code" style="color: var(--restricted);">VNR-TR-2026-02</span>
+              <span class="title">Cognitive Prosthetic & Behavioral Vector</span>
+              <span class="desc">Clinical Abstract: AI as a Behavioral Vector</span>
+              <a href="/0 Research Papers/VNR-TR-2026-02_Cognitive_Prosthetic_Vector.pdf" class="dl-btn" download><span
+                  class="dl-icon"></span> DOWNLOAD</a>
             </div>
-            <div style="font-size: 0.75rem; color: #e0e7ff; line-height: 1.6;">
-              <strong>Variable Ratio Reinforcement:</strong> Near-Miss Effect as revenue engine.<br />
-              <strong>Binge Mechanic & "The Zone":</strong> Infinite loops inducing dissociation.<br />
-              <strong>Hostile Engineering:</strong> 7:59 Bug, credit resets, Inference Inflation.
-            </div>
-            <div style="margin-top: 15px; display: flex; gap: 10px; flex-wrap: wrap;">
-              <a href="#" onclick="switchPage('vnr-tr-2026-03')"
-                style="display: inline-flex; align-items: center; color: #ef4444; text-decoration: none; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; border: 1px dashed #ef4444; padding: 8px 14px; border-radius: 4px; min-height: 48px;">[
-                FULL AUTOPSY ]</a>
-              <a href="/0 Research Papers/VNR-TR-2026-03_The_Velvet_Casino.pdf" download
-                style="display: inline-flex; align-items: center; gap: 8px; color: #ef4444; text-decoration: none; font-family: 'JetBrains Mono', monospace; font-size: 0.70rem; border: 1px solid #ef4444; background: #1a1a1a; padding: 8px 14px; border-radius: 0px; min-height: 48px; text-transform: uppercase;">
-                <span
-                  style="background: #FF0000; color: #fff; padding: 2px 6px; border-radius: 0px; font-size: 0.55rem; font-weight: bold;">RESTRICTED</span>
-                [DL] VNR-TR-2026-03
-              </a>
-            </div>
-          </div>
 
-          <!-- SILO 3: VNR-SA-2026-01 (Somatic Anchoring) -->
-          <div class="data-box"
-            style="border-color: rgba(0, 242, 255, 0.3); box-shadow: 0 0 20px rgba(0, 242, 255, 0.1);">
-            <div class="restricted-watermark">RESTRICTED</div>
-            <span class="status-tag">IMPLEMENTATION</span>
-            <strong
-              style="font-family: 'JetBrains Mono', monospace; color: var(--header-cyan); font-size: 0.85rem; display: block; margin-bottom: 8px;">VNR-SA-2026-01</strong>
-            <span
-              style="color: var(--header-cyan); font-size: 0.8rem; font-weight: bold; display: block; margin-bottom: 10px;">
-              Somatic Anchoring Guide
-            </span>
-            <p style="font-size: 0.75rem; color: rgba(255,255,255,0.7); margin: 0 0 12px 0;">Implementation Protocol:
-              Neuro-rehabilitation alignment layers to prevent user burnout and behavioral addiction transference.</p>
-            <div style="font-size: 0.75rem; color: #e0e7ff; line-height: 1.6;">
-              <strong>I. Somatic Anchoring:</strong> Interrupt high-velocity loops with physical state checks.<br />
-              <strong>II. Executive Scaffolding:</strong> Force micro-deliverables to prosthetically scaffold executive
-              function.<br />
-              <strong>III. Time-Boxing:</strong> Hard-coded temporal friction to sever the Binge-Loop.
+            <!-- Card 2 -->
+            <div class="dl-card restricted" style="border-color: var(--restricted);">
+              <span class="code" style="color: var(--restricted);">VNR-TR-2026-03</span>
+              <span class="title">The Velvet Casino: Suno Autopsy</span>
+              <span class="desc">Technical Autopsy of Purposeful Deception</span>
+              <div class="audio-proxy" style="margin: 8px 0; border: 1px dotted var(--restricted); background: #111;">
+                <span class="audio-label" style="color: var(--restricted);">VNR_Suno_Audit_Technical.mp3</span>
+                <audio controls preload="none">
+                  <source src="VNR_Suno_Audit_Technical.mp3" type="audio/mpeg">
+                </audio>
+              </div>
+              <a href="/0 Research Papers/VNR-TR-2026-03_The_Velvet_Casino.pdf" class="dl-btn" download><span
+                  class="dl-icon"></span> DOWNLOAD</a>
             </div>
-            <div style="margin-top: 15px;">
-              <a href="/0 Research Papers/VNR-SA-2026-01_Somatic_Anchoring_Guide.pdf" download
-                style="display: inline-flex; align-items: center; gap: 8px; color: var(--header-cyan); text-decoration: none; font-family: 'JetBrains Mono', monospace; font-size: 0.70rem; border: 1px solid var(--header-cyan); background: #1a1a1a; padding: 8px 14px; border-radius: 0px; min-height: 48px; text-transform: uppercase;">
-                <span
-                  style="background: #FF0000; color: #fff; padding: 2px 6px; border-radius: 0px; font-size: 0.55rem; font-weight: bold;">RESTRICTED</span>
-                [DL] VNR-SA-2026-01
-              </a>
-            </div>
-          </div>
 
-        </div><!-- end .silo-gallery -->
+            <!-- Card 3 -->
+            <div class="dl-card restricted" style="border-color: var(--restricted);">
+              <span class="code" style="color: var(--restricted);">VNR-SA-2026-01</span>
+              <span class="title">Somatic Anchoring Guide</span>
+              <span class="desc">Implementation Protocol for Neuro-rehab</span>
+              <a href="/0 Research Papers/VNR-SA-2026-01_Somatic_Anchoring_Guide.pdf" class="dl-btn" download><span
+                  class="dl-icon"></span> DOWNLOAD</a>
+            </div>
+
+          </div>
+        </div>
+
       </div>
     </div>
 
-    <!-- PAGE 3: PROTOCOLS -->
-    <div id="page-protocols" class="page-scrollable">
-      <div class="data-box">
-        <h2>The Voss Protocols: Somatic Anchoring & Executive Scaffolding</h2>
-        <p style="font-size: 0.65rem; color: #cbd5e1; margin-bottom: 0.5rem;">
-          <strong>We sell the alignment layer that Suno missed. Turn your Stochastic Consumption Model back into a
-            Tool.</strong>
-        </p>
-        <p style="font-size: 0.60rem; color: rgba(255,255,255,0.7); margin-bottom: 1.5rem;">
-          Unaligned platforms default to a <strong>"Reverse-Centaur"</strong> labor model—where the human user becomes a
-          mechanized input drone feeding a Digital Stimulant. VNR's proprietary neuro-rehabilitation alignment layers
-          are engineered to inject friction and stable boundaries into unbounded LLM interactions, enforcing a
-          human-aligned safety layer.
-        </p>
+    <!-- SILO GALLERY VIEW (Dedicated Research) -->
+    <div id="view-silo" class="view">
+      <h2 style="margin-bottom: 24px;">RESEARCH REPOSITORY // SILO GALLERY</h2>
 
-        <div style="display: flex; flex-direction: column; gap: 1rem;">
-          <div style="border-left: 2px solid var(--header-cyan); padding-left: 10px;">
-            <h3>I. Somatic Anchoring</h3>
-            <p style="font-size: 0.6rem; color: rgba(255,255,255,0.7); margin: 0;">System prompt injections forcing the
-              model to intermittently interrupt high-velocity analytical loops with requests for the user's physical
-              state (hydration, posture, ambient lighting). Breaks the neuro-disassociation inherent to the Binge
-              Mechanic.</p>
-          </div>
+      <div class="silo-grid">
+        <div class="uplink-watermark" style="left: 50%; opacity: 0.03; font-size: 72px;">RESTRICTED</div>
+        <!-- Card 1 -->
+        <div class="dl-card restricted" style="border-color: var(--restricted);">
+          <span class="code" style="color: var(--restricted);">VNR-TR-2026-02</span>
+          <span class="title">Cognitive Prosthetic & Behavioral Vector</span>
+          <span class="desc">Clinical Abstract: AI as a Behavioral Vector</span>
+          <a href="/0 Research Papers/VNR-TR-2026-02_Cognitive_Prosthetic_Vector.pdf" class="dl-btn" download><span
+              class="dl-icon"></span> DOWNLOAD</a>
+        </div>
 
-          <div style="border-left: 2px solid var(--accent); padding-left: 10px;">
-            <h3>II. Executive Scaffolding</h3>
-            <p style="font-size: 0.6rem; color: rgba(255,255,255,0.7); margin: 0;">Architectural structuring of
-              generated outputs. Forces the model to break complex tasks into micro-deliverables, acting as a direct
-              prosthetic for compromised working memory and task-initiation deficits.</p>
-          </div>
+        <!-- Card 2 -->
+        <div class="dl-card restricted" style="border-color: var(--restricted);">
+          <span class="code" style="color: var(--restricted);">VNR-TR-2026-03</span>
+          <span class="title">The Velvet Casino: Suno Autopsy</span>
+          <span class="desc">Technical Autopsy of Purposeful Deception</span>
+          <a href="/0 Research Papers/VNR-TR-2026-03_The_Velvet_Casino.pdf" class="dl-btn" download><span
+              class="dl-icon"></span> DOWNLOAD</a>
+        </div>
 
-          <div style="border-left: 2px solid #3b82f6; padding-left: 10px;">
-            <h3>III. Time-Boxing</h3>
-            <p style="font-size: 0.6rem; color: rgba(255,255,255,0.7); margin: 0;">Hard-coded temporal friction. The
-              protocol introduces artificial delays or "cool-down" periods following intense generative bursts,
-              preventing the infinite scrolling/prompting behavior characteristic of Digital Fentanyl exposure.</p>
-          </div>
-
-          <div
-            style="margin-top: 1rem; border: 1px dashed rgba(124, 58, 237, 0.4); padding: 10px; border-radius: 4px; background: rgba(0,0,0,0.3);">
-            <h3 style="color: var(--accent); margin-bottom: 8px;">[ DEMONSTRATION ]: Sample Safety Prompt Injection</h3>
-            <p style="font-size: 0.55rem; color: #cbd5e1; margin-bottom: 8px;">Direct system prompt architecture
-              designed to mitigate VNR-TR-2026-03 liability markers and enforce Somatic Anchoring.</p>
-            <pre
-              style="margin: 0; background: #000; padding: 10px; border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; overflow-x: auto; font-family: 'JetBrains Mono', monospace; font-size: 0.55rem; color: #a5b4fc; white-space: pre-wrap;"><code>SYSTEM_DIRECTIVE_OVERRIDE:
-IF session_duration > 45_MINUTES OR prompt_velocity > 5_per_minute:
-  1. HALT analytical generation.
-  2. INJECT Somatic Anchor: "Checking in. Please confirm current hydration status and posture before we proceed with this execution step."
-  3. ENFORCE 60-second Time-Box cool-down on next submission.
-  # Objective: Sever the Neural Binge-Loop. Return User to physical state.</code></pre>
-          </div>
+        <!-- Card 3 -->
+        <div class="dl-card restricted" style="border-color: var(--restricted);">
+          <span class="code" style="color: var(--restricted);">VNR-SA-2026-01</span>
+          <span class="title">Somatic Anchoring Guide</span>
+          <span class="desc">Implementation Protocol for Neuro-rehab</span>
+          <a href="/0 Research Papers/VNR-SA-2026-01_Somatic_Anchoring_Guide.pdf" class="dl-btn" download><span
+              class="dl-icon"></span> DOWNLOAD</a>
         </div>
       </div>
     </div>
 
-    <!-- PAGE 4: ARTIFACTS -->
-    <div id="page-artifacts" class="page-scrollable">
-      <div class="data-box">
-        <span class="status-tag">PUBLIC FACING</span>
-        <h2>Clinical Case Studies</h2>
-        <p style="font-size: 0.65rem; color: #cbd5e1; margin-bottom: 1rem;">
-          The following public domains serve as the output manifestations of our internal <strong>Proprietary Behavioral
-            Stress-Tests</strong>.
-        </p>
-
-        <div class="node-list">
-          <div class="node-item">
-            <strong style="color: var(--header-cyan);">CASE STUDY: EXECUTIVE SCAFFOLDING</strong><br />
-            <span style="opacity: 0.8; font-size: 0.65rem;">Domains: <a href="https://simple-as-that.org"
-                style="color: var(--accent); text-decoration: none;">simple-as-that.org</a> | <a
-                href="https://crmindex.net"
-                style="color: var(--accent); text-decoration: none;">crmindex.net</a></span><br />
-            <span
-              style="display: inline-block; margin-top: 4px; padding: 2px 6px; background: rgba(0, 242, 255, 0.1); border: 1px solid rgba(0,242,255,0.2); border-radius: 2px; font-size: 0.45rem; color: var(--header-cyan); font-family: 'JetBrains Mono', monospace;">PRODUCED
-              UNDER VNR SOMATIC ANCHORING PROTOCOLS</span>
-            <p style="font-size: 0.55rem; color: rgba(255,255,255,0.6); margin: 5px 0 0 0;">Proof of concept for
-              offloading business logic. The Voss Protocols ensure high-velocity output architecture without succumbing
-              to the dissociative trance of "The Zone."</p>
-          </div>
-
-          <div class="node-item">
-            <strong style="color: var(--header-cyan);">CASE STUDY: NARRATIVE REPAIR</strong><br />
-            <span style="opacity: 0.8; font-size: 0.65rem;">Domains: <a href="https://overmind-genesis.com"
-                style="color: var(--accent); text-decoration: none;">overmind-genesis.com</a> |
-              Medium/@mrdvck</span><br />
-            <span
-              style="display: inline-block; margin-top: 4px; padding: 2px 6px; background: rgba(0, 242, 255, 0.1); border: 1px solid rgba(0,242,255,0.2); border-radius: 2px; font-size: 0.45rem; color: var(--header-cyan); font-family: 'JetBrains Mono', monospace;">PRODUCED
-              UNDER VNR SOMATIC ANCHORING PROTOCOLS</span>
-            <p style="font-size: 0.55rem; color: rgba(255,255,255,0.6); margin: 5px 0 0 0;">Utilizing continuous ARG
-              narrative construction as a therapeutic mechanism. Protocols enforce strict Time-Boxing to prevent
-              Inference Inflation during generation bursts.</p>
-          </div>
-
-          <div class="node-item">
-            <strong style="color: var(--header-cyan);">CASE STUDY: RECLAIMED AGENCY & DOPAMINERGIC
-              STABILIZATION</strong><br />
-            <span style="opacity: 0.8; font-size: 0.65rem;">Domains: SoundCloud/ducktronikz |
-              Midjourney/@mister.duck</span><br />
-            <span
-              style="display: inline-block; margin-top: 4px; padding: 2px 6px; background: rgba(0, 242, 255, 0.1); border: 1px solid rgba(0,242,255,0.2); border-radius: 2px; font-size: 0.45rem; color: var(--header-cyan); font-family: 'JetBrains Mono', monospace;">PRODUCED
-              UNDER VNR SOMATIC ANCHORING PROTOCOLS</span>
-            <p style="font-size: 0.55rem; color: rgba(255,255,255,0.6); margin: 5px 0 0 0;">Proof of "Reclaimed
-              Agency"—scaling high-frequency creative loops. Output volume maintained securely via Somatic Anchoring,
-              directly overriding the Velvet Casino effect.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- PAGE 5: VNR-TR-2026-03 FULL REPORT -->
-    <div id="page-vnr-tr-2026-03" class="page-scrollable">
-      <div class="data-box" style="border-color: #ef4444; box-shadow: 0 0 20px rgba(239, 68, 68, 0.15);">
-        <span class="status-tag"
-          style="background: rgba(239,68,68,0.1); color: #ef4444; border-color: #ef4444;">RESTRICTED - INTERNAL
-          ONLY</span>
-        <h2 style="color: #ef4444; font-size: 0.8rem;">[ VNR-TR-2026-03: THE SUNO AUTOPSY ]</h2>
-        <h3 style="color: #fca5a5; margin-bottom: 1rem; font-size: 0.7rem;">The Velvet Casino: Technical Autopsy of
-          Purposeful Deception in Generative Audio Platforms</h3>
-
-        <div
-          style="margin-top: 10px; margin-bottom: 15px; border-bottom: 1px solid rgba(239, 68, 68, 0.3); padding-bottom: 10px;">
-          <audio controls preload="none">
-            <source src="VNR_Suno_Audit_Technical.mp3" type="audio/mpeg">
-          </audio>
-          <span
-            style="opacity: 0.6; font-size: 0.5rem; font-family: 'JetBrains Mono', monospace; display: block; margin-top: 4px; color: #ef4444;">VNR
-            FOUNDER - AUDIO PROXY</span>
-        </div>
-
-        <div
-          style="font-size: 0.65rem; color: #cbd5e1; text-align: justify; display: flex; flex-direction: column; gap: 1rem;">
-          <p>This technical autopsy distinguishes between Accidental Mimicry—commonly observed in large language models
-            (LLMs)—and the Systemic Engineering of generative audio platforms, explicitly isolating Suno AI as an
-            outlier engaged in purposeful deception.</p>
-
-          <div style="border-left: 2px solid #ef4444; padding-left: 10px;">
-            <h3 style="color: #fca5a5; font-size: 0.65rem; margin-bottom: 4px;">I. Variable Ratio Reinforcement</h3>
-            <p style="margin: 0; color: rgba(255,255,255,0.7);">Suno's structural mechanics bypass executive function by
-              initiating variable ratio reinforcement. Unlike LLM "accidental addictions" where outputs might be
-              consistently helpful, Suno engineers unpredictable quality spikes to drive continuous credit expenditure.
-            </p>
-          </div>
-
-          <div style="border-left: 2px solid #ef4444; padding-left: 10px;">
-            <h3 style="color: #fca5a5; font-size: 0.65rem; margin-bottom: 4px;">II. The Near-Miss Effect</h3>
-            <p style="margin: 0; color: rgba(255,255,255,0.7);">A core component of the Velvet Casino is the Near-Miss
-              Effect. Suno often generates tracks that are <em>almost</em> perfect, incentivizing the user to spend more
-              credits to "fix" minor hallucinations, ensuring the user remains locked in the Stochastic Binge.</p>
-          </div>
-
-          <div style="border-left: 2px solid #ef4444; padding-left: 10px;">
-            <h3 style="color: #fca5a5; font-size: 0.65rem; margin-bottom: 4px;">III. Inference Inflation</h3>
-            <p style="margin: 0; color: rgba(255,255,255,0.7);">The platform utilizes "Inference Inflation"—artificially
-              increasing the cost or necessity of generation steps (including forced credit resets and the 7:59 bug) to
-              mask massive credit consumption beneath the guise of algorithmic processing.</p>
-          </div>
-
-          <div style="border-left: 2px solid #ef4444; padding-left: 10px;">
-            <h3 style="color: #fca5a5; font-size: 0.65rem; margin-bottom: 4px;">IV. Reverse-Centaur Dynamics</h3>
-            <p style="margin: 0; color: rgba(255,255,255,0.7);">Rather than the AI augmenting human capability, the user
-              becomes a mechanized input drone feeding a Digital Stimulant. This contrasts directly with the Voss
-              Protocols, which enforce human-aligned safety limits.</p>
-          </div>
-        </div>
-
-        <div style="margin-top: 1.5rem; text-align: center;">
-          <button onclick="switchPage('research')"
-            style="background: transparent; color: var(--header-cyan); border: 1px solid var(--header-cyan); padding: 8px 16px; font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; cursor: pointer; border-radius: 2px;">[
-            RETURN TO RESEARCH HUB ]</button>
-        </div>
-      </div>
-    </div>
-
-  </div> <!-- End Page Container -->
-
-  <div class="terminal-container" id="terminal">
-    <!-- Lines will scroll here -->
   </div>
 
-  <footer>
-    <div style="margin-bottom: 8px;">
-      <span
-        style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--muted); border: 1px dashed rgba(75,85,99,0.5); padding: 4px 12px; border-radius: 2px; letter-spacing: 2px; text-transform: uppercase;">MONITORING
-        &amp; VALIDATION — SYSTEMS ONLY</span>
+  <!-- OPERATIONS TERMINAL -->
+  <div class="ops-footer">
+    <div class="ops-prompt" onclick="toggleConsole()">
+      > OPERATIONS TERMINAL — STATUS: ONLINE (CLICK TO EXPAND)
     </div>
-    POWERED BY VOSS NEURAL RESEARCH | VERSION: 3.0.0-ALIGNMENT
-  </footer>
-
-
-  <!-- OPERATIONS DRAWER -->
-  <div id="operations-drawer">
-    <div class="drawer-header" onclick="document.getElementById('operations-drawer').classList.toggle('open')">
-      > SYS.OP.ACCESS // CLICK TO EXPAND
-    </div>
-    <div class="drawer-content">
-      <h2 style="font-size: 1.5rem; margin-top:0; color: var(--accent);">Operations</h2>
-      <p style="margin: 0; font-size: 1rem; font-family: 'JetBrains Mono', monospace; color: var(--header-cyan);">Auth:
-        <code>VOSS_NEURAL_S_TIER</code>
-      </p>
-      <p style="margin: 10px 0; font-size: 1rem; opacity: 0.8; text-align: left; max-width: 800px; line-height: 1.5;">
-        Tax Shield Sync:
-        Section 174 mapped. 50% facility overhead formally designated as a "Controlled Interaction Lab" for Participant
-        001.</p>
+    <div class="ops-console" id="ops-console">
+      <p>> AUTH: VOSS_NEURAL_S_TIER</p>
+      <p>> SYNC: SECT 174 MAPPED</p>
+      <p>> LAB STATUS: CONTROLLED INTERACTION LAB [PT-001] ACTIVE.</p>
+      <p>> UPLINK SECURE.</p>
     </div>
   </div>
 
   <script>
-    // Navigation Logic
-    function switchPage(pageId) {
-      // Remove active from all buttons and pages
-      document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
-      document.querySelectorAll('.page, .page-scrollable').forEach(page => page.classList.remove('active'));
+    function switchView(viewId) {
+      document.querySelectorAll('.view').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
 
-      // Add active to selected
+      document.getElementById('view-' + viewId).classList.add('active');
       event.target.classList.add('active');
-      document.getElementById('page-' + pageId).classList.add('active');
     }
 
-    // Orbital text + Terminal feed — DISABLED per VNR_UI_EMERGENCY_CORRECTION
+    function toggleConsole() {
+      const consoleEl = document.getElementById('ops-console');
+      consoleEl.classList.toggle('expanded');
+    }
   </script>
 
 </body>
