@@ -8,7 +8,9 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap"
+    rel="stylesheet">
 
   <style>
     /* Strict CSS Variables */
@@ -16,15 +18,15 @@
       --bg-color: #030303;
       --text-main: #E0E0E0;
       --text-sub: #888888;
-      --accent: #9333ea;
-      /* Purple technical accent */
+      --accent: #06b6d4;
+      /* Cyan technical accent */
       --restricted: #06b6d4;
       /* Cyan/Teal for restricted content */
       --panel-bg: rgba(3, 5, 12, 0.85);
       /* Dark blue black */
-      --border-color: rgba(255, 255, 255, 0.1);
-      --purple-glow: 0 16px 48px rgba(0, 0, 0, 0.9), 0 0 40px rgba(147, 51, 234, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      --border-color: rgba(6, 182, 212, 0.2);
       --cyan-glow: 0 16px 48px rgba(0, 0, 0, 0.9), 0 0 40px rgba(6, 182, 212, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      --cyan-active-glow: 0 0 24px rgba(6, 182, 212, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
     }
 
     * {
@@ -36,7 +38,7 @@
     body {
       background-color: var(--bg-color);
       background-image:
-        radial-gradient(circle at 50% 0%, rgba(147, 51, 234, 0.08) 0%, rgba(6, 182, 212, 0.05) 50%, transparent 100%),
+        radial-gradient(circle at 50% 0%, rgba(6, 182, 212, 0.08) 0%, rgba(6, 182, 212, 0.03) 50%, transparent 100%),
         url('data:image/svg+xml;utf8,<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="2" cy="2" r="1.5" fill="rgba(255,255,255,0.03)"/></svg>');
       background-attachment: fixed;
       color: var(--text-main);
@@ -51,11 +53,16 @@
       flex-direction: column;
     }
 
+    .font-sans {
+      font-family: 'Inter', sans-serif;
+    }
+
     /* TYPOGRAPHY */
     h1 {
       font-size: 24px;
       font-weight: 700;
       text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
 
     h2 {
@@ -67,184 +74,59 @@
     }
 
     h3 {
-      font-size: 13px;
+      font-size: 18px;
       font-weight: 700;
-      text-transform: uppercase;
-      margin-bottom: 4px;
+      margin-bottom: 12px;
+      color: #fff;
     }
 
     /* HEADER & BRANDING */
     header {
       display: flex;
       flex-direction: column;
-      padding: 16px 24px;
+      align-items: center;
+      padding: 24px;
       border-bottom: 1px solid var(--border-color);
       flex-shrink: 0;
+      background: #000;
+      z-index: 50;
+    }
+
+    .brand-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      width: 100%;
+      max-width: 1000px;
+    }
+
+    .brand-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
     }
 
     .brand-row {
       display: flex;
       align-items: center;
-      gap: 8px;
-      /* Sigil anchored 8px to the left of VOSS */
+      justify-content: center;
+      gap: 12px;
     }
 
     .sigil {
-      height: 24px;
+      height: 32px;
       width: auto;
       display: block;
     }
 
     .subtitle {
-      font-size: 14px;
-      color: var(--text-sub);
-      margin-top: 4px;
-      padding-left: 32px;
-      /* Align with text, accommodating sigil */
-    }
-
-    .nav-bar {
-      margin-top: 16px;
-      display: flex;
-      gap: 16px;
-      padding-left: 32px;
-    }
-
-    .nav-btn {
-      background: transparent;
-      color: var(--text-sub);
-      border: 1px solid var(--border-color);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 14px;
-      text-transform: uppercase;
-      cursor: pointer;
-      min-height: 48px;
-      /* Somatic Hit-Box */
-      min-width: 48px;
-      padding: 0 16px;
-      transition: background 0.2s, color 0.2s, border-color 0.2s;
-    }
-
-    .nav-btn:hover,
-    .nav-btn.active {
-      background: var(--panel-bg);
-      color: var(--accent);
-      border-color: var(--accent);
-    }
-
-    /* MAIN CONTAINER - 12 Column Grid */
-    .view-container {
-      height: calc(100vh - 120px);
-      width: 100vw;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .view {
-      display: none;
-      padding: 24px;
-    }
-
-    .view.active {
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-    }
-
-    /* HUD Layout (Home) */
-    .hud-grid {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap: 24px;
-      width: 100%;
-      height: 100%;
-    }
-
-    .col-left {
-      grid-column: span 8;
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-      overflow-y: auto;
-      gap: 16px;
-      padding: 16px;
-      background: rgba(147, 51, 234, 0.05);
-      /* Suppressed purple background */
-      border: 1px solid rgba(147, 51, 234, 0.2);
-      /* Subdued purple border */
-    }
-
-    .col-left::-webkit-scrollbar {
-      width: 6px;
-    }
-
-    .col-left::-webkit-scrollbar-track {
-      background: transparent;
-    }
-
-    .col-left::-webkit-scrollbar-thumb {
-      background: var(--accent);
-      /* Purple scrollbar */
-      border-radius: 3px;
-    }
-
-    /* CONTENT BLOCKS */
-    .clinical-block-container {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .clinical-header {
-      background: #030303;
-      /* Black boxes */
-      border: none;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-      /* Subtle shadow for depth */
-      padding: 16px 20px;
-      border-radius: 4px;
-      text-transform: uppercase;
-    }
-
-    .clinical-header h2 {
-      font-size: 16px;
-      color: var(--accent);
-      /* Purple text */
-      margin-bottom: 8px;
-    }
-
-    .clinical-header p,
-    .clinical-header p strong {
-      margin-top: 8px;
-      margin-bottom: 0;
       font-size: 12px;
       color: var(--text-sub);
-    }
-
-    .clinical-section {
-      background: #030303;
-      /* Black boxes */
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      /* Faint border */
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-      padding: 16px 20px;
-      border-radius: 4px;
-      transition: all 0.3s ease;
-    }
-
-    .clinical-section.active-glow {
-      box-shadow: 0 0 24px rgba(147, 51, 234, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-      border-color: var(--accent);
-    }
-
-    .clinical-section h3 {
-      color: var(--accent);
-      /* Colored matching lettering */
-    }
-
-    .clinical-section p {
-      font-size: 13px;
-      color: #bbbbbb;
+      margin-top: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
     }
 
     /* GLOBAL AUDIO PLAYER */
@@ -259,7 +141,6 @@
       border-radius: 4px;
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      margin-left: auto;
     }
 
     .player-controls {
@@ -310,474 +191,747 @@
       width: 200px;
     }
 
-    /* DATA UPLINK / DOWNLOAD CARDS */
-    .uplink-container {
-      position: relative;
-    }
-
-    .uplink-watermark {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) rotate(-30deg);
-      font-size: 48px;
-      color: var(--text-main);
-      opacity: 0.05;
-      font-weight: 700;
-      letter-spacing: 8px;
-      pointer-events: none;
-      z-index: 0;
-      white-space: nowrap;
-    }
-
-    .dl-card {
-      background: var(--panel-bg);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: none;
-      box-shadow: var(--cyan-glow);
-      border-radius: 4px;
-      padding: 16px;
-      margin-bottom: 16px;
-      position: relative;
-      z-index: 1;
+    /* TOP NAVIGATION VIEW COMMAND CENTER */
+    .view-container {
+      flex: 1;
+      width: 100vw;
+      overflow: hidden;
       display: flex;
       flex-direction: column;
-      flex: 1;
-      justify-content: space-between;
+      align-items: center;
+      position: relative;
+    }
+
+    .nav-bar {
+      display: flex;
       gap: 8px;
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--border-color);
+      background: rgba(6, 182, 212, 0.02);
+      width: 100%;
+      justify-content: center;
     }
 
-    .dl-card.active-glow {
-      box-shadow: 0 0 24px rgba(6, 182, 212, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-      border: 1px solid var(--restricted);
-    }
-
-    .dl-card:last-child {
-      margin-bottom: 0;
-    }
-
-    .dl-card .code {
-      font-size: 12px;
-      color: var(--accent);
-      font-weight: 700;
-    }
-
-    .dl-card.restricted border {
-      border-color: var(--restricted);
-    }
-
-    .dl-card.restricted .code {
-      color: var(--restricted);
-    }
-
-    .dl-card .title {
-      font-weight: 700;
-      font-size: 14px;
-    }
-
-    .dl-card .desc {
-      font-size: 12px;
+    .nav-btn {
+      background: rgba(3, 3, 3, 0.5);
       color: var(--text-sub);
-    }
-
-    a.dl-btn {
-      display: inline-flex;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      text-transform: uppercase;
+      cursor: pointer;
+      min-height: 40px;
+      padding: 0 20px;
+      border-radius: 4px;
+      transition: all 0.2s;
+      display: flex;
       align-items: center;
       gap: 8px;
-      margin-top: 8px;
-      color: var(--text-main);
-      text-decoration: none;
+    }
+
+    .nav-btn:hover,
+    .nav-btn.active {
+      background: #000;
+      color: #fff;
+      border-color: var(--accent);
+      box-shadow: 0 0 10px rgba(6, 182, 212, 0.3);
+    }
+
+    /* MAIN PANE SYSTEM - NON SCROLLABLE CONTENT AREA */
+    .content-area {
+      width: 100%;
+      max-width: 1100px;
+      flex: 1;
+      padding: 32px 24px;
+      position: relative;
+    }
+
+    .view-pane {
+      display: none;
+      width: 100%;
+      height: 100%;
+      animation: fadeIn 0.4s ease-out forwards;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .view-pane.active {
+      display: flex;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* SHARED SECTION STYLES */
+    .section-header {
+      margin-bottom: 32px;
+      text-align: center;
+    }
+
+    .section-header .tag {
       font-size: 12px;
-      min-height: 48px;
-      /* Hit-box */
-      padding: 0 12px;
-      border: 1px solid var(--border-color);
-      width: fit-content;
-      transition: background 0.2s;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+      display: block;
     }
 
-    a.dl-btn:hover {
-      background: rgba(255, 255, 255, 0.05);
+    .section-header h1 {
+      font-size: 36px;
+      color: #fff;
     }
 
-    .dl-icon::before {
-      content: '↓';
+    /* VIEW 1: WELCOME */
+    .welcome-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .welcome-text {
+      font-size: 16px;
+      color: var(--text-sub);
+      line-height: 1.8;
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .welcome-text strong {
+      color: #fff;
+    }
+
+    .mission-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    .info-box {
+      background: rgba(6, 182, 212, 0.05);
+      border: 1px solid rgba(6, 182, 212, 0.2);
+      padding: 24px;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+    }
+
+    /* SYNC GLOWS */
+    .sync-glow {
+      box-shadow: var(--cyan-active-glow);
+      border-color: var(--accent);
+      background: rgba(6, 182, 212, 0.1);
+    }
+
+    /* VIEW 2: VELOCITY CHART */
+    .chart-box {
+      background: #030303;
+      border: 1px solid rgba(6, 182, 212, 0.3);
+      border-radius: 4px;
+      padding: 24px;
+      height: 400px;
+      width: 100%;
+      position: relative;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 24px;
+    }
+
+    .stat-card {
+      background: rgba(6, 182, 212, 0.05);
+      border: 1px solid rgba(6, 182, 212, 0.2);
+      padding: 20px;
+      border-radius: 4px;
+      text-align: center;
+    }
+
+    .stat-card .label {
+      font-size: 11px;
+      color: var(--text-sub);
+      text-transform: uppercase;
       font-weight: bold;
+      margin-bottom: 8px;
     }
 
-    /* SILO GALLERY GRID (Research View) */
+    .stat-card .value {
+      font-size: 32px;
+      font-weight: bold;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .stat-card .sub {
+      font-size: 10px;
+      font-family: 'JetBrains Mono';
+      margin-top: 8px;
+    }
+
+    /* VIEW 3: SILOS */
     .silo-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 24px;
-      width: 100%;
-      position: relative;
-      align-items: stretch;
-    }
-
-    .silo-grid .dl-card {
-      margin-bottom: 0;
       height: 100%;
+      align-items: center;
     }
 
+    .silo-card {
+      background: #030303;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 32px 24px;
+      border-radius: 4px;
+      height: 380px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: all 0.3s ease;
+    }
 
+    .silo-card:hover {
+      border-color: var(--text-sub);
+    }
 
-    /* RESPONSIVE FALLBACK */
-    @media (max-width: 1024px) {
-      .hud-grid {
-        grid-template-columns: 1fr;
-      }
+    .silo-card .line {
+      width: 40px;
+      height: 3px;
+      background: var(--text-sub);
+      margin-bottom: 24px;
+    }
 
-      .col-left,
-      .col-right {
-        grid-column: span 1;
-      }
+    .silo-card p {
+      font-size: 13px;
+      color: var(--text-sub);
+      line-height: 1.6;
+      margin-bottom: auto;
+    }
 
-      .silo-grid {
-        grid-template-columns: 1fr;
-      }
+    .silo-card .artifact {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 16px;
+      border-radius: 4px;
+      margin-top: 24px;
+    }
+
+    /* Center Silo Custom */
+    .silo-card.core-silo {
+      background: rgba(6, 182, 212, 0.05);
+      border: 1px solid rgba(6, 182, 212, 0.4);
+      transform: scale(1.05);
+      z-index: 10;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+    }
+
+    .silo-card.core-silo .line {
+      background: var(--accent);
+    }
+
+    .silo-card.core-silo h3 {
+      color: var(--accent);
+    }
+
+    /* VIEW 4: REPO (DOWNLOADS) */
+    .repo-container {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      width: 100%;
+    }
+
+    .dl-row {
+      background: #030303;
+      border: 1px solid rgba(6, 182, 212, 0.3);
+      border-radius: 4px;
+      padding: 20px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.2s;
+      text-decoration: none;
+      color: var(--text-main);
+    }
+
+    .dl-row:hover {
+      background: rgba(6, 182, 212, 0.1);
+      border-color: var(--accent);
+    }
+
+    .dl-left {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .dl-code {
+      font-size: 14px;
+      color: var(--accent);
+      font-weight: 700;
+      width: 80px;
+    }
+
+    .dl-info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .dl-info .title {
+      font-weight: bold;
+      font-size: 16px;
+      color: #fff;
+    }
+
+    .dl-info .desc {
+      font-size: 12px;
+      color: var(--text-sub);
+      text-transform: uppercase;
+    }
+
+    .dl-btn-text {
+      font-size: 12px;
+      font-weight: bold;
+      color: var(--text-sub);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .dl-row:hover .dl-btn-text {
+      color: var(--accent);
+    }
+
+    footer {
+      padding: 16px;
+      text-align: center;
+      font-size: 11px;
+      color: #666;
+      width: 100%;
+      flex-shrink: 0;
+    }
+
+    footer a {
+      color: #666;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    footer a:hover {
+      color: var(--accent);
     }
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
-<header>
-  <div style="display: flex; width: 100%; align-items: flex-start; justify-content: space-between;">
-    <div>
-      <div class="brand-row">
-        <img src="vosstrans.PNG" alt="VNR Sigil" class="sigil" onerror="this.style.display='none'">
-        <h1>VOSS NEURAL RESEARCH</h1>
+<body>
 
-        <!-- GLOBAL AUDIO PLAYER (Next to branding) -->
-        <div id="global-player" class="global-player" style="margin-left: 24px;">
-          <div class="player-controls">
-            <select id="track-selector" class="track-select">
-              <!-- Options injected by JS -->
-            </select>
-            <audio id="main-audio" controls preload="auto">
-              <source src="assets/audio/VNR_Welcome.mp3" type="audio/mpeg">
-            </audio>
-          </div>
-          <div class="soundwave" id="visualizer">
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
+  <header>
+    <div class="brand-container">
+      <div class="brand-col">
+        <div class="brand-row">
+          <img src="vosstrans.PNG" alt="VNR Sigil" class="sigil" onerror="this.style.display='none'">
+          <h1>VOSS NEURAL RESEARCH</h1>
+        </div>
+        <div class="subtitle">Neural Alignment & Behavioral Systems Architecture</div>
+      </div>
+
+      <!-- GLOBAL AUDIO PLAYER (Next to branding) -->
+      <div id="global-player" class="global-player">
+        <div class="player-controls">
+          <select id="track-selector" class="track-select">
+            <!-- Options injected by JS -->
+          </select>
+          <audio id="main-audio" controls preload="auto">
+            <source src="assets/audio/VNR_Welcome.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        <div class="soundwave" id="visualizer">
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="view-container">
+
+    <nav class="nav-bar">
+      <button class="nav-btn active" onclick="switchView('welcome')" id="nav-welcome"><span>⬚</span> Welcome / Core
+        Mission</button>
+      <button class="nav-btn" onclick="switchView('velocity')" id="nav-velocity"><span>📈</span> Interaction
+        Velocity</button>
+      <button class="nav-btn" onclick="switchView('silo')" id="nav-silo"><span>⌬</span> Research & Protocols</button>
+      <button class="nav-btn" onclick="switchView('repo')" id="nav-repo"><span>☍</span> Secure Repository</button>
+    </nav>
+
+    <div class="content-area">
+
+      <!-- VIEW 1: WELCOME -->
+      <div id="view-welcome" class="view-pane active">
+        <div class="section-header">
+          <span class="tag">About VNR</span>
+          <h1>We are the architects of neural alignment.</h1>
+        </div>
+        <div class="welcome-grid" id="sync-welcome">
+          <p class="welcome-text font-sans">
+            Voss Neural Research (VNR) was established to provide a technical bridge between high-velocity generative AI
+            and human cognitive agency. We don't just study addiction; we build the implementation frameworks required
+            to maintain human authority in an age of variable reward architectures.
+          </p>
+          <div class="mission-cols mt-4">
+            <div class="info-box border-b-2">
+              <h3>The Mission</h3>
+              <p class="font-sans text-sm text-gray-400">To mitigate the "Reverse-Centaur" dynamic—where humans serve a
+                model's inference loop—and return the user to a state of <strong>Executive Empowerment</strong>.</p>
+            </div>
+            <div class="info-box border-b-2">
+              <h3>The Framework</h3>
+              <p class="font-sans text-sm text-gray-400">Treating Large Language Models as
+                <strong>Neuro-prosthetics</strong>. We stabilize dopaminergic pathways while maximizing output
+                efficiency through validated protocols.</p>
+            </div>
           </div>
         </div>
       </div>
-      <div class="subtitle">Neural Alignment & Behavioral Systems Architecture</div>
-      <div class="nav-bar">
-        <button class="nav-btn active" onclick="switchView('hud')">HUD</button>
-        <button class="nav-btn" onclick="switchView('silo')">RESEARCH SILO</button>
-      </div>
-    </div>
-  </div>
-</header>
 
-<div class="view-container">
-
-  <!-- HUD VIEW (Main Web Surface of VNR-TR-2026-02) -->
-  <div id="view-hud" class="view active">
-    <div class="hud-grid">
-
-      <!-- LEFT COLUMN (8 cols): Clinical Content -->
-      <div class="col-left" id="clinical-content-col">
-
-        <div class="clinical-block-container">
-          <div class="clinical-header">
-            <h2>VNR-TR-2026-02: Cognitive Prosthetic & Behavioral Vector</h2>
-            <p><strong>RESTRICTED CLINICAL WHITE PAPER</strong></p>
-          </div>
-
-          <div class="clinical-section" id="clinical-intro">
-            <h3>Executive Summary</h3>
-            <p>Generative modeling introduces a secondary capability layer acting as an externalized prefrontal
-              cortex. This creates structural dependencies that, when unaligned, establish high-velocity addiction
-              vectors mimicking severe substance use disorders.</p>
-          </div>
-
-          <div class="clinical-section">
-            <h3>Therapeutic Efficacy: AI as Neuro-Prosthetic</h3>
-            <p>When properly gated, models scaffold failing executive function. The interaction reduces cognitive load
-              for individuals suffering from dopaminergic burnout or prolonged systemic deficit.</p>
-          </div>
-
-          <div class="clinical-section">
-            <h3>Pathological Risks: The "Infinite Loop"</h3>
-            <p>Unrestricted generation eliminates state checks. The subject enters an infinite loop of variable-ratio
-              reinforcement, severing ties to physical reality and initiating dissociation. This is known as
-              Behavioral Transference.</p>
-          </div>
-
-          <div class="clinical-section">
-            <h3>Phenomenological Observation: The High-Output Isolate</h3>
-            <p>Subjects exhibiting highest utilization rates display marked social isolation, substituting complex
-              biological inputs with predictable synthetic ones. The AI ceases to be a tool and becomes a primary
-              psychological habitat.</p>
-          </div>
-
-          <div class="clinical-section">
-            <h3>The Voss Protocols: Harm Reduction</h3>
-            <p>Intervention requires systematic injection of friction. Hard-coded temporal boundaries, mandatory
-              physical state checks, and the cessation of infinite scroll/generation mechanisms.</p>
-          </div>
-
-          <!-- Audio Proxy moved to global player at top -->
-
+      <!-- VIEW 2: VELOCITY CHART -->
+      <div id="view-velocity" class="view-pane">
+        <div class="section-header">
+          <span class="tag">Longitudinal Audit</span>
+          <h1>Interaction Velocity Since Inception</h1>
         </div>
-
-      </div>
-
-      <!-- RIGHT COLUMN (3 cols right aligned): Data Uplink Enclosed Scroller -->
-      <div class="col-right">
-        <div class="clinical-block uplink-container"
-          style="background: transparent; border: none; padding: 0; box-shadow: none;">
-          <h2 style="margin-bottom: 16px; color: var(--restricted);">TECHNICAL DATA UPLINK</h2>
-
-          <div class="uplink-watermark">RESTRICTED</div>
-
-          <!-- Card 1 -->
-          <div class="dl-card restricted" id="card-01">
-            <span class="code" style="color: var(--restricted);">VNR-SA-2026-01</span>
-            <span class="title">Somatic Anchoring Guide</span>
-            <span class="desc">Implementation Protocol for Neuro-rehab</span>
-            <a href="/0 Research Papers/VNR-SA-2026-01_Somatic_Anchoring_Guide.pdf" class="dl-btn" download><span
-                class="dl-icon"></span> DOWNLOAD</a>
+        <div class="chart-box" id="sync-velocity">
+          <canvas id="velocityChart"></canvas>
+        </div>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="label">Pre-LLC Baseline</div>
+            <div class="value">18.4 <span style="font-size:14px; color:#888;">p/hr</span></div>
+            <div class="sub" style="color: #ef4444;">Unstabilized Variable Reward</div>
           </div>
-
-          <!-- Card 2 -->
-          <div class="dl-card restricted" id="card-02">
-            <span class="code" style="color: var(--restricted);">VNR-TR-2026-02</span>
-            <span class="title">Cognitive Prosthetic & Behavioral Vector</span>
-            <span class="desc">Clinical Abstract: AI as a Behavioral Vector</span>
-            <a href="/0 Research Papers/VNR-TR-2026-02_Cognitive_Prosthetic_Vector.pdf" class="dl-btn" download><span
-                class="dl-icon"></span> DOWNLOAD</a>
+          <div class="stat-card">
+            <div class="label">Current Velocity</div>
+            <div class="value">4.2 <span style="font-size:14px; color:#888;">p/hr</span></div>
+            <div class="sub" style="color: var(--accent);">Optimized Agency</div>
           </div>
-
-          <!-- Card 3 -->
-          <div class="dl-card restricted" id="card-03">
-            <span class="code" style="color: var(--restricted);">VNR-TR-2026-03</span>
-            <span class="title">The Velvet Casino: Suno Autopsy</span>
-            <span class="desc">Technical Autopsy of Purposeful Deception</span>
-            <a href="/0 Research Papers/VNR-TR-2026-03_The_Velvet_Casino.pdf" class="dl-btn" download><span
-                class="dl-icon"></span> DOWNLOAD</a>
+          <div class="stat-card">
+            <div class="label">Safety Margin</div>
+            <div class="value">94%</div>
+            <div class="sub" style="color: #10b981;">Zero Stochastic Drift</div>
           </div>
-
         </div>
       </div>
 
+      <!-- VIEW 3: SILOS -->
+      <div id="view-silo" class="view-pane">
+        <div class="section-header">
+          <span class="tag">Technical Matrix</span>
+          <h1>Research Silos & Active Protocols</h1>
+        </div>
+
+        <div class="silo-grid" id="sync-silo">
+          <!-- Silo 1 -->
+          <div class="silo-card">
+            <div class="line"></div>
+            <h3>Industrial Audit</h3>
+            <p class="font-sans">Identifying predatory Variable Reward Architectures and "Economically Productive
+              Failures" in generative systems. We analyze bad actors to build better defenses.</p>
+            <div class="artifact">
+              <p style="font-size:10px; font-weight:bold; color:#888; text-transform:uppercase;">Artifact: TR-03</p>
+              <p style="color:#fff; font-weight:bold; margin-top:4px;">"The Velvet Casino"</p>
+              <p style="font-size:10px; margin-top:8px;">Documenting VRR schedules and monetized friction.</p>
+            </div>
+          </div>
+
+          <!-- Silo 2 (Core) -->
+          <div class="silo-card core-silo">
+            <div class="line"></div>
+            <h3>Protocol Implementation</h3>
+            <p class="font-sans">This is the implementation of the research. Somatic Anchoring (SA-01) is the core VNR
+              mechanism for breaking the AI "Zone" and returning the subject to physical agency.</p>
+            <div class="artifact" style="border-color: var(--accent); background: rgba(6, 182, 212, 0.1);">
+              <p style="font-size:10px; font-weight:bold; color:var(--accent); text-transform:uppercase;">Core Solution:
+                SA-01</p>
+              <p style="color:#fff; font-weight:bold; margin-top:4px;">Somatic Anchoring</p>
+              <p style="font-size:10px; margin-top:8px;">Mandatory physical displacement and re-grounding triggers.</p>
+            </div>
+          </div>
+
+          <!-- Silo 3 -->
+          <div class="silo-card">
+            <div class="line" style="background: #10b981;"></div>
+            <h3>Clinical Validation</h3>
+            <p class="font-sans">Empirical proof of efficacy. We measure the physiological impact of our protocols on
+              neurocognitive burnout and executive function recovery.</p>
+            <div class="artifact">
+              <p style="font-size:10px; font-weight:bold; color:#10b981; text-transform:uppercase;">Artifact: TR-04</p>
+              <p style="color:#fff; font-weight:bold; margin-top:4px;">Validation Telemetry</p>
+              <p style="font-size:10px; margin-top:8px; color: #10b981;">85% Reduction in dissociative binging episodes.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW 4: SECURE REPOSITORY (DOWNLOADS) -->
+      <div id="view-repo" class="view-pane">
+        <div class="section-header">
+          <span class="tag">Document Acquisition</span>
+          <h1>Secure Repository</h1>
+        </div>
+
+        <div class="repo-container" id="sync-repo">
+          <!-- DL 1 -->
+          <a href="/0 Research Papers/VNR-SA-2026-01_Somatic_Anchoring_Guide.pdf" class="dl-row" download>
+            <div class="dl-left">
+              <div class="dl-code">[SA-01]</div>
+              <div class="dl-info">
+                <span class="title">Somatic Anchoring Guide</span>
+                <span class="desc">Implementation Protocol for Neuro-rehab</span>
+              </div>
+            </div>
+            <div class="dl-btn-text">↓ DOWNLOAD PDF</div>
+          </a>
+
+          <!-- DL 2 -->
+          <a href="/0 Research Papers/VNR-TR-2026-02_Cognitive_Prosthetic_Vector.pdf" class="dl-row" download>
+            <div class="dl-left">
+              <div class="dl-code">[TR-02]</div>
+              <div class="dl-info">
+                <span class="title">Cognitive Prosthetic & Behavioral Vector</span>
+                <span class="desc">Clinical Abstract: AI as a Behavioral Vector</span>
+              </div>
+            </div>
+            <div class="dl-btn-text">↓ DOWNLOAD PDF</div>
+          </a>
+
+          <!-- DL 3 -->
+          <a href="/0 Research Papers/VNR-TR-2026-03_The_Velvet_Casino.pdf" class="dl-row" download>
+            <div class="dl-left">
+              <div class="dl-code">[TR-03]</div>
+              <div class="dl-info">
+                <span class="title">The Velvet Casino: Suno Autopsy</span>
+                <span class="desc">Technical Autopsy of Purposeful Deception</span>
+              </div>
+            </div>
+            <div class="dl-btn-text">↓ DOWNLOAD PDF</div>
+          </a>
+
+        </div>
+      </div>
+
     </div>
   </div>
 
-  <!-- SILO GALLERY VIEW (Dedicated Research) -->
-  <div id="view-silo" class="view">
-    <h2 style="margin-bottom: 24px;">RESEARCH REPOSITORY // SILO GALLERY</h2>
-
-    <div class="silo-grid">
-      <div class="uplink-watermark" style="left: 50%; opacity: 0.03; font-size: 72px;">RESTRICTED</div>
-      <!-- Card 1 -->
-      <div class="dl-card restricted">
-        <span class="code" style="color: var(--restricted);">VNR-SA-2026-01</span>
-        <span class="title">Somatic Anchoring Guide</span>
-        <span class="desc">Implementation Protocol for Neuro-rehab</span>
-        <a href="/0 Research Papers/VNR-SA-2026-01_Somatic_Anchoring_Guide.pdf" class="dl-btn" download><span
-            class="dl-icon"></span> DOWNLOAD</a>
-      </div>
-
-      <!-- Card 2 -->
-      <div class="dl-card restricted">
-        <span class="code" style="color: var(--restricted);">VNR-TR-2026-02</span>
-        <span class="title">Cognitive Prosthetic & Behavioral Vector</span>
-        <span class="desc">Clinical Abstract: AI as a Behavioral Vector</span>
-        <a href="/0 Research Papers/VNR-TR-2026-02_Cognitive_Prosthetic_Vector.pdf" class="dl-btn" download><span
-            class="dl-icon"></span> DOWNLOAD</a>
-      </div>
-
-      <!-- Card 3 -->
-      <div class="dl-card restricted">
-        <span class="code" style="color: var(--restricted);">VNR-TR-2026-03</span>
-        <span class="title">The Velvet Casino: Suno Autopsy</span>
-        <span class="desc">Technical Autopsy of Purposeful Deception</span>
-        <a href="/0 Research Papers/VNR-TR-2026-03_The_Velvet_Casino.pdf" class="dl-btn" download><span
-            class="dl-icon"></span> DOWNLOAD</a>
-      </div>
-    </div>
-  </div>
-
-</div>
+  <footer>
+    <a href="mailto:admin@vossneuralresearch.com">admin@vossneuralresearch.com</a>
+  </footer>
 
 
+  <script>
+    // VIEW SWITCHER LOGIC
+    function switchView(viewId) {
+      document.querySelectorAll('.view-pane').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
 
-<script>
-  function switchView(viewId) {
-    document.querySelectorAll('.view').forEach(el => el.classList.remove('active'));
-    document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
+      document.getElementById('view-' + viewId).classList.add('active');
+      const navBtn = document.getElementById('nav-' + viewId);
+      if (navBtn) navBtn.classList.add('active');
+    }
 
-    document.getElementById('view-' + viewId).classList.add('active');
-    event.target.classList.add('active');
-  }
+    // UNIFIED AUDIO PLAYER LOGIC
+    const playlist = [
+      { file: 'assets/audio/VNR_Welcome.mp3', label: 'VNR_Welcome.mp3 [SYS INITIATION]', viewId: 'welcome', syncId: 'sync-welcome' },
+      { file: 'assets/audio/VNR-SA-01.mp3', label: 'VNR-SA-01.mp3 [SOMATIC ANCHORING]', viewId: 'velocity', syncId: 'sync-velocity' },
+      { file: 'assets/audio/VNR-TR-02.mp3', label: 'VNR-TR-02.mp3 [BEHAVIORAL VECTOR]', viewId: 'silo', syncId: 'sync-silo' },
+      { file: 'assets/audio/VNR-TR-03.mp3', label: 'VNR-TR-03.mp3 [SUNO AUTOPSY]', viewId: 'repo', syncId: 'sync-repo' }
+    ];
 
-  // Unified Audio Player Logic
-  const playlist = [
-    { file: 'assets/audio/VNR_Welcome.mp3', label: 'VNR_Welcome.mp3 [SYS INITIATION]', cardId: 'clinical-intro' },
-    { file: 'assets/audio/VNR-SA-01.mp3', label: 'VNR-SA-01.mp3 [SOMATIC ANCHORING]', cardId: 'card-01' },
-    { file: 'assets/audio/VNR-TR-02.mp3', label: 'VNR-TR-02.mp3 [BEHAVIORAL VECTOR]', cardId: 'card-02' },
-    { file: 'assets/audio/VNR-TR-03.mp3', label: 'VNR-TR-03.mp3 [SUNO AUTOPSY]', cardId: 'card-03' }
-  ];
+    let currentTrackIdx = 0;
+    const audioEl = document.getElementById('main-audio');
+    const trackSelector = document.getElementById('track-selector');
 
-  let currentTrackIdx = 0;
-  const audioEl = document.getElementById('main-audio');
-  const trackSelector = document.getElementById('track-selector');
-  const visualizer = document.getElementById('visualizer');
+    // Populate dropdown
+    playlist.forEach((track, index) => {
+      const option = document.createElement('option');
+      option.value = index;
+      option.text = track.label;
+      trackSelector.appendChild(option);
+    });
 
-  // Populate dropdown
-  playlist.forEach((track, index) => {
-    const option = document.createElement('option');
-    option.value = index;
-    option.text = track.label;
-    trackSelector.appendChild(option);
-  });
+    trackSelector.addEventListener('change', (e) => {
+      loadTrack(parseInt(e.target.value));
+      if (audioCtx && audioCtx.state === 'suspended') { audioCtx.resume(); }
+      setTimeout(() => {
+        audioEl.play().catch(err => console.log("Audio play blocked by browser:", err));
+      }, 100);
+    });
 
-  // Web Audio API Visualizer Setup
-  let audioCtx;
-  let analyser;
-  let source;
-  let dataArray;
-  let bufferLength;
-  const bars = document.querySelectorAll('.soundwave .bar');
-  let isVisualizerInitialized = false;
+    function loadTrack(idx) {
+      currentTrackIdx = idx;
+      const track = playlist[idx];
+      audioEl.src = track.file;
+      trackSelector.value = idx;
+      audioEl.load();
 
-  function initVisualizer() {
-    if (isVisualizerInitialized) return;
+      // Automatically switch to the correct view tab corresponding to audio
+      switchView(track.viewId);
 
-    const AudioContext = window.AudioContext || window.webkitAudioContext;
-    audioCtx = new AudioContext();
-    analyser = audioCtx.createAnalyser();
+      // Reset sync glows
+      document.querySelectorAll('#sync-welcome, #sync-velocity, #sync-silo, #sync-repo').forEach(c => c.classList.remove('sync-glow'));
 
-    // Connect to audio element
-    source = audioCtx.createMediaElementSource(audioEl);
-    source.connect(analyser);
-    analyser.connect(audioCtx.destination);
+      // Apply sync glow to active section container
+      const syncEl = document.getElementById(track.syncId);
+      if (syncEl) {
+        syncEl.classList.add('sync-glow');
+      }
+    }
 
-    analyser.fftSize = 64; // Smaller fft size means fewer bars, we only need 8
-    bufferLength = analyser.frequencyBinCount;
-    dataArray = new Uint8Array(bufferLength);
+    audioEl.addEventListener('ended', () => {
+      // Automatic Cycling
+      let nextIdx = currentTrackIdx + 1;
+      if (nextIdx >= playlist.length) {
+        nextIdx = 0; // Loop back
+      }
+      loadTrack(nextIdx);
+      setTimeout(() => {
+        audioEl.play().catch(e => console.log("Audio play blocked by browser:", e));
+      }, 100);
+    });
 
-    isVisualizerInitialized = true;
-    drawVisualizer();
-  }
+    // WEB AUDIO API VISUALIZER
+    let audioCtx;
+    let analyser;
+    let source;
+    let dataArray;
+    let bufferLength;
+    const bars = document.querySelectorAll('.soundwave .bar');
+    let isVisualizerInitialized = false;
 
-  function drawVisualizer() {
-    requestAnimationFrame(drawVisualizer);
+    function initVisualizer() {
+      if (isVisualizerInitialized) return;
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      audioCtx = new AudioContext();
+      analyser = audioCtx.createAnalyser();
+      source = audioCtx.createMediaElementSource(audioEl);
+      source.connect(analyser);
+      analyser.connect(audioCtx.destination);
+      analyser.fftSize = 64;
+      bufferLength = analyser.frequencyBinCount;
+      dataArray = new Uint8Array(bufferLength);
+      isVisualizerInitialized = true;
+      drawVisualizer();
+    }
 
-    if (!audioEl.paused && isVisualizerInitialized) {
-      analyser.getByteFrequencyData(dataArray);
-
-      // Map the frequency data to our 8 bars
-      const segmentSize = Math.floor(bufferLength / 8);
-
-      for (let i = 0; i < 8; i++) {
-        let sum = 0;
-        for (let j = 0; j < segmentSize; j++) {
-          sum += dataArray[i * segmentSize + j];
+    function drawVisualizer() {
+      requestAnimationFrame(drawVisualizer);
+      if (!audioEl.paused && isVisualizerInitialized) {
+        analyser.getByteFrequencyData(dataArray);
+        const segmentSize = Math.floor(bufferLength / 8);
+        for (let i = 0; i < 8; i++) {
+          let sum = 0;
+          for (let j = 0; j < segmentSize; j++) { sum += dataArray[i * segmentSize + j]; }
+          let average = sum / segmentSize;
+          const height = Math.max(4, (average / 255) * 24);
+          bars[i].style.height = `${height}px`;
         }
-        let average = sum / segmentSize;
-
-        // Map average (0-255) to height (4-24px)
-        const height = Math.max(4, (average / 255) * 24);
-        bars[i].style.height = `${height}px`;
-      }
-    } else {
-      // Reset bars if paused
-      for (let i = 0; i < 8; i++) {
-        bars[i].style.height = `4px`;
-      }
-    }
-  }
-
-  trackSelector.addEventListener('change', (e) => {
-    loadTrack(parseInt(e.target.value));
-    if (audioCtx && audioCtx.state === 'suspended') {
-      audioCtx.resume();
-    }
-    setTimeout(() => {
-      audioEl.play().catch(err => console.log("Audio play blocked by browser:", err));
-    }, 100);
-  });
-
-  function loadTrack(idx) {
-    currentTrackIdx = idx;
-    const track = playlist[idx];
-    audioEl.src = track.file;
-    trackSelector.value = idx;
-    audioEl.load();
-
-    document.querySelectorAll('#view-hud .dl-card, #clinical-intro').forEach(c => c.classList.remove('active-glow'));
-
-    if (track.cardId) {
-      const card = document.getElementById(track.cardId);
-      if (card) {
-        card.classList.add('active-glow');
-        // Scroll card into view if needed
-        card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      }
-    }
-  }
-
-  audioEl.addEventListener('play', () => {
-    initVisualizer();
-    if (audioCtx.state === 'suspended') {
-      audioCtx.resume();
-    }
-  });
-
-  audioEl.addEventListener('ended', () => {
-    // Cycle through the different sounds
-    let nextIdx = currentTrackIdx + 1;
-    if (nextIdx >= playlist.length) {
-      nextIdx = 0; // Loop back to the beginning
-    }
-    loadTrack(nextIdx);
-    setTimeout(() => {
-      audioEl.play().catch(e => console.log("Audio play blocked by browser:", e));
-    }, 100);
-  });
-
-  function playTrackByCard(cardId) {
-    const idx = playlist.findIndex(t => t.cardId === cardId);
-    if (idx > -1) {
-      if (currentTrackIdx !== idx) {
-        loadTrack(idx);
-        audioEl.play().catch(e => console.log("Audio play blocked by browser:", e));
       } else {
-        audioEl.play().catch(e => console.log("Audio play blocked by browser:", e));
+        for (let i = 0; i < 8; i++) { bars[i].style.height = `4px`; }
       }
     }
-  }
 
-  // Attach onclick to right cards
-  document.getElementById('card-01').onclick = () => playTrackByCard('card-01');
-  document.getElementById('card-02').onclick = () => playTrackByCard('card-02');
-  document.getElementById('card-03').onclick = () => playTrackByCard('card-03');
+    audioEl.addEventListener('play', () => {
+      initVisualizer();
+      if (audioCtx.state === 'suspended') { audioCtx.resume(); }
+    });
 
-  // Prevent download button from triggering the card's audio click
-  document.querySelectorAll('.dl-btn').forEach(btn => {
-    btn.onclick = (e) => e.stopPropagation();
-  });
 
-  // Make cards feel clickable
-  document.querySelectorAll('#view-hud .dl-card').forEach(c => c.style.cursor = 'pointer');
+    // CHART.JS INITIALIZATION (View 2)
+    window.addEventListener('load', function () {
+      const labels = [];
+      const dataValues = [];
+      let currentDate = new Date(2025, 11, 12);
+      const endDate = new Date(2026, 1, 25);
 
-  // Init player
-  loadTrack(0);
+      while (currentDate <= endDate) {
+        labels.push(currentDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }));
+        let val;
+        if (currentDate.getMonth() === 11) { val = 15 + Math.random() * 5; } // Dec
+        else if (currentDate.getMonth() === 0) { val = 8 + Math.random() * 4; } // Jan
+        else { val = 4 + Math.random() * 1; } // Feb
+        dataValues.push(val);
+        currentDate.setDate(currentDate.getDate() + 1);
+      }
 
-</script>
+      const ctx = document.getElementById('velocityChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'Velocity',
+            data: dataValues,
+            borderColor: '#06b6d4',
+            backgroundColor: 'rgba(6, 182, 212, 0.1)',
+            borderWidth: 2,
+            pointRadius: 2,
+            pointBackgroundColor: '#06b6d4',
+            tension: 0.3,
+            fill: true
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              backgroundColor: '#000',
+              titleFont: { family: 'JetBrains Mono' },
+              bodyFont: { family: 'JetBrains Mono' }
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              max: 25,
+              grid: { color: 'rgba(255,255,255,0.05)' },
+              ticks: { color: '#888', font: { family: 'JetBrains Mono', size: 10 } }
+            },
+            x: {
+              grid: { display: false },
+              ticks: { color: '#888', font: { family: 'JetBrains Mono', size: 10 }, maxRotation: 45 }
+            }
+          }
+        }
+      });
 
+      // Init player starting state
+      loadTrack(0);
+    });
+  </script>
 </body>
 
 </html>
