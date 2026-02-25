@@ -440,33 +440,33 @@
       <div class="brand-row">
         <img src="vosstrans.PNG" alt="VNR Sigil" class="sigil" onerror="this.style.display='none'">
         <h1>VOSS NEURAL RESEARCH</h1>
+
+        <!-- GLOBAL AUDIO PLAYER (Next to branding) -->
+        <div id="global-player" class="global-player" style="margin-left: 24px;">
+          <div class="player-controls">
+            <select id="track-selector" class="track-select">
+              <!-- Options injected by JS -->
+            </select>
+            <audio id="main-audio" controls preload="auto">
+              <source src="assets/audio/VNR_Welcome.mp3" type="audio/mpeg">
+            </audio>
+          </div>
+          <div class="soundwave" id="visualizer">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+          </div>
+        </div>
       </div>
       <div class="subtitle">Neural Alignment & Behavioral Systems Architecture</div>
       <div class="nav-bar">
         <button class="nav-btn active" onclick="switchView('hud')">HUD</button>
         <button class="nav-btn" onclick="switchView('silo')">RESEARCH SILO</button>
-      </div>
-    </div>
-
-    <!-- GLOBAL AUDIO PLAYER (Moved slightly to right of Voss Neural) -->
-    <div id="global-player" class="global-player">
-      <div class="player-controls">
-        <select id="track-selector" class="track-select">
-          <!-- Options injected by JS -->
-        </select>
-        <audio id="main-audio" controls crossorigin="anonymous" preload="auto">
-          <source src="assets/audio/VNR_Welcome.mp3" type="audio/mpeg">
-        </audio>
-      </div>
-      <div class="soundwave" id="visualizer">
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
       </div>
     </div>
   </div>
