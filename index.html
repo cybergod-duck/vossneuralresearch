@@ -4,7 +4,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VOSS NEURAL RESEARCH | HUD</title>
+  <title>Voss Neural Research — AI-Native Creative & Research Studio</title>
+  <meta name="description"
+    content="Voss Neural Research develops AI-powered tools, clinical frameworks, and digital products that explore the boundary between human cognition and machine intelligence.">
+  <meta property="og:title" content="Voss Neural Research">
+  <meta property="og:description"
+    content="AI-powered tools, behavioral research, and digital media at the intersection of cognitive science and emerging technology.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://vossneuralresearch.com">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:creator" content="@Cyberdvck">
+  <meta name="p:domain_verify" content="8984bb98bac4dc62b448397598faf575" />
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,20 +23,13 @@
     rel="stylesheet">
 
   <style>
-    /* Strict CSS Variables */
     :root {
-      --bg-color: #030303;
-      --text-main: #E0E0E0;
+      --bg: #030303;
+      --text: #E0E0E0;
       --text-sub: #888888;
       --accent: #06b6d4;
-      /* Cyan technical accent */
-      --restricted: #06b6d4;
-      /* Cyan/Teal for restricted content */
-      --panel-bg: rgba(3, 5, 12, 0.85);
-      /* Dark blue black */
-      --border-color: rgba(6, 182, 212, 0.2);
-      --cyan-glow: 0 16px 48px rgba(0, 0, 0, 0.9), 0 0 40px rgba(6, 182, 212, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05);
-      --cyan-active-glow: 0 0 24px rgba(6, 182, 212, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      --border: rgba(6, 182, 212, 0.2);
+      --glow: 0 0 60px rgba(6, 182, 212, 0.15);
     }
 
     * {
@@ -35,903 +38,286 @@
       padding: 0;
     }
 
+    html {
+      scrollbar-width: none;
+    }
+
+    html::-webkit-scrollbar {
+      display: none;
+    }
+
     body {
-      background-color: var(--bg-color);
+      background-color: var(--bg);
       background-image:
-        radial-gradient(circle at 50% 0%, rgba(6, 182, 212, 0.08) 0%, rgba(6, 182, 212, 0.03) 50%, transparent 100%),
-        url('data:image/svg+xml;utf8,<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="2" cy="2" r="1.5" fill="rgba(255,255,255,0.03)"/></svg>');
-      background-attachment: fixed;
-      color: var(--text-main);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 14px;
-      line-height: 1.5;
-      width: 100vw;
-      height: 100vh;
-      overflow: hidden;
-      /* Prevent body scroll, handled internally */
-      display: flex;
-      flex-direction: column;
-    }
-
-    .font-sans {
+        radial-gradient(circle at 50% 0%, rgba(6, 182, 212, 0.06) 0%, transparent 60%),
+        radial-gradient(circle at 80% 100%, rgba(6, 182, 212, 0.03) 0%, transparent 40%);
+      color: var(--text);
       font-family: 'Inter', sans-serif;
-    }
-
-    /* TYPOGRAPHY */
-    h1 {
-      font-size: 24px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    h2 {
-      font-size: 16px;
-      font-weight: 700;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 8px;
-    }
-
-    h3 {
-      font-size: 18px;
-      font-weight: 700;
-      margin-bottom: 12px;
-      color: #fff;
-    }
-
-    /* HEADER & BRANDING */
-    header {
+      height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 24px;
-      border-bottom: 1px solid var(--border-color);
-      flex-shrink: 0;
-      background: #000;
-      z-index: 50;
+      overflow: hidden;
     }
 
-    .brand-container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 32px;
+    /* Subtle animated grid */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url('data:image/svg+xml;utf8,<svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><line x1="0" y1="40" x2="40" y2="40" stroke="rgba(6,182,212,0.04)" stroke-width="1"/><line x1="40" y1="0" x2="40" y2="40" stroke="rgba(6,182,212,0.04)" stroke-width="1"/></svg>');
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
       width: 100%;
-      max-width: 1000px;
-    }
-
-    .brand-col {
+      max-width: 900px;
+      padding: 0 32px;
+      height: 100vh;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      text-align: center;
+      justify-content: space-between;
     }
 
-    .brand-row {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
+    /* ─── HEADER ─── */
+    .header {
+      text-align: center;
+      padding: 48px 0 16px;
+      flex-shrink: 0;
     }
 
     .sigil {
-      height: 32px;
+      height: 72px;
       width: auto;
-      display: block;
+      margin-bottom: 16px;
+      opacity: 0.9;
+      filter: drop-shadow(0 0 20px rgba(6, 182, 212, 0.3));
     }
 
-    .subtitle {
-      font-size: 12px;
-      color: var(--text-sub);
-      margin-top: 4px;
-      text-transform: uppercase;
-      letter-spacing: 0.2em;
-    }
-
-    /* GLOBAL AUDIO PLAYER */
-    .global-player {
-      background: rgba(3, 5, 12, 0.95);
-      border: 1px solid #00ff00;
-      box-shadow: 0 0 15px rgba(0, 255, 0, 0.4), inset 0 0 10px rgba(0, 255, 0, 0.1);
-      padding: 8px 16px;
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      border-radius: 4px;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-    }
-
-    .player-controls {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .track-select {
-      background: rgba(3, 5, 12, 0.9);
-      color: #00ff00;
-      border: 1px solid rgba(0, 255, 0, 0.5);
+    .header h1 {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      padding: 6px 8px;
-      outline: none;
-      cursor: pointer;
-      text-transform: uppercase;
-      max-width: 250px;
-    }
-
-    .track-select option {
-      background: #03050c;
-      color: #00ff00;
-    }
-
-    /* Soundwave bars */
-    .soundwave {
-      display: flex;
-      align-items: flex-end;
-      gap: 3px;
-      height: 24px;
-      padding: 0 8px;
-    }
-
-    .soundwave .bar {
-      width: 3px;
-      background: #00ff00;
-      height: 4px;
-      border-radius: 1px;
-      transition: height 0.05s ease;
-      box-shadow: 0 0 5px rgba(0, 255, 0, 0.8);
-    }
-
-    .global-player audio {
-      height: 28px;
-      filter: invert(85%) grayscale(100%) brightness(80%) contrast(120%) sepia(100%) hue-rotate(60deg) saturate(300%);
-      width: 200px;
-    }
-
-    /* TOP NAVIGATION VIEW COMMAND CENTER */
-    .view-container {
-      flex: 1;
-      width: 100vw;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      position: relative;
-    }
-
-    .nav-bar {
-      display: flex;
-      gap: 8px;
-      padding: 16px 24px;
-      border-bottom: 1px solid var(--border-color);
-      background: rgba(6, 182, 212, 0.02);
-      width: 100%;
-      justify-content: center;
-    }
-
-    .nav-btn {
-      background: rgba(3, 3, 3, 0.5);
-      color: var(--text-sub);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 13px;
-      text-transform: uppercase;
-      cursor: pointer;
-      min-height: 40px;
-      padding: 0 20px;
-      border-radius: 4px;
-      transition: all 0.2s;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .nav-btn:hover,
-    .nav-btn.active {
-      background: #000;
-      color: #fff;
-      border-color: var(--accent);
-      box-shadow: 0 0 10px rgba(6, 182, 212, 0.3);
-    }
-
-    /* MAIN PANE SYSTEM - NON SCROLLABLE CONTENT AREA */
-    .content-area {
-      width: 100%;
-      max-width: 1100px;
-      flex: 1;
-      padding: 32px 24px;
-      position: relative;
-    }
-
-    .view-pane {
-      display: none;
-      width: 100%;
-      height: 100%;
-      animation: fadeIn 0.4s ease-out forwards;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .view-pane.active {
-      display: flex;
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* SHARED SECTION STYLES */
-    .section-header {
-      margin-bottom: 32px;
-      text-align: center;
-    }
-
-    .section-header .tag {
-      font-size: 12px;
+      font-size: 28px;
       font-weight: 700;
-      color: var(--accent);
       text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 8px;
-      display: block;
-    }
-
-    .section-header h1 {
-      font-size: 36px;
+      letter-spacing: 0.08em;
       color: #fff;
+      margin-bottom: 16px;
     }
 
-    /* VIEW 1: WELCOME */
-    .welcome-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 32px;
-      max-width: 800px;
+    .header .tagline {
+      font-size: 17px;
+      line-height: 1.7;
+      color: var(--text-sub);
+      max-width: 680px;
       margin: 0 auto;
     }
 
-    .welcome-text {
-      font-size: 16px;
-      color: var(--text-sub);
-      line-height: 1.8;
-      text-align: center;
-      margin-bottom: 24px;
+    .header .tagline strong {
+      color: var(--accent);
+      font-weight: 600;
     }
 
-    .welcome-text strong {
-      color: #fff;
+    /* ─── DIVIDER ─── */
+    .divider {
+      width: 80px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      margin: 20px auto;
     }
 
-    .mission-cols {
+    /* ─── PILLARS ─── */
+    .pillars {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 32px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      margin-bottom: 0;
+      flex: 1;
+      align-content: center;
     }
 
-    .info-box {
-      background: rgba(6, 182, 212, 0.05);
-      border: 1px solid rgba(6, 182, 212, 0.2);
-      padding: 24px;
-      border-radius: 4px;
+    .pillar {
+      background: rgba(6, 182, 212, 0.03);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 24px 24px;
       transition: all 0.3s ease;
-    }
-
-    /* SYNC GLOWS */
-    .sync-glow {
-      box-shadow: var(--cyan-active-glow);
-      border-color: var(--accent);
-      background: rgba(6, 182, 212, 0.1);
-    }
-
-    /* VIEW 2: VELOCITY CHART */
-    .chart-box {
-      background: #030303;
-      border: 1px solid rgba(6, 182, 212, 0.3);
-      border-radius: 4px;
-      padding: 24px;
-      height: 400px;
-      width: 100%;
       position: relative;
+      overflow: hidden;
     }
 
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      margin-top: 24px;
+    .pillar::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
     }
 
-    .stat-card {
-      background: rgba(6, 182, 212, 0.05);
-      border: 1px solid rgba(6, 182, 212, 0.2);
-      padding: 20px;
-      border-radius: 4px;
-      text-align: center;
+    .pillar:hover {
+      border-color: rgba(6, 182, 212, 0.4);
+      box-shadow: var(--glow);
+      transform: translateY(-2px);
     }
 
-    .stat-card .label {
-      font-size: 11px;
-      color: var(--text-sub);
+    .pillar:hover::before {
+      opacity: 1;
+    }
+
+    .pillar .icon {
+      font-size: 24px;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .pillar h3 {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      font-weight: 700;
       text-transform: uppercase;
-      font-weight: bold;
-      margin-bottom: 8px;
-    }
-
-    .stat-card .value {
-      font-size: 32px;
-      font-weight: bold;
+      letter-spacing: 0.05em;
       color: #fff;
-      font-family: 'Inter', sans-serif;
+      margin-bottom: 12px;
     }
 
-    .stat-card .sub {
-      font-size: 10px;
-      font-family: 'JetBrains Mono';
-      margin-top: 8px;
-    }
-
-    /* VIEW 3: SILOS */
-    .silo-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      height: 100%;
-      align-items: center;
-    }
-
-    .silo-card {
-      background: #030303;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 32px 24px;
-      border-radius: 4px;
-      height: 380px;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      transition: all 0.3s ease;
-    }
-
-    .silo-card:hover {
-      border-color: var(--text-sub);
-    }
-
-    .silo-card .line {
-      width: 40px;
-      height: 3px;
-      background: var(--text-sub);
-      margin-bottom: 24px;
-    }
-
-    .silo-card p {
-      font-size: 13px;
+    .pillar p {
+      font-size: 14px;
       color: var(--text-sub);
       line-height: 1.6;
-      margin-bottom: auto;
     }
 
-    .silo-card .artifact {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      padding: 16px;
-      border-radius: 4px;
-      margin-top: 24px;
-    }
-
-    /* Center Silo Custom */
-    .silo-card.core-silo {
-      background: rgba(6, 182, 212, 0.05);
-      border: 1px solid rgba(6, 182, 212, 0.4);
-      transform: scale(1.05);
-      z-index: 10;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
-    }
-
-    .silo-card.core-silo .line {
-      background: var(--accent);
-    }
-
-    .silo-card.core-silo h3 {
-      color: var(--accent);
-    }
-
-    /* VIEW 4: REPO (DOWNLOADS) */
-    .repo-container {
-      max-width: 800px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      width: 100%;
-    }
-
-    .dl-row {
-      background: #030303;
-      border: 1px solid rgba(6, 182, 212, 0.3);
-      border-radius: 4px;
-      padding: 20px 32px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      transition: all 0.2s;
+    a.pillar {
       text-decoration: none;
-      color: var(--text-main);
+      color: inherit;
+      display: block;
     }
 
-    .dl-row:hover {
-      background: rgba(6, 182, 212, 0.1);
-      border-color: var(--accent);
-    }
-
-    .dl-left {
-      display: flex;
-      align-items: center;
-      gap: 24px;
-    }
-
-    .dl-code {
-      font-size: 14px;
-      color: var(--accent);
-      font-weight: 700;
-      width: 80px;
-    }
-
-    .dl-info {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .dl-info .title {
-      font-weight: bold;
-      font-size: 16px;
-      color: #fff;
-    }
-
-    .dl-info .desc {
-      font-size: 12px;
-      color: var(--text-sub);
-      text-transform: uppercase;
-    }
-
-    .dl-btn-text {
-      font-size: 12px;
-      font-weight: bold;
-      color: var(--text-sub);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .dl-row:hover .dl-btn-text {
-      color: var(--accent);
-    }
-
-    footer {
-      padding: 16px;
-      text-align: center;
+    .pillar-cta {
+      display: block;
+      margin-top: 16px;
+      font-family: 'JetBrains Mono', monospace;
       font-size: 11px;
-      color: #666;
-      width: 100%;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+    }
+
+    .pillar-cta.soon {
+      color: var(--text-sub);
+      font-style: italic;
+    }
+
+    .pillar-cta .arrow {
+      transition: transform 0.3s;
+      display: inline-block;
+    }
+
+    a.pillar:hover .pillar-cta .arrow {
+      transform: translateX(4px);
+    }
+
+    /* ─── CONTACT ─── */
+    .contact {
+      text-align: center;
+      padding: 16px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
       flex-shrink: 0;
     }
 
-    footer a {
-      color: #666;
+    .contact a {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--text-sub);
       text-decoration: none;
       transition: color 0.2s;
     }
 
-    footer a:hover {
+    .contact a:hover {
       color: var(--accent);
     }
+
+    .contact .copy {
+      font-size: 11px;
+      color: #444;
+      margin-top: 12px;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 640px) {
+      .header {
+        padding: 48px 0 32px;
+      }
+
+      .header h1 {
+        font-size: 20px;
+      }
+
+      .header .tagline {
+        font-size: 15px;
+      }
+
+      .pillars {
+        grid-template-columns: 1fr;
+      }
+
+      .page {
+        padding: 0 20px;
+      }
+    }
   </style>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
+  <div class="page">
 
-  <header>
-    <div class="brand-container">
-      <div class="brand-col">
-        <div class="brand-row">
-          <img src="vosstrans.PNG" alt="VNR Sigil" class="sigil" onerror="this.style.display='none'">
-          <h1>VOSS NEURAL RESEARCH</h1>
-        </div>
-        <div class="subtitle">Neural Alignment & Behavioral Systems Architecture</div>
+    <div class="header">
+      <img src="vosstrans.PNG" alt="VNR" class="sigil" onerror="this.style.display='none'">
+      <h1>Voss Neural Research</h1>
+      <p class="tagline">
+        An <strong>AI-native studio</strong> developing software tools, behavioral research, and digital media
+        at the intersection of <strong>cognitive science</strong> and <strong>emerging technology</strong>.
+      </p>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="pillars">
+      <div class="pillar">
+        <span class="icon">⚙️</span>
+        <h3>AI-Powered Tools</h3>
+        <p>Trading bots, automation scripts, and generative systems built on cutting-edge machine learning
+          infrastructure.</p>
       </div>
-
-      <!-- GLOBAL AUDIO PLAYER (Next to branding) -->
-      <div id="global-player" class="global-player">
-        <div class="player-controls">
-          <select id="track-selector" class="track-select">
-            <!-- Options injected by JS -->
-          </select>
-          <audio id="main-audio" controls preload="auto">
-            <source src="assets/audio/VNR_Welcome.mp3" type="audio/mpeg">
-          </audio>
-        </div>
-        <div class="soundwave" id="visualizer">
-          <div class="bar"></div>
-          <div class="bar"></div>
-          <div class="bar"></div>
-          <div class="bar"></div>
-          <div class="bar"></div>
-          <div class="bar"></div>
-          <div class="bar"></div>
-          <div class="bar"></div>
-        </div>
+      <a href="/research/" class="pillar">
+        <span class="icon">🧠</span>
+        <h3>Behavioral Research</h3>
+        <p>Clinical frameworks exploring how humans interact with AI — from dopaminergic pathways to executive function
+          recovery.</p>
+        <span class="pillar-cta">View Papers & Protocols <span class="arrow">→</span></span>
+      </a>
+      <div class="pillar">
+        <span class="icon">◆</span>
+        <h3>Digital Media</h3>
+        <p>AI-generated art, music, multimedia content, and digital products across formats and platforms.</p>
+        <span class="pillar-cta soon">Store Coming Soon</span>
       </div>
     </div>
-  </header>
 
-  <div class="view-container">
-
-    <nav class="nav-bar">
-      <button class="nav-btn active" onclick="switchView('welcome')" id="nav-welcome"><span>⬚</span> Welcome / Core
-        Mission</button>
-      <button class="nav-btn" onclick="switchView('velocity')" id="nav-velocity"><span>📈</span> Interaction
-        Velocity</button>
-      <button class="nav-btn" onclick="switchView('silo')" id="nav-silo"><span>⌬</span> Research & Protocols</button>
-      <button class="nav-btn" onclick="switchView('repo')" id="nav-repo"><span>☍</span> Secure Repository</button>
-    </nav>
-
-    <div class="content-area">
-
-      <!-- VIEW 1: WELCOME -->
-      <div id="view-welcome" class="view-pane active">
-        <div class="section-header">
-          <span class="tag">About VNR</span>
-          <h1>We are the architects of neural alignment.</h1>
-        </div>
-        <div class="welcome-grid" id="sync-welcome">
-          <p class="welcome-text font-sans">
-            Voss Neural Research (VNR) was established to provide a technical bridge between high-velocity generative AI
-            and human cognitive agency. We don't just study addiction; we build the implementation frameworks required
-            to maintain human authority in an age of variable reward architectures.
-          </p>
-          <div class="mission-cols mt-4">
-            <div class="info-box border-b-2">
-              <h3>The Mission</h3>
-              <p class="font-sans text-sm text-gray-400">To mitigate the "Reverse-Centaur" dynamic—where humans serve a
-                model's inference loop—and return the user to a state of <strong>Executive Empowerment</strong>.</p>
-            </div>
-            <div class="info-box border-b-2">
-              <h3>The Framework</h3>
-              <p class="font-sans text-sm text-gray-400">Treating Large Language Models as
-                <strong>Neuro-prosthetics</strong>. We stabilize dopaminergic pathways while maximizing output
-                efficiency through validated protocols.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- VIEW 2: VELOCITY CHART -->
-      <div id="view-velocity" class="view-pane">
-        <div class="section-header">
-          <span class="tag">Longitudinal Audit</span>
-          <h1>Interaction Velocity Since Inception</h1>
-        </div>
-        <div class="chart-box" id="sync-velocity">
-          <canvas id="velocityChart"></canvas>
-        </div>
-        <div class="stats-grid">
-          <div class="stat-card">
-            <div class="label">Pre-LLC Baseline</div>
-            <div class="value">18.4 <span style="font-size:14px; color:#888;">p/hr</span></div>
-            <div class="sub" style="color: #ef4444;">Unstabilized Variable Reward</div>
-          </div>
-          <div class="stat-card">
-            <div class="label">Current Velocity</div>
-            <div class="value">4.2 <span style="font-size:14px; color:#888;">p/hr</span></div>
-            <div class="sub" style="color: var(--accent);">Optimized Agency</div>
-          </div>
-          <div class="stat-card">
-            <div class="label">Safety Margin</div>
-            <div class="value">94%</div>
-            <div class="sub" style="color: #10b981;">Zero Stochastic Drift</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- VIEW 3: SILOS -->
-      <div id="view-silo" class="view-pane">
-        <div class="section-header">
-          <span class="tag">Technical Matrix</span>
-          <h1>Research Silos & Active Protocols</h1>
-        </div>
-
-        <div class="silo-grid" id="sync-silo">
-          <!-- Silo 1 -->
-          <div class="silo-card">
-            <div class="line"></div>
-            <h3>Industrial Audit</h3>
-            <p class="font-sans">Identifying predatory Variable Reward Architectures and "Economically Productive
-              Failures" in generative systems. We analyze bad actors to build better defenses.</p>
-            <div class="artifact">
-              <p style="font-size:10px; font-weight:bold; color:#888; text-transform:uppercase;">Artifact: TR-03</p>
-              <p style="color:#fff; font-weight:bold; margin-top:4px;">"The Velvet Casino"</p>
-              <p style="font-size:10px; margin-top:8px;">Documenting VRR schedules and monetized friction.</p>
-            </div>
-          </div>
-
-          <!-- Silo 2 (Core) -->
-          <div class="silo-card core-silo">
-            <div class="line"></div>
-            <h3>Protocol Implementation</h3>
-            <p class="font-sans">This is the implementation of the research. Somatic Anchoring (SA-01) is the core VNR
-              mechanism for breaking the AI "Zone" and returning the subject to physical agency.</p>
-            <div class="artifact" style="border-color: var(--accent); background: rgba(6, 182, 212, 0.1);">
-              <p style="font-size:10px; font-weight:bold; color:var(--accent); text-transform:uppercase;">Core Solution:
-                SA-01</p>
-              <p style="color:#fff; font-weight:bold; margin-top:4px;">Somatic Anchoring</p>
-              <p style="font-size:10px; margin-top:8px;">Mandatory physical displacement and re-grounding triggers.</p>
-            </div>
-          </div>
-
-          <!-- Silo 3 -->
-          <div class="silo-card">
-            <div class="line" style="background: #10b981;"></div>
-            <h3>Clinical Validation</h3>
-            <p class="font-sans">Empirical proof of efficacy. We measure the physiological impact of our protocols on
-              neurocognitive burnout and executive function recovery.</p>
-            <div class="artifact">
-              <p style="font-size:10px; font-weight:bold; color:#10b981; text-transform:uppercase;">Artifact: TR-04</p>
-              <p style="color:#fff; font-weight:bold; margin-top:4px;">Validation Telemetry</p>
-              <p style="font-size:10px; margin-top:8px; color: #10b981;">85% Reduction in dissociative binging episodes.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- VIEW 4: SECURE REPOSITORY (DOWNLOADS) -->
-      <div id="view-repo" class="view-pane">
-        <div class="section-header">
-          <span class="tag">Document Acquisition</span>
-          <h1>Secure Repository</h1>
-        </div>
-
-        <div class="repo-container" id="sync-repo">
-          <!-- DL 1 -->
-          <a href="/0 Research Papers/VNR-SA-2026-01_Somatic_Anchoring_Guide.pdf" class="dl-row" download>
-            <div class="dl-left">
-              <div class="dl-code">[SA-01]</div>
-              <div class="dl-info">
-                <span class="title">Somatic Anchoring Guide</span>
-                <span class="desc">Implementation Protocol for Neuro-rehab</span>
-              </div>
-            </div>
-            <div class="dl-btn-text">↓ DOWNLOAD PDF</div>
-          </a>
-
-          <!-- DL 2 -->
-          <a href="/0 Research Papers/VNR-TR-2026-02_Cognitive_Prosthetic_Vector.pdf" class="dl-row" download>
-            <div class="dl-left">
-              <div class="dl-code">[TR-02]</div>
-              <div class="dl-info">
-                <span class="title">Cognitive Prosthetic & Behavioral Vector</span>
-                <span class="desc">Clinical Abstract: AI as a Behavioral Vector</span>
-              </div>
-            </div>
-            <div class="dl-btn-text">↓ DOWNLOAD PDF</div>
-          </a>
-
-          <!-- DL 3 -->
-          <a href="/0 Research Papers/VNR-TR-2026-03_The_Velvet_Casino.pdf" class="dl-row" download>
-            <div class="dl-left">
-              <div class="dl-code">[TR-03]</div>
-              <div class="dl-info">
-                <span class="title">The Velvet Casino: Suno Autopsy</span>
-                <span class="desc">Technical Autopsy of Purposeful Deception</span>
-              </div>
-            </div>
-            <div class="dl-btn-text">↓ DOWNLOAD PDF</div>
-          </a>
-
-        </div>
-      </div>
-
+    <div class="contact">
+      <a href="mailto:admin@vossneuralresearch.com">admin@vossneuralresearch.com</a>
+      <p class="copy">© 2026 Voss Neural Research LLC</p>
     </div>
+
   </div>
-
-  <footer>
-    <a href="mailto:admin@vossneuralresearch.com">admin@vossneuralresearch.com</a>
-  </footer>
-
-
-  <script>
-    // VIEW SWITCHER LOGIC
-    function switchView(viewId) {
-      document.querySelectorAll('.view-pane').forEach(el => el.classList.remove('active'));
-      document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
-
-      document.getElementById('view-' + viewId).classList.add('active');
-      const navBtn = document.getElementById('nav-' + viewId);
-      if (navBtn) navBtn.classList.add('active');
-    }
-
-    // UNIFIED AUDIO PLAYER LOGIC
-    const playlist = [
-      { file: 'assets/audio/VNR_Welcome.mp3', label: 'VNR_Welcome.mp3 [SYS INITIATION]', viewId: 'welcome', syncId: 'sync-welcome' },
-      { file: 'assets/audio/VNR-SA-01.mp3', label: 'VNR-SA-01.mp3 [SOMATIC ANCHORING]', viewId: 'velocity', syncId: 'sync-velocity' },
-      { file: 'assets/audio/VNR-TR-02.mp3', label: 'VNR-TR-02.mp3 [BEHAVIORAL VECTOR]', viewId: 'silo', syncId: 'sync-silo' },
-      { file: 'assets/audio/VNR-TR-03.mp3', label: 'VNR-TR-03.mp3 [SUNO AUTOPSY]', viewId: 'repo', syncId: 'sync-repo' }
-    ];
-
-    let currentTrackIdx = 0;
-    const audioEl = document.getElementById('main-audio');
-    const trackSelector = document.getElementById('track-selector');
-
-    // Populate dropdown
-    playlist.forEach((track, index) => {
-      const option = document.createElement('option');
-      option.value = index;
-      option.text = track.label;
-      trackSelector.appendChild(option);
-    });
-
-    trackSelector.addEventListener('change', (e) => {
-      loadTrack(parseInt(e.target.value));
-      if (audioCtx && audioCtx.state === 'suspended') { audioCtx.resume(); }
-      setTimeout(() => {
-        audioEl.play().catch(err => console.log("Audio play blocked by browser:", err));
-      }, 100);
-    });
-
-    function loadTrack(idx) {
-      currentTrackIdx = idx;
-      const track = playlist[idx];
-      audioEl.src = track.file;
-      trackSelector.value = idx;
-      audioEl.load();
-
-      // Automatically switch to the correct view tab corresponding to audio
-      switchView(track.viewId);
-
-      // Reset sync glows
-      document.querySelectorAll('#sync-welcome, #sync-velocity, #sync-silo, #sync-repo').forEach(c => c.classList.remove('sync-glow'));
-
-      // Apply sync glow to active section container
-      const syncEl = document.getElementById(track.syncId);
-      if (syncEl) {
-        syncEl.classList.add('sync-glow');
-      }
-    }
-
-    audioEl.addEventListener('ended', () => {
-      // Automatic Cycling
-      let nextIdx = currentTrackIdx + 1;
-      if (nextIdx >= playlist.length) {
-        nextIdx = 0; // Loop back
-      }
-      loadTrack(nextIdx);
-      setTimeout(() => {
-        audioEl.play().catch(e => console.log("Audio play blocked by browser:", e));
-      }, 100);
-    });
-
-    // WEB AUDIO API VISUALIZER
-    let audioCtx;
-    let analyser;
-    let source;
-    let dataArray;
-    let bufferLength;
-    const bars = document.querySelectorAll('.soundwave .bar');
-    let isVisualizerInitialized = false;
-
-    function initVisualizer() {
-      if (isVisualizerInitialized) return;
-      const AudioContext = window.AudioContext || window.webkitAudioContext;
-      audioCtx = new AudioContext();
-      analyser = audioCtx.createAnalyser();
-      source = audioCtx.createMediaElementSource(audioEl);
-      source.connect(analyser);
-      analyser.connect(audioCtx.destination);
-      analyser.fftSize = 64;
-      bufferLength = analyser.frequencyBinCount;
-      dataArray = new Uint8Array(bufferLength);
-      isVisualizerInitialized = true;
-      drawVisualizer();
-    }
-
-    function drawVisualizer() {
-      requestAnimationFrame(drawVisualizer);
-      if (!audioEl.paused && isVisualizerInitialized) {
-        analyser.getByteFrequencyData(dataArray);
-        const segmentSize = Math.floor(bufferLength / 8);
-        for (let i = 0; i < 8; i++) {
-          let sum = 0;
-          for (let j = 0; j < segmentSize; j++) { sum += dataArray[i * segmentSize + j]; }
-          let average = sum / segmentSize;
-          const height = Math.max(4, (average / 255) * 24);
-          bars[i].style.height = `${height}px`;
-        }
-      } else {
-        for (let i = 0; i < 8; i++) { bars[i].style.height = `4px`; }
-      }
-    }
-
-    audioEl.addEventListener('play', () => {
-      initVisualizer();
-      if (audioCtx.state === 'suspended') { audioCtx.resume(); }
-    });
-
-
-    // CHART.JS INITIALIZATION (View 2)
-    window.addEventListener('load', function () {
-      const labels = [];
-      const dataValues = [];
-      let currentDate = new Date(2025, 11, 12);
-      const endDate = new Date(2026, 1, 25);
-
-      while (currentDate <= endDate) {
-        labels.push(currentDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }));
-        let val;
-        if (currentDate.getMonth() === 11) { val = 15 + Math.random() * 5; } // Dec
-        else if (currentDate.getMonth() === 0) { val = 8 + Math.random() * 4; } // Jan
-        else { val = 4 + Math.random() * 1; } // Feb
-        dataValues.push(val);
-        currentDate.setDate(currentDate.getDate() + 1);
-      }
-
-      const ctx = document.getElementById('velocityChart').getContext('2d');
-      new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels: labels,
-          datasets: [{
-            label: 'Velocity',
-            data: dataValues,
-            borderColor: '#06b6d4',
-            backgroundColor: 'rgba(6, 182, 212, 0.1)',
-            borderWidth: 2,
-            pointRadius: 2,
-            pointBackgroundColor: '#06b6d4',
-            tension: 0.3,
-            fill: true
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: { display: false },
-            tooltip: {
-              backgroundColor: '#000',
-              titleFont: { family: 'JetBrains Mono' },
-              bodyFont: { family: 'JetBrains Mono' }
-            }
-          },
-          scales: {
-            y: {
-              beginAtZero: true,
-              max: 25,
-              grid: { color: 'rgba(255,255,255,0.05)' },
-              ticks: { color: '#888', font: { family: 'JetBrains Mono', size: 10 } }
-            },
-            x: {
-              grid: { display: false },
-              ticks: { color: '#888', font: { family: 'JetBrains Mono', size: 10 }, maxRotation: 45 }
-            }
-          }
-        }
-      });
-
-      // Init player starting state
-      loadTrack(0);
-    });
-  </script>
 </body>
 
 </html>
