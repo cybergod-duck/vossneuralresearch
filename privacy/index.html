@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy — Voss Neural Research</title>
+    <meta name="description"
+        content="Privacy policy for VNR VIPER browser extension and Voss Neural Research products.">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #030303;
+            --text: #E0E0E0;
+            --text-sub: #888888;
+            --accent: #06b6d4;
+            --border: rgba(6, 182, 212, 0.2);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.8;
+        }
+
+        .page {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 28px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-brand {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            font-size: 14px;
+            color: var(--accent);
+            text-decoration: none;
+            letter-spacing: 0.05em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+        }
+
+        .nav-links a {
+            color: var(--text-sub);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        h1 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 32px;
+            font-weight: 700;
+            color: #fff;
+            margin: 60px 0 12px;
+        }
+
+        .effective {
+            font-size: 13px;
+            color: var(--text-sub);
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--accent);
+            margin: 40px 0 12px;
+        }
+
+        p,
+        li {
+            font-size: 14px;
+            color: var(--text-sub);
+            margin-bottom: 12px;
+        }
+
+        ul {
+            padding-left: 24px;
+            margin-bottom: 16px;
+        }
+
+        li {
+            margin-bottom: 6px;
+        }
+
+        strong {
+            color: var(--text);
+        }
+
+        a {
+            color: var(--accent);
+        }
+
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 32px 0;
+            margin-top: 60px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        footer span,
+        footer a {
+            font-size: 12px;
+            color: var(--text-sub);
+        }
+
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 24px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+
+        <nav>
+            <a href="../" class="nav-brand">VNR_</a>
+            <div class="nav-links">
+                <a href="../about/">About</a>
+                <a href="../products/">Products</a>
+                <a href="../suno-report/" style="color: #ef4444;">SUNO REPORT</a>
+            </div>
+        </nav>
+
+        <h1>Privacy Policy</h1>
+        <p class="effective">Effective Date: March 6, 2026 · Last Updated: March 6, 2026</p>
+
+        <p>Voss Neural Research LLC ("VNR", "we", "us") builds browser security tools and digital products.
+            This policy explains what data our products collect and how we handle it.</p>
+
+        <h2>VNR VIPER Browser Extension</h2>
+        <p>VNR VIPER is a browser extension that scans for trackers, cookies, scripts, and localStorage artifacts.
+            Here's what it does and does not do:</p>
+
+        <p><strong>What VIPER does NOT do:</strong></p>
+        <ul>
+            <li>Does <strong>not</strong> collect, transmit, or store any personal data</li>
+            <li>Does <strong>not</strong> send browsing history, URLs, or page content to any server</li>
+            <li>Does <strong>not</strong> track your behavior or build user profiles</li>
+            <li>Does <strong>not</strong> use analytics, telemetry, or third-party tracking</li>
+            <li>Does <strong>not</strong> inject ads or modify web page content</li>
+        </ul>
+
+        <p><strong>What VIPER does:</strong></p>
+        <ul>
+            <li><strong>Scans locally:</strong> All scanning runs entirely in your browser. No data leaves your device.
+            </li>
+            <li><strong>Stores your license key:</strong> If you activate Pro, your license key is saved in
+                <code>chrome.storage.local</code> on your device only.
+            </li>
+            <li><strong>Verifies license keys:</strong> When you enter a Pro license key, the extension makes a single
+                API call to <code>api.gumroad.com</code> to verify the key. This sends only the license key string and
+                our product ID. No personal or browsing data is transmitted.</li>
+            <li><strong>Reads cookies and storage:</strong> VIPER reads your browser's cookies and localStorage to
+                identify known trackers. This data is processed locally and never transmitted.</li>
+        </ul>
+
+        <h2>Website (vossneuralresearch.com)</h2>
+        <p>Our website is a static site hosted on GitHub Pages. We do not use cookies, analytics, tracking pixels,
+            or any third-party scripts on our website. No data is collected from visitors.</p>
+
+        <h2>Gumroad Purchases</h2>
+        <p>When you purchase a product through Gumroad, your payment and account information is handled entirely
+            by Gumroad Inc. under their own <a href="https://gumroad.com/privacy" target="_blank">privacy policy</a>.
+            We receive your email address and purchase details from Gumroad to fulfill your order. We do not sell
+            or share this information.</p>
+
+        <h2>Data Storage</h2>
+        <p>We do not operate servers or databases that store user data. All VNR products are designed to function
+            locally or through third-party platforms (Gumroad, GitHub Pages) that maintain their own privacy policies.
+        </p>
+
+        <h2>Children's Privacy</h2>
+        <p>Our products are not directed at children under 13. We do not knowingly collect personal information
+            from children.</p>
+
+        <h2>Changes to This Policy</h2>
+        <p>We may update this policy as we release new products. Changes will be posted on this page with an
+            updated effective date.</p>
+
+        <h2>Contact</h2>
+        <p>Questions about this privacy policy? Contact us:</p>
+        <ul>
+            <li>Email: <a href="mailto:vossneuralresearch@gmail.com">vossneuralresearch@gmail.com</a></li>
+            <li>Website: <a href="https://vossneuralresearch.com">vossneuralresearch.com</a></li>
+        </ul>
+
+        <footer>
+            <span>&copy; 2026 Voss Neural Research LLC</span>
+            <div class="footer-links">
+                <a href="../">Home</a>
+                <a href="../products/">Products</a>
+            </div>
+        </footer>
+
+    </div>
+</body>
+
+</html>

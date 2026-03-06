@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Management Plan — Voss Neural Research</title>
+    <meta name="description"
+        content="Data Management and Sharing Plan for Voss Neural Research LLC, compliant with NIH DMS policy requirements.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #050505;
+            --surface: #0a0a0a;
+            --accent: #06b6d4;
+            --text: #d4d4d4;
+            --text-sub: #666;
+            --border: rgba(255, 255, 255, 0.06);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.8;
+        }
+
+        .nav {
+            padding: 20px 32px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .nav a {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            color: var(--text-sub);
+            text-decoration: none;
+            letter-spacing: 0.05em;
+            transition: color 0.2s;
+        }
+
+        .nav a:hover {
+            color: var(--accent);
+        }
+
+        .page {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 60px 24px 80px;
+        }
+
+        .tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 16px;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .subtitle {
+            font-size: 13px;
+            color: var(--text-sub);
+            margin-bottom: 32px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        h2 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+            margin: 32px 0 12px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+        }
+
+        h2:first-of-type {
+            border-top: none;
+            padding-top: 0;
+        }
+
+        p,
+        li {
+            margin-bottom: 12px;
+            font-size: 14px;
+            color: var(--text);
+        }
+
+        ol,
+        ul {
+            padding-left: 24px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .effective {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px;
+            margin: 24px 0;
+            font-size: 13px;
+            color: var(--text-sub);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 13px;
+        }
+
+        th {
+            text-align: left;
+            padding: 10px 12px;
+            background: var(--surface);
+            color: var(--accent);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border: 1px solid var(--border);
+        }
+
+        td {
+            padding: 10px 12px;
+            border: 1px solid var(--border);
+            color: var(--text);
+            vertical-align: top;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="nav">
+        <a href="/">← VNR HOME</a>
+        <a href="/about/">ABOUT</a>
+        <a href="/overmind/">THE OVERMIND</a>
+    </div>
+    <div class="page">
+        <div class="tag">Compliance</div>
+        <h1>Data Management &amp; Sharing Plan</h1>
+        <div class="subtitle">NIH Data Management and Sharing (DMS) Policy Compliant</div>
+
+        <div class="effective">
+            <strong>Effective Date:</strong> December 12, 2025<br>
+            <strong>Last Reviewed:</strong> March 3, 2026<br>
+            <strong>Entity:</strong> Voss Neural Research LLC
+        </div>
+
+        <h2>1. Data Types and Scope</h2>
+        <p>Voss Neural Research generates the following categories of scientific data in the course of its research
+            activities:</p>
+        <table>
+            <tr>
+                <th>Data Type</th>
+                <th>Format</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>Behavioral Telemetry</td>
+                <td>JSON, CSV</td>
+                <td>Timestamped interaction velocity, session duration, engagement pattern metrics from AI-human
+                    interaction studies.</td>
+            </tr>
+            <tr>
+                <td>Protocol Outcome Data</td>
+                <td>CSV, PDF</td>
+                <td>Somatic Anchoring (SA-01) intervention efficacy measurements, executive function recovery indices.
+                </td>
+            </tr>
+            <tr>
+                <td>AI Model Output Logs</td>
+                <td>JSON, TXT</td>
+                <td>Multi-model synthesis engine response data, convergent signal analysis records.</td>
+            </tr>
+            <tr>
+                <td>Variable Reward Architecture Profiles</td>
+                <td>JSON, PDF</td>
+                <td>Forensic analyses of commercial AI platform engagement mechanics.</td>
+            </tr>
+        </table>
+
+        <h2>2. Standards and Formats</h2>
+        <p>All scientific data will be maintained in machine-readable, non-proprietary formats (CSV, JSON, plain text)
+            to maximize interoperability and long-term accessibility. Metadata will follow the Dublin Core Metadata
+            Element Set and will include provenance, methodology, and temporal information.</p>
+
+        <h2>3. Data Storage and Preservation</h2>
+        <p>Research data is stored using encrypted cloud storage with automated versioning and backup. Data will be
+            preserved for a minimum of:</p>
+        <ul>
+            <li><strong>SBIR/STTR data:</strong> Protected for 20 years under the SBIR/STTR data rights clause, during
+                which VNR retains exclusive rights to use, modify, and distribute the data.</li>
+            <li><strong>Published data:</strong> Maintained indefinitely in accessible repositories.</li>
+            <li><strong>Clinical/behavioral data:</strong> Retained for a minimum of 10 years following completion of
+                the study, or as required by the funding agency.</li>
+        </ul>
+
+        <h2>4. Data Sharing and Access</h2>
+        <p>Voss Neural Research is committed to sharing research data to the greatest extent permissible, consistent
+            with privacy protections, intellectual property rights, and SBIR/STTR data protection provisions. Data
+            sharing will be accomplished through:</p>
+        <ul>
+            <li>Publication of summarized datasets alongside peer-reviewed manuscripts.</li>
+            <li>Deposit of de-identified datasets in appropriate public repositories upon expiration of SBIR/STTR data
+                protection periods.</li>
+            <li>Direct data sharing agreements with qualified researchers upon written request.</li>
+        </ul>
+
+        <h2>5. Privacy and Human Subjects Protection</h2>
+        <p>All research involving human subjects data, including N=1 longitudinal studies, will comply with applicable
+            regulations including:</p>
+        <ul>
+            <li>The Common Rule (45 CFR Part 46).</li>
+            <li>HIPAA Privacy Rule where applicable.</li>
+            <li>De-identification standards per the Safe Harbor method.</li>
+        </ul>
+        <p>Behavioral telemetry data that could identify research subjects will be de-identified prior to any sharing or
+            publication.</p>
+
+        <h2>6. Oversight and Responsibility</h2>
+        <p>The Principal Investigator (Tim Chappell, Founder) is responsible for the implementation and compliance of
+            this
+            Data Management and Sharing Plan. Inquiries may be directed to: <strong>data@vossneuralresearch.com</strong>
+        </p>
+    </div>
+</body>
+
+</html>

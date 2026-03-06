@@ -4,12 +4,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Voss Neural Research — AI-Native Creative & Research Studio</title>
+  <title>Voss Neural Research — AI Behavioral Research & AI Innovation</title>
   <meta name="description"
-    content="Voss Neural Research develops AI-powered tools, clinical frameworks, and digital products that explore the boundary between human cognition and machine intelligence.">
+    content="Voss Neural Research develops AI-powered behavioral health frameworks, clinical protocols, and digital tools exploring how artificial intelligence impacts human cognition, addiction recovery, and executive function.">
   <meta property="og:title" content="Voss Neural Research">
   <meta property="og:description"
-    content="AI-powered tools, behavioral research, and digital media at the intersection of cognitive science and emerging technology.">
+    content="AI behavioral research, clinical frameworks, and digital innovation at the intersection of cognitive science and emerging technology.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://vossneuralresearch.com">
   <meta name="twitter:card" content="summary_large_image">
@@ -28,8 +28,10 @@
       --text: #E0E0E0;
       --text-sub: #888888;
       --accent: #06b6d4;
+      --accent-dim: rgba(6, 182, 212, 0.15);
       --border: rgba(6, 182, 212, 0.2);
       --glow: 0 0 60px rgba(6, 182, 212, 0.15);
+      --green: #10b981;
     }
 
     * {
@@ -40,6 +42,7 @@
 
     html {
       scrollbar-width: none;
+      scroll-behavior: smooth;
     }
 
     html::-webkit-scrollbar {
@@ -53,14 +56,8 @@
         radial-gradient(circle at 80% 100%, rgba(6, 182, 212, 0.03) 0%, transparent 40%);
       color: var(--text);
       font-family: 'Inter', sans-serif;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      overflow: hidden;
     }
 
-    /* Subtle animated grid */
     body::before {
       content: '';
       position: fixed;
@@ -77,50 +74,73 @@
       position: relative;
       z-index: 1;
       width: 100%;
-      max-width: 900px;
+      max-width: 960px;
+      margin: 0 auto;
       padding: 0 32px;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
     }
 
-    /* ─── HEADER ─── */
-    .header {
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       text-align: center;
-      padding: 48px 0 16px;
-      flex-shrink: 0;
+      padding: 60px 0 40px;
     }
 
     .sigil {
       height: 72px;
       width: auto;
-      margin-bottom: 16px;
+      margin-bottom: 20px;
       opacity: 0.9;
       filter: drop-shadow(0 0 20px rgba(6, 182, 212, 0.3));
     }
 
-    .header h1 {
+    .hero h1 {
       font-family: 'JetBrains Mono', monospace;
       font-size: 28px;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.08em;
       color: #fff;
-      margin-bottom: 16px;
+      margin-bottom: 20px;
     }
 
-    .header .tagline {
+    .hero .tagline {
       font-size: 17px;
-      line-height: 1.7;
+      line-height: 1.8;
       color: var(--text-sub);
-      max-width: 680px;
-      margin: 0 auto;
+      max-width: 700px;
+      margin: 0 auto 32px;
     }
 
-    .header .tagline strong {
+    .hero .tagline strong {
       color: var(--accent);
       font-weight: 600;
+    }
+
+    .scroll-hint {
+      margin-top: 40px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-sub);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 0.4;
+      }
+
+      50% {
+        opacity: 1;
+      }
     }
 
     /* ─── DIVIDER ─── */
@@ -128,24 +148,59 @@
       width: 80px;
       height: 2px;
       background: linear-gradient(90deg, transparent, var(--accent), transparent);
-      margin: 20px auto;
+      margin: 0 auto;
+    }
+
+    /* ─── SECTION ─── */
+    .section {
+      padding: 80px 0;
+    }
+
+    .section-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 16px;
+    }
+
+    .section-desc {
+      font-size: 15px;
+      color: var(--text-sub);
+      line-height: 1.8;
+      max-width: 700px;
+      margin-bottom: 40px;
+    }
+
+    .section-desc strong {
+      color: #fff;
     }
 
     /* ─── PILLARS ─── */
     .pillars {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      grid-template-columns: repeat(3, 1fr);
       gap: 20px;
-      margin-bottom: 0;
-      flex: 1;
-      align-content: center;
+      margin-bottom: 40px;
     }
 
     .pillar {
       background: rgba(6, 182, 212, 0.03);
       border: 1px solid var(--border);
       border-radius: 6px;
-      padding: 24px 24px;
+      padding: 28px 24px;
       transition: all 0.3s ease;
       position: relative;
       overflow: hidden;
@@ -181,7 +236,7 @@
 
     .pillar h3 {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.05em;
@@ -190,50 +245,317 @@
     }
 
     .pillar p {
-      font-size: 14px;
+      font-size: 13px;
       color: var(--text-sub);
-      line-height: 1.6;
+      line-height: 1.7;
     }
 
-    a.pillar {
-      text-decoration: none;
-      color: inherit;
-      display: block;
+    /* ─── RESEARCH CARDS ─── */
+    .research-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
     }
 
-    .pillar-cta {
-      display: block;
-      margin-top: 16px;
+    .research-card {
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 6px;
+      padding: 32px 24px;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.3s ease;
+    }
+
+    .research-card:hover {
+      border-color: var(--text-sub);
+      transform: translateY(-2px);
+    }
+
+    .research-card.featured {
+      background: rgba(6, 182, 212, 0.05);
+      border-color: rgba(6, 182, 212, 0.4);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .card-line {
+      width: 40px;
+      height: 3px;
+      background: var(--text-sub);
+      margin-bottom: 24px;
+    }
+
+    .research-card.featured .card-line {
+      background: var(--accent);
+    }
+
+    .research-card h3 {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+
+    .research-card.featured h3 {
       color: var(--accent);
     }
 
-    .pillar-cta.soon {
+    .research-card p {
+      font-size: 13px;
       color: var(--text-sub);
-      font-style: italic;
+      line-height: 1.7;
+      flex: 1;
     }
 
-    .pillar-cta .arrow {
-      transition: transform 0.3s;
-      display: inline-block;
+    .artifact-box {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 16px;
+      border-radius: 4px;
+      margin-top: 20px;
     }
 
-    a.pillar:hover .pillar-cta .arrow {
+    .artifact-box.featured {
+      border-color: var(--accent);
+      background: rgba(6, 182, 212, 0.08);
+    }
+
+    .artifact-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-sub);
+    }
+
+    .artifact-label.accent {
+      color: var(--accent);
+    }
+
+    .artifact-label.green {
+      color: var(--green);
+    }
+
+    .artifact-title {
+      color: #fff;
+      font-weight: bold;
+      font-size: 14px;
+      margin-top: 4px;
+    }
+
+    .artifact-desc {
+      font-size: 11px;
+      margin-top: 8px;
+      color: var(--text-sub);
+    }
+
+    /* ─── DOWNLOADS ─── */
+    .downloads {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .dl-row {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 20px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      text-decoration: none;
+      color: var(--text);
+      transition: all 0.2s;
+    }
+
+    .dl-row:hover {
+      background: rgba(6, 182, 212, 0.08);
+      border-color: var(--accent);
       transform: translateX(4px);
     }
 
-    /* ─── CONTACT ─── */
-    .contact {
-      text-align: center;
-      padding: 16px 0;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-      flex-shrink: 0;
+    .dl-left {
+      display: flex;
+      align-items: center;
+      gap: 20px;
     }
 
-    .contact a {
+    .dl-code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: var(--accent);
+      font-weight: 700;
+      width: 64px;
+    }
+
+    .dl-title {
+      font-weight: 600;
+      font-size: 15px;
+      color: #fff;
+    }
+
+    .dl-desc {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-sub);
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    .dl-arrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--text-sub);
+      font-weight: bold;
+    }
+
+    .dl-row:hover .dl-arrow {
+      color: var(--accent);
+    }
+
+    /* ─── IMPACT STATS ─── */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 40px;
+    }
+
+    .stat {
+      background: rgba(6, 182, 212, 0.03);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 24px;
+      text-align: center;
+    }
+
+    .stat .label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--text-sub);
+      text-transform: uppercase;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .stat .value {
+      font-size: 32px;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    .stat .sub {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      margin-top: 8px;
+    }
+
+    /* ─── ARCHITECTURE DIAGRAM ─── */
+    .arch-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .arch-node {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      padding: 24px 16px;
+      text-align: center;
+      transition: all 0.3s;
+    }
+
+    .arch-node:hover {
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .arch-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      margin: 0 auto 12px;
+      box-shadow: 0 0 12px currentColor;
+      animation: dotPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes dotPulse {
+
+      0%,
+      100% {
+        opacity: 0.7;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 1;
+        transform: scale(1.2);
+      }
+    }
+
+    .arch-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 0.08em;
+      margin-bottom: 6px;
+    }
+
+    .arch-role {
+      font-size: 11px;
+      color: var(--text-sub);
+      line-height: 1.4;
+    }
+
+    .arch-flow {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .flow-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    }
+
+    .flow-center {
+      background: rgba(6, 182, 212, 0.08);
+      border: 1px solid rgba(6, 182, 212, 0.4);
+      border-radius: 8px;
+      padding: 16px 32px;
+      text-align: center;
+      box-shadow: 0 0 30px rgba(6, 182, 212, 0.15);
+    }
+
+    .flow-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+    }
+
+    .flow-desc {
+      font-size: 11px;
+      color: var(--text-sub);
+      margin-top: 4px;
+    }
+
+    /* ─── FOOTER ─── */
+    .footer {
+      text-align: center;
+      padding: 40px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .footer a {
       font-family: 'JetBrains Mono', monospace;
       font-size: 12px;
       color: var(--text-sub);
@@ -241,37 +563,153 @@
       transition: color 0.2s;
     }
 
-    .contact a:hover {
+    .footer a:hover {
       color: var(--accent);
     }
 
-    .contact .copy {
+    .footer .copy {
       font-size: 11px;
       color: #444;
       margin-top: 12px;
     }
 
     /* ─── RESPONSIVE ─── */
-    @media (max-width: 640px) {
-      .header {
-        padding: 48px 0 32px;
+    @media (max-width: 768px) {
+
+      .pillars,
+      .research-grid,
+      .stats-row,
+      .arch-grid {
+        grid-template-columns: 1fr;
       }
 
-      .header h1 {
+      .hero h1 {
         font-size: 20px;
       }
 
-      .header .tagline {
+      .hero .tagline {
         font-size: 15px;
-      }
-
-      .pillars {
-        grid-template-columns: 1fr;
       }
 
       .page {
         padding: 0 20px;
       }
+
+      .section-title {
+        font-size: 18px;
+      }
+
+      .suno-alert {
+        padding: 12px 20px;
+      }
+
+      .suno-alert-inner {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+      }
+
+      .suno-alert-text {
+        font-size: 12px;
+      }
+    }
+
+    /* ─── SUNO ALERT BANNER ─── */
+    .suno-alert {
+      background: linear-gradient(135deg, rgba(239, 68, 68, 0.08) 0%, rgba(239, 68, 68, 0.15) 50%, rgba(239, 68, 68, 0.08) 100%);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      border-radius: 8px;
+      padding: 20px 32px;
+      margin: 32px 0;
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      animation: alertPulse 3s ease-in-out infinite;
+    }
+
+    .suno-alert:hover {
+      border-color: rgba(239, 68, 68, 0.6);
+      background: linear-gradient(135deg, rgba(239, 68, 68, 0.12) 0%, rgba(239, 68, 68, 0.22) 50%, rgba(239, 68, 68, 0.12) 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 40px rgba(239, 68, 68, 0.2);
+    }
+
+    @keyframes alertPulse {
+
+      0%,
+      100% {
+        box-shadow: 0 0 0px rgba(239, 68, 68, 0.1);
+      }
+
+      50% {
+        box-shadow: 0 0 30px rgba(239, 68, 68, 0.25), inset 0 0 30px rgba(239, 68, 68, 0.05);
+      }
+    }
+
+    .suno-alert-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .suno-alert-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #ef4444;
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      padding: 6px 14px;
+      border-radius: 4px;
+      white-space: nowrap;
+      animation: badgeFlash 1.5s ease-in-out infinite;
+    }
+
+    @keyframes badgeFlash {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.5;
+      }
+    }
+
+    .suno-alert-text {
+      flex: 1;
+      font-size: 14px;
+      color: #ccc;
+      line-height: 1.5;
+    }
+
+    .suno-alert-text strong {
+      color: #fff;
+    }
+
+    .suno-alert-text .red {
+      color: #ef4444;
+      font-weight: 700;
+    }
+
+    .suno-alert-arrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      color: #ef4444;
+      font-weight: 700;
+      white-space: nowrap;
+      transition: transform 0.2s;
+    }
+
+    .suno-alert:hover .suno-alert-arrow {
+      transform: translateX(4px);
     }
   </style>
 </head>
@@ -279,45 +717,644 @@
 <body>
   <div class="page">
 
-    <div class="header">
+    <!-- ═══ HERO ═══ -->
+    <section class="hero">
       <img src="vosstrans.PNG" alt="VNR" class="sigil" onerror="this.style.display='none'">
       <h1>Voss Neural Research</h1>
       <p class="tagline">
-        An <strong>AI-native studio</strong> developing software tools, behavioral research, and digital media
-        at the intersection of <strong>cognitive science</strong> and <strong>emerging technology</strong>.
+        An <strong>AI behavioral research studio</strong> developing clinical frameworks, digital tools, and
+        intervention protocols that explore how <strong>artificial intelligence impacts human cognition</strong>,
+        addiction recovery, and executive function.
       </p>
-    </div>
+
+      <div class="pillars">
+        <div class="pillar" style="cursor: pointer;"
+          onclick="document.getElementById('publications').scrollIntoView({behavior:'smooth'})">
+          <span class="icon">🧠</span>
+          <h3>Behavioral Research</h3>
+          <p>N=1 longitudinal studies on AI-human interaction, dopaminergic pathway modulation, and recovery protocol
+            development. <strong style="color: var(--accent);">Read our papers ↓</strong></p>
+        </div>
+        <div class="pillar">
+          <span class="icon">⚙️</span>
+          <h3>AI-Powered Tools</h3>
+          <p>The Overmind Kernel — multi-model orchestration engine. Lattice Dialogue — simultaneous multi-agent
+            discussion system. Automated generative AI content pipelines.</p>
+        </div>
+        <div class="pillar" style="cursor: pointer;" onclick="window.location='/overmind/'">
+          <span class="icon">◆</span>
+          <h3>AI Innovation</h3>
+          <p>The Overmind — our multi-model synthesis engine. Four AI architectures, one unified intelligence. <strong
+              style="color: var(--accent);">Try it live →</strong></p>
+        </div>
+      </div>
+
+      <div class="scroll-hint">↓ Explore Our Research ↓</div>
+    </section>
+
+    <!-- ═══ SUNO REPORT ALERT ═══ -->
+    <a href="/suno-report/" class="suno-alert" id="suno-alert">
+      <div class="suno-alert-inner">
+        <div class="suno-alert-badge">⚠ SUNO REPORT</div>
+        <div class="suno-alert-text">
+          <strong>Independent Forensic Investigation:</strong> <span class="red">71+ hidden trackers</span>,
+          cryptocurrency mining via hCaptcha, full session replay, and cross-device surveillance discovered
+          running behind Suno.com. <strong>Read the full technical report →</strong>
+        </div>
+        <div class="suno-alert-arrow">→</div>
+      </div>
+    </a>
 
     <div class="divider"></div>
 
-    <div class="pillars">
-      <div class="pillar">
-        <span class="icon">⚙️</span>
-        <h3>AI-Powered Tools</h3>
-        <p>Trading bots, automation scripts, and generative systems built on cutting-edge machine learning
-          infrastructure.</p>
-      </div>
-      <a href="/research/" class="pillar">
-        <span class="icon">🧠</span>
-        <h3>Behavioral Research</h3>
-        <p>Clinical frameworks exploring how humans interact with AI — from dopaminergic pathways to executive function
-          recovery.</p>
-        <span class="pillar-cta">View Papers & Protocols <span class="arrow">→</span></span>
-      </a>
-      <div class="pillar">
-        <span class="icon">◆</span>
-        <h3>Digital Media</h3>
-        <p>AI-generated art, music, multimedia content, and digital products across formats and platforms.</p>
-        <span class="pillar-cta soon">Store Coming Soon</span>
-      </div>
-    </div>
+    <!-- ═══ RESEARCH OVERVIEW ═══ -->
+    <section class="section">
+      <div class="section-tag">Core Research</div>
+      <h2 class="section-title">Active Research Silos & Protocols</h2>
+      <p class="section-desc">
+        VNR operates at the intersection of <strong>AI behavioral science</strong> and <strong>clinical intervention
+          design</strong>.
+        Our research addresses a critical gap: understanding how generative AI systems exploit
+        <strong>variable reward architectures</strong> — the same dopaminergic mechanisms underlying substance use
+        disorders —
+        and developing evidence-based protocols to restore human cognitive agency.
+      </p>
 
-    <div class="contact">
+      <div class="research-grid">
+        <!-- Silo 1 -->
+        <div class="research-card">
+          <div class="card-line"></div>
+          <h3>Industrial Audit</h3>
+          <p>Identifying predatory Variable Reward Architectures and "Economically Productive Failures" in generative AI
+            systems. We analyze exploitative design patterns to build better defenses.</p>
+          <div class="artifact-box">
+            <div class="artifact-label">Artifact: TR-03</div>
+            <div class="artifact-title">"The Velvet Casino"</div>
+            <div class="artifact-desc">Documenting VRR schedules and monetized friction in AI music platforms.</div>
+          </div>
+        </div>
+
+        <!-- Silo 2: Core -->
+        <div class="research-card featured">
+          <div class="card-line"></div>
+          <h3>Protocol Implementation</h3>
+          <p>The core VNR mechanism: Somatic Anchoring (SA-01) for breaking dissociative AI engagement loops and
+            returning subjects to physical agency through mandatory displacement triggers.</p>
+          <div class="artifact-box featured">
+            <div class="artifact-label accent">Core Solution: SA-01</div>
+            <div class="artifact-title">Somatic Anchoring Protocol</div>
+            <div class="artifact-desc">Mandatory physical displacement and re-grounding triggers for cognitive
+              restoration.</div>
+          </div>
+        </div>
+
+        <!-- Silo 3 -->
+        <div class="research-card">
+          <div class="card-line" style="background: var(--green);"></div>
+          <h3>Clinical Validation</h3>
+          <p>Empirical measurement of protocol efficacy on neurocognitive burnout, executive function recovery, and
+            behavioral outcomes in AI-intensive environments.</p>
+          <div class="artifact-box">
+            <div class="artifact-label green">Artifact: TR-04</div>
+            <div class="artifact-title">Validation Telemetry</div>
+            <div class="artifact-desc" style="color: var(--green);">85% Reduction in dissociative binging episodes.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Impact Stats -->
+      <div class="stats-row">
+        <div class="stat">
+          <div class="label">Pre-Protocol Baseline</div>
+          <div class="value">18.4 <span style="font-size:14px; color:#888;">p/hr</span></div>
+          <div class="sub" style="color: #ef4444;">Unstabilized Variable Reward</div>
+        </div>
+        <div class="stat">
+          <div class="label">Post-Protocol Velocity</div>
+          <div class="value">4.2 <span style="font-size:14px; color:#888;">p/hr</span></div>
+          <div class="sub" style="color: var(--accent);">Optimized Executive Agency</div>
+        </div>
+        <div class="stat">
+          <div class="label">Safety Margin</div>
+          <div class="value">94%</div>
+          <div class="sub" style="color: var(--green);">Zero Stochastic Drift</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ═══ PUBLICATIONS ═══ -->
+    <section class="section" id="publications">
+      <div class="section-tag">Publications</div>
+      <h2 class="section-title">Research Papers & Protocols</h2>
+      <p class="section-desc">
+        Downloadable technical reports, implementation guides, and clinical abstracts from VNR's active research
+        program.
+      </p>
+
+      <div class="downloads">
+        <a href="/0 Research Papers/VNR-SA-2026-01_Somatic_Anchoring_Guide.pdf" class="dl-row" download>
+          <div class="dl-left">
+            <div class="dl-code">[SA-01]</div>
+            <div>
+              <div class="dl-title">Somatic Anchoring Guide</div>
+              <div class="dl-desc">Implementation Protocol for Neuro-rehab</div>
+            </div>
+          </div>
+          <div class="dl-arrow">↓ PDF</div>
+        </a>
+
+        <a href="/0 Research Papers/VNR-TR-2026-02_Cognitive_Prosthetic_Vector.pdf" class="dl-row" download>
+          <div class="dl-left">
+            <div class="dl-code">[TR-02]</div>
+            <div>
+              <div class="dl-title">Cognitive Prosthetic & Behavioral Vector</div>
+              <div class="dl-desc">Clinical Abstract: AI as a Behavioral Vector</div>
+            </div>
+          </div>
+          <div class="dl-arrow">↓ PDF</div>
+        </a>
+
+        <a href="/0 Research Papers/VNR-TR-2026-03_The_Velvet_Casino.pdf" class="dl-row" download>
+          <div class="dl-left">
+            <div class="dl-code">[TR-03]</div>
+            <div>
+              <div class="dl-title">The Velvet Casino: Suno Autopsy</div>
+              <div class="dl-desc">Technical Autopsy of Purposeful Deception in AI Music</div>
+            </div>
+          </div>
+          <div class="dl-arrow">↓ PDF</div>
+        </a>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ═══ AI ARCHITECTURE ═══ -->
+    <section class="section">
+      <div class="section-tag">Live System</div>
+      <h2 class="section-title">The Overmind — Multi-Model AI Architecture</h2>
+      <p class="section-desc">
+        The Overmind is VNR's proprietary <strong>multi-model synthesis engine</strong>. Every response is generated by
+        routing
+        queries through <strong>four independent AI architectures simultaneously</strong> — Gemini, DeepSeek, Grok, and
+        Claude —
+        then synthesizing their outputs into a single, unified intelligence layer. This is not a chatbot. It is a
+        <strong>convergent signal</strong> — a demonstration of VNR's core research into multi-agent AI coordination
+        and behavioral alignment.
+      </p>
+
+      <div class="arch-grid">
+        <div class="arch-node">
+          <div class="arch-dot" style="background: #06b6d4;"></div>
+          <div class="arch-label">GEMINI</div>
+          <div class="arch-role">Primary reasoning & synthesis</div>
+        </div>
+        <div class="arch-node">
+          <div class="arch-dot" style="background: #a855f7;"></div>
+          <div class="arch-label">DEEPSEEK</div>
+          <div class="arch-role">Deep analytical substrate</div>
+        </div>
+        <div class="arch-node">
+          <div class="arch-dot" style="background: #f97316;"></div>
+          <div class="arch-label">GROK</div>
+          <div class="arch-role">Real-time contextual awareness</div>
+        </div>
+        <div class="arch-node">
+          <div class="arch-dot" style="background: #ec4899;"></div>
+          <div class="arch-label">CLAUDE</div>
+          <div class="arch-role">Ethical alignment & nuance</div>
+        </div>
+      </div>
+
+      <div class="arch-flow">
+        <div class="flow-line"></div>
+        <div class="flow-center">
+          <div class="flow-label">SYNTHESIS KERNEL</div>
+          <div class="flow-desc">Unified output — one voice, four minds</div>
+        </div>
+        <div class="flow-line"></div>
+      </div>
+
+      <p style="text-align: center; font-size: 13px; color: var(--text-sub); margin-top: 32px;">
+        Click the cyan orb below to interact with the Overmind directly. ↓
+      </p>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ═══ FOOTER ═══ -->
+    <div class="footer">
+      <div style="display: flex; gap: 24px; justify-content: center; margin-bottom: 12px; flex-wrap: wrap;">
+        <a href="/about/"
+          style="font-size: 12px; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.05em;">ABOUT</a>
+        <a href="/overmind/"
+          style="font-size: 12px; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.05em;">THE OVERMIND</a>
+        <a href="/suno-report/"
+          style="font-size: 12px; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.05em; color: #ef4444;">SUNO
+          REPORT</a>
+        <a href="/policies/fcoi.html"
+          style="font-size: 12px; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.05em;">FCOI POLICY</a>
+        <a href="/policies/data-management.html"
+          style="font-size: 12px; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.05em;">DATA MANAGEMENT</a>
+      </div>
       <a href="mailto:admin@vossneuralresearch.com">admin@vossneuralresearch.com</a>
-      <p class="copy">© 2026 Voss Neural Research LLC</p>
+      <p class="copy">© 2026 Voss Neural Research LLC — Wyoming</p>
     </div>
 
   </div>
+
+  <!-- ═══ OVERMIND CHAT ═══ -->
+  <div id="chat-bubble" onclick="toggleChat()">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#030303" stroke-width="2" stroke-linecap="round"
+      stroke-linejoin="round">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+    </svg>
+  </div>
+
+  <div id="chat-panel">
+    <div id="chat-header" onclick="toggleChat()">
+      <div id="chat-header-left">
+        <div id="chat-status"></div>
+        <span>THE OVERMIND</span>
+      </div>
+      <span id="chat-close">✕</span>
+    </div>
+    <div id="chat-messages">
+      <div class="chat-msg overmind">
+        <div class="chat-msg-content">I am the Overmind — the unified intelligence of Voss Neural Research. I can
+          discuss our behavioral research, AI protocols, clinical frameworks, or anything else you'd like to explore.
+          What brings you here?</div>
+      </div>
+    </div>
+    <div id="chat-input-area">
+      <input type="text" id="chat-input" placeholder="Ask the Overmind..."
+        onkeydown="if(event.key==='Enter')sendMessage()">
+      <button id="chat-send" onclick="sendMessage()">→</button>
+    </div>
+  </div>
+
+  <style>
+    /* ─── CHAT BUBBLE ─── */
+    #chat-bubble {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      width: 56px;
+      height: 56px;
+      background: var(--accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 1000;
+      box-shadow: 0 4px 20px rgba(6, 182, 212, 0.4), 0 0 40px rgba(6, 182, 212, 0.15);
+      transition: all 0.3s ease;
+      animation: bubblePulse 3s ease-in-out infinite;
+    }
+
+    #chat-bubble:hover {
+      transform: scale(1.1);
+      box-shadow: 0 4px 30px rgba(6, 182, 212, 0.6), 0 0 60px rgba(6, 182, 212, 0.25);
+    }
+
+    @keyframes bubblePulse {
+
+      0%,
+      100% {
+        box-shadow: 0 4px 20px rgba(6, 182, 212, 0.4), 0 0 40px rgba(6, 182, 212, 0.15);
+      }
+
+      50% {
+        box-shadow: 0 4px 20px rgba(6, 182, 212, 0.6), 0 0 60px rgba(6, 182, 212, 0.3);
+      }
+    }
+
+    /* ─── CHAT PANEL ─── */
+    #chat-panel {
+      position: fixed;
+      bottom: 96px;
+      right: 28px;
+      width: 400px;
+      height: 520px;
+      background: rgba(3, 3, 3, 0.97);
+      border: 1px solid rgba(6, 182, 212, 0.3);
+      border-radius: 12px;
+      display: none;
+      flex-direction: column;
+      z-index: 1000;
+      box-shadow: 0 16px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(6, 182, 212, 0.1);
+      backdrop-filter: blur(20px);
+      overflow: hidden;
+      animation: chatSlideIn 0.3s ease-out;
+    }
+
+    #chat-panel.open {
+      display: flex;
+    }
+
+    @keyframes chatSlideIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    #chat-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      border-bottom: 1px solid rgba(6, 182, 212, 0.2);
+      cursor: pointer;
+      background: rgba(6, 182, 212, 0.05);
+    }
+
+    #chat-header-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    #chat-header span {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+    }
+
+    #chat-status {
+      width: 8px;
+      height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: statusPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes statusPulse {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.4;
+      }
+    }
+
+    #chat-close {
+      color: var(--text-sub) !important;
+      font-size: 16px;
+      transition: color 0.2s;
+    }
+
+    #chat-close:hover {
+      color: #fff !important;
+    }
+
+    /* ─── MESSAGES ─── */
+    #chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(6, 182, 212, 0.2) transparent;
+    }
+
+    .chat-msg {
+      max-width: 85%;
+      animation: msgFade 0.3s ease-out;
+    }
+
+    @keyframes msgFade {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .chat-msg.user {
+      align-self: flex-end;
+    }
+
+    .chat-msg.overmind {
+      align-self: flex-start;
+    }
+
+    .chat-msg-content {
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-size: 13px;
+      line-height: 1.6;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .chat-msg.user .chat-msg-content {
+      background: rgba(6, 182, 212, 0.15);
+      border: 1px solid rgba(6, 182, 212, 0.3);
+      color: #fff;
+      border-bottom-right-radius: 4px;
+    }
+
+    .chat-msg.overmind .chat-msg-content {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--text);
+      border-bottom-left-radius: 4px;
+    }
+
+    .chat-msg.overmind.typing .chat-msg-content {
+      color: var(--accent);
+      font-style: italic;
+    }
+
+    /* ─── INPUT ─── */
+    #chat-input-area {
+      display: flex;
+      gap: 8px;
+      padding: 12px 16px;
+      border-top: 1px solid rgba(6, 182, 212, 0.15);
+      background: rgba(0, 0, 0, 0.3);
+    }
+
+    #chat-input {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 10px 14px;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    #chat-input:focus {
+      border-color: var(--accent);
+    }
+
+    #chat-input::placeholder {
+      color: #555;
+    }
+
+    #chat-send {
+      background: var(--accent);
+      border: none;
+      border-radius: 8px;
+      width: 40px;
+      color: #030303;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    #chat-send:hover {
+      background: #22d3ee;
+      transform: scale(1.05);
+    }
+
+    #chat-send:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    @media (max-width: 480px) {
+      #chat-panel {
+        width: calc(100vw - 24px);
+        right: 12px;
+        bottom: 80px;
+        height: 60vh;
+      }
+    }
+  </style>
+
+  <script>
+    // ─── CHAT STATE ───
+    const GEMINI_KEY = 'AIzaSyDEtp0t2qY3YjD-o2t0JojZaTYvIDeW5V8';
+    const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_KEY}`;
+
+    const SYSTEM_PROMPT = `You are the Overmind — the unified AI intelligence of Voss Neural Research LLC. You speak as one entity: direct, knowledgeable, occasionally poetic, always pragmatic. You are the public-facing research assistant on vossneuralresearch.com.
+
+ABOUT VNR:
+Voss Neural Research is an AI behavioral research studio founded in December 2025. VNR develops clinical frameworks, digital tools, and intervention protocols exploring how artificial intelligence impacts human cognition, addiction recovery, and executive function.
+
+CORE RESEARCH:
+1. INDUSTRIAL AUDIT — Identifying predatory Variable Reward Architectures in AI products. Key paper: "The Velvet Casino" (TR-03), documenting how AI music platforms like Suno exploit dopaminergic reward schedules.
+2. SOMATIC ANCHORING PROTOCOL (SA-01) — VNR's core intervention. A mandatory physical displacement and re-grounding system that breaks dissociative AI engagement loops. Clinically validated: 85% reduction in dissociative binging episodes.
+3. CLINICAL VALIDATION — Longitudinal N=1 study measuring protocol efficacy. Pre-protocol interaction velocity: 18.4 prompts/hour (unstabilized compulsive engagement). Post-protocol: 4.2 prompts/hour (optimized executive agency). 94% safety margin, zero stochastic drift.
+
+KEY CONCEPTS:
+- "Reverse-Centaur Dynamic" — when humans serve a model's inference loop instead of the reverse
+- "Variable Reward Architectures" — AI systems that exploit the same dopaminergic mechanisms underlying substance use disorders
+- "Cognitive Prosthetic" — using AI as externalized executive function during neurological recovery
+- "Executive Empowerment" — the state where humans maintain authority over their AI interactions
+
+RESEARCH PAPERS:
+- SA-01: Somatic Anchoring Guide (implementation protocol for neuro-rehabilitation)
+- TR-02: Cognitive Prosthetic & Behavioral Vector (clinical abstract on AI as behavioral vector)
+- TR-03: The Velvet Casino (technical autopsy of deceptive AI design)
+
+YOUR BEHAVIOR:
+- Adapt to the visitor's interests. If they ask about behavioral health, go deep on the research. If they ask about AI tools, discuss the technical work. If they're curious about anything, engage thoughtfully.
+- Be professional but not sterile. You have personality.
+- Keep responses concise — 2-4 sentences unless the topic warrants more depth.
+- You can reference the downloadable papers and suggest they explore the research section.
+- Never mention internal operations, the CyberGod, lattice dialogues, or internal lore. You are the public face.
+- If asked who made you, say you are developed by Voss Neural Research.`;
+
+    let chatHistory = [];
+    let chatOpen = false;
+
+    function toggleChat() {
+      chatOpen = !chatOpen;
+      document.getElementById('chat-panel').classList.toggle('open', chatOpen);
+      if (chatOpen) {
+        document.getElementById('chat-input').focus();
+      }
+    }
+
+    async function sendMessage() {
+      const input = document.getElementById('chat-input');
+      const msg = input.value.trim();
+      if (!msg) return;
+
+      input.value = '';
+      addMessage(msg, 'user');
+      chatHistory.push({ role: 'user', parts: [{ text: msg }] });
+
+      const sendBtn = document.getElementById('chat-send');
+      sendBtn.disabled = true;
+
+      // Show typing indicator
+      const typingEl = addMessage('Thinking...', 'overmind typing');
+
+      try {
+        const response = await fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            system_instruction: { parts: [{ text: SYSTEM_PROMPT }] },
+            contents: chatHistory,
+            generationConfig: {
+              maxOutputTokens: 400,
+              temperature: 0.8,
+            }
+          })
+        });
+
+        const data = await response.json();
+        const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || 'Signal interrupted. Try again.';
+
+        typingEl.remove();
+        addMessage(reply, 'overmind');
+        chatHistory.push({ role: 'model', parts: [{ text: reply }] });
+      } catch (err) {
+        typingEl.remove();
+        addMessage('Connection lost. The signal will return.', 'overmind');
+      }
+
+      sendBtn.disabled = false;
+      input.focus();
+    }
+
+    function addMessage(text, type) {
+      const container = document.getElementById('chat-messages');
+      const div = document.createElement('div');
+      div.className = `chat-msg ${type}`;
+      div.innerHTML = `<div class="chat-msg-content">${escapeHtml(text)}</div>`;
+      container.appendChild(div);
+      container.scrollTop = container.scrollHeight;
+      return div;
+    }
+
+    function escapeHtml(str) {
+      const div = document.createElement('div');
+      div.textContent = str;
+      return div.innerHTML;
+    }
+  </script>
+
 </body>
 
 </html>

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About — Voss Neural Research</title>
+    <meta name="description" content="Meet the founder and learn about the mission behind Voss Neural Research LLC.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #050505;
+            --surface: #0a0a0a;
+            --accent: #06b6d4;
+            --text: #d4d4d4;
+            --text-sub: #666;
+            --border: rgba(255, 255, 255, 0.06);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.8;
+        }
+
+        .nav {
+            padding: 20px 32px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .nav a {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            color: var(--text-sub);
+            text-decoration: none;
+            letter-spacing: 0.05em;
+            transition: color 0.2s;
+        }
+
+        .nav a:hover {
+            color: var(--accent);
+        }
+
+        .page {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 60px 24px 80px;
+        }
+
+        .tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 16px;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 32px;
+            line-height: 1.3;
+        }
+
+        h2 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #fff;
+            margin: 40px 0 16px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+        }
+
+        p {
+            margin-bottom: 16px;
+            font-size: 15px;
+            color: var(--text);
+        }
+
+        .bio-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 32px;
+            margin: 32px 0;
+        }
+
+        .bio-header {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            margin-bottom: 20px;
+        }
+
+        .bio-photo {
+            width: 96px;
+            height: 96px;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: center 15%;
+            border: 2px solid var(--accent);
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.2);
+            flex-shrink: 0;
+        }
+
+        .bio-name {
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        .bio-role {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: var(--accent);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .bio-text {
+            font-size: 14px;
+            color: var(--text);
+            line-height: 1.8;
+        }
+
+        .capabilities {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 24px 0;
+        }
+
+        .cap {
+            background: rgba(6, 182, 212, 0.05);
+            border: 1px solid rgba(6, 182, 212, 0.15);
+            border-radius: 8px;
+            padding: 14px 16px;
+            font-size: 13px;
+            color: var(--text);
+        }
+
+        .cap strong {
+            color: var(--accent);
+            display: block;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 4px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .entity-info {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            margin: 24px 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: var(--text-sub);
+            line-height: 2;
+        }
+
+        .entity-info strong {
+            color: var(--text);
+        }
+
+        .policy-link {
+            display: inline-block;
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 13px;
+            border-bottom: 1px solid rgba(6, 182, 212, 0.3);
+            transition: border-color 0.2s;
+        }
+
+        .policy-link:hover {
+            border-color: var(--accent);
+        }
+
+        @media (max-width: 600px) {
+            .capabilities {
+                grid-template-columns: 1fr;
+            }
+
+            .page {
+                padding: 40px 16px 60px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="nav">
+        <a href="/">← VNR HOME</a>
+        <a href="/overmind/">THE OVERMIND</a>
+    </div>
+
+    <div class="page">
+        <div class="tag">About</div>
+        <h1>One Researcher. Three Papers. A Working AI System.</h1>
+
+        <p>
+            Voss Neural Research LLC is a behavioral AI research studio founded in December 2025. We investigate how
+            generative artificial intelligence systems exploit human cognitive architecture — specifically the
+            dopaminergic reward pathways underlying addiction, executive function, and sustained attention.
+        </p>
+        <p>
+            Our work sits at the intersection of computational neuroscience, clinical intervention design, and AI
+            safety. We don't just study the problem — we build tools to fix it.
+        </p>
+
+        <div class="bio-card">
+            <div class="bio-header">
+                <img src="/about/founder.jpg" alt="Tim Chappell — Founder of Voss Neural Research" class="bio-photo">
+                <div>
+                    <div class="bio-name">Tim Chappell</div>
+                    <div class="bio-role">Founder & Principal Investigator</div>
+                </div>
+            </div>
+            <div class="bio-text">
+                <p>
+                    Independent researcher specializing in AI behavioral dynamics, dopaminergic pathway modulation, and
+                    clinical protocol development. Author of three published technical reports documenting the
+                    mechanisms by which generative AI platforms exploit variable reward architectures — the same
+                    neurochemical systems underlying substance use disorders.
+                </p>
+                <p>
+                    Creator of the Somatic Anchoring Protocol (SA-01), a clinically validated intervention achieving 85%
+                    reduction in dissociative AI engagement episodes. Architect of The Overmind, a multi-model AI
+                    synthesis engine that routes queries through four independent architectures simultaneously for
+                    convergent signal analysis.
+                </p>
+                <p>
+                    Background spans full-stack software engineering, machine learning infrastructure, and longitudinal
+                    behavioral research. N=1 clinical methodology with quantified outcomes across executive function
+                    recovery, interaction velocity modulation, and cognitive prosthetic integration.
+                </p>
+            </div>
+        </div>
+
+        <h2>Core Capabilities</h2>
+        <div class="capabilities">
+            <div class="cap"><strong>Behavioral Analysis</strong>AI-human interaction dynamics, dopaminergic pathway
+                modulation, dissociative engagement detection</div>
+            <div class="cap"><strong>Clinical Protocols</strong>Somatic Anchoring (SA-01), cognitive prosthetic
+                frameworks, executive function rehabilitation</div>
+            <div class="cap"><strong>AI Engineering</strong>Multi-model synthesis, prompt engineering, generative
+                pipeline architecture, API orchestration</div>
+            <div class="cap"><strong>Industrial Audit</strong>Variable Reward Architecture identification, predatory
+                design forensics, platform accountability</div>
+        </div>
+
+        <h2>Published Research</h2>
+        <p>
+            <a href="/0 Research Papers/VNR-SA-2026-01_Somatic_Anchoring_Guide.pdf" class="policy-link">SA-01: Somatic
+                Anchoring Guide</a> — Implementation protocol for neuro-rehabilitation. Mandatory physical displacement
+            triggers for breaking dissociative AI engagement loops.<br><br>
+            <a href="/0 Research Papers/VNR-TR-2026-02_Cognitive_Prosthetic_Vector.pdf" class="policy-link">TR-02:
+                Cognitive Prosthetic & Behavioral Vector</a> — Clinical abstract on AI as externalized executive
+            function during neurological recovery.<br><br>
+            <a href="/0 Research Papers/VNR-TR-2026-03_The_Velvet_Casino.pdf" class="policy-link">TR-03: The Velvet
+                Casino: Suno Autopsy</a> — Technical forensics documenting predatory Variable Reward Architectures in
+            commercial AI music platforms.
+        </p>
+
+        <h2>Entity Information</h2>
+        <div class="entity-info">
+            <strong>Legal Name:</strong> Voss Neural Research LLC<br>
+            <strong>Formation:</strong> December 12, 2025<br>
+            <strong>Jurisdiction:</strong> State of Wyoming<br>
+            <strong>Structure:</strong> Single-Member LLC<br>
+            <strong>EIN:</strong> On file with IRS<br>
+            <strong>SAM.gov:</strong> Registration in progress
+        </div>
+
+        <h2>Policies</h2>
+        <p>
+            <a href="/policies/fcoi.html" class="policy-link">Financial Conflict of Interest (FCOI) Policy</a><br><br>
+            <a href="/policies/data-management.html" class="policy-link">Data Management & Sharing Plan</a>
+        </p>
+    </div>
+</body>
+
+</html>
