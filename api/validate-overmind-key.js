@@ -1,12 +1,10 @@
 // Vercel Serverless Function — Gumroad License Key Validator
 // POST /api/validate-overmind-key
 // Body: { license_key: "XXXX-XXXX-XXXX-XXXX" }
-//
-// Required Vercel env var: GUMROAD_ACCESS_TOKEN
-// Product permalink: overmind-sovereign
+// No env vars required — Gumroad license verify is a public endpoint.
 
 export default async function handler(req, res) {
-    res.setHeader('Access-Control-Allow-Origin', 'https://www.vossneuralresearch.com');
+    res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
@@ -18,19 +16,13 @@ export default async function handler(req, res) {
         return res.status(400).json({ valid: false, error: 'No license key provided.' });
     }
 
-    const accessToken = process.env.GUMROAD_ACCESS_TOKEN;
-    if (!accessToken) {
-        return res.status(500).json({ valid: false, error: 'Server configuration error.' });
-    }
-
     try {
         const params = new URLSearchParams({
             product_permalink: 'overmindfull',
             license_key: license_key.trim().toUpperCase(),
-            access_token: accessToken,
         });
 
-        const gumroadRes = await fetch(`https://api.gumroad.com/v2/licenses/verify`, {
+        const gumroadRes = await fetch('https://api.gumroad.com/v2/licenses/verify', {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: params.toString(),
@@ -45,9 +37,9 @@ export default async function handler(req, res) {
                 email: data.purchase?.email || '',
             });
         } else {
-            return res.status(200).json({ valid: false, error: 'Invalid or already-used key.' });
+            return res.status(200).json({ valid: false, error: 'Key not recognized. Check your Gumroad receipt and try again.' });
         }
     } catch (err) {
-        return res.status(500).json({ valid: false, error: 'Verification service unavailable.' });
+        return res.status(500).json({ valid: false, error: 'Verification service unavailable. Try again in a moment.' });
     }
 }
