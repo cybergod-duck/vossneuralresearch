@@ -25,7 +25,7 @@ export default async function handler(req, res) {
 
     try {
         const params = new URLSearchParams({
-            product_permalink: 'overmind-sovereign',
+            product_permalink: 'overmindfull',
             license_key: license_key.trim().toUpperCase(),
             access_token: accessToken,
         });
