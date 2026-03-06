@@ -697,8 +697,26 @@
                 The free mind scratches the surface. The full experience sees the architecture beneath.</p>
             <div class="price">$7<span style="font-size: 14px; color: #888;">/month</span></div>
             <div class="price-sub">Cancel anytime. Instant activation.</div>
-            <a class="modal-cta" href="https://vossneuralresearch.gumroad.com/l/overmind-sovereign"
-                target="_blank">UNLOCK FULL EXPERIENCE</a>
+            <a class="modal-cta" href="https://vossneuralresearch.gumroad.com/l/overmind-sovereign" target="_blank"
+                onclick="closeModal()">UNLOCK FULL EXPERIENCE</a>
+
+            <div style="margin: 24px 0; border-top: 1px solid rgba(57,255,20,0.1);"></div>
+
+            <p style="font-size: 12px; margin-bottom: 12px; color: #555;">Already have a license key?</p>
+            <div style="display:flex; gap:8px; margin-bottom: 8px;">
+                <input id="licenseKeyInput" type="text" placeholder="XXXX-XXXX-XXXX-XXXX" style="flex:1; background:rgba(255,255,255,0.05); border:1px solid rgba(57,255,20,0.2);
+                    border-radius:6px; color:#fff; font-family:'JetBrains Mono',monospace; font-size:12px;
+                    padding:10px 14px; outline:none; letter-spacing:0.1em; text-transform:uppercase;"
+                    onkeydown="if(event.key==='Enter')validateKey()">
+                <button onclick="validateKey()" id="validateBtn" style="background:rgba(57,255,20,0.1); border:1px solid rgba(57,255,20,0.3); border-radius:6px;
+                    color:var(--neon); font-family:'JetBrains Mono',monospace; font-size:11px; padding:0 16px;
+                    cursor:pointer; letter-spacing:0.08em; transition:all 0.2s; white-space:nowrap;">
+                    VERIFY
+                </button>
+            </div>
+            <div id="keyStatus" style="font-family:'JetBrains Mono',monospace; font-size:11px; min-height:16px;
+                letter-spacing:0.05em; color:#555;"></div>
+
             <button class="modal-close" onclick="closeModal()">maybe later</button>
         </div>
     </div>
@@ -873,6 +891,54 @@ YOUR BEHAVIOR:
         function closeModal() {
             document.getElementById('premiumModal').classList.remove('visible');
         }
+
+        async function validateKey() {
+            const input = document.getElementById('licenseKeyInput');
+            const statusEl = document.getElementById('keyStatus');
+            const btn = document.getElementById('validateBtn');
+            const key = input.value.trim();
+            if (!key) return;
+
+            btn.disabled = true;
+            btn.textContent = 'VERIFYING...';
+            statusEl.style.color = '#555';
+            statusEl.textContent = 'Contacting verification node...';
+
+            try {
+                const res = await fetch('/api/validate-overmind-key', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ license_key: key })
+                });
+                const data = await res.json();
+
+                if (data.valid) {
+                    premiumUnlocked = true;
+                    localStorage.setItem('overmind_sovereign', 'true');
+                    if (data.name) {
+                        memberName = data.name.split(' ')[0];
+                        localStorage.setItem('overmind_member_name', memberName);
+                    }
+                    statusEl.style.color = 'var(--neon)';
+                    statusEl.textContent = '✓ KEY VERIFIED — FULL EXPERIENCE UNLOCKED';
+                    document.querySelector('.tier-btn.premium .lock').textContent = '⚡';
+                    setTimeout(() => {
+                        closeModal();
+                        setTier('premium');
+                    }, 1200);
+                } else {
+                    statusEl.style.color = '#ef4444';
+                    statusEl.textContent = data.error || 'Key not recognized.';
+                }
+            } catch (err) {
+                statusEl.style.color = '#ef4444';
+                statusEl.textContent = 'Verification node unreachable. Try again.';
+            }
+
+            btn.disabled = false;
+            btn.textContent = 'VERIFY';
+        }
+
 
         // Check URL for unlock key (from Gumroad redirect)
         if (window.location.search.includes('sovereign=true')) {
