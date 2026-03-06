@@ -879,23 +879,30 @@
         </section>
 
         <!-- VIPER CTA #2 -->
-        <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px;
-            background:rgba(239,68,68,0.06); border:1px solid rgba(239,68,68,0.25); border-left:4px solid var(--red);
-            border-radius:6px; padding:16px 24px; margin:0 0 32px;">
-            <div>
-                <div
-                    style="font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--red); letter-spacing:0.1em; margin-bottom:4px;">
-                    THIS IS STILL ON YOUR MACHINE</div>
-                <div style="font-size:13px; color:var(--text);">The crypto PoW data and incognito bypass artifacts
-                    described above survive browser restarts. VIPER finds and removes them.</div>
+        <div style="background:rgba(239,68,68,0.06); border:1px solid rgba(239,68,68,0.25); border-left:4px solid var(--red);
+            border-radius:6px; padding:20px 24px; margin:0 0 32px;">
+            <div
+                style="font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--red); letter-spacing:0.1em; margin-bottom:8px;">
+                THIS DATA IS STILL IN YOUR BROWSER'S PROFILE FOLDER</div>
+            <div style="font-size:13px; color:var(--text); margin-bottom:16px; line-height:1.6;">
+                The crypto PoW artifacts and incognito bypass data described above are stored in <strong
+                    style="color:#fff;">SQLite databases and LevelDB files</strong> on your hard drive.
+                A browser extension can't reach them. You need a tool that runs at the OS level.
             </div>
-            <a href="/products/vnrviper/" style="flex-shrink:0; font-family:'JetBrains Mono',monospace; font-size:12px; font-weight:700;
-                letter-spacing:0.08em; color:#000; background:#22c55e; padding:10px 24px; border-radius:6px;
-                text-decoration:none; white-space:nowrap; transition:all 0.2s;"
-                onmouseover="this.style.boxShadow='0 0 20px rgba(34,197,94,0.4)'"
-                onmouseout="this.style.boxShadow='none'">
-                🐍 CLEAN MY BROWSER
-            </a>
+            <div style="display:flex; gap:12px; flex-wrap:wrap;">
+                <a href="/products/ultra-viper/" style="font-family:'JetBrains Mono',monospace; font-size:12px; font-weight:700;
+                    letter-spacing:0.08em; color:#000; background:#22c55e; padding:10px 24px; border-radius:6px;
+                    text-decoration:none; white-space:nowrap;"
+                    onmouseover="this.style.boxShadow='0 0 20px rgba(34,197,94,0.4)'"
+                    onmouseout="this.style.boxShadow='none'">
+                    🐍 TRY ULTRA VIPER FREE — 3 DAYS
+                </a>
+                <a href="/products/vnrviper/" style="font-family:'JetBrains Mono',monospace; font-size:12px; font-weight:700;
+                    letter-spacing:0.08em; color:#22c55e; background:transparent; padding:10px 24px; border-radius:6px;
+                    text-decoration:none; white-space:nowrap; border:1px solid rgba(34,197,94,0.3);">
+                    Or get VIPER Pro (browser extension)
+                </a>
+            </div>
         </div>
 
         <!-- IDENTITY RESOLUTION -->
@@ -1197,36 +1204,105 @@
         </section>
 
         <!-- THE SOLUTION -->
-        <section class="section" style="text-align:center; padding: 48px 0;">
-            <div class="section-tag"
-                style="color:#22c55e; background:rgba(34,197,94,0.12); border-color:rgba(34,197,94,0.3);">The Solution
+        <section class="section" style="padding: 48px 0;">
+            <div style="text-align:center; margin-bottom:32px;">
+                <div class="section-tag"
+                    style="color:#22c55e; background:rgba(34,197,94,0.12); border-color:rgba(34,197,94,0.3); display:inline-block;">
+                    The Solution</div>
+                <h2 style="font-size:28px; margin-bottom:12px; color:#fff;">Two tools. Two levels of clean.</h2>
+                <p class="section-desc" style="max-width:540px; margin:0 auto;">
+                    Choose based on how deep the contamination goes.
+                </p>
             </div>
-            <h2 style="font-size:28px; margin-bottom:16px;">We built a tool to fight back.</h2>
-            <p class="section-desc" style="max-width:560px; margin:0 auto 32px;">
-                <strong style="color:#22c55e;">VNR VIPER Pro</strong> scans your browser for every tracker type
-                documented in this report — cookies, crypto miners, session replay scripts, ad exchange syncs —
-                and lets you <strong style="color:#fff;">burn them all</strong> with one click.
-            </p>
-            <a href="/products/vnrviper/" style="
-                display:inline-block;
-                font-family:'JetBrains Mono',monospace;
-                font-size:13px;
-                font-weight:700;
-                letter-spacing:0.08em;
-                text-transform:uppercase;
-                color:#000;
-                background:#22c55e;
-                padding:14px 40px;
-                border-radius:6px;
-                text-decoration:none;
-                box-shadow:0 0 20px rgba(34,197,94,0.3);
-                transition:all 0.3s;
-            " onmouseover="this.style.boxShadow='0 0 40px rgba(34,197,94,0.5)'"
-                onmouseout="this.style.boxShadow='0 0 20px rgba(34,197,94,0.3)'">
-                🐍 GET VIPER PRO
-            </a>
-            <p style="font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--text-sub); margin-top:16px;">
-                Free scanner available · Pro unlocks one-click removal
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; max-width:820px; margin:0 auto;">
+
+                <!-- VIPER Pro card -->
+                <div
+                    style="background:rgba(10,10,10,0.8); border:1px solid rgba(34,197,94,0.2); border-radius:12px; padding:28px;">
+                    <div
+                        style="font-family:'JetBrains Mono',monospace; font-size:10px; color:#22c55e; letter-spacing:0.15em; margin-bottom:12px;">
+                        BROWSER EXTENSION</div>
+                    <div
+                        style="font-size:22px; font-weight:800; color:#fff; font-family:'JetBrains Mono',monospace; margin-bottom:8px;">
+                        🐍 VIPER Pro</div>
+                    <div style="font-size:13px; color:#aaa; line-height:1.6; margin-bottom:20px;">Scans browser cookies
+                        across all tabs and clears tracker localStorage from your active tab. Fast, lightweight, works
+                        right now without closing your browser.</div>
+                    <ul style="list-style:none; margin-bottom:24px;">
+                        <li
+                            style="font-size:12px; color:#aaa; padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.05); display:flex; gap:8px;">
+                            <span style="color:#22c55e;">✓</span> 71+ tracker cookie signatures</li>
+                        <li
+                            style="font-size:12px; color:#aaa; padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.05); display:flex; gap:8px;">
+                            <span style="color:#22c55e;">✓</span> Active-tab localStorage wipe</li>
+                        <li
+                            style="font-size:12px; color:#aaa; padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.05); display:flex; gap:8px;">
+                            <span style="color:#22c55e;">✓</span> Crypto PoW + session replay detection</li>
+                        <li style="font-size:12px; color:#aaa; padding:6px 0; display:flex; gap:8px;"><span
+                                style="color:#22c55e;">✓</span> One-click burn + auto-rescan</li>
+                    </ul>
+                    <div
+                        style="font-family:'JetBrains Mono',monospace; font-size:18px; font-weight:800; color:#fff; margin-bottom:4px;">
+                        $4.99<span style="font-size:12px; color:#666;">/mo</span></div>
+                    <a href="/products/vnrviper/"
+                        style="display:block; text-align:center; font-family:'JetBrains Mono',monospace; font-size:12px; font-weight:700;
+                        color:#000; background:#22c55e; padding:11px; border-radius:6px; text-decoration:none; margin-top:12px;"
+                        onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">
+                        GET VIPER PRO
+                    </a>
+                </div>
+
+                <!-- ULTRA VIPER card -->
+                <div
+                    style="background:rgba(10,10,10,0.8); border:2px solid rgba(34,197,94,0.4); border-radius:12px; padding:28px; position:relative; box-shadow:0 0 40px rgba(34,197,94,0.08);">
+                    <div
+                        style="position:absolute; top:-12px; left:50%; transform:translateX(-50%); font-family:'JetBrains Mono',monospace; font-size:10px; font-weight:700; background:#22c55e; color:#000; padding:3px 14px; border-radius:20px; white-space:nowrap; letter-spacing:0.1em;">
+                        FOR SUNO USERS</div>
+                    <div
+                        style="font-family:'JetBrains Mono',monospace; font-size:10px; color:#22c55e; letter-spacing:0.15em; margin-bottom:12px;">
+                        WINDOWS APP — OS LEVEL</div>
+                    <div
+                        style="font-size:22px; font-weight:800; color:#fff; font-family:'JetBrains Mono',monospace; margin-bottom:8px;">
+                        🐍 ULTRA VIPER</div>
+                    <div style="font-size:13px; color:#aaa; line-height:1.6; margin-bottom:20px;">Goes directly into
+                        your browser's SQLite databases and LevelDB stores. Purges tracker residue the extension can't
+                        reach — including the incognito bypass contamination documented in this report.</div>
+                    <ul style="list-style:none; margin-bottom:24px;">
+                        <li
+                            style="font-size:12px; color:#aaa; padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.05); display:flex; gap:8px;">
+                            <span style="color:#22c55e;">✓</span> SQLite cookie database purge</li>
+                        <li
+                            style="font-size:12px; color:#aaa; padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.05); display:flex; gap:8px;">
+                            <span style="color:#22c55e;">✓</span> LevelDB localStorage wipe (all profiles)</li>
+                        <li
+                            style="font-size:12px; color:#aaa; padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.05); display:flex; gap:8px;">
+                            <span style="color:#22c55e;">✓</span> Incognito bypass contamination removal</li>
+                        <li
+                            style="font-size:12px; color:#aaa; padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.05); display:flex; gap:8px;">
+                            <span style="color:#22c55e;">✓</span> Chrome · Brave · Edge · Comet</li>
+                        <li style="font-size:12px; color:#aaa; padding:6px 0; display:flex; gap:8px;"><span
+                                style="color:#22c55e;">✓</span> DNS flush + full forensic report</li>
+                    </ul>
+                    <div
+                        style="font-family:'JetBrains Mono',monospace; font-size:18px; font-weight:800; color:#fff; margin-bottom:4px;">
+                        $9.99<span style="font-size:12px; color:#666;">/mo</span></div>
+                    <div
+                        style="font-size:11px; color:#22c55e; font-family:'JetBrains Mono',monospace; margin-bottom:12px;">
+                        3-day free trial — cancel anytime</div>
+                    <a href="/products/ultra-viper/" style="display:block; text-align:center; font-family:'JetBrains Mono',monospace; font-size:12px; font-weight:700;
+                        color:#000; background:linear-gradient(135deg,#22c55e,#16a34a); padding:11px; border-radius:6px; text-decoration:none;
+                        box-shadow:0 0 20px rgba(34,197,94,0.3);"
+                        onmouseover="this.style.boxShadow='0 0 40px rgba(34,197,94,0.5)'"
+                        onmouseout="this.style.boxShadow='0 0 20px rgba(34,197,94,0.3)'">
+                        START FREE TRIAL — 3 DAYS FREE
+                    </a>
+                </div>
+            </div>
+
+            <p
+                style="font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--text-sub); margin-top:20px; text-align:center;">
+                Free VIPER scanner available · Ultra Viper requires Windows
             </p>
         </section>
 
