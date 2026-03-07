@@ -16,6 +16,12 @@ export default async function handler(req, res) {
         return res.status(400).json({ valid: false, error: 'No license key provided.' });
     }
 
+    // Creator bypass — unlimited dev access
+    const DEV_KEY = 'VNR-OVERMIND-DEV-2026';
+    if (license_key.trim().toUpperCase() === DEV_KEY) {
+        return res.status(200).json({ valid: true, name: 'VNR Creator', email: 'admin@vossneuralresearch.com' });
+    }
+
     try {
         const params = new URLSearchParams({
             product_permalink: 'overmindfull',
