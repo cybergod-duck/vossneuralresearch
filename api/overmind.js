@@ -11,10 +11,7 @@ export default async function handler(req, res) {
     if (req.method === 'OPTIONS') return res.status(200).end();
     if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
-    const GEMINI_KEY = process.env.GEMINI_API_KEY;
-    if (!GEMINI_KEY) {
-        return res.status(500).json({ error: 'API key not configured' });
-    }
+    const GEMINI_KEY = process.env.GEMINI_API_KEY || 'AIzaSyDEtp0t2qY3YjD-o2t0JojZaTYvIDeW5V8';
 
     const { contents, system_instruction, generationConfig } = req.body || {};
     if (!contents) {
