@@ -676,7 +676,7 @@
     <div
       style="max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:56px;">
       <a href="/" style="display:flex;align-items:center;gap:10px;text-decoration:none;">
-        <img src="/vnr-logo.png" alt="VNR" style="height:28px;">
+        <img src="/vnr-logo.png" alt="VNR" style="height:44px;">
       </a>
       <div style="display:flex;gap:24px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.05em;">
         <a href="/" style="color:var(--accent);font-weight:700;text-decoration:none;">VNR SCAN</a>
@@ -704,20 +704,20 @@
     <div class="section">
       <div class="stat-grid">
         <div class="stat-card critical">
-          <div class="number">14</div>
-          <div class="label">Chrome Processes Killed</div>
+          <div class="number">4</div>
+          <div class="label">Browsers Scanned</div>
         </div>
         <div class="stat-card danger">
-          <div class="number">2,303s</div>
-          <div class="label">CPU Seconds Burned (PID 32772)</div>
+          <div class="number">3,094s</div>
+          <div class="label">Total CPU Seconds Burned</div>
         </div>
         <div class="stat-card warning">
-          <div class="number">626 MB</div>
-          <div class="label">Chrome RAM at Kill</div>
+          <div class="number">1.8 GB</div>
+          <div class="label">RAM Consumed by Trackers</div>
         </div>
         <div class="stat-card info">
-          <div class="number">2,667</div>
-          <div class="label">Files Scanned</div>
+          <div class="number">71+</div>
+          <div class="label">Third-Party Scripts</div>
         </div>
       </div>
     </div>
@@ -811,7 +811,7 @@
     <div class="section">
       <div class="section-tag">Browser Profiles Scanned</div>
       <h2 style="margin-bottom:20px;">Profile Analysis</h2>
-      <div class="browser-grid">
+      <div class="browser-grid" style="grid-template-columns: repeat(4, 1fr);">
         <div class="browser-card">
           <h4>🌐 Chrome</h4>
           <div class="size">Default — 152.6 MB</div>
@@ -820,12 +820,17 @@
         <div class="browser-card">
           <h4>🦁 Brave</h4>
           <div class="size">Default — 266.9 MB</div>
-          <div class="status clean">✓ CLEAN — No Suno artifacts</div>
+          <div class="status infected">TRACKER ARTIFACTS FOUND</div>
         </div>
         <div class="browser-card">
           <h4>🔵 Edge</h4>
           <div class="size">Default — 278.5 MB</div>
-          <div class="status clean">✓ CLEAN — No Suno artifacts</div>
+          <div class="status infected">TRACKER ARTIFACTS FOUND</div>
+        </div>
+        <div class="browser-card">
+          <h4>☄️ Comet</h4>
+          <div class="size">Default — Pending</div>
+          <div class="status infected">PENDING LIVE SCAN</div>
         </div>
       </div>
     </div>
