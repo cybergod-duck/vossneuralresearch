@@ -675,7 +675,7 @@
     <div
       style="max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:56px;">
       <a href="/" style="display:flex;align-items:center;gap:10px;text-decoration:none;">
-        <img src="/vnr-logo.png" alt="VNR" style="height:44px;">
+        <img src="/vnr-logo.png" alt="VNR" style="height:36px;width:auto;">
       </a>
       <div style="display:flex;gap:24px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.05em;">
         <a href="/" style="color:var(--accent);font-weight:700;text-decoration:none;">VNR SCAN</a>
@@ -689,30 +689,85 @@
   </nav>
 
   <!-- SECTION NAV -->
-  <div id="scan-nav"
-    style="position:fixed;left:16px;top:50%;transform:translateY(-50%);z-index:999;display:flex;flex-direction:column;gap:6px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.04em;">
-    <a href="#scan-overview" class="snav" data-color="var(--cyan)"
-      style="color:var(--text-sub);text-decoration:none;padding:6px 10px;border-left:2px solid transparent;transition:all 0.2s;">Overview</a>
-    <a href="#scan-gpu" class="snav" data-color="var(--red)"
-      style="color:var(--text-sub);text-decoration:none;padding:6px 10px;border-left:2px solid transparent;transition:all 0.2s;">GPU
-      Abuse</a>
-    <a href="#scan-browsers" class="snav" data-color="var(--orange)"
-      style="color:var(--text-sub);text-decoration:none;padding:6px 10px;border-left:2px solid transparent;transition:all 0.2s;">Browsers</a>
-    <a href="#scan-files" class="snav" data-color="#eab308"
-      style="color:var(--text-sub);text-decoration:none;padding:6px 10px;border-left:2px solid transparent;transition:all 0.2s;">Files</a>
-    <a href="#scan-hp" class="snav" data-color="var(--green)"
-      style="color:var(--text-sub);text-decoration:none;padding:6px 10px;border-left:2px solid transparent;transition:all 0.2s;">HP
-      Extension</a>
-    <a href="#cleanup-section" class="snav" data-color="var(--green)"
-      style="color:var(--text-sub);text-decoration:none;padding:6px 10px;border-left:2px solid transparent;transition:all 0.2s;">Cleanup</a>
-    <a href="#scan-incidents" class="snav" data-color="var(--red)"
-      style="color:var(--text-sub);text-decoration:none;padding:6px 10px;border-left:2px solid transparent;transition:all 0.2s;">Incidents</a>
-    <a href="#fortress-deployment" class="snav" data-color="var(--cyan)"
-      style="color:var(--text-sub);text-decoration:none;padding:6px 10px;border-left:2px solid transparent;transition:all 0.2s;">LOCKER</a>
-    <a href="#scan-technical" class="snav" data-color="var(--purple)"
-      style="color:var(--text-sub);text-decoration:none;padding:6px 10px;border-left:2px solid transparent;transition:all 0.2s;">Technical</a>
-    <a href="#scan-actions" class="snav" data-color="var(--green)"
-      style="color:var(--text-sub);text-decoration:none;padding:6px 10px;border-left:2px solid transparent;transition:all 0.2s;">Actions</a>
+  <style>
+    #scan-nav {
+      position: fixed;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    #scan-nav .snav {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text-sub);
+      text-decoration: none;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      transition: all 0.25s ease;
+      background: transparent;
+      border-left: 3px solid transparent;
+    }
+
+    #scan-nav .snav:hover {
+      background: rgba(255, 255, 255, 0.04);
+      color: #fff;
+    }
+
+    #scan-nav .snav.active {
+      background: rgba(255, 255, 255, 0.06);
+      border-left-color: var(--nav-color);
+      color: #fff;
+    }
+
+    #scan-nav .snav .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      transition: box-shadow 0.3s;
+    }
+
+    #scan-nav .snav.active .dot {
+      box-shadow: 0 0 8px 2px var(--nav-color);
+    }
+
+    @media(max-width:1200px) {
+      #scan-nav {
+        display: none !important;
+      }
+    }
+  </style>
+  <div id="scan-nav">
+    <a href="#scan-overview" class="snav" data-color="#40c0ff" style="--nav-color:#40c0ff;">
+      <span class="dot" style="background:#40c0ff;"></span>Overview</a>
+    <a href="#scan-gpu" class="snav" data-color="#ef4444" style="--nav-color:#ef4444;">
+      <span class="dot" style="background:#ef4444;"></span>GPU Abuse</a>
+    <a href="#scan-browsers" class="snav" data-color="#f97316" style="--nav-color:#f97316;">
+      <span class="dot" style="background:#f97316;"></span>Browsers</a>
+    <a href="#scan-files" class="snav" data-color="#eab308" style="--nav-color:#eab308;">
+      <span class="dot" style="background:#eab308;"></span>Files</a>
+    <a href="#scan-hp" class="snav" data-color="#22c55e" style="--nav-color:#22c55e;">
+      <span class="dot" style="background:#22c55e;"></span>HP Extension</a>
+    <a href="#cleanup-section" class="snav" data-color="#22c55e" style="--nav-color:#22c55e;">
+      <span class="dot" style="background:#22c55e;"></span>Cleanup</a>
+    <a href="#scan-incidents" class="snav" data-color="#ef4444" style="--nav-color:#ef4444;">
+      <span class="dot" style="background:#ef4444;"></span>Incidents</a>
+    <a href="#fortress-deployment" class="snav" data-color="#40c0ff" style="--nav-color:#40c0ff;">
+      <span class="dot" style="background:#40c0ff;"></span>LOCKER</a>
+    <a href="#scan-technical" class="snav" data-color="#a855f7" style="--nav-color:#a855f7;">
+      <span class="dot" style="background:#a855f7;"></span>Technical</a>
+    <a href="#scan-actions" class="snav" data-color="#22c55e" style="--nav-color:#22c55e;">
+      <span class="dot" style="background:#22c55e;"></span>Actions</a>
   </div>
 
   <div class="container" style="padding-top:72px;">
