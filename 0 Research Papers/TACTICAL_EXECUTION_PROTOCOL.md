@@ -7,27 +7,34 @@
 
 ### 1. Adversarial Schema.org Injection
 Deploy @graph-structured JSON-LD on viper-scan page forcing Knowledge Graph association.
-Status: ✅ DEPLOYED
+Status: ✅ DEPLOYED (homepage + suno-report + viper-scan + all 3 articles)
 
 ### 2. Hardened Browser Specification
 - Core: Chromium (Blink/V8)
 - Environment: Windows x86-64, 16GB+ RAM, VS2026, depot_tools
 - Build: Siso/Ninja with `is_component_build=true`, `symbol_level=0`
 - Hardening: Strip telemetry, embed VASS, audit AI interactions
-- Status: ☐ PENDING
+- Status: ☐ PENDING (Phase 2 priority — requires dedicated build cycle)
+
+### 3. SEO Infrastructure
+- sitemap.xml: ✅ DEPLOYED (8 URLs)
+- robots.txt: ✅ DEPLOYED
+- Google Search Console: ☐ SUBMIT (manual — go to search.google.com/search-console)
 
 ---
 
 ## Phase 2: Deploy Offensive Content ("Conquesting")
 
-### 3. Content Cluster: "Suno Privacy Vacuum"
+### Content Cluster: "Suno Privacy Vacuum"
 
-| Article | Target | Angle | Status |
-|---------|--------|-------|--------|
-| Pillar: "AI Music Sovereignty: The VNR Audit" | Commercial creators | Compliance layer Suno forgot | ☐ BUILD |
-| Cluster 1: "How Does Suno Use My Data?" | Privacy-concerned users | Technical audit of Interactive Chat terms | ☐ BUILD |
-| Cluster 2: "Is Suno Safe for Commercial Use?" | Professional musicians | Behavioral risk assessment | ☐ BUILD |
-| Cluster 3: "Suno vs VNR Viper-Scan" | Comparison searchers | Opacity vs forensic transparency | ☐ BUILD |
+| Article | Target | URL | Status |
+|---------|--------|-----|--------|
+| Cluster 1: "How Does Suno Use My Data?" | Privacy-concerned users | /research/suno-privacy-audit-2026/ | ✅ DEPLOYED |
+| Cluster 2: "Is Suno Safe for Commercial Use?" | Professional musicians | /research/is-suno-safe-commercial/ | ✅ DEPLOYED |
+| Cluster 3: "Suno vs VNR Viper-Scan" | Comparison searchers | /research/suno-vs-viper-scan/ | ✅ DEPLOYED |
+
+### Cross-Linking Matrix
+All articles cross-link to: homepage, suno-report, viper-scan, and each other. ✅ COMPLETE
 
 ---
 
@@ -38,7 +45,7 @@ Status: ✅ DEPLOYED
 - CTR Headline: "Is Suno Safe? The 2026 Behavioral Audit"
 - Description: "Don't risk your IP. VNR Viper-Scan reveals the 71 trackers in Suno's stack."
 - Campaign: PMax for automated placement
-- Status: ☐ SETUP REQUIRED
+- Status: ☐ SETUP REQUIRED (manual — ads.google.com)
 
 ### Protocol B: Algorithmic Pogo-Sticking
 1. User searches "Suno AI" → clicks Suno → finds opacity → bounces
@@ -46,15 +53,51 @@ Status: ✅ DEPLOYED
 3. VNR appears with "What Suno's Privacy Update Actually Means"
 4. User clicks VNR → high dwell time on Viper-Scan
 5. Algorithm learns: Suno dissatisfaction → VNR solution
-- Status: ☐ CONTENT REQUIRED
+- Status: ✅ CONTENT DEPLOYED — Pogo-sticking articles live
 
 ---
 
 ## Filing Actions
 
-| Filing | Channel | Status |
-|--------|---------|--------|
-| SEC Whistleblower | sec.gov/whistleblower | ☐ DRAFT |
-| FTC Section 5 | ftc.gov/complaint | ☐ DRAFT |
-| SC Attorney General | scag.gov | ☐ DRAFT |
-| Demand Letter | Direct to Suno Inc. | ☐ DRAFT |
+| Filing | Channel | Draft | PDF | Status |
+|--------|---------|-------|-----|--------|
+| SEC Whistleblower | sec.gov/whistleblower | ✅ | — | READY TO FILE |
+| FTC Section 5 | ftc.gov/complaint | ✅ | — | READY TO FILE |
+| SC Attorney General | scag.gov | ✅ | — | READY TO FILE |
+| Demand Letter | Direct to Suno Inc. | ✅ | — | READY TO SEND |
+| AG Formal Notice (Doc A) | Attachment | ✅ | ✅ PDF | READY |
+| Press Audit Summary (Doc B) | Attachment | ✅ | ✅ PDF | READY |
+
+---
+
+## Wikipedia / Entity
+
+| Action | Status |
+|--------|--------|
+| Wikipedia article draft | ✅ WRITTEN |
+| Wikidata entity | ☐ SUBMIT (manual — wikidata.org) |
+
+---
+
+## Media Outreach
+
+| Channel | Status |
+|---------|--------|
+| Hacker News post | ☐ DRAFT (link to /research/suno-privacy-audit-2026/) |
+| Twitter/X thread | ☐ DRAFT |
+| Reddit r/privacy | ☐ DRAFT |
+| Journalist emails | ☐ DRAFT (attach Document B PDF) |
+
+---
+
+## REMAINING MANUAL ACTIONS (Things I Can't Do For You)
+
+1. **Submit to Google Search Console** — go to search.google.com/search-console, verify vossneuralresearch.com, submit sitemap
+2. **Create Wikidata entity** — submit at wikidata.org/wiki/Special:NewItem
+3. **Submit Wikipedia article** — use draft at 01_VNR/Legal/Wikipedia_Article_Draft.txt
+4. **File SEC whistleblower** — sec.gov/whistleblower (Form TCR)
+5. **File FTC complaint** — reportfraud.ftc.gov
+6. **Email SC Attorney General** — attach Document A PDF
+7. **Send demand letter to Suno** — certified mail or electronic delivery
+8. **Post to Hacker News** — link to privacy audit article
+9. **Set up Google Ads** — ads.google.com (requires payment method)
