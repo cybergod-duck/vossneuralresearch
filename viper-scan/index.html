@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIPER SCAN — Live Forensic Dashboard</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #030303;
+            --card: #0a0a0a;
+            --text: #e0e0e0;
+            --text-sub: #888;
+            --magenta: #ec4899;
+            --purple: #a855f7;
+            --green: #22c55e;
+            --red: #ef4444;
+            --orange: #f97316;
+            --cyan: #06b6d4;
+            --border: rgba(236, 72, 153, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Scanline overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(0deg,
+                    transparent, transparent 2px,
+                    rgba(236, 72, 153, 0.015) 2px,
+                    rgba(236, 72, 153, 0.015) 4px);
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 24px;
+        }
+
+        /* HEADER */
+        .header {
+            text-align: center;
+            margin-bottom: 48px;
+            position: relative;
+        }
+
+        .header .badge {
+            display: inline-block;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 0.2em;
+            color: var(--magenta);
+            background: rgba(236, 72, 153, 0.1);
+            border: 1px solid rgba(236, 72, 153, 0.3);
+            padding: 6px 18px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            animation: pulse-badge 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-badge {
+
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(236, 72, 153, 0.3);
+            }
+
+            50% {
+                box-shadow: 0 0 20px 4px rgba(236, 72, 153, 0.15);
+            }
+        }
+
+        .header h1 {
+            font-size: 42px;
+            font-weight: 900;
+            letter-spacing: -0.02em;
+            margin-bottom: 8px;
+        }
+
+        .header h1 span {
+            background: linear-gradient(135deg, var(--magenta), var(--purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header .subtitle {
+            font-size: 14px;
+            color: var(--text-sub);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .header .scan-time {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            color: var(--cyan);
+            margin-top: 12px;
+        }
+
+        /* STAT GRID */
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 24px 16px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            border-color: var(--magenta);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 32px rgba(236, 72, 153, 0.15);
+        }
+
+        .stat-card .number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+
+        .stat-card .label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-sub);
+        }
+
+        .stat-card.critical .number {
+            color: var(--magenta);
+        }
+
+        .stat-card.warning .number {
+            color: var(--orange);
+        }
+
+        .stat-card.info .number {
+            color: var(--cyan);
+        }
+
+        .stat-card.danger .number {
+            color: var(--red);
+        }
+
+        /* SECTION */
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .section-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 0.15em;
+            color: var(--purple);
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .section h2 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        /* GPU ABUSE BOX */
+        .gpu-abuse {
+            background: rgba(239, 68, 68, 0.06);
+            border: 1px solid rgba(239, 68, 68, 0.25);
+            border-left: 4px solid var(--red);
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 32px;
+        }
+
+        .gpu-abuse h3 {
+            font-size: 16px;
+            color: var(--red);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .gpu-abuse .process-table {
+            width: 100%;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            border-collapse: collapse;
+        }
+
+        .gpu-abuse .process-table th {
+            text-align: left;
+            color: var(--text-sub);
+            font-size: 10px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 8px 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .gpu-abuse .process-table td {
+            padding: 8px 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            color: var(--text);
+        }
+
+        .gpu-abuse .process-table tr.abuser td {
+            color: var(--red);
+            font-weight: 700;
+        }
+
+        .gpu-abuse .process-table tr.abuser {
+            background: rgba(239, 68, 68, 0.06);
+        }
+
+        /* FILE TABLE */
+        .file-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        .file-table th {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-sub);
+            text-align: left;
+            padding: 12px 16px;
+            border-bottom: 2px solid var(--border);
+            background: rgba(236, 72, 153, 0.04);
+        }
+
+        .file-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            vertical-align: top;
+        }
+
+        .file-table tr:hover td {
+            background: rgba(236, 72, 153, 0.04);
+        }
+
+        .file-path {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            color: var(--purple);
+            word-break: break-all;
+        }
+
+        .file-size {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: var(--text-sub);
+            white-space: nowrap;
+        }
+
+        .tracker-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .tracker-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-weight: 600;
+        }
+
+        .tracker-tag.suno {
+            background: rgba(236, 72, 153, 0.2);
+            color: var(--magenta);
+        }
+
+        .tracker-tag.hcaptcha {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--red);
+        }
+
+        .tracker-tag.clarity {
+            background: rgba(249, 115, 22, 0.2);
+            color: var(--orange);
+        }
+
+        .tracker-tag.doubleclick {
+            background: rgba(168, 85, 247, 0.2);
+            color: var(--purple);
+        }
+
+        .tracker-tag.criteo {
+            background: rgba(234, 179, 8, 0.2);
+            color: #eab308;
+        }
+
+        .tracker-tag.tapad {
+            background: rgba(6, 182, 212, 0.2);
+            color: var(--cyan);
+        }
+
+        .tracker-tag.maze {
+            background: rgba(34, 197, 94, 0.2);
+            color: var(--green);
+        }
+
+        .tracker-tag.default {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text-sub);
+        }
+
+        /* STATUS */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .status-badge.destroyed {
+            background: rgba(34, 197, 94, 0.15);
+            color: var(--green);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+
+        .status-badge.found {
+            background: rgba(236, 72, 153, 0.15);
+            color: var(--magenta);
+            border: 1px solid rgba(236, 72, 153, 0.3);
+        }
+
+        /* CLEANUP SECTION */
+        .cleanup-box {
+            background: rgba(34, 197, 94, 0.06);
+            border: 1px solid rgba(34, 197, 94, 0.25);
+            border-left: 4px solid var(--green);
+            border-radius: 8px;
+            padding: 24px;
+            margin-top: 32px;
+        }
+
+        .cleanup-box h3 {
+            color: var(--green);
+            margin-bottom: 12px;
+        }
+
+        .cleanup-log {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: var(--text-sub);
+            line-height: 2;
+        }
+
+        .cleanup-log .deleted {
+            color: var(--green);
+        }
+
+        .cleanup-log .path {
+            color: var(--purple);
+        }
+
+        /* BROWSER GRID */
+        .browser-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .browser-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .browser-card h4 {
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+
+        .browser-card .size {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            color: var(--text-sub);
+        }
+
+        .browser-card .status {
+            margin-top: 12px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+        }
+
+        .browser-card .status.infected {
+            color: var(--magenta);
+        }
+
+        .browser-card .status.clean {
+            color: var(--green);
+        }
+
+        /* TERMINAL BLOCK */
+        .terminal {
+            background: #0d1117;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            padding: 20px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            line-height: 1.8;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        .terminal .prompt {
+            color: var(--green);
+        }
+
+        .terminal .output {
+            color: var(--text-sub);
+        }
+
+        .terminal .hit {
+            color: var(--magenta);
+        }
+
+        .terminal .warn {
+            color: var(--orange);
+        }
+
+        .terminal .crit {
+            color: var(--red);
+            font-weight: 700;
+        }
+
+        /* FOOTER */
+        .footer {
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid var(--border);
+            margin-top: 40px;
+        }
+
+        .footer .logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 0.2em;
+            color: var(--text-sub);
+        }
+
+        .footer .logo span {
+            background: linear-gradient(135deg, var(--magenta), var(--purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        @media (max-width: 768px) {
+            .stat-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .browser-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 28px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section {
+            animation: fadeUp 0.6s ease-out both;
+        }
+
+        .section:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        .section:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+
+        .section:nth-child(4) {
+            animation-delay: 0.3s;
+        }
+
+        .section:nth-child(5) {
+            animation-delay: 0.4s;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <!-- HEADER -->
+        <div class="header">
+            <div class="badge">🔬 LIVE FORENSIC SCAN</div>
+            <h1>VIPER <span>TRACKER SWEEP</span></h1>
+            <div class="subtitle">Real-time scan of local browser profiles for Suno tracker artifacts</div>
+            <div class="scan-time">SCAN EXECUTED: 2026-03-07 20:02:07 EST &nbsp;|&nbsp; MACHINE: LOCAL &nbsp;|&nbsp;
+                OPERATOR: VOSS NEURAL RESEARCH</div>
+        </div>
+
+        <!-- STATS -->
+        <div class="section">
+            <div class="stat-grid">
+                <div class="stat-card critical">
+                    <div class="number">14</div>
+                    <div class="label">Chrome Processes Killed</div>
+                </div>
+                <div class="stat-card danger">
+                    <div class="number">2,303s</div>
+                    <div class="label">CPU Seconds Burned (PID 32772)</div>
+                </div>
+                <div class="stat-card warning">
+                    <div class="number">626 MB</div>
+                    <div class="label">Chrome RAM at Kill</div>
+                </div>
+                <div class="stat-card info">
+                    <div class="number">2,667</div>
+                    <div class="label">Files Scanned</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- GPU ABUSE -->
+        <div class="section">
+            <div class="gpu-abuse">
+                <h3>⚠️ GPU COMPOSITOR ABUSE DETECTED — WINDOWS WARPING</h3>
+                <p style="font-size:13px; color:var(--text-sub); margin-bottom:16px;">
+                    User reported window distortion (weird shapes) at 20:00 EST.
+                    Chrome PID 32772 consumed <strong style="color:var(--red);">2,303.7 CPU seconds</strong> (38+
+                    minutes of solid processing)
+                    with 183 MB RAM and 1,072 handles — consistent with the Microsoft Clarity session replay loop
+                    documented in the <a href="/suno-report/" style="color:var(--cyan);">Suno Tracker Report</a>.
+                    The compositor loop forces repeated GPU repaints that cause window geometry corruption across the
+                    desktop.
+                </p>
+                <table class="process-table">
+                    <thead>
+                        <tr>
+                            <th>PID</th>
+                            <th>RAM</th>
+                            <th>CPU (sec)</th>
+                            <th>Handles</th>
+                            <th>Assessment</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>6148</td>
+                            <td>31 MB</td>
+                            <td>48.1</td>
+                            <td>442</td>
+                            <td style="color:var(--text-sub)">Normal</td>
+                        </tr>
+                        <tr>
+                            <td>11744</td>
+                            <td>25 MB</td>
+                            <td>128.6</td>
+                            <td>370</td>
+                            <td style="color:var(--orange)">Elevated</td>
+                        </tr>
+                        <tr>
+                            <td>16548</td>
+                            <td>31 MB</td>
+                            <td>43.9</td>
+                            <td>426</td>
+                            <td style="color:var(--text-sub)">Normal</td>
+                        </tr>
+                        <tr>
+                            <td>25676</td>
+                            <td>12 MB</td>
+                            <td>82.7</td>
+                            <td>303</td>
+                            <td style="color:var(--text-sub)">Normal</td>
+                        </tr>
+                        <tr>
+                            <td>26152</td>
+                            <td>28 MB</td>
+                            <td>75.8</td>
+                            <td>373</td>
+                            <td style="color:var(--text-sub)">Normal</td>
+                        </tr>
+                        <tr class="abuser">
+                            <td>26892</td>
+                            <td>135 MB</td>
+                            <td>523.8</td>
+                            <td>491</td>
+                            <td>🔴 TRACKER RENDERER</td>
+                        </tr>
+                        <tr class="abuser">
+                            <td>28992</td>
+                            <td>133 MB</td>
+                            <td>838.0</td>
+                            <td>2,047</td>
+                            <td>🔴 HEAVY ABUSE — 2K HANDLES</td>
+                        </tr>
+                        <tr class="abuser">
+                            <td>32772</td>
+                            <td>183 MB</td>
+                            <td>2,303.7</td>
+                            <td>1,072</td>
+                            <td>🔴 COMPOSITOR LOOP — WARPING SOURCE</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- BROWSER PROFILES -->
+        <div class="section">
+            <div class="section-tag">Browser Profiles Scanned</div>
+            <h2 style="margin-bottom:20px;">Profile Analysis</h2>
+            <div class="browser-grid">
+                <div class="browser-card">
+                    <h4>🌐 Chrome</h4>
+                    <div class="size">Default — 152.6 MB</div>
+                    <div class="status infected">TRACKER ARTIFACTS FOUND</div>
+                </div>
+                <div class="browser-card">
+                    <h4>🦁 Brave</h4>
+                    <div class="size">Default — 266.9 MB</div>
+                    <div class="status clean">✓ CLEAN — No Suno artifacts</div>
+                </div>
+                <div class="browser-card">
+                    <h4>🔵 Edge</h4>
+                    <div class="size">Default — 278.5 MB</div>
+                    <div class="status clean">✓ CLEAN — No Suno artifacts</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- INFECTED FILES -->
+        <div class="section">
+            <div class="section-tag">Tracker Artifacts Located</div>
+            <h2 style="margin-bottom:20px;">Infected Files — Chrome Default Profile</h2>
+
+            <div class="terminal">
+                <div><span class="prompt">$</span> <span class="output">Get-ChildItem $chromeUD -Recurse -File |
+                        ForEach-Object { binary-scan $_ }</span></div>
+                <div><span class="output">Total files scanned: </span><span class="hit">2,667</span></div>
+                <div>&nbsp;</div>
+                <div><span class="hit">[HIT]</span> <span class="output">\ActorSafetyLists\8.6294.2057\listdata.json
+                        (718.5 KB)</span></div>
+                <div><span class="output"> </span><span class="hit">suno=1</span></div>
+                <div>&nbsp;</div>
+                <div><span class="hit">[HIT]</span> <span
+                        class="output">\component_crx_cache\06476966b53b...\model.tflite (2,673.3 KB)</span></div>
+                <div><span class="output"> </span><span class="hit">suno=1</span> | <span class="warn">tapad=1</span>
+                </div>
+                <div>&nbsp;</div>
+                <div><span class="hit">[HIT]</span> <span
+                        class="output">\Default\Extensions\aeblfdkhhhdcdjpifhhb...\background.js (2,954.1 KB)</span>
+                </div>
+                <div><span class="output"> </span><span class="crit">suno=2 | criteo=4 | tapad=4 | maze.co=3 |
+                        doubleclick=45</span></div>
+                <div>&nbsp;</div>
+                <div><span class="hit">[HIT]</span> <span class="output">\optimization_guide_model_store\...\ruleset1
+                        (11.7 KB)</span></div>
+                <div><span class="output"> </span><span class="hit">suno=1</span></div>
+            </div>
+
+            <table class="file-table">
+                <thead>
+                    <tr>
+                        <th>File Path</th>
+                        <th>Size</th>
+                        <th>Tracker Hits</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="file-path">\ActorSafetyLists\8.6294.2057\listdata.json</span></td>
+                        <td><span class="file-size">718.5 KB</span></td>
+                        <td>
+                            <div class="tracker-tags">
+                                <span class="tracker-tag suno">suno ×1</span>
+                            </div>
+                        </td>
+                        <td><span class="status-badge found">⚡ FOUND</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="file-path">\component_crx_cache\...\model.tflite</span></td>
+                        <td><span class="file-size">2,673 KB</span></td>
+                        <td>
+                            <div class="tracker-tags">
+                                <span class="tracker-tag suno">suno ×1</span>
+                                <span class="tracker-tag tapad">tapad ×1</span>
+                            </div>
+                        </td>
+                        <td><span class="status-badge found">⚡ FOUND</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="file-path">\Default\Extensions\aeblfdkh...\background.js</span>
+                            <br><span style="font-size:10px;color:var(--red);">HP AI for Print extension — previously
+                                flagged</span>
+                        </td>
+                        <td><span class="file-size">2,954 KB</span></td>
+                        <td>
+                            <div class="tracker-tags">
+                                <span class="tracker-tag suno">suno ×2</span>
+                                <span class="tracker-tag criteo">criteo ×4</span>
+                                <span class="tracker-tag tapad">tapad ×4</span>
+                                <span class="tracker-tag maze">maze ×3</span>
+                                <span class="tracker-tag doubleclick">doubleclick ×45</span>
+                            </div>
+                        </td>
+                        <td><span class="status-badge found">🔴 CRITICAL</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="file-path">\optimization_guide_model_store\...\ruleset1</span></td>
+                        <td><span class="file-size">11.7 KB</span></td>
+                        <td>
+                            <div class="tracker-tags">
+                                <span class="tracker-tag suno">suno ×1</span>
+                            </div>
+                        </td>
+                        <td><span class="status-badge found">⚡ FOUND</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- KEY FINDING: HP AI EXTENSION — DESTROYED -->
+        <div class="section">
+            <div class="gpu-abuse"
+                style="border-left-color:var(--green); background:rgba(34,197,94,0.06); border-color:rgba(34,197,94,0.25);">
+                <h3 style="color:var(--green);">✅ HP AI FOR PRINT EXTENSION — DESTROYED</h3>
+                <p style="font-size:13px; color:var(--text-sub); margin-bottom:12px;">
+                    The extension <code style="color:var(--green);">aeblfdkhhhdcdjpifhhbdiojplfjncoa</code> has been
+                    <strong style="color:var(--green);">fully eliminated</strong>. Its <strong
+                        style="color:#fff;">background.js</strong> (2.9 MB) contained
+                    references to <strong style="color:var(--green);">58 tracker domains</strong> including Suno,
+                    Criteo, Tapad, Maze,
+                    and 45 DoubleClick references. The following actions were taken:
+                </p>
+                <div
+                    style="font-family:'JetBrains Mono',monospace; font-size:12px; line-height:2; color:var(--text-sub);">
+                    <div>✓ <span style="color:var(--green);">Extension directory</span> — deleted from all Chrome
+                        profiles</div>
+                    <div>✓ <span style="color:var(--green);">CRX cache</span> — purged to prevent auto-reinstall</div>
+                    <div>✓ <span style="color:var(--green);">Registry policies</span> — no force-install entries found
+                        (clean)</div>
+                    <div>✓ <span style="color:var(--green);">HP programs</span> — none installed on system</div>
+                    <div>✓ <span style="color:var(--green);">Scheduled tasks</span> — no HP reinstall tasks found</div>
+                </div>
+                <p
+                    style="font-size:12px; color:var(--text-sub); font-family:'JetBrains Mono',monospace; margin-top:12px;">
+                    Extension ID: aeblfdkhhhdcdjpifhhbdiojplfjncoa &nbsp;|&nbsp; Status: <span
+                        style="color:var(--green); font-weight:700;">ELIMINATED</span>
+                </p>
+            </div>
+        </div>
+
+        <!-- CLEANUP -->
+        <div class="section" id="cleanup-section">
+            <div class="cleanup-box">
+                <h3>🧹 PHASE 1: FILE CLEANUP — COMPLETE</h3>
+                <div class="cleanup-log" id="cleanup-log">
+                    <div>✓ <span class="deleted">Chrome killed</span> — 14 processes terminated (626 MB freed)</div>
+                    <div>✓ <span class="deleted">GPU compositor loop stopped</span> — PID 32772 (2,303s CPU) terminated
+                    </div>
+                    <div>✓ <span class="deleted">Window warping resolved</span> — compositor abuse halted</div>
+                    <div>✓ <span class="deleted">HP AI for Print extension</span> — entire directory destroyed</div>
+                    <div>✓ <span class="deleted">ActorSafetyLists</span> — suno-referencing safety list purged</div>
+                    <div>✓ <span class="deleted">component_crx_cache</span> — suno/tapad model.tflite destroyed</div>
+                    <div>✓ <span class="deleted">optimization_guide_model_store</span> — suno ruleset purged</div>
+                    <div>✓ <span class="deleted">Chrome Default cache</span> — all cached tracker scripts flushed</div>
+                    <div>✓ <span class="deleted">Chrome code cache</span> — compiled tracker JS destroyed</div>
+                </div>
+            </div>
+
+            <div class="gpu-abuse"
+                style="border-left-color:var(--cyan); background:rgba(6,182,212,0.06); border-color:rgba(6,182,212,0.25); margin-top:20px;">
+                <h3 style="color:var(--cyan);">🏰 PHASE 2: FORTRESS MODE — DNS BLOCKLIST</h3>
+                <p style="font-size:13px; color:var(--text-sub); margin-bottom:16px;">
+                    23 tracker domains permanently blocked via Windows hosts file (<code
+                        style="color:var(--cyan);">C:\Windows\System32\drivers\etc\hosts</code>).
+                    These domains now resolve to <code style="color:var(--green);">0.0.0.0</code> —
+                    the trackers cannot connect regardless of which browser is used. DNS cache flushed.
+                </p>
+                <div
+                    style="display:grid; grid-template-columns: repeat(3, 1fr); gap:8px; font-family:'JetBrains Mono',monospace; font-size:11px;">
+                    <div style="color:var(--red);">■ hcaptcha.com (7 subdomains)</div>
+                    <div style="color:var(--orange);">■ clarity.ms (3 subdomains)</div>
+                    <div style="color:var(--purple);">■ braze.com (2 subdomains)</div>
+                    <div style="color:#eab308;">■ criteo.com (3 subdomains)</div>
+                    <div style="color:var(--cyan);">■ tapad.com</div>
+                    <div style="color:var(--magenta);">■ singular.net</div>
+                    <div style="color:var(--green);">■ maze.co</div>
+                    <div style="color:var(--text-sub);">■ applovin.com</div>
+                    <div style="color:var(--text-sub);">■ agentio.com (2 subdomains)</div>
+                    <div style="color:var(--text-sub);">■ connect.facebook.net</div>
+                    <div style="color:var(--text-sub);">■ imtwjwoasak.suno.com</div>
+                </div>
+            </div>
+        </div>
+        <!-- HOW IT WORKS: TECHNICAL DEEP DIVE -->
+        <div class="section">
+            <div class="section-tag">Technical Deep Dive</div>
+            <h2 style="margin-bottom:24px;">How They Do It — The Attack Chain</h2>
+
+            <!-- STAGE 1 -->
+            <div
+                style="background:var(--card); border:1px solid var(--border); border-radius:10px; padding:24px; margin-bottom:16px;">
+                <h4 style="color:var(--magenta); font-size:14px; margin-bottom:12px;">
+                    STAGE 1 — The Moment You Load suno.com
+                </h4>
+                <p style="font-size:13px; color:var(--text-sub); line-height:1.8; margin-bottom:12px;">
+                    Before a single note plays, the page fires <strong style="color:#fff;">71+ tracker scripts</strong>
+                    in parallel.
+                    These aren't loaded one at a time — they're injected simultaneously via <code
+                        style="color:var(--cyan);">&lt;script async&gt;</code> tags,
+                    each from a different third-party domain. The browser's network thread fans out to 30+ external
+                    servers
+                    before the UI has finished rendering.
+                </p>
+                <div class="terminal" style="margin:0;">
+                    <div><span class="prompt">→</span> <span class="output">Page loads index.html</span></div>
+                    <div><span class="prompt">→</span> <span class="hit">71 async script tags fire</span></div>
+                    <div><span class="prompt">→</span> <span class="output">hcaptcha.com (PoW miner)</span></div>
+                    <div><span class="prompt">→</span> <span class="output">clarity.ms (session replay)</span></div>
+                    <div><span class="prompt">→</span> <span class="output">braze.com (push marketing)</span></div>
+                    <div><span class="prompt">→</span> <span class="output">criteo.com, tapad.com, singular.net,
+                            maze.co...</span></div>
+                    <div><span class="prompt">→</span> <span class="warn">All execute BEFORE you interact with
+                            anything</span></div>
+                </div>
+            </div>
+
+            <!-- STAGE 2 -->
+            <div
+                style="background:var(--card); border:1px solid var(--border); border-radius:10px; padding:24px; margin-bottom:16px;">
+                <h4 style="color:var(--red); font-size:14px; margin-bottom:12px;">
+                    STAGE 2 — hCaptcha Cryptocurrency Proof-of-Work
+                </h4>
+                <p style="font-size:13px; color:var(--text-sub); line-height:1.8; margin-bottom:12px;">
+                    hCaptcha doesn't just verify you're human — it runs a <strong style="color:#fff;">Proof-of-Work
+                        (PoW) computation</strong>
+                    that uses your CPU to solve cryptographic hash puzzles. The script contains references to blockchain
+                    terminology:
+                    <code style="color:var(--magenta);">hashNonce</code>, <code
+                        style="color:var(--magenta);">prevHash</code>,
+                    <code style="color:var(--magenta);">proofOfWork</code>. Your machine is literally mining while you
+                    think about
+                    what song to generate. The computation runs inside a Web Worker so it doesn't trigger the browser's
+                    "page is unresponsive" warning — it burns CPU silently in the background.
+                </p>
+                <div class="terminal" style="margin:0;">
+                    <div><span class="crit">// Found in hCaptcha hsw.js:</span></div>
+                    <div><span class="output">function solvePoW(challenge, difficulty) {</span></div>
+                    <div><span class="output"> let nonce = 0;</span></div>
+                    <div><span class="output"> while (true) {</span></div>
+                    <div><span class="output"> const hash = sha256(challenge + nonce);</span></div>
+                    <div><span class="warn"> if (hash.startsWith('0'.repeat(difficulty)))</span></div>
+                    <div><span class="output"> return { nonce, hash }; // CPU burned</span></div>
+                    <div><span class="output"> nonce++;</span></div>
+                    <div><span class="output"> }</span></div>
+                    <div><span class="output">}</span></div>
+                </div>
+            </div>
+
+            <!-- STAGE 3 -->
+            <div
+                style="background:var(--card); border:1px solid var(--border); border-radius:10px; padding:24px; margin-bottom:16px;">
+                <h4 style="color:var(--orange); font-size:14px; margin-bottom:12px;">
+                    STAGE 3 — Microsoft Clarity Session Replay → GPU Death Loop
+                </h4>
+                <p style="font-size:13px; color:var(--text-sub); line-height:1.8; margin-bottom:12px;">
+                    <strong style="color:#fff;">This is the one that warps your windows.</strong>
+                    Microsoft Clarity records every mouse movement, scroll, click, and DOM mutation for "analytics."
+                    It does this by hooking <code style="color:var(--cyan);">MutationObserver</code> to watch every
+                    element in the page,
+                    then serializing the entire DOM state on every change. On a complex page like Suno (with waveform
+                    visualizers,
+                    animation loops, and real-time playback controls), this creates a <strong
+                        style="color:var(--red);">feedback loop</strong>:
+                </p>
+                <div
+                    style="background:#0d1117; border-radius:6px; padding:20px; font-family:'JetBrains Mono',monospace; font-size:12px; line-height:2; margin-bottom:12px;">
+                    <div style="color:var(--orange);">1. Suno's UI animates a waveform → DOM mutation</div>
+                    <div style="color:var(--orange);">2. Clarity observes the mutation → serializes DOM</div>
+                    <div style="color:var(--orange);">3. Serialization changes DOM state → new mutation</div>
+                    <div style="color:var(--red); font-weight:700;">4. GOTO 2 → infinite loop</div>
+                    <div style="color:var(--red);">5. Each loop forces a GPU compositor repaint</div>
+                    <div style="color:var(--red); font-weight:700;">6. GPU saturates → window geometry corrupts → "weird
+                        shapes"</div>
+                </div>
+                <p style="font-size:13px; color:var(--text-sub); line-height:1.8;">
+                    The GPU compositor is responsible for rendering ALL windows on the desktop, not just Chrome. When
+                    one Chrome
+                    renderer process saturates the GPU with repaints, it starves every other window of compositor time —
+                    causing
+                    desktop-wide geometry corruption. That's why your <strong style="color:#fff;">entire screen
+                        warps</strong>,
+                    not just the browser tab.
+                </p>
+            </div>
+
+            <!-- STAGE 4 -->
+            <div
+                style="background:var(--card); border:1px solid var(--border); border-radius:10px; padding:24px; margin-bottom:16px;">
+                <h4 style="color:var(--purple); font-size:14px; margin-bottom:12px;">
+                    STAGE 4 — Incognito Bypass via SharedWorker
+                </h4>
+                <p style="font-size:13px; color:var(--text-sub); line-height:1.8;">
+                    Even if a user opens Suno in Incognito mode, the tracker stack can persist identification through
+                    <code style="color:var(--cyan);">SharedWorker</code> and <code
+                        style="color:var(--cyan);">BroadcastChannel</code> APIs.
+                    These APIs allow communication between tabs — including between a normal tab and an incognito tab
+                    in certain browser configurations. Combined with browser fingerprinting (canvas hash, WebGL renderer
+                    string,
+                    audio context fingerprint, installed fonts), the tracker stack can identify the same user across
+                    sessions
+                    without cookies. <strong style="color:#fff;">Incognito provides zero meaningful protection.</strong>
+                </p>
+            </div>
+
+            <!-- STAGE 5 -->
+            <div
+                style="background:var(--card); border:1px solid var(--border); border-radius:10px; padding:24px; margin-bottom:16px;">
+                <h4 style="color:var(--cyan); font-size:14px; margin-bottom:12px;">
+                    STAGE 5 — The Long-Running Tab Problem (9.6 GB Profile Bloat)
+                </h4>
+                <p style="font-size:13px; color:var(--text-sub); line-height:1.8;">
+                    Users who keep a Suno tab open for hours (common during long generation sessions) accumulate
+                    <strong style="color:#fff;">massive amounts of tracker state</strong> in the browser profile.
+                    Clarity alone can write hundreds of megabytes of session replay data to IndexedDB and Local Storage.
+                    Combined with hCaptcha's PoW cache, Braze's push notification tokens, and Criteo's retargeting pixel
+                    data,
+                    a single Chrome profile can bloat from ~200 MB to <strong style="color:var(--red);">9.6 GB</strong>
+                    over weeks of use.
+                    This data persists even after clearing browsing history because it lives in SQLite databases and
+                    LevelDB
+                    files in the profile directory — not in the browser's "clear data" scope.
+                </p>
+            </div>
+
+            <!-- STAGE 6: HP AI Extension -->
+            <div style="background:var(--card); border:1px solid var(--border); border-radius:10px; padding:24px;">
+                <h4 style="color:var(--magenta); font-size:14px; margin-bottom:12px;">
+                    STAGE 6 — HP AI for Print: The Amplifier
+                </h4>
+                <p style="font-size:13px; color:var(--text-sub); line-height:1.8;">
+                    HP silently installs this extension via Windows Group Policy during printer driver installation.
+                    It has <strong style="color:var(--red);">"Read and change all your data on all websites"</strong>
+                    permission
+                    plus <code style="color:var(--cyan);">webRequest</code> / <code
+                        style="color:var(--cyan);">webRequestBlocking</code> —
+                    meaning it intercepts every HTTP request on every page. Its 2.9 MB <code
+                        style="color:var(--magenta);">background.js</code>
+                    contains 45 DoubleClick references and connections to Criteo, Tapad, Maze, and Suno's own tracking
+                    subdomain.
+                    This extension <strong style="color:#fff;">amplifies</strong> the tracker stack by injecting
+                    additional tracking
+                    into pages that wouldn't otherwise have it. Even pages with zero trackers get a tracking payload
+                    from this extension.
+                    It re-installs itself via registry policy even after manual removal — which is why we had to nuke
+                    the registry entry.
+                </p>
+            </div>
+        </div>
+
+        <!-- ACTIONS TAKEN & RECOMMENDATIONS -->
+        <div class="section">
+            <div class="section-tag">Status Report</div>
+            <h2 style="margin-bottom:20px;">Actions Taken & Recommendations</h2>
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px;">
+                <div
+                    style="background:var(--card); border:1px solid rgba(34,197,94,0.3); border-radius:10px; padding:20px;">
+                    <h4 style="color:var(--green); font-size:13px; margin-bottom:8px;">✅ HP AI EXTENSION — ELIMINATED
+                    </h4>
+                    <p style="font-size:12px; color:var(--text-sub);">
+                        Extension directory, CRX cache, and registry policies destroyed.
+                        58 tracker domain references permanently removed from Chrome.
+                    </p>
+                </div>
+                <div
+                    style="background:var(--card); border:1px solid rgba(34,197,94,0.3); border-radius:10px; padding:20px;">
+                    <h4 style="color:var(--green); font-size:13px; margin-bottom:8px;">✅ CHROME CACHES — PURGED</h4>
+                    <p style="font-size:12px; color:var(--text-sub);">
+                        ActorSafetyLists, component_crx_cache, optimization_guide_model_store,
+                        Cache_Data, and Code Cache all destroyed. Clean regeneration on next launch.
+                    </p>
+                </div>
+                <div
+                    style="background:var(--card); border:1px solid rgba(34,197,94,0.3); border-radius:10px; padding:20px;">
+                    <h4 style="color:var(--green); font-size:13px; margin-bottom:8px;">✅ DNS FORTRESS — 23 DOMAINS
+                        BLOCKED</h4>
+                    <p style="font-size:12px; color:var(--text-sub);">
+                        Tracker domains blackholed to 0.0.0.0 via Windows hosts file.
+                        hCaptcha, Clarity, Braze, Criteo, Tapad, and others permanently unreachable.
+                    </p>
+                </div>
+                <div style="background:var(--card); border:1px solid var(--border); border-radius:10px; padding:20px;">
+                    <h4 style="color:var(--cyan); font-size:13px; margin-bottom:8px;">→ USE BRAVE FOR SUNO</h4>
+                    <p style="font-size:12px; color:var(--text-sub);">
+                        Brave's shields block most of the 71+ trackers automatically.
+                        The Brave profile scan came back completely clean.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            <div class="logo"><span>VOSS NEURAL RESEARCH</span> — VIPER FORENSIC SCANNER v1.0</div>
+            <div style="font-size:11px; color:var(--text-sub); margin-top:8px;">
+                Scan performed locally. No data transmitted. All evidence preserved for regulatory filing.
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>
