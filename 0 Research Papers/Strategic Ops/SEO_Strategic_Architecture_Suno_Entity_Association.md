@@ -6,7 +6,7 @@
 
 ## Executive Summary
 
-Position `vossneuralresearch.com/viper-scan/` as a **semantically proximate entity** to "Suno" in Google Search — appearing in "People Also Search For" (PASF) and "Related Searches" — by engineering digital associations that establish VNR as the essential security companion for AI music creators.
+Position `vossneuralresearch.com/vnr-scan/` as a **semantically proximate entity** to "Suno" in Google Search — appearing in "People Also Search For" (PASF) and "Related Searches" — by engineering digital associations that establish VNR as the essential security companion for AI music creators.
 
 ---
 
@@ -14,7 +14,7 @@ Position `vossneuralresearch.com/viper-scan/` as a **semantically proximate enti
 
 The search environment has transitioned from keyword-matching to a **multidimensional network of interconnected entities** governed by the Google Knowledge Graph. "Suno" is a dominant conceptual anchor in AI-generated music, attracting massive creative, transactional, and informational search queries.
 
-**VNR's objective:** Embed Viper-Scan into the "next-step intent" of Suno users — transforming it from an unrelated security tool into an essential companion.
+**VNR's objective:** Embed VNR Deep Scan into the "next-step intent" of Suno users — transforming it from an unrelated security tool into an essential companion.
 
 **Key mechanism:** The "pogo-sticking" effect — users click a Suno result, return to SERP, then click VNR → this triggers the PASF box and builds semantic association.
 
@@ -39,9 +39,9 @@ The search environment has transitioned from keyword-matching to a **multidimens
 
 - **PASF** = triggered by user bounce-back behavior (click result → return to SERP)
 - **Related Searches** = reflects Google's understanding of topical clusters
-- **Next-query intent** = if data suggests Suno users want to "scan" for security, PASF proactively suggests Viper-Scan
+- **Next-query intent** = if data suggests Suno users want to "scan" for security, PASF proactively suggests VNR Deep Scan
 
-**Target semantic triple:** `"VNR Viper-Scan" → "Audits" → "Suno AI"`
+**Target semantic triple:** `"VNR Deep Scan" → "Audits" → "Suno AI"`
 
 ---
 
@@ -52,7 +52,7 @@ The search environment has transitioned from keyword-matching to a **multidimens
 | Organization | `sameAs` | Ties VNR to Wikidata, LinkedIn, etc. |
 | WebApplication | `featureList` | Explicitly mentions "AI Interaction Auditing" for Suno |
 | Service | `serviceOutput` | Defines security report as complement to AI music |
-| WebPage | `about` | Links Viper-Scan to "AI Safety" entity |
+| WebPage | `about` | Links VNR Deep Scan to "AI Safety" entity |
 | Article | `mentions` | Cites Suno as relevant use-case in PR content |
 
 ---
@@ -63,8 +63,8 @@ The search environment has transitioned from keyword-matching to a **multidimens
 1. **"How does Suno AI use my data?"** → Technical audit of Feb 2026 privacy policy
 2. **"Is Suno AI safe for commercial use?"** → Whitepaper on behavioral findings
 3. **"Suno AI privacy policy update 2026"** → Analysis of "Interactive Chat Information"
-4. **"AI Music Sovereignty"** → Pillar page linking to Viper-Scan
-5. **Comparison guides** → "Suno V4 Privacy vs. VNR Viper Audit"
+4. **"AI Music Sovereignty"** → Pillar page linking to VNR Deep Scan
+5. **Comparison guides** → "Suno V4 Privacy vs. VNR Deep Scan Audit"
 
 ### Skyscraper Technique:
 - Find high-ranking AI music security articles
@@ -81,7 +81,7 @@ The search environment has transitioned from keyword-matching to a **multidimens
 | Usage | Generates a song | "How to audit Suno interactions" | Next-Step Intent |
 | Concern | "Is Suno safe for commercial use?" | Behavioral findings whitepaper | Solution-Awareness |
 | Research | "Suno privacy policy 2026" | "Interactive Chat Info" analysis | PASF Trigger |
-| Return | Bounces from competitor | Viper-Scan utility page | Click-Through Reward |
+| Return | Bounces from competitor | VNR Deep Scan utility page | Click-Through Reward |
 
 ---
 
@@ -90,8 +90,8 @@ The search environment has transitioned from keyword-matching to a **multidimens
 - **Page Speed:** < 3 seconds load time
 - **Mobile-First:** 58%+ searches are mobile; PASF carousel is prominent on mobile
 - **HTTPS:** Required for trust signals
-- **Internal Linking:** Research blog → Viper-Scan (distribute link equity)
-- **Clean URLs:** `/viper-scan/` ✓
+- **Internal Linking:** Research blog → VNR Deep Scan (distribute link equity)
+- **Clean URLs:** `/vnr-scan/` ✓
 - **Core Web Vitals:** LCP, FID, CLS all must pass
 
 ---
@@ -100,7 +100,7 @@ The search environment has transitioned from keyword-matching to a **multidimens
 
 Suno's "Interactive Chat Information" category covers user prompts, conversations, and creative inputs used for model training. This creates a trust vacuum.
 
-**VNR fills this vacuum** by positioning Viper-Scan as the primary tool for "digital sovereignty" and "data transparency."
+**VNR fills this vacuum** by positioning VNR Deep Scan as the primary tool for "digital sovereignty" and "data transparency."
 
 ---
 
@@ -125,7 +125,7 @@ Suno's "Interactive Chat Information" category covers user prompts, conversation
 
 ## Implementation Priority
 
-1. ✅ Schema.org JSON-LD on viper-scan page (IMMEDIATE)
+1. ✅ Schema.org JSON-LD on vnr-scan page (IMMEDIATE)
 2. ✅ Meta tags optimized for Suno-adjacent keywords (IMMEDIATE)
 3. ☐ Wikidata entity for VNR (THIS WEEK)
 4. ☐ Content clusters: 5 articles targeting Suno-security gap (THIS MONTH)

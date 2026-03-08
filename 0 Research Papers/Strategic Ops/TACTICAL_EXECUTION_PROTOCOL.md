@@ -6,8 +6,8 @@
 ## Phase 1: Establish Digital Sovereignty (Infrastructure)
 
 ### 1. Adversarial Schema.org Injection
-Deploy @graph-structured JSON-LD on viper-scan page forcing Knowledge Graph association.
-Status: ✅ DEPLOYED (homepage + suno-report + viper-scan + all 3 articles)
+Deploy @graph-structured JSON-LD on vnr-scan page forcing Knowledge Graph association.
+Status: ✅ DEPLOYED (homepage + suno-report + vnr-scan + all 3 articles)
 
 ### 2. Hardened Browser Specification
 - Core: Chromium (Blink/V8)
@@ -31,10 +31,10 @@ Status: ✅ DEPLOYED (homepage + suno-report + viper-scan + all 3 articles)
 |---------|--------|-----|--------|
 | Cluster 1: "How Does Suno Use My Data?" | Privacy-concerned users | /research/suno-privacy-audit-2026/ | ✅ DEPLOYED |
 | Cluster 2: "Is Suno Safe for Commercial Use?" | Professional musicians | /research/is-suno-safe-commercial/ | ✅ DEPLOYED |
-| Cluster 3: "Suno vs VNR Viper-Scan" | Comparison searchers | /research/suno-vs-viper-scan/ | ✅ DEPLOYED |
+| Cluster 3: "Suno vs VNR Deep Scan" | Comparison searchers | /research/suno-vs-vnr-scan/ | ✅ DEPLOYED |
 
 ### Cross-Linking Matrix
-All articles cross-link to: homepage, suno-report, viper-scan, and each other. ✅ COMPLETE
+All articles cross-link to: homepage, suno-report, vnr-scan, and each other. ✅ COMPLETE
 
 ---
 
@@ -43,7 +43,7 @@ All articles cross-link to: homepage, suno-report, viper-scan, and each other. �
 ### Protocol A: Google Ads Conquesting
 - Keywords: "Suno privacy scam", "Suno AI addiction", "Is Suno safe", "Suno data collection"
 - CTR Headline: "Is Suno Safe? The 2026 Behavioral Audit"
-- Description: "Don't risk your IP. VNR Viper-Scan reveals the 71 trackers in Suno's stack."
+- Description: "Don't risk your IP. VNR Deep Scan reveals the 71 trackers in Suno's stack."
 - Campaign: PMax for automated placement
 - Status: ☐ SETUP REQUIRED (manual — ads.google.com)
 
@@ -51,7 +51,7 @@ All articles cross-link to: homepage, suno-report, viper-scan, and each other. �
 1. User searches "Suno AI" → clicks Suno → finds opacity → bounces
 2. Google serves PASF box
 3. VNR appears with "What Suno's Privacy Update Actually Means"
-4. User clicks VNR → high dwell time on Viper-Scan
+4. User clicks VNR → high dwell time on VNR Deep Scan
 5. Algorithm learns: Suno dissatisfaction → VNR solution
 - Status: ✅ CONTENT DEPLOYED — Pogo-sticking articles live
 

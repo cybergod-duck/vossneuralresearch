@@ -12,7 +12,7 @@ Position Voss Neural Research as the **mandatory adversarial auditor** of the Su
 
 ## 1. The Paradigm: Entity-Centric Intervention
 
-The contemporary search environment has transitioned from keyword matching to a multidimensional network of interconnected entities. "Suno" has emerged as a dominant but increasingly scrutinized node. For VNR, achieving "semantic proximity" is no longer about appearing in PASF features — it is about positioning Viper-Scan as the **mandatory "loaded gun"** — a strategic oversight tool that captures Suno users at the moment of peak distrust.
+The contemporary search environment has transitioned from keyword matching to a multidimensional network of interconnected entities. "Suno" has emerged as a dominant but increasingly scrutinized node. For VNR, achieving "semantic proximity" is no longer about appearing in PASF features — it is about positioning VNR Deep Scan as the **mandatory "loaded gun"** — a strategic oversight tool that captures Suno users at the moment of peak distrust.
 
 **The engineering challenge:** Create an association where Google's algorithms perceive VNR not as an alternative, but as a **necessary remedy**.
 
@@ -26,7 +26,7 @@ On February 12, 2026, Suno announced a significant update to its Privacy Policy,
 
 **This creates a massive vacuum of digital sovereignty.**
 
-VNR must position Viper-Scan as the **definitive auditor of these "shadow updates."** Content auditing the risks of undisclosed chat inputs embeds VNR into high-value search journeys of creators concerned about:
+VNR must position VNR Deep Scan as the **definitive auditor of these "shadow updates."** Content auditing the risks of undisclosed chat inputs embeds VNR into high-value search journeys of creators concerned about:
 - Intellectual property exposure
 - Voice protection and likeness rights
 - Creative input being used for model training without granular consent
@@ -126,7 +126,7 @@ Move from passive SEO to **active conquesting**. VNR should bid on:
 
 ### Immediate (Week 1-2)
 - ✅ **Schema.org `subjectOf` markup** linking VNR content to Suno's copyright battles and privacy failures
-- ✅ **Viper-Scan page deployed** with full SEO infrastructure
+- ✅ **VNR Deep Scan page deployed** with full SEO infrastructure
 - ☐ **Google Ads campaign** targeting Suno dissatisfaction keywords
 
 ### Short-Term (Month 1)
@@ -135,7 +135,7 @@ Move from passive SEO to **active conquesting**. VNR should bid on:
 - ☐ **Wikidata entity** for VNR with structured properties
 
 ### Medium-Term (Month 2-3)
-- ☐ **Browser prototype** — Chromium shell with hardcoded VIPER blocking
+- ☐ **Browser prototype** — Chromium shell with hardcoded VNR Deep Scan blocking
 - ☐ **Digital PR outreach** to 5+ authoritative tech policy outlets
 - ☐ **SA-01 research paper** aligned with Connecticut neural data law
 

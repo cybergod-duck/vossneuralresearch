@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>VOSS NEURAL RESEARCH | HUD</title>
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -18,15 +18,15 @@
       --bg-color: #030303;
       --text-main: #E0E0E0;
       --text-sub: #888888;
-      --accent: #06b6d4;
+      --accent: #40c0ff;
       /* Cyan technical accent */
-      --restricted: #06b6d4;
+      --restricted: #40c0ff;
       /* Cyan/Teal for restricted content */
       --panel-bg: rgba(3, 5, 12, 0.85);
       /* Dark blue black */
-      --border-color: rgba(6, 182, 212, 0.2);
-      --cyan-glow: 0 16px 48px rgba(0, 0, 0, 0.9), 0 0 40px rgba(6, 182, 212, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05);
-      --cyan-active-glow: 0 0 24px rgba(6, 182, 212, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      --border-color: rgba(64, 192, 255, 0.2);
+      --cyan-glow: 0 16px 48px rgba(0, 0, 0, 0.9), 0 0 40px rgba(64, 192, 255, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      --cyan-active-glow: 0 0 24px rgba(64, 192, 255, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
     }
 
     * {
@@ -38,7 +38,7 @@
     body {
       background-color: var(--bg-color);
       background-image:
-        radial-gradient(circle at 50% 0%, rgba(6, 182, 212, 0.08) 0%, rgba(6, 182, 212, 0.03) 50%, transparent 100%),
+        radial-gradient(circle at 50% 0%, rgba(64, 192, 255, 0.08) 0%, rgba(64, 192, 255, 0.03) 50%, transparent 100%),
         url('data:image/svg+xml;utf8,<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="2" cy="2" r="1.5" fill="rgba(255,255,255,0.03)"/></svg>');
       background-attachment: fixed;
       color: var(--text-main);
@@ -207,7 +207,7 @@
       gap: 8px;
       padding: 16px 24px;
       border-bottom: 1px solid var(--border-color);
-      background: rgba(6, 182, 212, 0.02);
+      background: rgba(64, 192, 255, 0.02);
       width: 100%;
       justify-content: center;
     }
@@ -234,7 +234,7 @@
       background: #000;
       color: #fff;
       border-color: var(--accent);
-      box-shadow: 0 0 10px rgba(6, 182, 212, 0.3);
+      box-shadow: 0 0 10px rgba(64, 192, 255, 0.3);
     }
 
     /* MAIN PANE SYSTEM - NON SCROLLABLE CONTENT AREA */
@@ -320,8 +320,8 @@
     }
 
     .info-box {
-      background: rgba(6, 182, 212, 0.05);
-      border: 1px solid rgba(6, 182, 212, 0.2);
+      background: rgba(64, 192, 255, 0.05);
+      border: 1px solid rgba(64, 192, 255, 0.2);
       padding: 24px;
       border-radius: 4px;
       transition: all 0.3s ease;
@@ -331,13 +331,13 @@
     .sync-glow {
       box-shadow: var(--cyan-active-glow);
       border-color: var(--accent);
-      background: rgba(6, 182, 212, 0.1);
+      background: rgba(64, 192, 255, 0.1);
     }
 
     /* VIEW 2: VELOCITY CHART */
     .chart-box {
       background: #030303;
-      border: 1px solid rgba(6, 182, 212, 0.3);
+      border: 1px solid rgba(64, 192, 255, 0.3);
       border-radius: 4px;
       padding: 24px;
       height: 400px;
@@ -353,8 +353,8 @@
     }
 
     .stat-card {
-      background: rgba(6, 182, 212, 0.05);
-      border: 1px solid rgba(6, 182, 212, 0.2);
+      background: rgba(64, 192, 255, 0.05);
+      border: 1px solid rgba(64, 192, 255, 0.2);
       padding: 20px;
       border-radius: 4px;
       text-align: center;
@@ -430,8 +430,8 @@
 
     /* Center Silo Custom */
     .silo-card.core-silo {
-      background: rgba(6, 182, 212, 0.05);
-      border: 1px solid rgba(6, 182, 212, 0.4);
+      background: rgba(64, 192, 255, 0.05);
+      border: 1px solid rgba(64, 192, 255, 0.4);
       transform: scale(1.05);
       z-index: 10;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
@@ -457,7 +457,7 @@
 
     .dl-row {
       background: #030303;
-      border: 1px solid rgba(6, 182, 212, 0.3);
+      border: 1px solid rgba(64, 192, 255, 0.3);
       border-radius: 4px;
       padding: 20px 32px;
       display: flex;
@@ -469,7 +469,7 @@
     }
 
     .dl-row:hover {
-      background: rgba(6, 182, 212, 0.1);
+      background: rgba(64, 192, 255, 0.1);
       border-color: var(--accent);
     }
 
@@ -671,7 +671,7 @@
             <h3>Protocol Implementation</h3>
             <p class="font-sans">This is the implementation of the research. Somatic Anchoring (SA-01) is the core VNR
               mechanism for breaking the AI "Zone" and returning the subject to physical agency.</p>
-            <div class="artifact" style="border-color: var(--accent); background: rgba(6, 182, 212, 0.1);">
+            <div class="artifact" style="border-color: var(--accent); background: rgba(64, 192, 255, 0.1);">
               <p style="font-size:10px; font-weight:bold; color:var(--accent); text-transform:uppercase;">Core Solution:
                 SA-01</p>
               <p style="color:#fff; font-weight:bold; margin-top:4px;">Somatic Anchoring</p>
@@ -893,11 +893,11 @@
           datasets: [{
             label: 'Velocity',
             data: dataValues,
-            borderColor: '#06b6d4',
-            backgroundColor: 'rgba(6, 182, 212, 0.1)',
+            borderColor: '#40c0ff',
+            backgroundColor: 'rgba(64, 192, 255, 0.1)',
             borderWidth: 2,
             pointRadius: 2,
-            pointBackgroundColor: '#06b6d4',
+            pointBackgroundColor: '#40c0ff',
             tension: 0.3,
             fill: true
           }]
