@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VNR SCAN Cleanup Kit — Download | Voss Neural Research</title>
+    <style>
+        :root {
+            --bg: #0a0e17;
+            --card: #111827;
+            --cyan: #40c0ff;
+            --red: #ef4444;
+            --green: #22c55e;
+            --text: #e2e8f0;
+            --text-sub: #94a3b8;
+            --border: #1e293b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .kit {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 40px;
+            text-align: center;
+        }
+
+        h1 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        h1 span {
+            color: var(--cyan);
+        }
+
+        .target {
+            color: var(--red);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 18px;
+            margin-bottom: 16px;
+        }
+
+        .desc {
+            color: var(--text-sub);
+            font-size: 14px;
+            line-height: 1.8;
+            margin-bottom: 32px;
+        }
+
+        .warning {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 24px;
+            text-align: left;
+        }
+
+        .warning h3 {
+            color: var(--red);
+            font-size: 14px;
+            margin-bottom: 8px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .warning p {
+            color: var(--text-sub);
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .files {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 24px;
+            margin-bottom: 24px;
+            text-align: left;
+        }
+
+        .files h3 {
+            color: var(--green);
+            font-size: 14px;
+            margin-bottom: 12px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .file {
+            color: var(--text-sub);
+            font-size: 13px;
+            padding: 6px 0;
+            border-bottom: 1px solid var(--border);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .file:last-child {
+            border-bottom: none;
+        }
+
+        .file span {
+            color: var(--cyan);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 16px 40px;
+            background: var(--cyan);
+            color: #0a0e17;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            font-size: 14px;
+            text-decoration: none;
+            border-radius: 8px;
+            letter-spacing: 0.05em;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #fff;
+        }
+
+        .steps {
+            color: #555;
+            font-size: 11px;
+            margin-top: 12px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .back {
+            color: var(--text-sub);
+            font-size: 12px;
+            margin-top: 24px;
+        }
+
+        .back a {
+            color: var(--cyan);
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="kit">
+        <h1>VNR <span>SCAN</span></h1>
+        <div class="target">[suno.com]</div>
+        <p class="desc">
+            DNS LOCKER blocklist + tracker removal scripts + browser profile cleaner.<br>
+            Everything documented on the scan page, packaged for your machine.
+        </p>
+
+        <div class="warning">
+            <h3>⚠️ IMPORTANT — READ BEFORE DOWNLOADING</h3>
+            <p>
+                We cannot guarantee this kit will protect your system unless you
+                <strong style="color:var(--red);">DELETE your Suno account</strong> and
+                <strong style="color:var(--red);">do NOT return to suno.com</strong>.
+                The tracker infrastructure re-seeds itself on every visit.
+                This is the only way to ensure your CPU's safety.
+            </p>
+        </div>
+
+        <div class="files">
+            <h3>📦 WHAT'S INSIDE</h3>
+            <div class="file"><span>install-locker.bat</span> — Block 23 tracker domains via hosts file</div>
+            <div class="file"><span>browser-cleanup.bat</span> — Remove artifacts from Chrome, Brave, Edge</div>
+            <div class="file"><span>verify-clean.bat</span> — Confirm protection is active</div>
+            <div class="file"><span>README.md</span> — Full instructions</div>
+        </div>
+
+        <a href="/vnr-scan-kit/VNR-SCAN-Kit.zip" class="btn">DOWNLOAD VNR SCAN KIT →</a>
+        <div class="steps">Step 1: Delete Suno &nbsp;|&nbsp; Step 2: Run LOCKER &nbsp;|&nbsp; Step 3: Verify Clean</div>
+
+        <div class="back"><a href="/">← Back to VNR SCAN</a></div>
+    </div>
+</body>
+
+</html>
