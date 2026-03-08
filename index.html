@@ -1615,26 +1615,41 @@
         if (el) sections.push({ id, el, link });
       });
 
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            navLinks.forEach(l => {
-              l.style.color = 'var(--text-sub)';
-              l.style.borderLeftColor = 'transparent';
-              l.classList.remove('active');
-            });
-            const match = sections.find(s => s.id === entry.target.id);
-            if (match) {
-              const color = match.link.dataset.color;
-              match.link.style.color = color;
-              match.link.style.borderLeftColor = color;
-              match.link.classList.add('active');
-            }
-          }
+      function setActive(activeLink) {
+        navLinks.forEach(l => {
+          l.style.color = 'var(--text-sub)';
+          l.style.borderLeftColor = 'transparent';
+          l.classList.remove('active');
         });
-      }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
+        if (activeLink) {
+          const color = activeLink.dataset.color;
+          activeLink.style.color = color;
+          activeLink.style.borderLeftColor = color;
+          activeLink.classList.add('active');
+        }
+      }
 
-      sections.forEach(s => observer.observe(s.el));
+      function onScroll() {
+        const scrollY = window.scrollY + 120;
+        let current = sections[0];
+        for (let i = sections.length - 1; i >= 0; i--) {
+          if (sections[i].el.offsetTop <= scrollY) {
+            current = sections[i];
+            break;
+          }
+        }
+        if (current) setActive(current.link);
+      }
+
+      // Click handler — instant highlight
+      navLinks.forEach(link => {
+        link.addEventListener('click', function () {
+          setActive(this);
+        });
+      });
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
     })();
   </script>
 </body>
