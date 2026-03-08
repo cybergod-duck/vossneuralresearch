@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voss Neural Research — Independent Suno AI Audit & Data Sovereignty</title>
+  <meta name="description"
+    content="Independent forensic review of Suno AI's February 2026 privacy policy update. 71+ trackers identified. Interactive Chat data ingestion explained. Assess your exposure.">
+  <meta property="og:title" content="Suno AI Privacy & Behavioral Audit 2026 — VNR">
+  <meta property="og:description"
+    content="Detailed analysis: unconsented creative input training, keystroke & intent logging, potential Connecticut SB 1295 implications.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://vossneuralresearch.com">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:creator" content="@Cyberdvck">
+  <meta name="p:domain_verify" content="8984bb98bac4dc62b448397598faf575">
+  <link rel="icon" type="image/png" href="/vnr-icon.png">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="canonical" href="https://vossneuralresearch.com">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap"
+    rel="stylesheet">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "ResearchOrganization",
+        "@id": "https://vossneuralresearch.com/#organization",
+        "name": "Voss Neural Research",
+        "alternateName": "VNR",
+        "url": "https://vossneuralresearch.com",
+        "description": "Independent research lab conducting forensic audits of generative AI platforms with focus on data rights and behavioral design."
+      },
+      {
+        "@type": "TechArticle",
+        "@id": "https://vossneuralresearch.com/#suno-audit",
+        "headline": "Suno AI February 2026 Privacy Policy Forensic Review",
+        "datePublished": "2026-03-07",
+        "author": { "@id": "https://vossneuralresearch.com/#organization" }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #05050a;
+      --panel: #0f0f1a;
+      --surface: rgba(255, 255, 255, 0.025);
+      --text: #e0e8ff;
+      --text-sub: #a0b0d0;
+      --accent: #40c0ff;
+      --danger: #ff4d4d;
+      --green: #22c55e;
+      --green-dim: rgba(34, 197, 94, 0.1);
+      --amber: #f59e0b;
+      --amber-dim: rgba(245, 158, 11, 0.1);
+      --red: #ef4444;
+      --red-dim: rgba(239, 68, 68, 0.08);
+      --border: #1a1a33;
+      --border-hover: rgba(64, 192, 255, 0.3);
+      --grid: rgba(64, 192, 255, 0.03);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-snap-type: y proximity;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      font-size: 16px;
+      background-image:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+      background-size: 50px 50px;
+    }
+
+    .page {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    /* ─── NAV ─── */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(5, 5, 10, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+      height: 68px;
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    .nav-logo {
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-logo img {
+      height: 32px;
+      object-fit: contain;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-links a {
+      color: var(--text-sub);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 14px;
+      padding: 8px 16px;
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: #fff;
+    }
+
+    .nav-links a.active {
+      color: var(--accent);
+      background: rgba(64, 192, 255, 0.08);
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      padding: 120px 0 60px;
+      display: grid;
+      grid-template-columns: 1.25fr 0.95fr;
+      gap: 60px;
+      align-items: center;
+      scroll-snap-align: start;
+    }
+
+    .hero h1 {
+      font-size: 3.2rem;
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 1.4rem;
+      color: #fff;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      background: linear-gradient(135deg, var(--accent), var(--green));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--text-sub);
+      max-width: 540px;
+      margin-bottom: 2rem;
+      line-height: 1.7;
+    }
+
+    .section-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 0.8rem;
+      display: block;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 13px 28px;
+      border-radius: 6px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+      font-size: 14px;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #000;
+    }
+
+    .btn-primary:hover {
+      background: #60d0ff;
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+      margin-left: 12px;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* ─── MONITOR ─── */
+    .monitor {
+      background: #000;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    }
+
+    .monitor-header {
+      background: var(--panel);
+      padding: 12px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      color: var(--text-sub);
+    }
+
+    .monitor-status {
+      color: var(--danger);
+      font-weight: 700;
+    }
+
+    .monitor-body {
+      padding: 20px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+    }
+
+    .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid #1a1a33;
+    }
+
+    .stat-label {
+      color: var(--text-sub);
+      font-size: 0.85rem;
+    }
+
+    .stat-val {
+      font-weight: 600;
+      font-size: 0.85rem;
+    }
+
+    .log-feed {
+      margin-top: 14px;
+      max-height: 120px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .log-feed::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 50px;
+      background: linear-gradient(transparent, #000);
+    }
+
+    .log-item {
+      color: var(--accent);
+      margin-bottom: 5px;
+      font-size: 0.8rem;
+    }
+
+    /* ─── TRUST BAR ─── */
+    .trust-bar {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      padding: 36px 28px;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      scroll-snap-align: start;
+    }
+
+    .trust-item {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-sub);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .dot {
+      width: 6px;
+      height: 6px;
+      background: var(--green);
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    /* ─── SECTIONS ─── */
+    .section {
+      min-height: 100vh;
+      padding: 80px 28px;
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      scroll-snap-align: start;
+    }
+
+    .section-header {
+      margin-bottom: 40px;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+
+    .section-desc {
+      font-size: 16px;
+      color: var(--text-sub);
+      max-width: 600px;
+      line-height: 1.7;
+    }
+
+    /* ─── PROBLEM/SOLUTION ─── */
+    .problem-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .problem-card,
+    .solution-card {
+      border-radius: 8px;
+      padding: 36px;
+      position: relative;
+    }
+
+    .problem-card {
+      background: rgba(245, 158, 11, 0.06);
+      border: 1px solid rgba(245, 158, 11, 0.12);
+    }
+
+    .solution-card {
+      background: rgba(64, 192, 255, 0.06);
+      border: 1px solid rgba(64, 192, 255, 0.12);
+    }
+
+    .card-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 16px;
+    }
+
+    .card-label.red {
+      color: var(--amber);
+    }
+
+    .card-label.green {
+      color: var(--accent);
+    }
+
+    .card-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+
+    .card-text {
+      font-size: 14px;
+      color: var(--text-sub);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .card-list {
+      list-style: none;
+    }
+
+    .card-list li {
+      font-size: 14px;
+      color: var(--text);
+      padding: 6px 0 6px 20px;
+      position: relative;
+    }
+
+    .card-list li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--text-sub);
+    }
+
+    /* ─── STATS ─── */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      padding: 50px 28px;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      max-width: 1100px;
+      margin: 0 auto;
+      scroll-snap-align: start;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 32px;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .stats-row .stat-label {
+      font-size: 12px;
+      color: var(--text-sub);
+      margin-top: 4px;
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* ─── EVIDENCE GRID ─── */
+    .evidence-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      margin-top: 2rem;
+    }
+
+    .evidence-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      padding: 28px;
+      border-radius: 8px;
+      transition: border-color 0.2s;
+    }
+
+    .evidence-card:hover {
+      border-color: var(--accent);
+    }
+
+    .evidence-card h3 {
+      color: #fff;
+      margin-bottom: 10px;
+      font-size: 1.1rem;
+    }
+
+    .evidence-card p {
+      color: var(--text-sub);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    /* ─── RESEARCH ─── */
+    .research-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .research-card {
+      display: block;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 28px 24px;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .research-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .research-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 10px;
+    }
+
+    .research-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+
+    .research-excerpt {
+      font-size: 13px;
+      color: var(--text-sub);
+      line-height: 1.6;
+    }
+
+    .research-link {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--accent);
+      margin-top: 14px;
+      display: block;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 50px 28px;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 36px;
+    }
+
+    .footer-brand {
+      max-width: 300px;
+    }
+
+    .footer-brand-name {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    .footer-brand-desc {
+      font-size: 13px;
+      color: var(--text-sub);
+      line-height: 1.6;
+    }
+
+    .footer-col h4 {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-sub);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 14px;
+    }
+
+    .footer-col a {
+      display: block;
+      font-size: 13px;
+      color: var(--text);
+      text-decoration: none;
+      padding: 3px 0;
+      transition: color 0.2s;
+    }
+
+    .footer-col a:hover {
+      color: #fff;
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-copy {
+      font-size: 12px;
+      color: var(--text-sub);
+    }
+
+    .footer-badges {
+      display: flex;
+      gap: 12px;
+    }
+
+    .footer-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--text-sub);
+      padding: 4px 10px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding-top: 120px;
+      }
+
+      .monitor {
+        margin-top: 40px;
+      }
+
+      .problem-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .research-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-row {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 28px;
+      }
+
+      .trust-bar {
+        flex-direction: column;
+        gap: 12px;
+        align-items: center;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .footer-top {
+        flex-direction: column;
+        gap: 28px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+      }
+
+      .section-title {
+        font-size: 1.6rem;
+      }
+
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+    }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate {
+      opacity: 0;
+      animation: fadeInUp 0.6s ease forwards;
+    }
+
+    .delay-1 {
+      animation-delay: 0.1s;
+    }
+
+    .delay-2 {
+      animation-delay: 0.2s;
+    }
+
+    .delay-3 {
+      animation-delay: 0.3s;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo"><img src="/vnr-logo.png" alt="VNR"></a>
+      <div class="nav-links">
+        <a href="/" style="color:var(--accent);font-weight:600;">VNR SCAN</a>
+        <a href="#audit">Findings</a>
+        <a href="#exposure">Exposure</a>
+        <a href="#research">Research</a>
+        <a href="#engage">Engage</a>
+        <a href="#about">About</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="page">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div>
+        <div class="section-tag animate">VNR SCAN — LIVE FORENSIC INTELLIGENCE</div>
+        <h1 class="animate delay-1">See What AI Platforms <em>Don't Want You to See</em></h1>
+        <p class="animate delay-2">
+          Our flagship forensic dashboard exposes the hidden data collection layer beneath generative AI platforms.
+          71+ trackers. CPU crypto mining. GPU abuse. Session replay. All documented in real time.
+        </p>
+        <div class="animate delay-3">
+          <a href="/" class="btn btn-primary" style="font-size:1.1em;padding:1em 2.5em;letter-spacing:0.03em;">Launch
+            VNR SCAN →</a>
+          <a href="#research" class="btn btn-secondary">Read Research</a>
+        </div>
+      </div>
+
+      <div class="monitor animate delay-2">
+        <div class="monitor-header">
+          <div>VNR SCAN — LIVE FORENSIC FEED</div>
+          <div class="monitor-status">SCANNING</div>
+        </div>
+        <div class="monitor-body">
+          <div class="stat-row"><span class="stat-label">Third-party scripts detected</span><span class="stat-val"
+              style="color:var(--danger)">71+</span></div>
+          <div class="stat-row"><span class="stat-label">hCaptcha PoW crypto mining</span><span class="stat-val"
+              style="color:var(--danger)">CONFIRMED</span></div>
+          <div class="stat-row"><span class="stat-label">Microsoft Clarity GPU abuse</span><span class="stat-val"
+              style="color:var(--danger)">ACTIVE</span></div>
+          <div class="stat-row"><span class="stat-label">Creative data harvesting</span><span class="stat-val"
+              style="color:var(--amber)">Interactive Chat → model training</span></div>
+          <div class="stat-row"><span class="stat-label">CT SB 1295 compliance</span><span class="stat-val"
+              style="color:var(--danger)">NON-COMPLIANT</span></div>
+          <div class="log-feed">
+            <div class="log-item">[TRACE] Segment.identify — user traits sent</div>
+            <div class="log-item">[TRACE] Hotjar session recording initialized</div>
+            <div class="log-item">[TRACE] Clarity keystroke capture active</div>
+            <div class="log-item">[WARN] hCaptcha PoW — CPU mining cycle detected</div>
+            <div class="log-item">[CRIT] GPU compositor cascade — MutationObserver loop</div>
+            <div class="log-item">[INFO] 1.2 MB creative vector egress observed</div>
+          </div>
+          <div style="text-align:center;padding-top:0.8em;">
+            <a href="/" style="color:var(--accent);font-weight:600;font-size:0.95em;text-decoration:none;">Open
+              Full Dashboard →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- TRUST BAR -->
+  <div class="trust-bar">
+    <div class="trust-item"><span class="dot"></span> Independent Lab</div>
+    <div class="trust-item"><span class="dot"></span> CT SB 1295 Compliance</div>
+    <div class="trust-item"><span class="dot"></span> Open Source Audit</div>
+    <div class="trust-item"><span class="dot"></span> No VC · No Conflicts</div>
+  </div>
+
+  <!-- KEY EVIDENCE -->
+  <div class="section" id="audit">
+    <div class="section-header">
+      <div class="section-tag">Key Evidence</div>
+      <h2 class="section-title">What the February 2026 Update Actually Changed</h2>
+      <p class="section-desc">
+        Suno expanded its data use policy to include "Interactive Chat Information" for model improvement. This covers
+        not only final outputs, but the entire creative process — prompts, rejected generations, parameter tweaks.
+      </p>
+    </div>
+    <div class="evidence-grid">
+      <div class="evidence-card">
+        <h3>Extensive Tracking Surface</h3>
+        <p>71+ external domains contacted per session, including analytics, replay, and advertising scripts. Many
+          persist across logged-in and guest usage.</p>
+      </div>
+      <div class="evidence-card">
+        <h3>Variable Reward Mechanics</h3>
+        <p>Generation success/failure follows patterns consistent with slot-machine-style engagement retention. Combined
+          with opaque data use, this raises questions about long-term user autonomy.</p>
+      </div>
+      <div class="evidence-card">
+        <h3>Potential Regulatory Exposure</h3>
+        <p>Connecticut SB 1295 defines protected "neural data" broadly. If behavioral signals from music creation loops
+          are processed without explicit consent, compliance questions arise.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- THE PROBLEM -->
+  <div class="section" id="exposure">
+    <div class="section-header">
+      <div class="section-tag" style="color: var(--amber);">The Problem</div>
+      <h2 class="section-title">Generative AI platforms are harvesting your creative process.</h2>
+      <p class="section-desc">Generative AI platforms ingest user prompts, edit history, and creative decisions to train
+        proprietary models — creating liability for creators and enterprises alike.</p>
+    </div>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div class="card-label red">Exposure</div>
+        <div class="card-title">Data Sovereignty Risk</div>
+        <p class="card-text">AI music platforms deploy shadow privacy updates, harvest creative inputs for model
+          training, and operate 71+ undisclosed third-party tracking scripts — without meaningful consent.</p>
+        <ul class="card-list">
+          <li>Shadow privacy policy updates (Feb 2026)</li>
+          <li>71+ undisclosed tracking scripts per session</li>
+          <li>CPU crypto mining via hCaptcha PoW</li>
+          <li>Session replay recording all interactions</li>
+          <li>Incognito mode bypass via fingerprinting</li>
+        </ul>
+      </div>
+      <div class="solution-card">
+        <div class="card-label green">What We Document</div>
+        <div class="card-title">Forensic Evidence.</div>
+        <p class="card-text">Voss Neural Research provides independent, reproducible forensic evidence of unconsented
+          data extraction from generative AI platforms.</p>
+        <ul class="card-list">
+          <li>Packet-level forensic trace analysis</li>
+          <li>Full tracker inventory with DNS blocklists</li>
+          <li>Behavioral risk classification (SA-01 protocol)</li>
+          <li>CT SB 1295 neural data compliance review</li>
+          <li>Regulatory filings (SEC, FTC, AG)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-row">
+    <div class="stat">
+      <div class="stat-num">71+</div>
+      <div class="stat-label">Trackers Documented</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">9.6 GB</div>
+      <div class="stat-label">Profile Bloat Found</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">CAT 4</div>
+      <div class="stat-label">Behavioral Risk Rating</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">SB 1295</div>
+      <div class="stat-label">Compliance Standard</div>
+    </div>
+  </div>
+
+  <!-- RESEARCH -->
+  <div class="section" id="research">
+    <div class="section-header">
+      <div class="section-tag">Research</div>
+      <h2 class="section-title">Published Reports & Analysis</h2>
+      <p class="section-desc">Independent forensic research documenting the data practices of generative AI platforms.
+        All findings are reproducible.</p>
+    </div>
+    <div class="research-grid">
+      <a href="/" class="research-card" style="border-color: var(--accent); box-shadow: 0 0 20px rgba(64,192,255,.1);">
+        <div class="research-tag" style="color: var(--accent);">Flagship Tool</div>
+        <div class="research-title">VNR SCAN — Live Forensic Dashboard</div>
+        <p class="research-excerpt">Real-time forensic visibility into AI platform data collection. See exactly what
+          trackers are active, what data is being harvested, and where it goes.</p>
+        <span class="research-link">Launch VNR SCAN →</span>
+      </a>
+      <a href="/suno-report/" class="research-card">
+        <div class="research-tag" style="color: var(--danger);">Case Study</div>
+        <div class="research-title">Suno AI Tracker Report</div>
+        <p class="research-excerpt">Complete forensic inventory of 71+ undisclosed tracking scripts, session replay, and
+          CPU mining on a major AI music platform.</p>
+        <span class="research-link">Read Full Report →</span>
+      </a>
+      <a href="/research/suno-privacy-audit-2026/" class="research-card">
+        <div class="research-tag" style="color: var(--amber);">Whitepaper</div>
+        <div class="research-title">The Hidden 2026 Privacy Update</div>
+        <p class="research-excerpt">How Suno's February 2026 "Interactive Chat Information" update harvests creative
+          inputs for model training without consent.</p>
+        <span class="research-link">Read Analysis →</span>
+      </a>
+      <a href="/research/is-suno-safe-commercial/" class="research-card">
+        <div class="research-tag" style="color: var(--amber);">Risk Assessment</div>
+        <div class="research-title">Is Suno Safe for Commercial Use?</div>
+        <p class="research-excerpt">Behavioral risk assessment for professional musicians and commercial creators
+          operating on generative AI platforms.</p>
+        <span class="research-link">Read Assessment →</span>
+      </a>
+      <a href="/research/suno-interactive-chat-2026/" class="research-card">
+        <div class="research-tag" style="color: var(--accent);">Policy Analysis</div>
+        <div class="research-title">What "Interactive Chat Information" Really Means</div>
+        <p class="research-excerpt">Forensic dissection of Suno's February 2026 privacy policy update — how your
+          creative
+          process feeds model training pipelines under CT SB 1295.</p>
+        <span class="research-link">Read Analysis →</span>
+      </a>
+      <a href="/research/ai-music-sovereignty-audit-2026/" class="research-card">
+        <div class="research-tag" style="color: var(--green);">Sovereignty</div>
+        <div class="research-title">AI Music Sovereignty: Why Every User Needs an Independent Audit</div>
+        <p class="research-excerpt">The definitive case for data portability, right to deletion, and independent
+          forensic
+          auditing across all generative AI music platforms.</p>
+        <span class="research-link">Read Report →</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- REQUEST AN AUDIT -->
+  <div class="section" id="engage">
+    <div class="section-header">
+      <div class="section-tag">Engage</div>
+      <h2 class="section-title">Request a Forensic Audit</h2>
+      <p class="section-desc">We audit generative AI platforms for data sovereignty violations, unconsented tracking,
+        and regulatory non-compliance. If your platform, label, or organization needs independent forensic evidence — we
+        produce it.</p>
+    </div>
+    <div class="problem-grid">
+      <div style="background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 36px;">
+        <div class="card-label" style="color: var(--accent);">For Organizations</div>
+        <div class="card-title">Platform Audit</div>
+        <p class="card-text">Full forensic analysis of any generative AI platform — tracker inventory, behavioral risk
+          classification, data egress mapping, and regulatory compliance review. Delivered as a publishable report.</p>
+        <ul class="card-list">
+          <li>Packet-level forensic trace analysis</li>
+          <li>Full DNS and script inventory</li>
+          <li>SB 1295 / GDPR compliance assessment</li>
+          <li>Executive summary + technical appendix</li>
+        </ul>
+      </div>
+      <div style="background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 36px;">
+        <div class="card-label" style="color: var(--amber);">For Creators & Labels</div>
+        <div class="card-title">Exposure Assessment</div>
+        <p class="card-text">Determine your organization's data exposure to specific AI platforms. We document exactly
+          what data was collected, how it was processed, and what your legal options are.</p>
+        <ul class="card-list">
+          <li>Platform-specific exposure report</li>
+          <li>Creative IP risk analysis</li>
+          <li>Regulatory filing support (FTC, AG, SEC)</li>
+          <li>Expert testimony preparation</li>
+        </ul>
+      </div>
+    </div>
+    <div style="text-align: center; margin-top: 40px;">
+      <a href="mailto:audits@vossneuralresearch.com?subject=Audit%20Inquiry" class="btn btn-primary"
+        style="font-size: 16px; padding: 16px 36px;">Contact for Audit Inquiry →</a>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <div class="section" id="about">
+    <div class="section-header">
+      <div class="section-tag">About</div>
+      <h2 class="section-title">About Voss Neural Research</h2>
+      <p class="section-desc">VNR is an independent forensic research lab focused on generative AI data sovereignty.
+        We document what platforms won't disclose.</p>
+    </div>
+    <div class="problem-grid">
+      <div style="background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 36px;">
+        <div class="card-label" style="color: var(--accent);">Mission</div>
+        <p class="card-text" style="font-size: 15px;">Every creator deserves to know exactly how generative AI platforms
+          use their data, their creative process, and their computational resources. VNR exists to provide that
+          transparency through independent, reproducible forensic research.</p>
+      </div>
+      <div style="background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 36px;">
+        <div class="card-label" style="color: var(--green);">Credentials</div>
+        <ul class="card-list">
+          <li>Established 2025 — independent LLC</li>
+          <li>Open source forensic methodology</li>
+          <li>CT SB 1295 compliance expertise</li>
+          <li>Active regulatory filings (SEC, FTC, AG)</li>
+          <li>Independent — no VC, no conflicts</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUBSCRIBE -->
+  <div class="section" style="min-height: auto; padding: 60px 28px;">
+    <div style="text-align: center;">
+      <h3 style="font-size: 20px; color: #fff;">Stay Informed</h3>
+      <p style="color: var(--text-sub); margin: 1.2rem 0;">Receive updates when new forensic reports or regulatory
+        filings are published.</p>
+      <form action="mailto:admin@vossneuralresearch.com" method="post" enctype="text/plain"
+        style="display:flex; justify-content:center; gap:12px; max-width:500px; margin:0 auto;">
+        <input type="email" placeholder="your.email@domain.com" required
+          style="flex:1; padding:12px 16px; background: var(--panel); border:1px solid var(--border); color:#fff; border-radius:6px; font-family: inherit;">
+        <button type="submit" class="btn btn-secondary" style="margin-left:0;">Subscribe</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-brand-name">VOSS NEURAL RESEARCH</div>
+        <p class="footer-brand-desc">Independent forensic research lab. Documenting what generative AI platforms won't
+          disclose.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Research</h4>
+        <a href="/suno-report/">Suno Tracker Report</a>
+        <a href="/research/suno-privacy-audit-2026/">Privacy Audit 2026</a>
+        <a href="/research/is-suno-safe-commercial/">Commercial Risk Assessment</a>
+        <a href="/research/velvet-casino/">The Velvet Casino</a>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <a href="/">VNR SCAN</a>
+        <a href="/research/">All Research</a>
+        <a href="https://github.com/cybergod-duck/vossneuralresearch">GitHub</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="/privacy/">Privacy Policy</a>
+        <a href="/policies/fcoi.html">FCOI Policy</a>
+        <a href="/policies/data-management.html">Data Management</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">&copy; 2026 Voss Neural Research LLC. All research is independently produced.</div>
+      <div class="footer-badges">
+        <span class="footer-badge">CT SB 1295</span>
+        <span class="footer-badge">Independent Lab</span>
+      </div>
+    </div>
+  </footer>
+  <script>
+    // Active nav link highlighting based on scroll position
+    const sections = document.querySelectorAll('.section[id], .hero');
+    const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + id) {
+              link.classList.add('active');
+            }
+          });
+        }
+      });
+    }, { rootMargin: '-40% 0px -40% 0px', threshold: 0 });
+
+    sections.forEach(section => observer.observe(section));
+  </script>
+
+</body>
+
+</html>
