@@ -636,6 +636,7 @@
     .footer .logo span {
       background: linear-gradient(135deg, var(--accent), var(--cyan));
       -webkit-background-clip: text;
+      background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
@@ -1419,6 +1420,60 @@
           Root cause analysis by VNR SCAN Protocol v1.0 | Full process inventory preserved
         </p>
       </div>
+
+      <!-- Incident 4: March 9 2026, 11:14 EST — TRACKER PERSISTENCE ESCALATION -->
+      <div class="gpu-abuse"
+        style="border-left-color:#a855f7; background:rgba(168,85,247,0.06); border-color:rgba(168,85,247,0.25); margin-top:16px;">
+        <h3 style="color:#a855f7; font-size:14px;">🟣 FINDING — 2026-03-09 11:14 EST — TRACKER PERSISTENCE ESCALATION
+        </h3>
+        <p style="font-size:11px; color:var(--text-sub); margin-bottom:12px; line-height:1.5;">
+          <strong style="color:#fff;">Each cleanup round gets harder.</strong> Across three documented cleanup cycles,
+          Suno's tracker infrastructure exhibited <strong style="color:#a855f7;">progressive persistence</strong> —
+          artifacts re-seed into deeper browser directories, new self-hosted domains evade existing blocklists,
+          and the OS increasingly resists programmatic remediation.
+        </p>
+        <div
+          style="background:#0d1117; border-radius:6px; padding:12px 14px; font-family:'JetBrains Mono',monospace; font-size:10px; line-height:1.8; margin-bottom:12px;">
+          <div style="color:#a855f7; font-weight:700;">CLEANUP ESCALATION LOG — 3 ROUNDS DOCUMENTED</div>
+          <div style="color:#555; margin-top:8px;"># ROUND 1 — 2026-03-07</div>
+          <div><span class="output">Scope:</span> <span style="color:var(--green);">Cache + Cookies + Hosts file</span>
+          </div>
+          <div><span class="output">Targets:</span> <span style="color:#fff;">5 directories (Cache, Code Cache, Local
+              Storage, Service Worker, GPUCache)</span></div>
+          <div><span class="output">Result:</span> <span style="color:var(--green);">Clean in one pass ✓</span></div>
+          <div style="color:#555; margin-top:8px;"># ROUND 2 — 2026-03-08</div>
+          <div><span class="output">Scope:</span> <span style="color:var(--orange);">Expanded — deeper browser
+              internals</span></div>
+          <div><span class="output">Targets:</span> <span style="color:#fff;">+3 new: component_crx_cache,
+              ActorSafetyLists, optimization_guide_model_store</span></div>
+          <div><span class="output">Finding:</span> <span class="warn">Tracker artifacts had re-seeded into ML model
+              stores and safety lists</span></div>
+          <div><span class="output">Result:</span> <span style="color:var(--orange);">Required expanded target list
+              ⚠</span></div>
+          <div style="color:#555; margin-top:8px;"># ROUND 3 — 2026-03-09</div>
+          <div><span class="output">Scope:</span> <span class="crit">Full system — 4 browsers × 8 directories</span>
+          </div>
+          <div><span class="output">Targets:</span> <span style="color:#fff;">Chrome, Brave, Edge, Comet — 32 artifact
+              directories purged</span></div>
+          <div><span class="output">Finding:</span> <span class="crit">Hosts file injection blocked by UAC elevation
+              chain — OS resists programmatic writes</span></div>
+          <div><span class="output">Result:</span> <span class="crit">Required manual admin intervention to complete
+              ⛔</span></div>
+        </div>
+
+
+        <p style="font-size:10px; color:var(--text-sub); line-height:1.4;">
+          <strong style="color:#a855f7;">Conclusion:</strong> Suno's tracker stack is <strong style="color:#fff;">not
+            static</strong>. Every visit plants deeper artifacts that survive standard cleanup.
+          Round 1 needed 5 targets. Round 3 needed <strong style="color:var(--red);">32</strong>. This validates the
+          <strong style="color:#fff;">"Step Zero" doctrine</strong> — the only effective countermeasure is to
+          <strong style="color:var(--red);">never go back</strong>.
+        </p>
+        <p style="font-size:11px; color:#555; font-family:'JetBrains Mono',monospace; margin-top:8px;">
+          Finding documented by VNR SCAN Protocol v1.0 | 3-round longitudinal observation | Operator: Voss Neural
+          Research
+        </p>
+      </div>
     </div>
 
     <!-- MARCH 9 LIVE CAPTURE — hCAPTCHA SELF-HOSTING DISCOVERY -->
@@ -1896,7 +1951,7 @@
           <br><strong style="color:#fff;">Pay what you want.</strong> Free is fine. We're not here to sell — we're here
           to stop this.
         </p>
-        <a href="https://vossneuralresearch.gumroad.com/l/vnr_scan" target="_blank"
+        <a href="/vnr-scan/"
           style="display:inline-block; padding:12px 32px; background:var(--cyan); color:#0a0e17; font-family:'JetBrains Mono',monospace; font-weight:700; font-size:13px; text-decoration:none; border-radius:6px; letter-spacing:0.05em; transition:all 0.2s;"
           onmouseover="this.style.background='#fff'" onmouseout="this.style.background='var(--cyan)'">DOWNLOAD VNR SCAN
           KIT →</a>
@@ -1995,7 +2050,10 @@
     })();
   </script>
 
-<footer style="text-align:center;padding:20px;border-top:1px solid #1a1a33;"><p style="font-size:11px;color:#666;font-family:'JetBrains Mono',monospace;">&copy; 2026 Voss Neural Research LLC</p></footer>
+  <footer style="text-align:center;padding:20px;border-top:1px solid #1a1a33;">
+    <p style="font-size:11px;color:#666;font-family:'JetBrains Mono',monospace;">&copy; 2026 Voss Neural Research LLC
+    </p>
+  </footer>
 </body>
 
 </html>
