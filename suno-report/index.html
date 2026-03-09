@@ -7,10 +7,10 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>Suno Tracker Report — 71+ Hidden Trackers Exposed | Voss Neural Research</title>
     <meta
-        content="Independent forensic investigation exposing 71+ hidden trackers, cryptocurrency mining, session replay, and cross-device surveillance embedded in Suno.com. Full technical evidence and legal analysis."
+        content="Independent forensic investigation exposing 71+ hidden trackers, undisclosed proof-of-work computation, behavioral fingerprinting, session replay, and cross-device surveillance embedded in Suno.com. Full technical evidence and deobfuscated code analysis."
         name="description" />
     <meta
-        content="Suno, trackers, hCaptcha, crypto mining, session replay, Microsoft Clarity, privacy, forensic analysis, surveillance"
+        content="Suno, trackers, hCaptcha, proof-of-work, behavioral fingerprinting, session replay, Microsoft Clarity, privacy, forensic analysis, surveillance, deobfuscation"
         name="keywords" />
     <meta content="SUNO TRACKER REPORT — 71+ Hidden Services Exposed" property="og:title" />
     <meta
@@ -22,7 +22,7 @@
     <meta content="summary_large_image" name="twitter:card" />
     <meta content="Suno Tracker Report — 71+ Hidden Trackers Exposed" name="twitter:title" />
     <meta
-        content="Independent forensic investigation by Voss Neural Research reveals 71+ hidden trackers, crypto mining, and GPU abuse in Suno.com"
+        content="Independent forensic investigation by Voss Neural Research reveals 71+ hidden trackers, undisclosed PoW computation, behavioral fingerprinting, and GPU abuse in Suno.com"
         name="twitter:description" />
     <meta content="index, follow" name="robots" />
     <meta content="Voss Neural Research LLC" name="author" />
@@ -41,11 +41,11 @@
             },
             {
                 "@type": "TechArticle",
-                "headline": "Suno Tracker Report — 71+ Hidden Trackers, Crypto Mining, and GPU Abuse Exposed",
-                "description": "Independent forensic investigation exposing Suno.com's undisclosed 71+ tracker infrastructure, hCaptcha proof-of-work cryptocurrency mining, Microsoft Clarity session replay causing GPU compositor abuse, and incognito bypass mechanisms.",
+                "headline": "Suno Tracker Report — 71+ Hidden Trackers, Undisclosed Computation, and GPU Abuse Exposed",
+                "description": "Independent forensic investigation exposing Suno.com's undisclosed 71+ tracker infrastructure, self-hosted hCaptcha with proof-of-work computation, behavioral fingerprinting via custom bytecode VM, Microsoft Clarity session replay causing GPU compositor abuse, and incognito bypass via Private State Tokens.",
                 "url": "https://www.vossneuralresearch.com/suno-report/",
                 "datePublished": "2026-02-15",
-                "dateModified": "2026-03-07",
+                "dateModified": "2026-03-09",
                 "author": {"@id": "https://vossneuralresearch.com/#organization"},
                 "publisher": {"@id": "https://vossneuralresearch.com/#organization"},
                 "mentions": [
@@ -53,7 +53,7 @@
                     {"@type": "SoftwareApplication", "name": "hCaptcha"},
                     {"@type": "SoftwareApplication", "name": "Microsoft Clarity"}
                 ],
-                "keywords": "Suno tracker report, Suno privacy, Suno hidden trackers, Suno crypto mining, hCaptcha proof-of-work, Suno GPU abuse, AI music security"
+                "keywords": "Suno tracker report, Suno privacy, Suno hidden trackers, hCaptcha proof-of-work, hCaptcha deobfuscation, behavioral fingerprinting, Suno GPU abuse, AI music security, Private State Tokens"
             }
         ]
     }
@@ -666,9 +666,10 @@
 <body>
     <nav class="vnr-nav">
         <div class="vnr-nav-inner">
-            <a href="/" class="vnr-nav-logo"><img src="/vnr-logo.png" alt="VNR" style="height:44px;width:auto;"></a>
+            <a href="/" class="vnr-nav-logo"><img src="/CROP-vnr-logo.PNG" alt="VNR"
+                    style="height:44px;width:auto;"></a>
             <div class="vnr-nav-links">
-                <a href="/" class="active">VNR SCAN</a>
+                <a href="/" class="vnr-live-link">VNR LIVE</a>
                 <a href="/overview/">What AI Platforms Hide</a>
                 <a href="/overview/#research">Research</a>
                 <a href="/suno-report/">Tracker Report</a>
@@ -685,8 +686,8 @@
                 style="background:#10b981"></span>Marketing</a>
         <a class="snav" href="#advertising-pixels-amp-conversion-tracking"><span class="dot"
                 style="background:#ff4d4d"></span>Advertising Pixels</a>
-        <a class="snav" href="#cryptocurrency-mining-via-hcaptcha"><span class="dot"
-                style="background:#a78bfa"></span>Cryptocurrency</a>
+        <a class="snav" href="#hcaptcha-computational-exploitation"><span class="dot"
+                style="background:#a78bfa"></span>hCaptcha Deep Dive</a>
         <a class="snav" href="#identity-resolution-amp-cross-device-tracking"><span class="dot"
                 style="background:#ec4899"></span>Identity Resolution</a>
         <a class="snav" href="#ad-exchange-cookie-syncing"><span class="dot" style="background:#eab308"></span>Ad
@@ -717,7 +718,8 @@
                 <div class="report-badge">⚠ Independent Forensic Investigation</div>
                 <h1>SUNO <span>TRACKER</span> REPORT</h1>
                 <p class="subtitle">
-                    71+ hidden trackers, cryptocurrency mining, session replay, and cross-device surveillance
+                    71+ hidden trackers, undisclosed proof-of-work computation, behavioral fingerprinting, session
+                    replay, and cross-device surveillance
                     infrastructure
                     discovered running behind a music generation website.
                 </p>
@@ -742,8 +744,8 @@
                     <div class="stat-label">Profile Bloat</div>
                 </div>
                 <div class="stat-block">
-                    <div class="stat-number">100+</div>
-                    <div class="stat-label">Domains w/ Crypto PoW</div>
+                    <div class="stat-number">619</div>
+                    <div class="stat-label">Obfuscated Functions</div>
                 </div>
             </div>
             <!-- EXECUTIVE SUMMARY -->
@@ -772,16 +774,16 @@
                 </div>
                 <div class="callout" style="border-left-color: var(--orange);">
                     <p>
-                        <strong>Critical Discovery:</strong> hCaptcha's cryptocurrency proof-of-work infrastructure,
-                        accessed
-                        through Suno, wrote persistent data across <strong>100+ domains</strong> with Ethereum mainnet
-                        (chainId 0x1)
-                        and Binance blockchain references — with its logging level deliberately set to
-                        <strong>SILENT</strong>.
-                        This data <strong>survived incognito mode</strong>, re-seeding itself into the main browser
-                        profile
-                        even
-                        from private browsing sessions.
+                        <strong>Critical Discovery:</strong> hCaptcha is <strong>self-hosted on Suno's own
+                            subdomains</strong>
+                        to evade ad blockers and privacy tools. Our deobfuscation of the captured 300KB api.js script
+                        revealed
+                        a <strong>custom bytecode virtual machine</strong> with 619 obfuscated functions, 35,000+
+                        encoded instructions,
+                        and a full behavioral biometrics pipeline capturing mouse, touch, keyboard, and device motion
+                        data.
+                        The script uses <strong>Private State Tokens</strong> to track users across sessions —
+                        even in incognito mode.
                     </p>
                 </div>
             </section>
@@ -911,44 +913,93 @@
                     </div>
                 </div>
             </section>
-            <!-- CATEGORY: CRYPTO / HCAPTCHA -->
+            <!-- CATEGORY: HCAPTCHA DEEP DIVE -->
             <section class="section">
                 <div class="section-tag">Critical Finding</div>
-                <h2 id="cryptocurrency-mining-via-hcaptcha">Cryptocurrency Mining via hCaptcha</h2>
-                <p class="section-desc">The most alarming discovery. hCaptcha's "bot detection" runs proof-of-work
-                    computations using your CPU — the same mechanism used in cryptocurrency mining — with blockchain
-                    references to Ethereum mainnet and Binance.</p>
+                <h2 id="hcaptcha-computational-exploitation">hCaptcha Computational Exploitation</h2>
+                <p class="section-desc">The most alarming discovery. Suno self-hosts hCaptcha on its own subdomains to
+                    evade ad blockers, then runs invisible proof-of-work computations on your CPU — without disclosure
+                    or consent. Our deobfuscation of the captured 300KB script revealed a deeply obfuscated surveillance
+                    and computation framework.</p>
                 <div class="callout">
                     <p>
-                        hCaptcha's proof-of-work system wrote persistent data across <strong>100+ domains</strong> in
-                        browser
-                        LocalStorage. This data included <strong>Ethereum mainnet chainId (0x1)</strong> and
-                        <strong>Binance blockchain references</strong>. The logging level was deliberately set to
-                        <strong>SILENT</strong>, hiding all console output from the user. Most critically: this data
-                        <strong>survived incognito mode</strong>, re-seeding from private browsing sessions back into
-                        the
-                        main browser profile.
+                        VNR deobfuscated hCaptcha's captured <strong>api.js</strong> (300KB, minified) and found:
+                        a <strong>custom bytecode virtual machine</strong> with 67 opcodes, 35,000+ encoded
+                        instructions,
+                        and an XOR-shifted string table designed to prevent static analysis.
+                        The script runs <strong>SHA-256 proof-of-work challenges</strong> via SubtleCrypto and
+                        WebAssembly
+                        acceleration — the same computational technique used in cryptocurrency mining.
+                        It captures <strong>full behavioral biometrics</strong> (mouse, touch, keyboard, device motion)
+                        and uses <strong>Private State Tokens</strong> issued by <code>pst-issuer.hcaptcha.com</code>
+                        to track users across sessions, even in incognito mode.
                     </p>
                 </div>
                 <div class="tracker-grid">
                     <div class="tracker-card critical">
-                        <div class="tracker-name">hCaptcha PoW System</div>
-                        <div class="tracker-company">Intuition Machines</div>
-                        <div class="tracker-desc">Self-hosted on Suno's own subdomain to evade ad blockers. Runs
-                            continuous
-                            background proof-of-work computations consuming CPU cycles. Ethereum and Binance blockchain
-                            infrastructure references found in stored data.</div>
-                        <div class="tracker-domain">hcaptcha-endpoint-prod.suno.com • hcaptcha-imgs-prod.suno.com</div>
+                        <div class="tracker-name">Self-Hosted hCaptcha</div>
+                        <div class="tracker-company">Intuition Machines / Suno</div>
+                        <div class="tracker-desc">hCaptcha is served from Suno's own subdomains
+                            (<code>hcaptcha-endpoint-prod.suno.com</code>) to bypass ad blockers and privacy lists
+                            that block <code>*.hcaptcha.com</code>. This is a deliberate evasion tactic.</div>
+                        <div class="tracker-domain">hcaptcha-endpoint-prod.suno.com • hcaptcha-assets-prod.suno.com
+                        </div>
+                        <div class="impact-badge high">🔴 CRITICAL — BLOCKER EVASION</div>
+                    </div>
+                    <div class="tracker-card critical">
+                        <div class="tracker-name">Invisible PoW Computation</div>
+                        <div class="tracker-company">hCaptcha / Intuition Machines</div>
+                        <div class="tracker-desc">During song generation, an invisible challenge iframe runs
+                            SHA-256 proof-of-work computations via SubtleCrypto and WebAssembly
+                            acceleration — consuming CPU cycles without any visible UI or user consent.
+                            This is functionally identical to cryptocurrency mining techniques.</div>
+                        <div class="tracker-domain">SubtleCrypto.digest() • WebAssembly.instantiate()</div>
                         <div class="impact-badge high">🔴 CRITICAL — CPU EXPLOITATION</div>
                     </div>
                     <div class="tracker-card critical">
-                        <div class="tracker-name">Incognito Bypass</div>
+                        <div class="tracker-name">Custom Bytecode VM</div>
+                        <div class="tracker-company">hCaptcha / Intuition Machines</div>
+                        <div class="tracker-desc">The script contains a full virtual machine with 67 opcodes,
+                            35,000+ bytecode instructions, and an XOR-shifted encoded string table.
+                            619 functions are deliberately obfuscated to prevent security researchers
+                            from analyzing what the script actually does on your machine.</div>
+                        <div class="tracker-domain">619 obfuscated functions • 1,982 encoded strings</div>
+                        <div class="impact-badge high">🔴 CRITICAL — ANTI-ANALYSIS</div>
+                    </div>
+                    <div class="tracker-card critical">
+                        <div class="tracker-name">Behavioral Fingerprinting</div>
+                        <div class="tracker-company">hCaptcha / Intuition Machines</div>
+                        <div class="tracker-desc">Captures every mouse movement, touch event, keystroke,
+                            and device accelerometer/gyroscope reading into circular time buffers.
+                            This creates a unique biometric fingerprint of each user that persists
+                            across sessions. Also detects installed browser extensions by scanning
+                            stack traces for <code>chrome-extension://</code> URLs.</div>
+                        <div class="tracker-domain">38 addEventListener hooks • Motion/Touch/Key capture</div>
+                        <div class="impact-badge high">🔴 CRITICAL — BIOMETRIC PROFILING</div>
+                    </div>
+                    <div class="tracker-card critical">
+                        <div class="tracker-name">Private State Token Tracking</div>
                         <div class="tracker-company">hCaptcha / Suno</div>
-                        <div class="tracker-desc">Even a single visit to Suno in an incognito window rebuilt ~257 MB of
-                            tracker data and replanted the crypto PoW infrastructure into the main browser profile.
-                            Incognito provides zero protection.</div>
-                        <div class="tracker-domain">Cross-profile persistence mechanism</div>
-                        <div class="impact-badge high">🔴 CRITICAL — PRIVACY BYPASS</div>
+                        <div class="tracker-desc">Issues cryptographic Private State Tokens via
+                            <code>pst-issuer.hcaptcha.com</code> that persist across browsing sessions
+                            and survive incognito mode. Combined with Storage Access API requests,
+                            this creates a dual-layer persistence mechanism that works even when
+                            third-party cookies are blocked.
+                        </div>
+                        <div class="tracker-domain">pst-issuer.hcaptcha.com • Storage Access API</div>
+                        <div class="impact-badge high">🔴 CRITICAL — INCOGNITO BYPASS</div>
+                    </div>
+                    <div class="tracker-card critical">
+                        <div class="tracker-name">DOM API Surveillance</div>
+                        <div class="tracker-company">hCaptcha / Intuition Machines</div>
+                        <div class="tracker-desc">Wraps fundamental DOM APIs including
+                            <code>getElementById</code>, <code>querySelector</code>,
+                            <code>Element.click()</code>, and even <code>console.log</code>
+                            with Proxy objects that intercept calls from every other script
+                            on the page — effectively surveilling all JavaScript execution.
+                        </div>
+                        <div class="tracker-domain">Document.prototype methods • Proxy wrapping</div>
+                        <div class="impact-badge high">🔴 CRITICAL — PAGE SURVEILLANCE</div>
                     </div>
                 </div>
             </section>
@@ -1189,7 +1240,7 @@
                 <div class="legal-grid">
                     <div class="legal-card">
                         <h4>Computer Fraud &amp; Abuse Act (CFAA)</h4>
-                        <p>Unauthorized use of computing resources via hCaptcha's proof-of-work cryptocurrency mining
+                        <p>Unauthorized use of computing resources via hCaptcha's undisclosed proof-of-work computation
                             without informed consent.</p>
                     </div>
                     <div class="legal-card">
@@ -1205,8 +1256,9 @@
                     </div>
                     <div class="legal-card">
                         <h4>SC Computer Crime Act (§ 16-16-20)</h4>
-                        <p>South Carolina statute covering unauthorized use of computer resources — applicable to crypto
-                            PoW
+                        <p>South Carolina statute covering unauthorized use of computer resources — applicable to
+                            undisclosed
+                            PoW computation
                             via hCaptcha on the investigator's workstation.</p>
                     </div>
                 </div>

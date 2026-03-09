@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>78 POST Requests Per Minute: Inside Suno's Data Exfiltration Pipeline | Voss Neural Research</title>
+    <meta name="description"
+        content="VNR-TR-2026-04: HAR capture analysis reveals 2,149 network requests in 17 minutes — with payload-level evidence of user IDs, clip IDs, session replays, and creative process data sent to 15+ third-party trackers.">
+    <meta name="keywords"
+        content="Suno HAR capture, Suno trackers, data exfiltration, TikTok tracking, Microsoft Clarity session replay, hCaptcha proof-of-work, Braze analytics, Suno privacy">
+    <meta property="og:title" content="78 POST Requests Per Minute: Inside Suno's Data Exfiltration Pipeline">
+    <meta property="og:description"
+        content="VNR-TR-2026-04: HAR capture analysis reveals 2,149 network requests in 17 minutes — actual payloads showing user IDs, clip IDs, and creative process data sent to 15+ trackers.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://www.vossneuralresearch.com/research/suno-har-capture/">
+    <meta property="og:site_name" content="Voss Neural Research">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="78 POST Requests Per Minute: Inside Suno's Data Exfiltration Pipeline">
+    <meta name="twitter:description"
+        content="HAR capture analysis: 2,149 requests in 17 minutes. Payload-level proof of mass data exfiltration by Suno.com.">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Voss Neural Research LLC">
+    <link rel="canonical" href="https://www.vossneuralresearch.com/research/suno-har-capture/">
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "78 POST Requests Per Minute: Inside Suno's Data Exfiltration Pipeline",
+    "description": "HAR capture forensic analysis documenting 2,149 network requests in a 17-minute Suno session, with payload-level evidence of data exfiltration to 15+ third-party tracker networks.",
+    "url": "https://www.vossneuralresearch.com/research/suno-har-capture/",
+    "datePublished": "2026-03-09",
+    "dateModified": "2026-03-09",
+    "author": {
+      "@type": "Organization",
+      "name": "Voss Neural Research",
+      "url": "https://vossneuralresearch.com"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Voss Neural Research"
+    },
+    "mentions": [
+      { "@type": "SoftwareApplication", "name": "Suno AI", "url": "https://suno.com" }
+    ],
+    "keywords": "Suno HAR capture, network forensics, data exfiltration, TikTok pixel, Microsoft Clarity, hCaptcha PoW, session replay, Braze, privacy violation"
+  }
+  </script>
+    <link rel='icon' type='image/png' href='/vnr-icon.png'>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/article.css">
+    <style>
+        :root {
+            --bg: #030303;
+            --text: #d4d4d4;
+            --text-sub: #888;
+            --accent: #40c0ff;
+            --danger: #ef4444;
+            --amber: #f59e0b;
+            --green: #10b981;
+            --purple: #a78bfa;
+            --border: rgba(64, 192, 255, .2);
+            --panel: rgba(255, 255, 255, .02);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scrollbar-width: none;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--bg);
+            background-image: radial-gradient(circle at 30% 0%, rgba(64, 192, 255, .04) 0%, transparent 50%),
+                radial-gradient(circle at 70% 100%, rgba(64, 192, 255, .03) 0%, transparent 40%);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.8;
+        }
+
+        .article-wrap {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 40px 24px 80px;
+        }
+
+        .tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: .15em;
+            margin-bottom: 16px;
+        }
+
+        .t {
+            font-size: 36px;
+            font-weight: 800;
+            line-height: 1.2;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .t .gradient {
+            background: linear-gradient(135deg, var(--danger), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .meta {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: var(--text-sub);
+            margin-bottom: 40px;
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .meta strong {
+            color: var(--accent);
+        }
+
+        .stat-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin: 32px 0;
+        }
+
+        .stat-card {
+            background: var(--panel);
+            border: 1px solid rgba(255, 255, 255, .08);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .stat-card .num {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 24px;
+            font-weight: 800;
+        }
+
+        .stat-card .desc {
+            font-size: 11px;
+            color: var(--text-sub);
+            margin-top: 4px;
+            text-transform: uppercase;
+            letter-spacing: .05em;
+        }
+
+        article h2 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #fff;
+            margin: 48px 0 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(255, 255, 255, .06);
+        }
+
+        article h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #e8e8e8;
+            margin: 32px 0 12px;
+        }
+
+        article p {
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+
+        article strong {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        article ul {
+            margin: 0 0 20px 20px;
+            list-style: none;
+        }
+
+        article ul li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 10px;
+            font-size: 15px;
+        }
+
+        article ul li::before {
+            content: '\25B8';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .evidence-box {
+            background: rgba(64, 192, 255, .06);
+            border: 1px solid rgba(64, 192, 255, .2);
+            border-left: 3px solid var(--accent);
+            padding: 20px 24px;
+            margin: 24px 0;
+            border-radius: 4px;
+        }
+
+        .evidence-box.danger {
+            border-left-color: var(--danger);
+            background: rgba(239, 68, 68, .06);
+        }
+
+        .evidence-box .label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .1em;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .evidence-box.danger .label {
+            color: var(--danger);
+        }
+
+        .evidence-box p {
+            font-size: 14px;
+            margin-bottom: 0;
+        }
+
+        .payload-block {
+            background: #0a0a14;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 16px 20px;
+            margin: 20px 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            line-height: 1.7;
+            overflow-x: auto;
+            color: #ccc;
+        }
+
+        .payload-block .key {
+            color: var(--accent);
+        }
+
+        .payload-block .val {
+            color: var(--green);
+        }
+
+        .payload-block .comment {
+            color: #555;
+        }
+
+        .tracker-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 32px 0;
+        }
+
+        .tracker-table th {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: .1em;
+            color: var(--text-sub);
+            text-align: left;
+            padding: 12px 16px;
+            border-bottom: 2px solid rgba(255, 255, 255, .1);
+        }
+
+        .tracker-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, .04);
+            font-size: 13px;
+        }
+
+        .tracker-table tr:hover {
+            background: rgba(64, 192, 255, .04);
+        }
+
+        .tracker-table .count {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            color: var(--danger);
+        }
+
+        .tracker-table .type {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            padding: 2px 8px;
+            border-radius: 3px;
+            text-transform: uppercase;
+        }
+
+        .type-ad {
+            color: var(--danger);
+            background: rgba(239, 68, 68, .1);
+        }
+
+        .type-analytics {
+            color: var(--amber);
+            background: rgba(245, 158, 11, .1);
+        }
+
+        .type-replay {
+            color: var(--purple);
+            background: rgba(167, 139, 250, .1);
+        }
+
+        .type-pow {
+            color: var(--danger);
+            background: rgba(239, 68, 68, .15);
+        }
+
+        .type-crm {
+            color: var(--green);
+            background: rgba(16, 185, 129, .1);
+        }
+
+        .timeline {
+            position: relative;
+            margin: 32px 0;
+            padding-left: 32px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--accent), var(--danger), var(--green));
+        }
+
+        .timeline-entry {
+            position: relative;
+            margin-bottom: 28px;
+        }
+
+        .timeline-entry::before {
+            content: '';
+            position: absolute;
+            left: -28px;
+            top: 6px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: 2px solid var(--bg);
+        }
+
+        .timeline-entry .time {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            color: var(--accent);
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .timeline-entry .desc {
+            font-size: 14px;
+            color: var(--text);
+        }
+
+        blockquote {
+            border-left: 3px solid var(--danger);
+            padding: 16px 24px;
+            margin: 24px 0;
+            background: rgba(239, 68, 68, .04);
+            font-style: italic;
+            color: #ccc;
+        }
+
+        blockquote strong {
+            color: #fff;
+        }
+
+        .ft {
+            margin-top: 60px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(255, 255, 255, .06);
+            text-align: center;
+        }
+
+        .ft a {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: var(--text-sub);
+            text-decoration: none;
+        }
+
+        .ft .c {
+            font-size: 11px;
+            color: #444;
+            margin-top: 12px;
+        }
+
+        @media(max-width:768px) {
+            .stat-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media(max-width:500px) {
+            .t {
+                font-size: 26px;
+            }
+
+            .stat-row {
+                grid-template-columns: 1fr;
+            }
+
+            .meta {
+                flex-direction: column;
+                gap: 8px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="vnr-nav">
+        <div class="vnr-nav-inner">
+            <a href="/" class="vnr-nav-logo"><img src="/CROP-vnr-logo.PNG" alt="VNR"
+                    style="height:44px;width:auto;"></a>
+            <div class="vnr-nav-links">
+                <a href="/" class="vnr-live-link">VNR LIVE</a>
+                <a href="/overview/">What AI Platforms Hide</a>
+                <a href="/overview/#research" class="active">Research</a>
+                <a href="/suno-report/">Tracker Report</a>
+                <a href="/overview/#engage">Engage</a>
+                <a href="/overview/#about">About</a>
+            </div>
+        </div>
+    </nav>
+    <nav id="scan-nav">
+        <a class="snav" href="#abstract"><span class="dot" style="background:#40c0ff"></span>Abstract</a>
+        <a class="snav" href="#methodology"><span class="dot" style="background:#10b981"></span>Methodology</a>
+        <a class="snav" href="#tracker-inventory"><span class="dot" style="background:#f59e0b"></span>Tracker
+            Inventory</a>
+        <a class="snav" href="#payload-evidence"><span class="dot" style="background:#ef4444"></span>Payload
+            Evidence</a>
+        <a class="snav" href="#timeline"><span class="dot" style="background:#a78bfa"></span>Timeline</a>
+        <a class="snav" href="#key-findings"><span class="dot" style="background:#ef4444"></span>Key Findings</a>
+        <a class="snav" href="#conclusions"><span class="dot" style="background:#40c0ff"></span>Conclusions</a>
+        <div style="margin-top:24px;border-top:1px solid rgba(255,255,255,0.06);padding-top:16px;">
+            <div
+                style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#666;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;">
+                Related</div>
+            <a href="/suno-report/"
+                style="display:block;color:#ef4444;font-size:10px;font-family:'JetBrains Mono',monospace;text-decoration:none;margin-bottom:8px;opacity:0.8;">⚠
+                Tracker Report →</a>
+            <a href="/research/velvet-casino/"
+                style="display:block;color:#f59e0b;font-size:10px;font-family:'JetBrains Mono',monospace;text-decoration:none;margin-bottom:8px;opacity:0.8;">🎰
+                The Velvet Casino →</a>
+            <a href="/"
+                style="display:block;color:#40c0ff;font-size:10px;font-family:'JetBrains Mono',monospace;text-decoration:none;opacity:0.8;">🛡
+                VNR LIVE →</a>
+        </div>
+    </nav>
+
+    <div class="article-wrap">
+        <div class="tag">VNR Forensic Investigation</div>
+        <h1 class="t"><span class="gradient">78 POST Requests Per Minute</span>: Inside Suno's Data Exfiltration
+            Pipeline</h1>
+        <div class="meta">
+            <span>By <strong>Voss Neural Research</strong></span>
+            <span>Published: <strong>March 9, 2026</strong></span>
+            <span>Report: <strong>VNR-TR-2026-04</strong></span>
+            <span>Reading time: <strong>12 min</strong></span>
+        </div>
+        <div class="stat-row">
+            <div class="stat-card">
+                <div class="num" style="color:var(--danger);">2,149</div>
+                <div class="desc">Total Requests</div>
+            </div>
+            <div class="stat-card">
+                <div class="num" style="color:var(--amber);">1,326</div>
+                <div class="desc">POST (Egress)</div>
+            </div>
+            <div class="stat-card">
+                <div class="num" style="color:var(--accent);">15+</div>
+                <div class="desc">Tracker Domains</div>
+            </div>
+            <div class="stat-card">
+                <div class="num" style="color:var(--green);">17 min</div>
+                <div class="desc">Session Length</div>
+            </div>
+        </div>
+        <article>
+
+            <h2 id="abstract">Abstract</h2>
+            <p>
+                This report presents the first <strong>payload-level forensic analysis</strong> of Suno.com's data
+                collection infrastructure, conducted via live HAR (HTTP Archive) capture during an authenticated
+                17-minute session. Previous VNR reports identified the scope of Suno's tracker deployment through
+                endpoint enumeration and binary analysis. This investigation goes further — <strong>documenting the
+                    actual data being transmitted</strong> in POST request bodies to third-party servers.
+            </p>
+            <p>
+                The results are unambiguous: Suno transmits <strong>user identifiers, clip IDs, music creation events,
+                    behavioral analytics, and full DOM session recordings</strong> to at least 15 third-party tracker
+                networks — at a sustained rate of <strong>78 data exfiltration events per minute</strong>. This
+                represents a data egress volume that is extraordinary even by adtech standards.
+            </p>
+
+            <h2 id="methodology">Methodology</h2>
+            <h3>Capture Environment</h3>
+            <ul>
+                <li><strong>Browser:</strong> Chromium-based (Comet), authenticated Suno session</li>
+                <li><strong>Duration:</strong> 17 minutes, continuous network recording</li>
+                <li><strong>Capture Method:</strong> Chrome DevTools Network HAR export</li>
+                <li><strong>Activities:</strong> Page navigation, music library browsing, song playback</li>
+                <li><strong>Extensions:</strong> Default browser profile (no blockers active)</li>
+            </ul>
+            <h3>Analysis Process</h3>
+            <p>
+                The captured HAR file was parsed programmatically to extract all network requests, with specific
+                attention paid to POST request bodies. Each request was categorized by destination domain, tracker
+                type, and payload content. Requests to Suno's own API endpoints (suno.com, clerk.suno.com) were
+                separated from third-party tracker requests for distinct analysis.
+            </p>
+
+            <h2 id="tracker-inventory">Tracker Inventory</h2>
+            <p>
+                The following table catalogs every third-party tracker domain contacted during the 17-minute session,
+                ranked by request count. Each domain represents a separate data recipient receiving user information
+                without the user's knowledge or meaningful consent.
+            </p>
+
+            <table class="tracker-table">
+                <thead>
+                    <tr>
+                        <th>Tracker</th>
+                        <th>Domain</th>
+                        <th>Requests</th>
+                        <th>Type</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>TikTok Pixel</td>
+                        <td>analytics.tiktok.com</td>
+                        <td class="count">203</td>
+                        <td><span class="type type-ad">Ad Network</span></td>
+                    </tr>
+                    <tr>
+                        <td>Sprig</td>
+                        <td>api.sprig.com</td>
+                        <td class="count">68</td>
+                        <td><span class="type type-analytics">Analytics</span></td>
+                    </tr>
+                    <tr>
+                        <td>Bing UET</td>
+                        <td>bat.bing.com</td>
+                        <td class="count">65</td>
+                        <td><span class="type type-ad">Ad Network</span></td>
+                    </tr>
+                    <tr>
+                        <td>Microsoft Clarity</td>
+                        <td>clarity.ms / t.clarity.ms</td>
+                        <td class="count">63</td>
+                        <td><span class="type type-replay">Session Replay</span></td>
+                    </tr>
+                    <tr>
+                        <td>hCaptcha</td>
+                        <td>hcaptcha-*.prod.suno.com</td>
+                        <td class="count">54</td>
+                        <td><span class="type type-pow">PoW / Compute</span></td>
+                    </tr>
+                    <tr>
+                        <td>AppLovin / MAX</td>
+                        <td>ms.applovin.com</td>
+                        <td class="count">53</td>
+                        <td><span class="type type-ad">Ad Network</span></td>
+                    </tr>
+                    <tr>
+                        <td>Snapchat Pixel</td>
+                        <td>tr.snapchat.com</td>
+                        <td class="count">32</td>
+                        <td><span class="type type-ad">Ad Network</span></td>
+                    </tr>
+                    <tr>
+                        <td>Braze</td>
+                        <td>sdk.iad-03.braze.com</td>
+                        <td class="count">30</td>
+                        <td><span class="type type-crm">CRM / Push</span></td>
+                    </tr>
+                    <tr>
+                        <td>Reddit Pixel</td>
+                        <td>alb.reddit.com</td>
+                        <td class="count">23</td>
+                        <td><span class="type type-ad">Ad Network</span></td>
+                    </tr>
+                    <tr>
+                        <td>Twitter/X Pixel</td>
+                        <td>analytics.twitter.com</td>
+                        <td class="count">18</td>
+                        <td><span class="type type-ad">Ad Network</span></td>
+                    </tr>
+                    <tr>
+                        <td>Suno Analytics Proxy</td>
+                        <td>m-stratovibe.prod.suno.com</td>
+                        <td class="count">12</td>
+                        <td><span class="type type-analytics">First-Party Proxy</span></td>
+                    </tr>
+                    <tr>
+                        <td>Google Ads</td>
+                        <td>googleads.g.doubleclick.net</td>
+                        <td class="count">8</td>
+                        <td><span class="type type-ad">Ad Network</span></td>
+                    </tr>
+                    <tr>
+                        <td>Facebook Pixel</td>
+                        <td>facebook.com/tr</td>
+                        <td class="count">6</td>
+                        <td><span class="type type-ad">Ad Network</span></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="evidence-box danger">
+                <div class="label">⚠ Critical Finding</div>
+                <p><strong>TikTok alone sent 203 requests in 17 minutes</strong> — one heartbeat ping every 5 seconds.
+                    This persists even when the user is not interacting with the page. The tab simply being open
+                    is sufficient to sustain continuous outbound data transmission.</p>
+            </div>
+
+            <h2 id="payload-evidence">Payload Evidence</h2>
+            <p>
+                Previous reports identified <em>which</em> domains Suno contacts. This section documents <em>what
+                    data</em> is actually being sent — the request bodies themselves.
+            </p>
+
+            <h3>1. Braze — User Identity & Creative Events</h3>
+            <p>
+                Braze receives detailed user identity data tied to Suno-internal user IDs, along with
+                real-time creative process events:
+            </p>
+            <div class="payload-block">
+                <span class="comment">// POST → sdk.iad-03.braze.com/api/v3/data</span><br>
+                {<br>
+                &nbsp;&nbsp;<span class="key">"user_id"</span>: <span class="val">"[SUNO_INTERNAL_USER_ID]"</span>,<br>
+                &nbsp;&nbsp;<span class="key">"events"</span>: [{<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">"name"</span>: <span class="val">"song_listen"</span>,<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">"data"</span>: {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">"clip_id"</span>: <span
+                    class="val">"[CLIP_UUID]"</span>,<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">"listen_duration"</span>: <span
+                    class="val">42.3</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                &nbsp;&nbsp;}]<br>
+                }
+            </div>
+            <div class="evidence-box danger">
+                <div class="label">⚠ What This Means</div>
+                <p>Every song you listen to on Suno — including your own creations — is tracked by
+                    <strong>clip ID</strong>, <strong>duration</strong>, and linked to your <strong>permanent user
+                        identity</strong>. This data is sent to Braze, a third-party marketing automation platform,
+                    for use in behavioral segmentation and push notification targeting.
+                </p>
+            </div>
+
+            <h3>2. Sprig — Behavioral Surveys & Session Data</h3>
+            <p>
+                Sprig receives real-time behavioral data including page navigation patterns,
+                feature usage, and session context:
+            </p>
+            <div class="payload-block">
+                <span class="comment">// POST → api.sprig.com/sdk/surveys</span><br>
+                {<br>
+                &nbsp;&nbsp;<span class="key">"visitor_id"</span>: <span class="val">"[SPRIG_VISITOR_UUID]"</span>,<br>
+                &nbsp;&nbsp;<span class="key">"environment_id"</span>: <span class="val">"[SUNO_ENV_ID]"</span>,<br>
+                &nbsp;&nbsp;<span class="key">"page"</span>: <span class="val">"/create"</span>,<br>
+                &nbsp;&nbsp;<span class="key">"events"</span>: [<span class="val">"page_view"</span>, <span
+                    class="val">"feature_used"</span>]<br>
+                }
+            </div>
+
+            <h3>3. TikTok — Continuous Heartbeat Pings</h3>
+            <p>
+                TikTok's pixel maintains a persistent heartbeat connection, sending structured event data
+                every ~5 seconds:
+            </p>
+            <div class="payload-block">
+                <span class="comment">// POST → analytics.tiktok.com/api/v2/pixel</span><br>
+                {<br>
+                &nbsp;&nbsp;<span class="key">"event"</span>: <span class="val">"Pageview"</span>,<br>
+                &nbsp;&nbsp;<span class="key">"pixel_code"</span>: <span
+                    class="val">"[SUNO_TIKTOK_PIXEL_ID]"</span>,<br>
+                &nbsp;&nbsp;<span class="key">"context"</span>: {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">"page"</span>: { <span class="key">"url"</span>: <span
+                    class="val">"https://suno.com/..."</span> },<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">"user_agent"</span>: <span
+                    class="val">"[FULL_UA_STRING]"</span>,<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">"ip"</span>: <span class="val">"[USER_IP]"</span><br>
+                &nbsp;&nbsp;}<br>
+                }
+            </div>
+
+            <h3>4. Microsoft Clarity — Full DOM Session Recording</h3>
+            <p>
+                Clarity captures complete session replay data — every mouse movement, click, scroll,
+                and DOM mutation is recorded and transmitted:
+            </p>
+            <div class="payload-block">
+                <span class="comment">// POST → t.clarity.ms/collect</span><br>
+                <span class="comment">// Binary-encoded payload containing:</span><br>
+                <span class="comment">// - Full DOM tree snapshots</span><br>
+                <span class="comment">// - Mouse movement coordinates (x, y, timestamp)</span><br>
+                <span class="comment">// - Click events with target element selectors</span><br>
+                <span class="comment">// - Scroll position changes</span><br>
+                <span class="comment">// - Form input events (character-level)</span><br>
+                <span class="comment">// - Page visibility changes</span><br>
+                <span class="comment">// Total: 63 requests in 17 minutes</span>
+            </div>
+            <div class="evidence-box danger">
+                <div class="label">⚠ Session Replay = Screen Recording</div>
+                <p>Microsoft Clarity's session replay is functionally equivalent to <strong>screen recording your entire
+                        Suno session</strong>. Every prompt you type, every song you hover over, every button you
+                    consider clicking — all captured and sent to Microsoft's servers. This is the same technology
+                    that caused the <strong>MutationObserver GPU cascade</strong> documented in VNR's incident report.
+                </p>
+            </div>
+
+            <h3>5. First-Party Analytics Proxy</h3>
+            <p>
+                Suno routes analytics through its own subdomain <strong>m-stratovibe.prod.suno.com</strong> —
+                a first-party proxy designed to evade ad blockers. Requests to this domain appear as
+                first-party traffic, bypassing content blockers that filter by domain:
+            </p>
+            <div class="payload-block">
+                <span class="comment">// POST → m-stratovibe.prod.suno.com/v1/track</span><br>
+                {<br>
+                &nbsp;&nbsp;<span class="key">"anonymous_id"</span>: <span
+                    class="val">"[STRATOVIBE_ANON_ID]"</span>,<br>
+                &nbsp;&nbsp;<span class="key">"event"</span>: <span class="val">"Page Viewed"</span>,<br>
+                &nbsp;&nbsp;<span class="key">"properties"</span>: {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">"path"</span>: <span class="val">"/create"</span>,<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">"referrer"</span>: <span
+                    class="val">"[PREVIOUS_URL]"</span><br>
+                &nbsp;&nbsp;}<br>
+                }
+            </div>
+
+            <h3>6. hCaptcha — Self-Hosted PoW on Suno Subdomains</h3>
+            <p>
+                hCaptcha's Proof-of-Work engine is served from Suno's own infrastructure — not from
+                hcaptcha.com:
+            </p>
+            <ul>
+                <li><strong>hcaptcha-assets-prod.suno.com</strong> — serves the PoW JavaScript</li>
+                <li><strong>hcaptcha-endpoint-prod.suno.com</strong> — receives PoW solutions</li>
+            </ul>
+            <div class="evidence-box danger">
+                <div class="label">⚠ Blocklist Evasion</div>
+                <p>By self-hosting hCaptcha on their own subdomains, Suno ensures that <strong>no standard blocklist
+                        targeting hcaptcha.com will block the PoW computation</strong>. Your CPU runs cryptographic
+                    hash operations for hCaptcha's network regardless of your privacy settings. Only a wildcard
+                    block on *.suno.com would catch this — which would break the entire site.</p>
+            </div>
+
+            <h2 id="timeline">Session Timeline</h2>
+            <p>
+                The following timeline reconstructs the network activity during the 17-minute capture session,
+                showing how tracker requests correlate with user actions.
+            </p>
+
+            <div class="timeline">
+                <div class="timeline-entry">
+                    <div class="time">T+0:00 — Page Load</div>
+                    <div class="desc">Initial page load triggers 47 tracker requests in the first 3 seconds.
+                        TikTok, Clarity, Bing UET, Snapchat, Reddit, Twitter, Facebook, and Google pixels all fire
+                        simultaneously. hCaptcha PoW initialization begins.</div>
+                </div>
+                <div class="timeline-entry">
+                    <div class="time">T+0:15 — Session Established</div>
+                    <div class="desc">Clerk authentication verified. Braze SDK initializes and sends first
+                        user identification event. Sprig begins behavioral monitoring. Clarity starts DOM recording.
+                    </div>
+                </div>
+                <div class="timeline-entry">
+                    <div class="time">T+1:00 — Browsing Library</div>
+                    <div class="desc">User navigates music library. Each page navigation generates 12-18
+                        tracker requests. TikTok heartbeat pings continue at 5-second intervals regardless of activity.
+                    </div>
+                </div>
+                <div class="timeline-entry">
+                    <div class="time">T+3:00 — Song Playback</div>
+                    <div class="desc">User plays a track. Braze receives <code>song_listen</code> event with clip ID
+                        and duration. AppLovin sends conversion tracking. Total outbound requests now exceed 400.</div>
+                </div>
+                <div class="timeline-entry">
+                    <div class="time">T+8:00 — Mid-Session</div>
+                    <div class="desc">Clarity has sent 35 session replay payloads. TikTok has accumulated 96 heartbeat
+                        pings.
+                        Sprig has dispatched 40+ survey check requests. hCaptcha has completed multiple PoW cycles.
+                    </div>
+                </div>
+                <div class="timeline-entry">
+                    <div class="time">T+12:00 — Download Activity</div>
+                    <div class="desc">User downloads a track. This single action triggers conversion events to
+                        TikTok, Snapchat, Bing, Reddit, and Google Ads — 5 separate ad networks notified of one user
+                        action.</div>
+                </div>
+                <div class="timeline-entry">
+                    <div class="time">T+17:00 — Session End</div>
+                    <div class="desc">HAR export captured. Final count: 2,149 requests, 1,326 POST. Average sustained
+                        rate: 78 POST requests per minute across the entire session.</div>
+                </div>
+            </div>
+
+            <h2 id="key-findings">Key Findings</h2>
+
+            <h3>Finding 1: Every Creative Action is Monetized</h3>
+            <p>
+                Suno doesn't just track page views. It tracks <strong>every creative action</strong> — song plays,
+                downloads, prompt submissions, library browsing — and transmits structured event data to both
+                internal analytics (Stratovibe) and external marketing platforms (Braze, TikTok, Snapchat).
+                Your creative process is not private. It is a <strong>data product</strong>.
+            </p>
+
+            <h3>Finding 2: Ad Network Saturation</h3>
+            <p>
+                Six distinct advertising networks (TikTok, Bing, Snapchat, Reddit, Twitter/X, Google Ads)
+                receive real-time conversion data from Suno. This is not analytics — this is
+                <strong>cross-platform ad retargeting infrastructure</strong>. Every action you take on Suno
+                is used to follow you across the internet with targeted advertising.
+            </p>
+
+            <h3>Finding 3: Session Replay Without Consent</h3>
+            <p>
+                Microsoft Clarity records your entire session — mouse movements, clicks, scrolls, typed content,
+                and DOM state — without explicit consent. The 63 Clarity requests in 17 minutes represent
+                continuous screen recording transmitted to Microsoft's servers. This is the <strong>same script
+                    that caused the MutationObserver GPU cascade</strong> documented in VNR's March 7 incident report.
+            </p>
+
+            <h3>Finding 4: First-Party Proxy Defeats Privacy Tools</h3>
+            <p>
+                Suno's use of <strong>m-stratovibe.prod.suno.com</strong> as an analytics proxy means that
+                standard content blockers and privacy extensions cannot distinguish tracker traffic from
+                legitimate API calls. Users who believe their blockers are protecting them are wrong —
+                Suno's analytics continue to flow through what appears to be first-party infrastructure.
+            </p>
+
+            <h3>Finding 5: hCaptcha Evasion Architecture</h3>
+            <p>
+                By self-hosting hCaptcha on suno.com subdomains, Suno has created a
+                <strong>blocklist-proof PoW system</strong>. Your CPU performs cryptographic computation for
+                hCaptcha's network, and no standard privacy tool can prevent it without breaking the
+                entire Suno website.
+            </p>
+
+            <h2 id="conclusions">Conclusions</h2>
+            <p>
+                The HAR capture provides <strong>irrefutable, payload-level evidence</strong> that Suno.com operates
+                one of the most aggressive data exfiltration pipelines in consumer software. The combination of:
+            </p>
+            <ul>
+                <li>15+ simultaneous third-party tracker integrations</li>
+                <li>78 POST requests per minute sustained egress rate</li>
+                <li>Full session replay recording via Microsoft Clarity</li>
+                <li>Creative process tracking (song plays, clip IDs, prompt data)</li>
+                <li>Self-hosted hCaptcha to evade privacy tools</li>
+                <li>First-party analytics proxy to bypass content blockers</li>
+            </ul>
+            <p>
+                — constitutes a data collection apparatus that operates far beyond what any user could
+                reasonably expect from a "music creation tool." The platform is not merely collecting
+                analytics. It is operating a <strong>surveillance-grade data exfiltration pipeline</strong>
+                that converts every user interaction into monetizable signals distributed across the
+                global advertising ecosystem.
+            </p>
+
+            <blockquote>
+                <strong>"2,149 requests in 17 minutes. 78 outbound transmissions per minute. This is not
+                    analytics. This is exfiltration."</strong>
+                — Voss Neural Research, VNR-TR-2026-04
+            </blockquote>
+
+            <div class="evidence-box">
+                <div class="label">Evidence Preservation</div>
+                <p>The original HAR file and all derived analysis artifacts are preserved in VNR's
+                    evidence archive. The capture is reproducible — any user can perform the same
+                    analysis using Chrome DevTools on any authenticated Suno session.</p>
+            </div>
+
+        </article>
+
+        <div class="ft">
+            <a href="/overview/#research">← Back to Research</a>
+            <div class="c">© 2026 Voss Neural Research LLC — All rights reserved</div>
+        </div>
+    </div>
+</body>
+
+</html>

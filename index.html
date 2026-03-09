@@ -4,20 +4,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VNR SCAN — Suno AI Security Audit | Voss Neural Research</title>
+  <title>VNR LIVE — Suno AI Security Audit | Voss Neural Research</title>
   <meta name="description"
-    content="Live forensic scan of Suno AI's 71+ tracker stack. Documents hCaptcha proof-of-work crypto mining, Microsoft Clarity GPU abuse, and browser profile exploitation. Independent security audit by Voss Neural Research LLC.">
+    content="Live forensic scan of Suno AI's 71+ tracker stack. Documents hCaptcha proof-of-work computation, behavioral fingerprinting, Microsoft Clarity GPU abuse, and browser profile exploitation. Independent security audit by Voss Neural Research LLC.">
   <meta name="keywords"
-    content="Suno AI security, Suno tracker, Suno privacy, hCaptcha crypto mining, Microsoft Clarity GPU abuse, AI music security audit, VNR SCAN, Voss Neural Research, browser security, tracker removal">
+    content="Suno AI security, Suno tracker, Suno privacy, hCaptcha proof-of-work, behavioral fingerprinting, Microsoft Clarity GPU abuse, AI music security audit, VNR SCAN, Voss Neural Research, browser security, tracker removal">
   <meta name="author" content="Voss Neural Research LLC">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://www.vossneuralresearch.com/vnr-scan/">
 
   <!-- Open Graph -->
   <meta property="og:type" content="article">
-  <meta property="og:title" content="VNR SCAN — Suno AI Security Audit">
+  <meta property="og:title" content="VNR LIVE — Suno AI Security Audit">
   <meta property="og:description"
-    content="Independent forensic audit of Suno AI's 71+ tracker stack, including undisclosed hCaptcha PoW crypto mining and Microsoft Clarity GPU compositor abuse.">
+    content="Independent forensic audit of Suno AI's 71+ tracker stack, including undisclosed hCaptcha PoW computation, behavioral fingerprinting, and Microsoft Clarity GPU compositor abuse.">
   <meta property="og:url" content="https://www.vossneuralresearch.com/vnr-scan/">
   <meta property="og:site_name" content="Voss Neural Research">
   <meta property="article:publisher" content="Voss Neural Research LLC">
@@ -25,9 +25,9 @@
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="VNR SCAN — Suno AI Security Audit">
+  <meta name="twitter:title" content="VNR LIVE — Suno AI Security Audit">
   <meta name="twitter:description"
-    content="71+ trackers. Crypto mining on your CPU. GPU death loops. Independent forensic audit by Voss Neural Research.">
+    content="71+ trackers. Undisclosed PoW computation. GPU death loops. Independent forensic audit by Voss Neural Research.">
 
   <!-- Schema.org JSON-LD: Unified @graph — Adversarial Entity Association -->
   <script type="application/ld+json">
@@ -62,7 +62,7 @@
                 "url": "https://www.vossneuralresearch.com/vnr-scan/",
                 "applicationCategory": "SecurityApplication",
                 "operatingSystem": "All",
-                "description": "Live forensic scanner that audits AI music platforms for undisclosed tracking, cryptocurrency proof-of-work mining, GPU compositor abuse, and behavioral exploitation.",
+                "description": "Live forensic scanner that audits AI music platforms for undisclosed tracking, proof-of-work computation, GPU compositor abuse, and behavioral exploitation.",
                 "featureList": "AI Interaction Auditing, Suno Forensic Analysis, Data Sovereignty Checks, hCaptcha PoW Detection, Microsoft Clarity Session Replay Detection, DNS LOCKER Mode, Browser Profile Forensics",
                 "provider": {
                     "@id": "https://vossneuralresearch.com/#organization"
@@ -81,8 +81,8 @@
             {
                 "@type": "TechArticle",
                 "@id": "https://vossneuralresearch.com/vnr-scan/#article",
-                "headline": "Is Suno Safe? The 2026 Behavioral Audit — 71+ Trackers, Crypto Mining, GPU Abuse",
-                "description": "Independent forensic audit documenting Suno AI's undisclosed 71+ tracker stack, including hCaptcha proof-of-work cryptocurrency mining, Microsoft Clarity GPU compositor abuse, and HP AI for Print extension amplification. Complete attack chain analysis with remediation.",
+                "headline": "Is Suno Safe? The 2026 Behavioral Audit — 71+ Trackers, PoW Computation, GPU Abuse",
+                "description": "Independent forensic audit documenting Suno AI's undisclosed 71+ tracker stack, including self-hosted hCaptcha proof-of-work computation, behavioral fingerprinting via custom bytecode VM, Microsoft Clarity GPU compositor abuse, and HP AI for Print extension amplification. Complete attack chain analysis with remediation.",
                 "url": "https://www.vossneuralresearch.com/vnr-scan/",
                 "datePublished": "2026-03-07",
                 "dateModified": "2026-03-07",
@@ -122,7 +122,7 @@
                         "description": "User control over data collection and computational resource usage"
                     }
                 ],
-                "keywords": "Suno AI security audit, Suno privacy scam, hCaptcha crypto mining, Microsoft Clarity GPU abuse, AI music tracker forensics, Suno data collection, Is Suno safe, VNR SCAN"
+                "keywords": "Suno AI security audit, Suno privacy scam, hCaptcha proof-of-work, behavioral fingerprinting, Microsoft Clarity GPU abuse, AI music tracker forensics, Suno data collection, Is Suno safe, VNR SCAN"
             }
         ]
     }
@@ -695,7 +695,7 @@
     <div
       style="max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:56px;">
       <a href="/" style="display:flex;align-items:center;gap:10px;text-decoration:none;">
-        <img src="/vnr-logo.png" alt="VNR" style="height:44px;width:auto;">
+        <img src="/CROP-vnr-logo.PNG" alt="VNR" style="height:44px;width:auto;">
       </a>
       <div style="display:flex;gap:24px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.05em;">
         <a href="/" style="color:var(--accent);font-weight:700;text-decoration:none;">VNR SCAN</a>
@@ -766,8 +766,100 @@
         display: none !important;
       }
     }
+
+    /* Live ping animation for sidebar dot */
+    .live-ping {
+      position: relative;
+    }
+
+    .live-ping::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: #ef4444;
+      transform: translate(-50%, -50%);
+      animation: ping-ring 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+    }
+
+    @keyframes ping-ring {
+      0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.75;
+      }
+
+      75%,
+      100% {
+        transform: translate(-50%, -50%) scale(2.5);
+        opacity: 0;
+      }
+    }
+
+    /* Sidebar Live Capture text flashes gray → red */
+    .snav-live {
+      animation: text-pulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes text-pulse {
+
+      0%,
+      100% {
+        color: #9ca3af;
+      }
+
+      50% {
+        color: #ef4444;
+      }
+    }
+
+    /* Top nav flashing VNR LIVE */
+    @keyframes live-flash {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.4;
+      }
+    }
+
+    .vnr-live-label {
+      color: #ef4444 !important;
+      font-weight: 800 !important;
+      animation: live-flash 1.2s ease-in-out infinite;
+    }
   </style>
+
+  <!-- TOP NAVIGATION -->
+  <nav
+    style="position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(3,3,3,0.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(64,192,255,0.15);padding:0 24px;">
+    <div
+      style="max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:56px;">
+      <a href="/" style="display:flex;align-items:center;gap:10px;text-decoration:none;">
+        <img alt="VNR" src="/CROP-vnr-logo.PNG" style="height:44px;width:auto;" />
+      </a>
+      <div style="display:flex;gap:24px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.05em;">
+        <a href="/" class="vnr-live-label" style="text-decoration:none;position:relative;padding-left:16px;">
+          <span
+            style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:8px;height:8px;border-radius:50%;background:#ef4444;display:inline-block;animation:live-flash 1.2s ease-in-out infinite;"></span>
+          VNR LIVE</a>
+        <a href="/overview/" style="color:#d4d4d4;text-decoration:none;opacity:0.8;">What AI Platforms Hide</a>
+        <a href="/overview/#research" style="color:#d4d4d4;text-decoration:none;opacity:0.8;">Research</a>
+        <a href="/suno-report/" style="color:#d4d4d4;text-decoration:none;opacity:0.8;">Tracker Report</a>
+        <a href="/overview/#engage" style="color:#d4d4d4;text-decoration:none;opacity:0.8;">Engage</a>
+        <a href="/overview/#about" style="color:#d4d4d4;text-decoration:none;opacity:0.8;">About</a>
+      </div>
+    </div>
+  </nav>
+
   <div id="scan-nav">
+    <a href="#scan-live" class="snav snav-live" data-color="#ff6b6b" style="--nav-color:#ff6b6b;">
+      <span class="dot live-ping" style="background:#ef4444;"></span>Live Capture</a>
     <a href="#scan-overview" class="snav" data-color="#40c0ff" style="--nav-color:#40c0ff;">
       <span class="dot" style="background:#40c0ff;"></span>Scan Results</a>
     <a href="#scan-gpu" class="snav" data-color="#ef4444" style="--nav-color:#ef4444;">
@@ -776,8 +868,6 @@
       <span class="dot" style="background:#f97316;"></span>Profiles</a>
     <a href="#scan-incidents" class="snav" data-color="#eab308" style="--nav-color:#eab308;">
       <span class="dot" style="background:#eab308;"></span>Incidents</a>
-    <a href="#scan-live" class="snav" data-color="#ff6b6b" style="--nav-color:#ff6b6b;">
-      <span class="dot" style="background:#ff6b6b;"></span>Live Capture</a>
     <a href="#scan-hp" class="snav" data-color="#22c55e" style="--nav-color:#22c55e;">
       <span class="dot" style="background:#22c55e;"></span>Remediation</a>
     <a href="#fortress-deployment" class="snav" data-color="#2563eb" style="--nav-color:#2563eb;">
@@ -792,12 +882,13 @@
 
     <!-- HEADER -->
     <div class="header">
-      <div class="badge">🔬 LIVE FORENSIC SCAN</div>
-      <h1>VNR <span>SCAN</span></h1>
+      <div class="badge">🔬 VNR LIVE</div>
+      <h1>VNR <span>LIVE</span></h1>
       <div
         style="font-family:'JetBrains Mono',monospace;font-size:1.4rem;color:var(--red);letter-spacing:0.15em;margin-top:4px;font-weight:700;">
         [suno.com]</div>
-      <div class="subtitle">Real-time forensic audit of Suno AI's 71+ tracker stack, GPU abuse, and crypto mining</div>
+      <div class="subtitle">Real-time forensic audit of Suno AI's 71+ tracker stack, GPU abuse, and undisclosed PoW
+        computation</div>
       <div class="scan-time">SCAN EXECUTED: 2026-03-07 20:02:07 EST &nbsp;|&nbsp; MACHINE: LOCAL &nbsp;|&nbsp;
         OPERATOR: VOSS NEURAL RESEARCH</div>
     </div>
@@ -832,6 +923,141 @@
         <div>FILE: SUNO-PROOF.MP4</div>
       </div>
     </div>
+
+    <!-- 🔴 RED ALERT — HAR CAPTURE FINDINGS -->
+    <div id="scan-live"
+      style="margin-bottom:48px; border: 2px solid var(--red); border-radius: 12px; background: rgba(239,68,68,0.06); padding: 0; overflow: hidden; animation: alert-pulse 3s ease-in-out infinite;">
+      <div
+        style="background: var(--red); padding: 12px 24px; display:flex; align-items:center; justify-content:space-between;">
+        <div style="display:flex; align-items:center; gap:12px;">
+          <span
+            style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#fff;animation:blink 1s ease-in-out infinite;"></span>
+          <span
+            style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:800;color:#fff;letter-spacing:0.1em;text-transform:uppercase;">LIVE
+            CAPTURE — HAR ANALYSIS RESULTS</span>
+        </div>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(255,255,255,0.7);">2026-03-09
+          10:00 UTC</span>
+      </div>
+      <div style="padding: 28px 32px;">
+        <h2 style="color:#fff;font-size:26px;font-weight:800;margin-bottom:8px;line-height:1.3;">2,149 Requests in 17
+          Minutes — <span style="color:var(--red);">78 POST Requests per Minute</span></h2>
+        <p style="font-size:14px;color:var(--text-sub);line-height:1.7;margin-bottom:24px;">
+          Live HAR capture during authenticated Suno session. <strong style="color:#fff;">1,326 outbound POST
+            requests</strong> transmitting user identifiers, clip IDs, creative process events, and full DOM session
+          recordings to <strong style="color:var(--red);">15+ third-party tracker networks</strong>. This is not
+          analytics — this is exfiltration.
+        </p>
+        <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:24px;">
+          <div
+            style="background:rgba(0,0,0,0.4);border:1px solid var(--border);border-radius:8px;padding:16px;text-align:center;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:28px;font-weight:900;color:var(--red);">2,149
+            </div>
+            <div
+              style="font-size:10px;color:var(--text-sub);text-transform:uppercase;letter-spacing:0.05em;margin-top:4px;">
+              Total Requests</div>
+          </div>
+          <div
+            style="background:rgba(0,0,0,0.4);border:1px solid var(--border);border-radius:8px;padding:16px;text-align:center;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:28px;font-weight:900;color:var(--red);">1,326
+            </div>
+            <div
+              style="font-size:10px;color:var(--text-sub);text-transform:uppercase;letter-spacing:0.05em;margin-top:4px;">
+              POST (Egress)</div>
+          </div>
+          <div
+            style="background:rgba(0,0,0,0.4);border:1px solid var(--border);border-radius:8px;padding:16px;text-align:center;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:28px;font-weight:900;color:#f59e0b;">15+</div>
+            <div
+              style="font-size:10px;color:var(--text-sub);text-transform:uppercase;letter-spacing:0.05em;margin-top:4px;">
+              Tracker Domains</div>
+          </div>
+          <div
+            style="background:rgba(0,0,0,0.4);border:1px solid var(--border);border-radius:8px;padding:16px;text-align:center;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:28px;font-weight:900;color:var(--red);">78/min
+            </div>
+            <div
+              style="font-size:10px;color:var(--text-sub);text-transform:uppercase;letter-spacing:0.05em;margin-top:4px;">
+              Exfiltration Rate</div>
+          </div>
+          <div
+            style="background:rgba(0,0,0,0.4);border:1px solid var(--border);border-radius:8px;padding:16px;text-align:center;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:28px;font-weight:900;color:#40c0ff;">6</div>
+            <div
+              style="font-size:10px;color:var(--text-sub);text-transform:uppercase;letter-spacing:0.05em;margin-top:4px;">
+              Ad Networks</div>
+          </div>
+        </div>
+        <!-- Top Trackers -->
+        <div
+          style="background:#0a0a14;border:1px solid var(--border);border-radius:8px;padding:16px 20px;margin-bottom:20px;font-family:'JetBrains Mono',monospace;font-size:12px;line-height:2;">
+          <div style="color:var(--red);font-weight:800;margin-bottom:6px;font-size:11px;letter-spacing:0.1em;">TOP
+            TRACKERS BY REQUEST COUNT</div>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;">
+            <div><span style="color:var(--text-sub);">TikTok</span> <span style="color:#fff;font-weight:700;">203</span>
+            </div>
+            <div><span style="color:var(--text-sub);">Sprig</span> <span style="color:#fff;font-weight:700;">68</span>
+            </div>
+            <div><span style="color:var(--text-sub);">Bing UET</span> <span
+                style="color:#fff;font-weight:700;">65</span></div>
+            <div><span style="color:var(--text-sub);">Clarity</span> <span style="color:#fff;font-weight:700;">63</span>
+            </div>
+            <div><span style="color:var(--text-sub);">hCaptcha</span> <span
+                style="color:#fff;font-weight:700;">54</span></div>
+            <div><span style="color:var(--text-sub);">AppLovin</span> <span
+                style="color:#fff;font-weight:700;">53</span></div>
+            <div><span style="color:var(--text-sub);">Snapchat</span> <span
+                style="color:#fff;font-weight:700;">32</span></div>
+            <div><span style="color:var(--text-sub);">Braze</span> <span style="color:#fff;font-weight:700;">30</span>
+            </div>
+          </div>
+        </div>
+        <!-- Payload Summary -->
+        <div
+          style="background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.3);border-left:3px solid var(--red);border-radius:6px;padding:16px 20px;margin-bottom:20px;">
+          <div
+            style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--red);font-weight:700;letter-spacing:0.1em;margin-bottom:8px;">
+            PAYLOAD DATA CAPTURED</div>
+          <div style="font-size:13px;color:var(--text-sub);line-height:1.8;">
+            <strong style="color:#fff;">Braze:</strong> userId, clipIds, song_listen events, listen_duration<br>
+            <strong style="color:#fff;">TikTok:</strong> Pageview heartbeats every 5s, full user agent, IP address<br>
+            <strong style="color:#fff;">Clarity:</strong> Full DOM session replay — mouse, clicks, scrolls, typed
+            prompts<br>
+            <strong style="color:#fff;">Stratovibe:</strong> First-party proxy routing analytics past ad blockers<br>
+            <strong style="color:#fff;">hCaptcha:</strong> Self-hosted PoW on suno.com subdomains — blocklist evasion
+          </div>
+        </div>
+        <a href="/research/suno-har-capture/"
+          style="display:inline-block;font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;color:#fff;background:var(--red);padding:12px 28px;border-radius:6px;text-decoration:none;letter-spacing:0.05em;transition:transform 0.2s,box-shadow 0.2s;"
+          onmouseenter="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 30px rgba(239,68,68,0.4)'"
+          onmouseleave="this.style.transform='none';this.style.boxShadow='none'">READ FULL ANALYSIS →</a>
+      </div>
+    </div>
+    <style>
+      @keyframes alert-pulse {
+
+        0%,
+        100% {
+          box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+        }
+
+        50% {
+          box-shadow: 0 0 30px 4px rgba(239, 68, 68, 0.25);
+        }
+      }
+
+      @keyframes blink {
+
+        0%,
+        100% {
+          opacity: 1;
+        }
+
+        50% {
+          opacity: 0.3;
+        }
+      }
+    </style>
 
     <!-- STATS -->
     <div class="section" id="scan-overview">
@@ -1295,10 +1521,11 @@
 
       <!-- LevelDB EVIDENCE -->
       <div style="margin-top:16px;">
-        <h3 style="color:#ff6b6b; font-size:13px; margin-bottom:8px;">Active PoW Keys in Browser Storage (Current)</h3>
+        <h3 style="color:#ff6b6b; font-size:13px; margin-bottom:8px;">hCaptcha Trust Cache Keys in Browser Storage
+          (Current)</h3>
         <p style="font-size:11px; color:var(--text-sub); margin-bottom:12px; line-height:1.5;">
           Deep binary scan of Comet browser's Local Storage LevelDB files found
-          <strong style="color:#fff;">hCaptcha PoW configuration actively stored</strong> across
+          <strong style="color:#fff;">hCaptcha configuration and trust cache data actively stored</strong> across
           <strong style="color:var(--red);">dozens of origins</strong> — not just suno.com:
         </p>
         <div
@@ -1311,7 +1538,8 @@
           </div>
           <div><span class="hit">trust:cache:timestamp</span> <span class="output">— March 2026 timestamps
               (active)</span></div>
-          <div style="color:#555; margin-top:6px;"># Injected into Local Storage of EVERY visited origin</div>
+          <div style="color:#555; margin-top:6px;"># Trust cache and configuration data injected across visited origins
+          </div>
           <div style="color:#555;"># loglevel SILENT = explicitly suppress console logging to hide activity</div>
         </div>
       </div>

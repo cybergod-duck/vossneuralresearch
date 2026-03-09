@@ -87,6 +87,29 @@ body {
   opacity: 1;
 }
 
+/* ─── VNR LIVE FLASHING RED NAV ─── */
+.vnr-live-link {
+  color: #ef4444 !important;
+  font-weight: 800 !important;
+  opacity: 1 !important;
+  animation: vnr-live-flash 1.5s ease-in-out infinite;
+  text-shadow: 0 0 8px rgba(239, 68, 68, 0.4);
+}
+
+@keyframes vnr-live-flash {
+
+  0%,
+  100% {
+    color: #ef4444;
+    text-shadow: 0 0 8px rgba(239, 68, 68, 0.4);
+  }
+
+  50% {
+    color: #ff8888;
+    text-shadow: 0 0 16px rgba(239, 68, 68, 0.7);
+  }
+}
+
 /* ─── FIXED SIDEBAR TOC ─── */
 #scan-nav {
   position: fixed;
