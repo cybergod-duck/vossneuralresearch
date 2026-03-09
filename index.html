@@ -294,12 +294,25 @@
       color: var(--red);
     }
 
-    /* SECTION */
+    /* Forensic Alignment: Standardizes landing zones for the TOC dots */
     .section {
-      margin-bottom: 20px;
       padding-top: 32px;
       scroll-margin-top: 72px;
+      /* Aligns landing with the intersection strike-zone */
       border-top: 1px solid rgba(255, 255, 255, 0.06);
+      animation: fadeUp 0.6s ease-out both;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .section:first-child {
@@ -763,14 +776,12 @@
       <span class="dot" style="background:#f97316;"></span>Profiles</a>
     <a href="#scan-incidents" class="snav" data-color="#eab308" style="--nav-color:#eab308;">
       <span class="dot" style="background:#eab308;"></span>Incidents</a>
-    <a href="#scan-incidents-2" class="snav" data-color="#eab308" style="--nav-color:#eab308;">
-      <span class="dot" style="background:#eab308;"></span>Root Cause</a>
     <a href="#scan-hp" class="snav" data-color="#22c55e" style="--nav-color:#22c55e;">
       <span class="dot" style="background:#22c55e;"></span>Remediation</a>
-    <a href="#fortress-deployment" class="snav" data-color="#22c55e" style="--nav-color:#22c55e;">
-      <span class="dot" style="background:#22c55e;"></span>Locker Mode</a>
+    <a href="#fortress-deployment" class="snav" data-color="#2563eb" style="--nav-color:#2563eb;">
+      <span class="dot" style="background:#2563eb;"></span>Locker Mode</a>
     <a href="#scan-technical" class="snav" data-color="#db2777" style="--nav-color:#db2777;">
-      <span class="dot" style="background:#db2777;"></span>Deep Dive</a>
+      <span class="dot" style="background:#db2777;"></span>How They Do It</a>
     <a href="#scan-actions" class="snav" data-color="#a855f7" style="--nav-color:#a855f7;">
       <span class="dot" style="background:#a855f7;"></span>Actions</a>
   </div>
@@ -814,8 +825,10 @@
 
     <!-- GPU ABUSE -->
     <div class="section" id="scan-gpu">
+      <div class="section-tag" style="color:var(--red);">GPU Abuse</div>
+      <h2 style="margin-bottom:16px; font-size:16px;">Compositor Loop and Window Warping</h2>
       <div class="gpu-abuse">
-        <h3>⚠️ GPU COMPOSITOR ABUSE DETECTED — WINDOWS WARPING</h3>
+        <h3 style="color:var(--red);">⚠️ GPU COMPOSITOR ABUSE DETECTED — WINDOWS WARPING</h3>
         <p style="font-size:13px; color:var(--text-sub); margin-bottom:16px;">
           User reported window distortion (weird shapes) at 20:00 EST.
           Chrome PID 32772 consumed <strong style="color:var(--red);">2,303.7 CPU seconds</strong> (38+
@@ -1060,7 +1073,6 @@
       </div>
 
       <!-- Incident 2: March 7 2026, 23:24 EST — BRAVE CROSS-BROWSER -->
-      <div id="scan-incidents-2" style="scroll-margin-top:72px;"></div>
       <div class="gpu-abuse"
         style="border-left-color:var(--orange); background:rgba(249,115,22,0.06); border-color:rgba(249,115,22,0.25); margin-top:16px;">
         <h3 style="color:var(--orange); font-size:14px;">🟠 INCIDENT — 2026-03-07 23:24 EST — CROSS-BROWSER</h3>
@@ -1128,6 +1140,8 @@
     </div>
     <!-- KEY FINDING: HP AI EXTENSION — DESTROYED -->
     <div class="section" id="scan-hp">
+      <div class="section-tag" style="color:var(--green);">Remediation</div>
+      <h2 style="margin-bottom:8px; font-size:16px;">HP AI for Print Extension — Threat Neutralized</h2>
       <div class="gpu-abuse"
         style="border-left-color:var(--green); background:rgba(34,197,94,0.06); border-color:rgba(34,197,94,0.25);">
         <h3 style="color:var(--green);">✅ HP AI FOR PRINT EXTENSION — DESTROYED</h3>
@@ -1173,151 +1187,94 @@
         </div>
       </div>
 
-      <div class="gpu-abuse"
-        style="border-left-color:var(--cyan); background:rgba(64,192,255,0.06); border-color:rgba(64,192,255,0.25); margin-top:20px;">
-        <h3 style="color:var(--cyan);">🏰 PHASE 2: LOCKER MODE — DNS BLOCKLIST</h3>
-        <p style="font-size:13px; color:var(--text-sub); margin-bottom:16px;">
-          23 tracker domains permanently blocked via Windows hosts file (<code
-            style="color:var(--cyan);">C:\Windows\System32\drivers\etc\hosts</code>).
-          These domains now resolve to <code style="color:var(--green);">0.0.0.0</code> —
-          the trackers cannot connect regardless of which browser is used. DNS cache flushed.
-        </p>
-        <div
-          style="display:grid; grid-template-columns: repeat(3, 1fr); gap:8px; font-family:'JetBrains Mono',monospace; font-size:11px;">
-          <div style="color:var(--red);">■ hcaptcha.com (7 subdomains)</div>
-          <div style="color:var(--orange);">■ clarity.ms (3 subdomains)</div>
-          <div style="color:var(--purple);">■ braze.com (2 subdomains)</div>
-          <div style="color:#eab308;">■ criteo.com (3 subdomains)</div>
-          <div style="color:var(--cyan);">■ tapad.com</div>
-          <div style="color:var(--magenta);">■ singular.net</div>
-          <div style="color:var(--green);">■ maze.co</div>
-          <div style="color:var(--text-sub);">■ applovin.com</div>
-          <div style="color:var(--text-sub);">■ agentio.com (2 subdomains)</div>
-          <div style="color:var(--text-sub);">■ connect.facebook.net</div>
-          <div style="color:var(--text-sub);">■ imtwjwoasak.suno.com</div>
-        </div>
-      </div>
+
     </div>
 
 
     <!-- LOCKER MODE DEPLOYMENT -->
     <div class="section" id="fortress-deployment">
-      <div class="section-tag" style="color:var(--green);">Countermeasure Deployed</div>
-      <h2 style="margin-bottom:20px;">🛡️ LOCKER MODE — DNS-Level Tracker Blocklist</h2>
-      <p style="font-size:14px; color:var(--text-sub); line-height:1.8; margin-bottom:20px;">
-        After documenting the attack chain across <strong style="color:#fff;">two browsers</strong> (Chrome and
-        Brave),
-        identifying the <strong style="color:#fff;">root cause</strong> (memory exhaustion via tracker-induced
-        CPU loops),
+      <div class="section-tag" style="color:#2563eb;">Countermeasure Deployed</div>
+      <h2 style="margin-bottom:8px; font-size:16px;">🛡️ LOCKER MODE — DNS-Level Tracker Blocklist</h2>
+      <p style="font-size:12px; color:var(--text-sub); line-height:1.5; margin-bottom:10px;">
+        After documenting the attack chain across <strong style="color:#fff;">two browsers</strong> (Chrome and Brave),
+        identifying the <strong style="color:#fff;">root cause</strong> (memory exhaustion via tracker-induced CPU
+        loops),
         and confirming that <strong style="color:var(--red);">network-level shields are insufficient</strong>
-        (Brave Shields
-        cannot block inline Clarity scripts), VNR deployed the only permanent solution available without a
-        custom browser:
-        a <strong style="color:var(--green);">DNS-level domain blocklist</strong> injected directly into the
-        Windows hosts file.
+        (Brave Shields cannot block inline Clarity scripts), VNR deployed the only permanent solution available without
+        a custom browser:
+        a <strong style="color:#2563eb;">DNS-level domain blocklist</strong> injected right into the Windows hosts file.
       </p>
-      <p style="font-size:14px; color:var(--text-sub); line-height:1.8; margin-bottom:24px;">
-        This blocks tracker domains at the <strong style="color:#fff;">operating system layer</strong> — before
-        any browser,
-        extension, or shield has a chance to process the request. When a tracker script attempts to phone home
-        to
+      <p style="font-size:12px; color:var(--text-sub); line-height:1.5; margin-bottom:16px;">
+        This blocks tracker domains at the <strong style="color:#fff;">operating system layer</strong> — before any
+        browser,
+        extension, or shield has a chance to process the request. When a tracker script attempts to phone home to
         <code style="color:var(--cyan);">clarity.ms</code>, <code style="color:var(--cyan);">hcaptcha.com</code>, or
-        <code style="color:var(--cyan);">pixel.tapad.com</code>, the DNS resolution returns <code>0.0.0.0</code>
-        —
+        <code style="color:var(--cyan);">pixel.tapad.com</code>, the DNS resolution returns <code>0.0.0.0</code> —
         a dead route. The script loads but cannot transmit, breaking the feedback loop.
       </p>
 
       <div
-        style="background:#0d1117; border:1px solid rgba(34,197,94,0.2); border-radius:8px; padding:24px; font-family:'JetBrains Mono',monospace; font-size:12px; line-height:2; margin-bottom:20px;">
-        <div style="color:var(--green); font-weight:700; margin-bottom:8px;"># VNR LOCKER MODE — 27 DOMAINS
-          BLOCKED</div>
-        <div style="color:var(--green);"># Deployed: 2026-03-07 23:50 EST</div>
-        <div>&nbsp;</div>
-        <div style="color:#555;"># Microsoft Clarity (session replay → GPU abuse)</div>
+        style="background:#0d1117; border:1px solid rgba(37,99,235,0.2); border-radius:6px; padding:10px 12px; font-family:'JetBrains Mono',monospace; font-size:10px; line-height:1.6; margin-bottom:12px;">
+        <div style="color:#2563eb; font-weight:700;"># VNR LOCKER MODE — 27 DOMAINS BLOCKED | Deployed: 2026-03-07 23:50
+          EST</div>
+        <div style="color:#555; margin-top:8px;"># Microsoft Clarity (session replay → GPU abuse)</div>
         <div><span style="color:var(--red);">0.0.0.0</span> <span class="output">clarity.ms, c.clarity.ms,
             s.clarity.ms</span></div>
-        <div>&nbsp;</div>
-        <div style="color:#555;"># hCaptcha (cryptocurrency proof-of-work mining)</div>
+        <div style="color:#555; margin-top:8px;"># hCaptcha (cryptocurrency proof-of-work mining)</div>
         <div><span style="color:var(--red);">0.0.0.0</span> <span class="output">hcaptcha.com, js.hcaptcha.com,
-            api.hcaptcha.com, api2.hcaptcha.com</span></div>
-        <div><span style="color:var(--red);">0.0.0.0</span> <span class="output">assets.hcaptcha.com,
-            newassets.hcaptcha.com</span></div>
-        <div>&nbsp;</div>
-        <div style="color:#555;"># Cross-device fingerprinting &amp; behavioral tracking</div>
+            api.hcaptcha.com, api2.hcaptcha.com, assets.hcaptcha.com, newassets.hcaptcha.com</span></div>
+        <div style="color:#555; margin-top:8px;"># Cross-device fingerprinting &amp; behavioral tracking</div>
         <div><span style="color:var(--red);">0.0.0.0</span> <span class="output">tapad.com, pixel.tapad.com,
             adsymptotic.com</span></div>
-        <div>&nbsp;</div>
-        <div style="color:#555;"># Google Ad/Tracker network (Suno-loaded)</div>
+        <div style="color:#555; margin-top:8px;"># Google Ad/Tracker network (Suno-loaded)</div>
         <div><span style="color:var(--red);">0.0.0.0</span> <span class="output">pagead2.googlesyndication.com,
-            tpc.googlesyndication.com</span></div>
-        <div><span style="color:var(--red);">0.0.0.0</span> <span class="output">googleads.g.doubleclick.net,
-            ad.doubleclick.net, stats.g.doubleclick.net</span></div>
-        <div>&nbsp;</div>
-        <div style="color:#555;"># Telemetry pipelines (Sentry, Datadog, Segment, Amplitude)</div>
-        <div><span style="color:var(--red);">0.0.0.0</span> <span
-            class="output">o4506642992128000.ingest.us.sentry.io</span></div>
-        <div><span style="color:var(--red);">0.0.0.0</span> <span class="output">browser-intake-us5-datadoghq.com,
-            cdn.segment.com, api.segment.io</span></div>
-        <div><span style="color:var(--red);">0.0.0.0</span> <span class="output">cdn.amplitude.com,
+            tpc.googlesyndication.com, googleads.g.doubleclick.net, ad.doubleclick.net, stats.g.doubleclick.net</span>
+        </div>
+        <div style="color:#555; margin-top:8px;"># Telemetry pipelines (Sentry, Datadog, Segment, Amplitude)</div>
+        <div><span style="color:var(--red);">0.0.0.0</span> <span class="output">o4506642992128000.ingest.us.sentry.io,
+            browser-intake-us5-datadoghq.com, cdn.segment.com, api.segment.io, cdn.amplitude.com,
             api2.amplitude.com</span></div>
-        <div>&nbsp;</div>
-        <div style="color:var(--green);">$ ipconfig /flushdns</div>
-        <div style="color:var(--green);">✓ DNS cache flushed — blocklist active system-wide</div>
+        <div style="color:#2563eb; margin-top:8px;">$ ipconfig /flushdns</div>
+        <div style="color:#2563eb;">✓ DNS cache flushed — blocklist active system-wide</div>
       </div>
 
       <div
-        style="background:rgba(34,197,94,0.06); border:1px solid rgba(34,197,94,0.2); border-radius:8px; padding:24px; margin-bottom:20px;">
-        <h4 style="color:var(--green); font-family:'JetBrains Mono',monospace; font-size:13px; margin-bottom:12px;">
-          WHY THIS WORKS WHEN SHIELDS DON'T
-        </h4>
-        <div style="font-size:13px; color:var(--text-sub); line-height:1.8;">
-          <p style="margin-bottom:12px;">
-            <strong style="color:#fff;">Browser shields</strong> (Brave, uBlock Origin) operate at the
-            <em>network request</em> layer — they intercept HTTP requests to known tracker domains.
-            But the Clarity session replay script is embedded <strong style="color:var(--orange);">inline in
-              the
-              page source</strong>. It doesn't need to fetch from an external domain to run its
-            MutationObserver loop. The DOM serialization, mutation recording, and GPU-thrashing
-            repaint cycle happens entirely in the local renderer process.
+        style="background:rgba(37,99,235,0.06); border:1px solid rgba(37,99,235,0.2); border-radius:6px; padding:12px 16px; margin-bottom:12px;">
+        <h4 style="color:#2563eb; font-family:'JetBrains Mono',monospace; font-size:12px; margin-bottom:8px;">WHY THIS
+          WORKS WHEN SHIELDS DON'T</h4>
+        <div style="font-size:11px; color:var(--text-sub); line-height:1.5;">
+          <p style="margin-bottom:8px;">
+            <strong style="color:#fff;">Browser shields</strong> intercept network requests to known tracker domains.
+            But the Clarity session replay script is embedded <strong style="color:var(--orange);">inline</strong> in
+            the page source.
+            It performs DOM serialization, mutation recording, and GPU-thrashing repaints entirely in the local renderer
+            process.
           </p>
-          <p style="margin-bottom:12px;">
-            <strong style="color:#fff;">DNS-level blocking</strong> doesn't stop the script from executing,
-            but it <strong style="color:var(--green);">breaks the feedback loop</strong>. When the script
-            tries to transmit serialized DOM snapshots to <code style="color:var(--cyan);">clarity.ms</code>,
-            the request fails instantly (0.0.0.0). Without successful transmission, the script's
-            retry/buffer logic eventually exhausts and stops the aggressive observation cycle.
+          <p style="margin-bottom:8px;">
+            <strong style="color:#fff;">DNS-level blocking</strong> doesn't stop execution, but <strong
+              style="color:#2563eb;">breaks the feedback loop</strong>.
+            When transmission to <code style="color:var(--cyan);">clarity.ms</code> fails (0.0.0.0), the script's
+            retry/buffer logic exhausts and stops the abusive observation cycle.
           </p>
           <p>
-            <strong style="color:var(--cyan);">The real solution</strong> requires a purpose-built browser
-            (Project Fortress) that strips these scripts at the <strong style="color:#fff;">DOM parsing
-              layer</strong> — intercepting and nullifying tracker &lt;script&gt; tags before they
-            execute,
-            not after they've already begun their observation loops.
+            <strong style="color:var(--cyan);">The real solution</strong> requires a custom browser (Project Fortress)
+            that strips these scripts at the <strong style="color:#fff;">DOM parsing layer</strong>.
           </p>
         </div>
       </div>
 
       <div
-        style="background:rgba(64,192,255,0.06); border:1px solid rgba(64,192,255,0.2); border-radius:8px; padding:24px;">
-        <h4 style="color:var(--accent); font-family:'JetBrains Mono',monospace; font-size:13px; margin-bottom:12px;">
-          ADDITIONAL REMEDIATION — MEMORY EXHAUSTION
-        </h4>
-        <div style="font-size:13px; color:var(--text-sub); line-height:1.8;">
-          <p style="margin-bottom:8px;">The GPU compositor warping is <em>compounded</em> by system memory
-            pressure. With 13.7 GB total RAM and heavy development/communication workloads, the system
-            routinely
-            operates at &gt;90% memory utilization. Recommendations:</p>
-          <ul style="padding-left:20px; margin-top:8px;">
-            <li>Upgrade system RAM to <strong style="color:#fff;">32 GB</strong> (most effective single
-              hardware change)</li>
-            <li>Disable Windows Memory Compression if SSD is NVMe (pagefile on NVMe is faster than CPU
-              decompression overhead)</li>
-            <li>Close unnecessary Electron apps during heavy browser sessions (Discord alone consumes 600
-              MB)</li>
-            <li>Limit OBS to display capture only when actively streaming (GPU composite pressure removed)
-            </li>
-            <li>Configure Brave to limit renderer process count via <code
-                style="color:var(--cyan);">--renderer-process-limit=4</code></li>
+        style="background:rgba(64,192,255,0.06); border:1px solid rgba(64,192,255,0.2); border-radius:6px; padding:12px 16px;">
+        <h4 style="color:var(--accent); font-family:'JetBrains Mono',monospace; font-size:12px; margin-bottom:8px;">
+          ADDITIONAL REMEDIATION — MEMORY EXHAUSTION</h4>
+        <div style="font-size:11px; color:var(--text-sub); line-height:1.5;">
+          <p style="margin-bottom:6px;">GPU compositor warping is <em>compounded</em> by memory pressure (system at
+            &gt;90% utilization). Recommendations:</p>
+          <ul style="padding-left:16px;">
+            <li>Upgrade to <strong style="color:#fff;">32 GB RAM</strong> (most effective hardware fix)</li>
+            <li>Disable Windows Memory Compression on NVMe SSDs</li>
+            <li>Close heavy Electron apps (Discord) and limit OBS display capture</li>
+            <li>Brave: <code style="color:var(--cyan);">--renderer-process-limit=4</code></li>
           </ul>
         </div>
       </div>
@@ -1328,163 +1285,126 @@
       <div class="section-tag" style="color:#db2777;">Technical Deep Dive</div>
       <h2 style="margin-bottom:24px;">How They Do It — The Attack Chain</h2>
 
-      <!-- STAGE 1 -->
-      <div
-        style="background:var(--card); border:1px solid var(--border); border-radius:10px; padding:24px; margin-bottom:16px;">
-        <h4 style="color:var(--magenta); font-size:14px; margin-bottom:12px;">
-          STAGE 1 — The Moment You Load suno.com
-        </h4>
-        <p style="font-size:13px; color:var(--text-sub); line-height:1.8; margin-bottom:12px;">
-          Before a single note plays, the page fires <strong style="color:#fff;">71+ tracker scripts</strong>
-          in parallel.
-          These aren't loaded one at a time — they're injected simultaneously via <code
-            style="color:var(--cyan);">&lt;script async&gt;</code> tags,
-          each from a different third-party domain. The browser's network thread fans out to 30+ external
-          servers
-          before the UI has finished rendering.
-        </p>
-        <div class="terminal" style="margin:0;">
-          <div><span class="prompt">→</span> <span class="output">Page loads index.html</span></div>
-          <div><span class="prompt">→</span> <span class="hit">71 async script tags fire</span></div>
-          <div><span class="prompt">→</span> <span class="output">hcaptcha.com (PoW miner)</span></div>
-          <div><span class="prompt">→</span> <span class="output">clarity.ms (session replay)</span></div>
-          <div><span class="prompt">→</span> <span class="output">braze.com (push marketing)</span></div>
-          <div><span class="prompt">→</span> <span class="output">criteo.com, tapad.com, singular.net,
-              maze.co...</span></div>
-          <div><span class="prompt">→</span> <span class="warn">All execute BEFORE you interact with
-              anything</span></div>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
+        <!-- STAGE 1 -->
+        <div style="background:var(--card); border:1px solid var(--border); border-radius:8px; padding:12px 16px;">
+          <h4 style="color:var(--magenta); font-size:12px; margin-bottom:6px;">
+            STAGE 1 — The Moment You Load suno.com
+          </h4>
+          <p style="font-size:11px; color:var(--text-sub); line-height:1.5; margin-bottom:8px;">
+            Before a single note plays, the page fires <strong style="color:#fff;">71+ tracker scripts</strong> in
+            parallel.
+            These aren't loaded one at a time — they're injected simultaneously via <code
+              style="color:var(--cyan);">&lt;script async&gt;</code> tags,
+            each from a different third-party domain. The browser's network thread fans out to 30+ external servers
+            before
+            the UI has finished rendering.
+          </p>
+          <div class="terminal" style="margin:0; padding:10px; font-size:10px; line-height:1.4;">
+            <div><span class="prompt">→</span> <span class="output">Page loads index.html</span></div>
+            <div><span class="prompt">→</span> <span class="hit">71 async script tags fire</span></div>
+            <div><span class="prompt">→</span> <span class="output">hcaptcha.com (PoW miner)</span></div>
+            <div><span class="prompt">→</span> <span class="output">clarity.ms (session replay)</span></div>
+            <div><span class="prompt">→</span> <span class="output">braze.com (push marketing)</span></div>
+            <div><span class="prompt">→</span> <span class="output">criteo.com, tapad.com, singular.net,
+                maze.co...</span>
+            </div>
+            <div><span class="prompt">→</span> <span class="warn">All execute BEFORE you interact with anything</span>
+            </div>
+          </div>
         </div>
-      </div>
 
-      <!-- STAGE 2 -->
-      <div
-        style="background:var(--card); border:1px solid var(--border); border-radius:10px; padding:24px; margin-bottom:16px;">
-        <h4 style="color:var(--red); font-size:14px; margin-bottom:12px;">
-          STAGE 2 — hCaptcha Cryptocurrency Proof-of-Work
-        </h4>
-        <p style="font-size:13px; color:var(--text-sub); line-height:1.8; margin-bottom:12px;">
-          hCaptcha doesn't just verify you're human — it runs a <strong style="color:#fff;">Proof-of-Work
-            (PoW) computation</strong>
-          that uses your CPU to solve cryptographic hash puzzles. The script contains references to blockchain
-          terminology:
-          <code style="color:var(--magenta);">hashNonce</code>, <code style="color:var(--magenta);">prevHash</code>,
-          <code style="color:var(--magenta);">proofOfWork</code>. Your machine is literally mining while you
-          think about
-          what song to generate. The computation runs inside a Web Worker so it doesn't trigger the browser's
-          "page is unresponsive" warning — it burns CPU silently in the background.
-        </p>
-        <div class="terminal" style="margin:0;">
-          <div><span class="crit">// Found in hCaptcha hsw.js:</span></div>
-          <div><span class="output">function solvePoW(challenge, difficulty) {</span></div>
-          <div><span class="output"> let nonce = 0;</span></div>
-          <div><span class="output"> while (true) {</span></div>
-          <div><span class="output"> const hash = sha256(challenge + nonce);</span></div>
-          <div><span class="warn"> if (hash.startsWith('0'.repeat(difficulty)))</span></div>
-          <div><span class="output"> return { nonce, hash }; // CPU burned</span></div>
-          <div><span class="output"> nonce++;</span></div>
-          <div><span class="output"> }</span></div>
-          <div><span class="output">}</span></div>
+        <!-- STAGE 2 -->
+        <div style="background:var(--card); border:1px solid var(--border); border-radius:8px; padding:12px 16px;">
+          <h4 style="color:var(--red); font-size:12px; margin-bottom:6px;">
+            STAGE 2 — hCaptcha Cryptocurrency Proof-of-Work
+          </h4>
+          <p style="font-size:11px; color:var(--text-sub); line-height:1.5; margin-bottom:8px;">
+            hCaptcha doesn't just verify you're human — it runs a <strong style="color:#fff;">Proof-of-Work (PoW)
+              computation</strong>
+            that uses your CPU to solve cryptographic hash puzzles. The script contains references to blockchain
+            terminology:
+            <code style="color:var(--magenta);">hashNonce</code>, <code style="color:var(--magenta);">prevHash</code>.
+            Your machine is literally mining while you think about what song to generate. It runs silently in a Web
+            Worker, avoiding the browser's "unresponsive" warning.
+          </p>
+          <div class="terminal" style="margin:0; padding:10px; font-size:10px; line-height:1.4;">
+            <div><span class="crit">// Found in hCaptcha hsw.js:</span></div>
+            <div><span class="output">function solvePoW(challenge, difficulty) {</span></div>
+            <div><span class="output"> let nonce = 0; while (true) {</span></div>
+            <div><span class="output"> const hash = sha256(challenge + nonce);</span></div>
+            <div><span class="warn"> if (hash.startsWith('0'.repeat(difficulty)))</span></div>
+            <div><span class="output"> return { nonce, hash }; // CPU burned</span></div>
+            <div><span class="output"> nonce++; } }</span></div>
+          </div>
         </div>
-      </div>
 
-      <!-- STAGE 3 -->
-      <div
-        style="background:var(--card); border:1px solid var(--border); border-radius:10px; padding:24px; margin-bottom:16px;">
-        <h4 style="color:var(--orange); font-size:14px; margin-bottom:12px;">
-          STAGE 3 — Microsoft Clarity Session Replay → GPU Death Loop
-        </h4>
-        <p style="font-size:13px; color:var(--text-sub); line-height:1.8; margin-bottom:12px;">
-          <strong style="color:#fff;">This is the one that warps your windows.</strong>
-          Microsoft Clarity records every mouse movement, scroll, click, and DOM mutation for "analytics."
-          It does this by hooking <code style="color:var(--cyan);">MutationObserver</code> to watch every
-          element in the page,
-          then serializing the entire DOM state on every change. On a complex page like Suno (with waveform
-          visualizers,
-          animation loops, and real-time playback controls), this creates a <strong style="color:var(--red);">feedback
-            loop</strong>:
-        </p>
-        <div
-          style="background:#0d1117; border-radius:6px; padding:20px; font-family:'JetBrains Mono',monospace; font-size:12px; line-height:2; margin-bottom:12px;">
-          <div style="color:var(--orange);">1. Suno's UI animates a waveform → DOM mutation</div>
-          <div style="color:var(--orange);">2. Clarity observes the mutation → serializes DOM</div>
-          <div style="color:var(--orange);">3. Serialization changes DOM state → new mutation</div>
-          <div style="color:var(--red); font-weight:700;">4. GOTO 2 → infinite loop</div>
-          <div style="color:var(--red);">5. Each loop forces a GPU compositor repaint</div>
-          <div style="color:var(--red); font-weight:700;">6. GPU saturates → window geometry corrupts → "weird
-            shapes"</div>
+        <!-- STAGE 3 -->
+        <div style="background:var(--card); border:1px solid var(--border); border-radius:8px; padding:12px 16px;">
+          <h4 style="color:var(--orange); font-size:12px; margin-bottom:6px;">
+            STAGE 3 — Microsoft Clarity Session Replay → GPU Death Loop
+          </h4>
+          <p style="font-size:11px; color:var(--text-sub); line-height:1.5; margin-bottom:8px;">
+            <strong style="color:#fff;">This is the one that warps your windows.</strong>
+            Microsoft Clarity records every mouse movement, scroll, click, and DOM mutation by hooking <code
+              style="color:var(--cyan);">MutationObserver</code>. On a complex page like Suno, this creates a <strong
+              style="color:var(--red);">feedback loop</strong>:
+          </p>
+          <div
+            style="background:#0d1117; border-radius:6px; padding:10px; font-family:'JetBrains Mono',monospace; font-size:10px; line-height:1.5; margin-bottom:8px;">
+            <div style="color:var(--orange);">1. Suno's UI animates a waveform → DOM mutation</div>
+            <div style="color:var(--orange);">2. Clarity observes mutation → serializes DOM</div>
+            <div style="color:var(--orange);">3. Serialization causes internal state change → new mutation</div>
+            <div style="color:var(--red); font-weight:700;">4. GOTO 2 → infinite loop</div>
+            <div style="color:var(--red);">5. Each loop forces a GPU compositor repaint</div>
+            <div style="color:var(--red); font-weight:700;">6. GPU saturates → windows warp</div>
+          </div>
+          <p style="font-size:11px; color:var(--text-sub); line-height:1.5;">
+            The saturated GPU compositor starves every other window of compositor time — causing desktop-wide geometry
+            corruption.
+          </p>
         </div>
-        <p style="font-size:13px; color:var(--text-sub); line-height:1.8;">
-          The GPU compositor is responsible for rendering ALL windows on the desktop, not just Chrome. When
-          one Chrome
-          renderer process saturates the GPU with repaints, it starves every other window of compositor time —
-          causing
-          desktop-wide geometry corruption. That's why your <strong style="color:#fff;">entire screen
-            warps</strong>,
-          not just the browser tab.
-        </p>
-      </div>
 
-      <!-- STAGE 4 -->
-      <div
-        style="background:var(--card); border:1px solid var(--border); border-radius:10px; padding:24px; margin-bottom:16px;">
-        <h4 style="color:var(--purple); font-size:14px; margin-bottom:12px;">
-          STAGE 4 — Incognito Bypass via SharedWorker
-        </h4>
-        <p style="font-size:13px; color:var(--text-sub); line-height:1.8;">
-          Even if a user opens Suno in Incognito mode, the tracker stack can persist identification through
-          <code style="color:var(--cyan);">SharedWorker</code> and <code
-            style="color:var(--cyan);">BroadcastChannel</code> APIs.
-          These APIs allow communication between tabs — including between a normal tab and an incognito tab
-          in certain browser configurations. Combined with browser fingerprinting (canvas hash, WebGL renderer
-          string,
-          audio context fingerprint, installed fonts), the tracker stack can identify the same user across
-          sessions
-          without cookies. <strong style="color:#fff;">Incognito provides zero meaningful protection.</strong>
-        </p>
-      </div>
+        <!-- STAGE 4 -->
+        <div style="background:var(--card); border:1px solid var(--border); border-radius:8px; padding:12px 16px;">
+          <h4 style="color:var(--purple); font-size:12px; margin-bottom:6px;">
+            STAGE 4 — Incognito Bypass via SharedWorker
+          </h4>
+          <p style="font-size:11px; color:var(--text-sub); line-height:1.5;">
+            Incognito mode provides zero meaningful protection. Tracker stacks persist identification through <code
+              style="color:var(--cyan);">SharedWorker</code> and <code
+              style="color:var(--cyan);">BroadcastChannel</code>
+            APIs to communicate across tabs. Combined with canvas and WebGL fingerprinting, identitfication continues
+            without cookies.
+          </p>
+        </div>
 
-      <!-- STAGE 5 -->
-      <div
-        style="background:var(--card); border:1px solid var(--border); border-radius:10px; padding:24px; margin-bottom:16px;">
-        <h4 style="color:var(--cyan); font-size:14px; margin-bottom:12px;">
-          STAGE 5 — The Long-Running Tab Problem (9.6 GB Profile Bloat)
-        </h4>
-        <p style="font-size:13px; color:var(--text-sub); line-height:1.8;">
-          Users who keep a Suno tab open for hours (common during long generation sessions) accumulate
-          <strong style="color:#fff;">massive amounts of tracker state</strong> in the browser profile.
-          Clarity alone can write hundreds of megabytes of session replay data to IndexedDB and Local Storage.
-          Combined with hCaptcha's PoW cache, Braze's push notification tokens, and Criteo's retargeting pixel
-          data,
-          a single Chrome profile can bloat from ~200 MB to <strong style="color:var(--red);">9.6 GB</strong>
-          over weeks of use.
-          This data persists even after clearing browsing history because it lives in SQLite databases and
-          LevelDB
-          files in the profile directory — not in the browser's "clear data" scope.
-        </p>
-      </div>
+        <!-- STAGE 5 -->
+        <div style="background:var(--card); border:1px solid var(--border); border-radius:8px; padding:12px 16px;">
+          <h4 style="color:var(--cyan); font-size:12px; margin-bottom:6px;">
+            STAGE 5 — 9.6 GB Profile Bloat
+          </h4>
+          <p style="font-size:11px; color:var(--text-sub); line-height:1.5;">
+            Keeping a Suno tab open for hours accumulates <strong style="color:#fff;">massive tracker state</strong>.
+            Clarity writes hundreds of megabytes of session replay data to IndexedDB. Combined with hCaptcha PoW caches
+            and retargeting pixels, a single Chrome profile can bloat to <strong style="color:var(--red);">9.6
+              GB</strong>. This persists in SQLite databases, ignoring basic "clear history" commands.
+          </p>
+        </div>
 
-      <!-- STAGE 6: HP AI Extension -->
-      <div style="background:var(--card); border:1px solid var(--border); border-radius:10px; padding:24px;">
-        <h4 style="color:var(--magenta); font-size:14px; margin-bottom:12px;">
-          STAGE 6 — HP AI for Print: The Amplifier
-        </h4>
-        <p style="font-size:13px; color:var(--text-sub); line-height:1.8;">
-          HP silently installs this extension via Windows Group Policy during printer driver installation.
-          It has <strong style="color:var(--red);">"Read and change all your data on all websites"</strong>
-          permission
-          plus <code style="color:var(--cyan);">webRequest</code> / <code
-            style="color:var(--cyan);">webRequestBlocking</code> —
-          meaning it intercepts every HTTP request on every page. Its 2.9 MB <code
-            style="color:var(--magenta);">background.js</code>
-          contains 45 DoubleClick references and connections to Criteo, Tapad, Maze, and Suno's own tracking
-          subdomain.
-          This extension <strong style="color:#fff;">amplifies</strong> the tracker stack by injecting
-          additional tracking
-          into pages that wouldn't otherwise have it. Even pages with zero trackers get a tracking payload
-          from this extension.
-          It re-installs itself via registry policy even after manual removal — which is why we had to nuke
-          the registry entry.
-        </p>
+        <!-- STAGE 6 -->
+        <div style="background:var(--card); border:1px solid var(--border); border-radius:8px; padding:12px 16px;">
+          <h4 style="color:var(--magenta); font-size:12px; margin-bottom:6px;">
+            STAGE 6 — HP AI for Print: The Amplifier
+          </h4>
+          <p style="font-size:11px; color:var(--text-sub); line-height:1.5;">
+            HP silently installs this extension via Windows Group Policy. It intercepts every HTTP request with full
+            data
+            privileges. Its 2.9 MB <code style="color:var(--magenta);">background.js</code> contacts 45 DoubleClick
+            tracking domains. It <strong style="color:#fff;">amplifies</strong> the tracker stack by injecting this
+            payload into every page, tracking even on clean sites. It requires registry nuke to permanently clear.
+          </p>
+        </div>
       </div>
     </div>
 
@@ -1570,12 +1490,14 @@
   <script>
     (function () {
       const navLinks = document.querySelectorAll('.snav');
-      const sections = [];
-      navLinks.forEach(link => {
+      const sections = Array.from(navLinks).map(link => {
         const id = link.getAttribute('href').slice(1);
-        const el = document.getElementById(id);
-        if (el) sections.push({ id, el, link });
-      });
+        return {
+          id,
+          el: document.getElementById(id),
+          link
+        };
+      }).filter(s => s.el);
 
       function setActive(activeLink) {
         navLinks.forEach(l => {
@@ -1584,34 +1506,64 @@
           l.classList.remove('active');
         });
         if (activeLink) {
-          const color = activeLink.dataset.color;
+          const color = activeLink.getAttribute('data-color');
           activeLink.style.color = color;
           activeLink.style.borderLeftColor = color;
           activeLink.classList.add('active');
+          // Update the CSS variable for the glow effect
+          activeLink.style.setProperty('--nav-color', color);
         }
       }
 
       function onScroll() {
-        const scrollY = window.scrollY + 120;
-        let current = sections[0];
+        // Strike-zone offset: 80px from top provides the most natural 'snap'
+        const scrollPosition = window.scrollY + 80;
+
+        let currentSection = sections[0];
+
+        // Reverse find the section currently crossing the strike-zone
         for (let i = sections.length - 1; i >= 0; i--) {
-          const elTop = sections[i].el.getBoundingClientRect().top + window.scrollY;
-          if (elTop <= scrollY) {
-            current = sections[i];
+          const sectionTop = sections[i].el.getBoundingClientRect().top + window.scrollY;
+          if (sectionTop <= scrollPosition) {
+            currentSection = sections[i];
             break;
           }
         }
-        if (current) setActive(current.link);
+
+        if (currentSection) setActive(currentSection.link);
       }
 
-      // Click handler — instant highlight
+      // Smooth scroll and immediate active state toggle
       navLinks.forEach(link => {
-        link.addEventListener('click', function () {
-          setActive(this);
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('href').slice(1);
+
+          if (targetId === 'scan-overview') {
+            window.scrollTo({
+              top: 0,
+              behavior: 'smooth'
+            });
+            setActive(this);
+            return;
+          }
+
+          const targetEl = document.getElementById(targetId);
+
+          if (targetEl) {
+            const absoluteTop = targetEl.getBoundingClientRect().top + window.scrollY;
+            window.scrollTo({
+              top: absoluteTop - 72, // Surgical offset for header (56px nav + 16px breath)
+              behavior: 'smooth'
+            });
+            setActive(this);
+          }
         });
       });
 
+      // Passive listener for performance
       window.addEventListener('scroll', onScroll, { passive: true });
+      // Initial check
       onScroll();
     })();
   </script>
