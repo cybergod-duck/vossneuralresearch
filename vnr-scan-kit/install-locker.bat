@@ -1,7 +1,7 @@
 @echo off
 echo.
 echo  ============================================
-echo   VNR SCAN - LOCKER MODE INSTALLER
+echo   VNR SCAN - LOCKER INSTALLER
 echo   Voss Neural Research
 echo  ============================================
 echo.
@@ -21,7 +21,7 @@ set "HOSTS=%SystemRoot%\System32\drivers\etc\hosts"
 
 echo.>> "%HOSTS%"
 echo # ============================================>> "%HOSTS%"
-echo # VNR SCAN - LOCKER MODE>> "%HOSTS%"
+echo # VNR SCAN - LOCKER>> "%HOSTS%"
 echo # Suno AI Tracker Blocklist>> "%HOSTS%"
 echo # Installed: %date% %time%>> "%HOSTS%"
 echo # ============================================>> "%HOSTS%"
@@ -63,7 +63,7 @@ echo.>> "%HOSTS%"
 
 echo.
 echo  ============================================
-echo   LOCKER MODE INSTALLED
+echo   LOCKER INSTALLED
 echo   23 tracker domains blocked
 echo   Flush DNS cache...
 echo  ============================================

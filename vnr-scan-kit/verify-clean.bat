@@ -8,12 +8,12 @@ echo.
 
 set clean=1
 
-echo  [1/3] Checking LOCKER Mode...
+echo  [1/3] Checking LOCKER...
 findstr /c:"VNR SCAN" "%SystemRoot%\System32\drivers\etc\hosts" >nul 2>&1
 if %errorlevel% equ 0 (
-    echo        LOCKER MODE: ACTIVE
+    echo        LOCKER: ACTIVE
 ) else (
-    echo        LOCKER MODE: NOT INSTALLED
+    echo        LOCKER: NOT INSTALLED
     echo        Run install-locker.bat first.
     set clean=0
 )

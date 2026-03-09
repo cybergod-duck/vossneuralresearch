@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+    import sys; sys.stderr = open('error.txt', 'w'); import standardize_articles
+                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ovjup\Dropbox\Voss Neural Research LLC\01_VNR\Website\vossneuralresearch\research\standardize_articles.py", line 482, in <module>
+    process_file(file)
+    ~~~~~~~~~~~~^^^^^^
+  File "C:\Users\ovjup\Dropbox\Voss Neural Research LLC\01_VNR\Website\vossneuralresearch\research\standardize_articles.py", line 379, in process_file
+    desc_el = soup.find('meta', attrs={{'name': 'description'}})
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: cannot use 'dict' as a set element (unhashable type: 'dict')
