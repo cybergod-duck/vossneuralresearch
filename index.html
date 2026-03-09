@@ -769,7 +769,7 @@
   </style>
   <div id="scan-nav">
     <a href="#scan-overview" class="snav" data-color="#40c0ff" style="--nav-color:#40c0ff;">
-      <span class="dot" style="background:#40c0ff;"></span>Overview</a>
+      <span class="dot" style="background:#40c0ff;"></span>Scan Results</a>
     <a href="#scan-gpu" class="snav" data-color="#ef4444" style="--nav-color:#ef4444;">
       <span class="dot" style="background:#ef4444;"></span>GPU Abuse</a>
     <a href="#scan-browsers" class="snav" data-color="#f97316" style="--nav-color:#f97316;">
@@ -800,9 +800,42 @@
         OPERATOR: VOSS NEURAL RESEARCH</div>
     </div>
 
+    <!-- RECORDED EVIDENCE VIDEO -->
+    <div
+      style="margin: 32px auto 48px auto; max-width: 650px; border-radius: 8px; overflow: hidden; box-shadow: 0 12px 40px rgba(0,0,0,0.8); border: 1px solid var(--border); background: #111;">
+      <!-- Browser Header -->
+      <div
+        style="background: #222; padding: 10px 14px; display: flex; align-items: center; border-bottom: 1px solid #333;">
+        <div style="display: flex; gap: 8px;">
+          <div style="width: 12px; height: 12px; border-radius: 50%; background: #ff5f56;"></div>
+          <div style="width: 12px; height: 12px; border-radius: 50%; background: #ffbd2e;"></div>
+          <div style="width: 12px; height: 12px; border-radius: 50%; background: #27c93f;"></div>
+        </div>
+        <div
+          style="margin: 0 auto; background: #0a0a0a; padding: 6px 24px; border-radius: 6px; font-family: monospace; font-size: 12px; color: #888; border: 1px solid #333; transform: translateX(-24px);">
+          🔒 https://suno.com
+        </div>
+      </div>
+      <!-- Video Content -->
+      <div style="position: relative; aspect-ratio: 16/9; background: #000;">
+        <video autoplay loop muted playsinline style="width: 100%; height: 100%; object-fit: cover;">
+          <source src="SUNO-PROOF.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      <!-- Footer Info -->
+      <div
+        style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; font-family: monospace; font-size: 11px; color: var(--text-sub); background: var(--bg); border-top: 1px solid var(--border);">
+        <div><span style="color:var(--red);">●</span> LIVE CAPTURE</div>
+        <div>FILE: SUNO-PROOF.MP4</div>
+      </div>
+    </div>
+
     <!-- STATS -->
     <div class="section" id="scan-overview">
       <div class="section-tag" style="color:#40c0ff;">Scan Results</div>
+      <h2 style="color: #fff; font-size: 22px; margin-bottom: 24px; font-weight: 600; letter-spacing: 0.05em;">Overview
+      </h2>
       <div class="stat-grid">
         <div class="stat-card critical">
           <div class="number">4</div>
@@ -1519,7 +1552,7 @@
         // Strike-zone offset: 80px from top provides the most natural 'snap'
         const scrollPosition = window.scrollY + 80;
 
-        let currentSection = sections[0];
+        let currentSection = null;
 
         // Reverse find the section currently crossing the strike-zone
         for (let i = sections.length - 1; i >= 0; i--) {
@@ -1530,7 +1563,7 @@
           }
         }
 
-        if (currentSection) setActive(currentSection.link);
+        setActive(currentSection ? currentSection.link : null);
       }
 
       // Smooth scroll and immediate active state toggle
@@ -1538,16 +1571,6 @@
         link.addEventListener('click', function (e) {
           e.preventDefault();
           const targetId = this.getAttribute('href').slice(1);
-
-          if (targetId === 'scan-overview') {
-            window.scrollTo({
-              top: 0,
-              behavior: 'smooth'
-            });
-            setActive(this);
-            return;
-          }
-
           const targetEl = document.getElementById(targetId);
 
           if (targetEl) {
