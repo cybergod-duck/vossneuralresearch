@@ -1,5 +1,3 @@
 Internal R&D/
 .vercel
 .env*.local
-vnr_multi_agent.py
-vnr_outreach_bot.py
