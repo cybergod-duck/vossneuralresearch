@@ -920,9 +920,9 @@
 
       <!-- INFECTED FILES -->
       <div class="section-tag" style="color:#f97316; margin-top:16px;">Tracker Artifacts Located</div>
-      <h2 style="margin-bottom:8px; font-size:18px;">Infected Files — Chrome Default Profile</h2>
+      <h2 style="margin-bottom:8px; font-size:15px;">Infected Files — Chrome Default Profile</h2>
 
-      <div class="terminal">
+      <div class="terminal" style="font-size:11px; padding:12px; line-height:1.6;">
         <div><span class="prompt">$</span> <span class="output">Get-ChildItem $chromeUD -Recurse -File |
             ForEach-Object { binary-scan $_ }</span></div>
         <div><span class="output">Total files scanned: </span><span class="hit">2,667</span></div>
