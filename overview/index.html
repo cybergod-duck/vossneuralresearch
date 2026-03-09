@@ -746,23 +746,48 @@
     .delay-3 {
       animation-delay: 0.3s;
     }
+
+    /* Top nav flashing VNR LIVE */
+    @keyframes live-flash {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.4;
+      }
+    }
+
+    .vnr-live-label {
+      color: #ef4444 !important;
+      font-weight: 800 !important;
+      animation: live-flash 1.2s ease-in-out infinite;
+    }
   </style>
 </head>
 
 <body>
 
-  <!-- NAV -->
-  <nav class="nav">
-    <div class="nav-inner">
-      <a href="/" class="nav-logo"><img src="/CROP-vnr-logo.PNG" alt="VNR"></a>
-      <div class="nav-links">
-        <a href="/" style="color:var(--accent);font-weight:600;">VNR LIVE</a>
-        <a href="/overview/" style="color:var(--accent);font-weight:600;">Main</a>
-        <a href="#audit">Findings</a>
-        <a href="#exposure">Exposure</a>
-        <a href="#research">Research</a>
-        <a href="#engage">Engage</a>
-        <a href="#about">About</a>
+  <!-- TOP NAVIGATION -->
+  <nav
+    style="position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(3,3,3,0.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(64,192,255,0.15);padding:0 24px;">
+    <div
+      style="max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:56px;">
+      <a href="/" style="display:flex;align-items:center;gap:10px;text-decoration:none;">
+        <img alt="VNR" src="/CROP-vnr-logo.PNG" style="height:44px;width:auto;" />
+      </a>
+      <div style="display:flex;gap:24px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.05em;">
+        <a href="/" class="vnr-live-label" style="text-decoration:none;position:relative;padding-left:16px;">
+          <span
+            style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:8px;height:8px;border-radius:50%;background:#ef4444;display:inline-block;animation:live-flash 1.2s ease-in-out infinite;"></span>
+          VNR LIVE</a>
+        <a href="/overview/" style="color:#40c0ff;text-decoration:none;font-weight:600;">Main</a>
+        <a href="#research" style="color:#d4d4d4;text-decoration:none;opacity:0.8;">Research</a>
+        <a href="/suno-report/" style="color:#d4d4d4;text-decoration:none;opacity:0.8;">Tracker Report</a>
+        <a href="#engage" style="color:#d4d4d4;text-decoration:none;opacity:0.8;">Engage</a>
+        <a href="#about" style="color:#d4d4d4;text-decoration:none;opacity:0.8;">About</a>
       </div>
     </div>
   </nav>

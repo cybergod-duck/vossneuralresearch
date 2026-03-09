@@ -727,6 +727,25 @@
                 top: 100%;
             }
         }
+
+        /* Top nav flashing VNR LIVE */
+        @keyframes live-flash {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.4;
+            }
+        }
+
+        .vnr-live-label {
+            color: #ef4444 !important;
+            font-weight: 800 !important;
+            animation: live-flash 1.2s ease-in-out infinite;
+        }
     </style>
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&amp;family=JetBrains+Mono:wght@400;700&amp;display=swap"
@@ -903,7 +922,10 @@
             </a>
             <div
                 style="display:flex;gap:24px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.05em;">
-                <a href="/" style="color:var(--accent);font-weight:700;text-decoration:none;">VNR SCAN</a>
+                <a href="/" class="vnr-live-label" style="text-decoration:none;position:relative;padding-left:16px;">
+                    <span
+                        style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:8px;height:8px;border-radius:50%;background:#ef4444;display:inline-block;animation:live-flash 1.2s ease-in-out infinite;"></span>
+                    VNR LIVE</a>
                 <a href="/overview/" style="color:#d4d4d4;text-decoration:none;opacity:0.8;">Main</a>
                 <a href="/overview/#research" style="color:#d4d4d4;text-decoration:none;opacity:0.8;">Research</a>
                 <a href="/suno-report/" style="color:#d4d4d4;text-decoration:none;opacity:0.8;">Tracker Report</a>
