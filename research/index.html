@@ -15,154 +15,240 @@
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="/article.css">
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      overflow: hidden;
+      background: #030303;
+      color: #e0e0e0;
+    }
+
+    .page-shell {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .page-header {
+      flex-shrink: 0;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 24px 28px 20px;
+      width: 100%;
+    }
+
+    .article-list-wrapper {
+      flex: 1;
+      min-height: 0;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: #1a1a33 transparent;
+    }
+
+    .article-list-wrapper::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .article-list-wrapper::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .article-list-wrapper::-webkit-scrollbar-thumb {
+      background: #1a1a33;
+      border-radius: 3px;
+    }
+
+    .article-list-wrapper::-webkit-scrollbar-thumb:hover {
+      background: #40c0ff33;
+    }
+
+    .article-list {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 28px 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .article-card {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      background: #0f0f1a;
+      border: 1px solid #1a1a33;
+      border-radius: 8px;
+      padding: 24px 28px;
+      text-decoration: none;
+      transition: all 0.25s;
+      min-height: 80px;
+    }
+
+    .article-card:hover {
+      border-color: #40c0ff44;
+      background: #12122a;
+    }
+
+    .article-card.featured {
+      border-color: #ff4d4d;
+    }
+
+    .card-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      white-space: nowrap;
+      min-width: 110px;
+    }
+
+    .card-body {
+      flex: 1;
+    }
+
+    .card-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+
+    .card-desc {
+      font-size: 13px;
+      color: #a0b0d0;
+      line-height: 1.5;
+    }
+
+    .card-arrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: #40c0ff;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .page-footer {
+      flex-shrink: 0;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 16px 28px;
+      border-top: 1px solid #1a1a33;
+      text-align: center;
+      width: 100%;
+    }
+  </style>
 </head>
 
 <body>
-  <nav class="vnr-nav">
-    <div class="vnr-nav-inner">
-      <a href="/" class="vnr-nav-logo"><img src="/CROP-vnr-logo.PNG" alt="VNR" style="height:44px;width:auto;"></a>
-      <div class="vnr-nav-links">
-        <a href="/" class="vnr-live-link">VNR LIVE</a>
-        <a href="/research/" class="active">Research</a>
-        <a href="/suno-report/">Tracker Report</a>
-        <a href="/engage/">Engage</a>
-        <a href="/about/">About</a>
+  <div class="page-shell">
+    <nav class="vnr-nav">
+      <div class="vnr-nav-inner">
+        <a href="/" class="vnr-nav-logo"><img src="/CROP-vnr-logo.PNG" alt="VNR" style="height:44px;width:auto;"></a>
+        <div class="vnr-nav-links">
+          <a href="/" class="vnr-live-link">VNR LIVE</a>
+          <a href="/research/" class="active">Research</a>
+          <a href="/suno-report/">Tracker Report</a>
+          <a href="/engage/">Engage</a>
+          <a href="/about/">About</a>
+        </div>
       </div>
-    </div>
-  </nav>
+    </nav>
 
-  <main style="max-width:900px;margin:0 auto;padding:100px 28px 80px;">
-    <div style="margin-bottom:48px;">
+    <div class="page-header">
       <div
         style="font-family:'JetBrains Mono',monospace;font-size:0.8rem;color:#40c0ff;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:12px;">
         Research</div>
-      <h1 style="font-size:2.4rem;font-weight:700;color:#fff;margin-bottom:16px;line-height:1.2;">Published Reports &
+      <h1 style="font-size:2rem;font-weight:700;color:#fff;margin-bottom:8px;line-height:1.2;">Published Reports &
         Analysis</h1>
-      <p style="font-size:16px;color:#a0b0d0;max-width:600px;line-height:1.7;">Independent forensic research documenting
-        the data practices of generative AI platforms. All findings are reproducible.</p>
+      <p style="font-size:14px;color:#a0b0d0;max-width:600px;line-height:1.6;">Independent forensic research documenting
+        the data practices of generative AI platforms.</p>
     </div>
 
-    <div style="display:flex;flex-direction:column;gap:14px;">
+    <div class="article-list-wrapper">
+      <div class="article-list">
 
-      <a href="/research/suno-har-capture/"
-        style="display:flex;align-items:center;gap:24px;background:#0f0f1a;border:1px solid #ff4d4d;border-radius:8px;padding:24px 28px;text-decoration:none;transition:all 0.25s;min-height:80px;">
-        <div
-          style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;white-space:nowrap;min-width:110px;color:#ff4d4d;">
-          🔴 NEW</div>
-        <div style="flex:1;">
-          <div style="font-size:16px;font-weight:700;color:#fff;margin-bottom:6px;line-height:1.3;">78 POST Requests Per
-            Minute: Inside Suno's Data Exfiltration Pipeline</div>
-          <p style="font-size:13px;color:#a0b0d0;line-height:1.5;">HAR capture analysis reveals 2,149 requests in 17
-            minutes — actual payloads showing user IDs, clip IDs, and creative process data sent to 15+ trackers.</p>
-        </div>
-        <span
-          style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#40c0ff;white-space:nowrap;flex-shrink:0;">Read
-          Analysis →</span>
-      </a>
-
-      <a href="/suno-report/"
-        style="display:flex;align-items:center;gap:24px;background:#0f0f1a;border:1px solid #1a1a33;border-radius:8px;padding:24px 28px;text-decoration:none;transition:all 0.25s;min-height:80px;">
-        <div
-          style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;white-space:nowrap;min-width:110px;color:#ff4d4d;">
-          Case Study</div>
-        <div style="flex:1;">
-          <div style="font-size:16px;font-weight:700;color:#fff;margin-bottom:6px;line-height:1.3;">Suno AI Tracker
-            Report</div>
-          <p style="font-size:13px;color:#a0b0d0;line-height:1.5;">Complete forensic inventory of 71+ undisclosed
-            tracking scripts, session replay, and CPU mining.</p>
-        </div>
-        <span
-          style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#40c0ff;white-space:nowrap;flex-shrink:0;">Read
-          Report →</span>
-      </a>
-
-      <a href="/research/velvet-casino/"
-        style="display:flex;align-items:center;gap:24px;background:#0f0f1a;border:1px solid #1a1a33;border-radius:8px;padding:24px 28px;text-decoration:none;transition:all 0.25s;min-height:80px;">
-        <div
-          style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;white-space:nowrap;min-width:110px;color:#f59e0b;">
-          Technical Autopsy</div>
-        <div style="flex:1;">
-          <div style="font-size:16px;font-weight:700;color:#fff;margin-bottom:6px;line-height:1.3;">The Velvet Casino
+        <a href="/research/suno-har-capture/" class="article-card featured">
+          <div class="card-tag" style="color:#ff4d4d;">🔴 NEW</div>
+          <div class="card-body">
+            <div class="card-title">78 POST Requests Per Minute: Inside Suno's Data Exfiltration Pipeline</div>
+            <p class="card-desc">HAR capture analysis reveals 2,149 requests in 17 minutes — actual payloads showing
+              user IDs, clip IDs, and creative process data sent to 15+ trackers.</p>
           </div>
-          <p style="font-size:13px;color:#a0b0d0;line-height:1.5;">How Suno uses gambling-derived mechanics — variable
-            reward architecture, near-miss effects, inference inflation — to drive compulsive engagement.</p>
-        </div>
-        <span
-          style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#40c0ff;white-space:nowrap;flex-shrink:0;">Read
-          Autopsy →</span>
-      </a>
+          <span class="card-arrow">Read Analysis →</span>
+        </a>
 
-      <a href="/research/suno-privacy-audit-2026/"
-        style="display:flex;align-items:center;gap:24px;background:#0f0f1a;border:1px solid #1a1a33;border-radius:8px;padding:24px 28px;text-decoration:none;transition:all 0.25s;min-height:80px;">
-        <div
-          style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;white-space:nowrap;min-width:110px;color:#f59e0b;">
-          Whitepaper</div>
-        <div style="flex:1;">
-          <div style="font-size:16px;font-weight:700;color:#fff;margin-bottom:6px;line-height:1.3;">The Hidden 2026
-            Privacy Update</div>
-          <p style="font-size:13px;color:#a0b0d0;line-height:1.5;">How Suno's "Interactive Chat Information" update
-            harvests creative inputs for model training.</p>
-        </div>
-        <span
-          style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#40c0ff;white-space:nowrap;flex-shrink:0;">Read
-          Analysis →</span>
-      </a>
+        <a href="/suno-report/" class="article-card">
+          <div class="card-tag" style="color:#ff4d4d;">Case Study</div>
+          <div class="card-body">
+            <div class="card-title">Suno AI Tracker Report</div>
+            <p class="card-desc">Complete forensic inventory of 71+ undisclosed tracking scripts, session replay, and
+              CPU mining.</p>
+          </div>
+          <span class="card-arrow">Read Report →</span>
+        </a>
 
-      <a href="/research/is-suno-safe-commercial/"
-        style="display:flex;align-items:center;gap:24px;background:#0f0f1a;border:1px solid #1a1a33;border-radius:8px;padding:24px 28px;text-decoration:none;transition:all 0.25s;min-height:80px;">
-        <div
-          style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;white-space:nowrap;min-width:110px;color:#f59e0b;">
-          Risk Assessment</div>
-        <div style="flex:1;">
-          <div style="font-size:16px;font-weight:700;color:#fff;margin-bottom:6px;line-height:1.3;">Is Suno Safe for
-            Commercial Use?</div>
-          <p style="font-size:13px;color:#a0b0d0;line-height:1.5;">Behavioral risk assessment for professional musicians
-            and commercial creators on AI platforms.</p>
-        </div>
-        <span
-          style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#40c0ff;white-space:nowrap;flex-shrink:0;">Read
-          Assessment →</span>
-      </a>
+        <a href="/research/velvet-casino/" class="article-card">
+          <div class="card-tag" style="color:#f59e0b;">Technical Autopsy</div>
+          <div class="card-body">
+            <div class="card-title">The Velvet Casino</div>
+            <p class="card-desc">How Suno uses gambling-derived mechanics — variable reward architecture, near-miss
+              effects, inference inflation — to drive compulsive engagement.</p>
+          </div>
+          <span class="card-arrow">Read Autopsy →</span>
+        </a>
 
-      <a href="/research/suno-interactive-chat-2026/"
-        style="display:flex;align-items:center;gap:24px;background:#0f0f1a;border:1px solid #1a1a33;border-radius:8px;padding:24px 28px;text-decoration:none;transition:all 0.25s;min-height:80px;">
-        <div
-          style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;white-space:nowrap;min-width:110px;color:#40c0ff;">
-          Policy Analysis</div>
-        <div style="flex:1;">
-          <div style="font-size:16px;font-weight:700;color:#fff;margin-bottom:6px;line-height:1.3;">What "Interactive
-            Chat Information" Really Means</div>
-          <p style="font-size:13px;color:#a0b0d0;line-height:1.5;">Forensic dissection of Suno's February 2026 privacy
-            policy update under CT SB 1295.</p>
-        </div>
-        <span
-          style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#40c0ff;white-space:nowrap;flex-shrink:0;">Read
-          Analysis →</span>
-      </a>
+        <a href="/research/suno-privacy-audit-2026/" class="article-card">
+          <div class="card-tag" style="color:#f59e0b;">Whitepaper</div>
+          <div class="card-body">
+            <div class="card-title">The Hidden 2026 Privacy Update</div>
+            <p class="card-desc">How Suno's "Interactive Chat Information" update harvests creative inputs for model
+              training.</p>
+          </div>
+          <span class="card-arrow">Read Analysis →</span>
+        </a>
 
-      <a href="/research/ai-music-sovereignty-audit-2026/"
-        style="display:flex;align-items:center;gap:24px;background:#0f0f1a;border:1px solid #1a1a33;border-radius:8px;padding:24px 28px;text-decoration:none;transition:all 0.25s;min-height:80px;">
-        <div
-          style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;white-space:nowrap;min-width:110px;color:#22c55e;">
-          Sovereignty</div>
-        <div style="flex:1;">
-          <div style="font-size:16px;font-weight:700;color:#fff;margin-bottom:6px;line-height:1.3;">AI Music
-            Sovereignty: Why Every User Needs an Independent Audit</div>
-          <p style="font-size:13px;color:#a0b0d0;line-height:1.5;">Data portability, right to deletion, and independent
-            forensic auditing across all AI music platforms.</p>
-        </div>
-        <span
-          style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#40c0ff;white-space:nowrap;flex-shrink:0;">Read
-          Report →</span>
-      </a>
+        <a href="/research/is-suno-safe-commercial/" class="article-card">
+          <div class="card-tag" style="color:#f59e0b;">Risk Assessment</div>
+          <div class="card-body">
+            <div class="card-title">Is Suno Safe for Commercial Use?</div>
+            <p class="card-desc">Behavioral risk assessment for professional musicians and commercial creators on AI
+              platforms.</p>
+          </div>
+          <span class="card-arrow">Read Assessment →</span>
+        </a>
 
+        <a href="/research/suno-interactive-chat-2026/" class="article-card">
+          <div class="card-tag" style="color:#40c0ff;">Policy Analysis</div>
+          <div class="card-body">
+            <div class="card-title">What "Interactive Chat Information" Really Means</div>
+            <p class="card-desc">Forensic dissection of Suno's February 2026 privacy policy update under CT SB 1295.</p>
+          </div>
+          <span class="card-arrow">Read Analysis →</span>
+        </a>
+
+        <a href="/research/ai-music-sovereignty-audit-2026/" class="article-card">
+          <div class="card-tag" style="color:#22c55e;">Sovereignty</div>
+          <div class="card-body">
+            <div class="card-title">AI Music Sovereignty: Why Every User Needs an Independent Audit</div>
+            <p class="card-desc">Data portability, right to deletion, and independent forensic auditing across all AI
+              music platforms.</p>
+          </div>
+          <span class="card-arrow">Read Report →</span>
+        </a>
+
+      </div>
     </div>
-  </main>
 
-  <footer style="max-width:900px;margin:0 auto;padding:40px 28px;border-top:1px solid #1a1a33;text-align:center;">
-    <p style="font-size:12px;color:#a0b0d0;">&copy; 2026 Voss Neural Research LLC. All research is independently
-      produced.</p>
-  </footer>
+    <div class="page-footer">
+      <p style="font-size:11px;color:#666;">&copy; 2026 Voss Neural Research LLC</p>
+    </div>
+  </div>
 </body>
 
 </html>

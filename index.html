@@ -698,8 +698,8 @@
         <img src="/CROP-vnr-logo.PNG" alt="VNR" style="height:44px;width:auto;">
       </a>
       <div style="display:flex;gap:24px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.05em;">
-        <a href="/" style="color:var(--accent);font-weight:700;text-decoration:none;">VNR SCAN</a> <a
-          href="/research/" style="color:#d4d4d4;text-decoration:none;opacity:0.8;">Research</a>
+        <a href="/" style="color:var(--accent);font-weight:700;text-decoration:none;">VNR SCAN</a> <a href="/research/"
+          style="color:#d4d4d4;text-decoration:none;opacity:0.8;">Research</a>
         <a href="/suno-report/" style="color:#d4d4d4;text-decoration:none;opacity:0.8;">Tracker Report</a>
         <a href="/engage/" style="color:#d4d4d4;text-decoration:none;opacity:0.8;">Engage</a>
         <a href="/about/" style="color:#d4d4d4;text-decoration:none;opacity:0.8;">About</a>
@@ -831,6 +831,29 @@
       color: #ef4444 !important;
       font-weight: 800 !important;
       animation: live-flash 1.2s ease-in-out infinite;
+    }
+
+    /* Dark scrollbar */
+    html {
+      scrollbar-width: thin;
+      scrollbar-color: #111 #030303;
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #030303;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #111;
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #222;
     }
   </style>
 
