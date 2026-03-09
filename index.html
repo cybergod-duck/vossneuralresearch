@@ -919,29 +919,29 @@
       </div>
 
       <!-- INFECTED FILES -->
-      <div class="section-tag" style="color:#f97316;">Tracker Artifacts Located</div>
-      <h2 style="margin-bottom:20px;">Infected Files — Chrome Default Profile</h2>
+      <div class="section-tag" style="color:#f97316; margin-top:16px;">Tracker Artifacts Located</div>
+      <h2 style="margin-bottom:8px; font-size:18px;">Infected Files — Chrome Default Profile</h2>
 
       <div class="terminal">
         <div><span class="prompt">$</span> <span class="output">Get-ChildItem $chromeUD -Recurse -File |
             ForEach-Object { binary-scan $_ }</span></div>
         <div><span class="output">Total files scanned: </span><span class="hit">2,667</span></div>
-        <div>&nbsp;</div>
+
         <div><span class="hit">[HIT]</span> <span class="output">\ActorSafetyLists\8.6294.2057\listdata.json
             (718.5 KB)</span></div>
         <div><span class="output"> </span><span class="hit">suno=1</span></div>
-        <div>&nbsp;</div>
+
         <div><span class="hit">[HIT]</span> <span class="output">\component_crx_cache\06476966b53b...\model.tflite
             (2,673.3 KB)</span></div>
         <div><span class="output"> </span><span class="hit">suno=1</span> | <span class="warn">tapad=1</span>
         </div>
-        <div>&nbsp;</div>
+
         <div><span class="hit">[HIT]</span> <span
             class="output">\Default\Extensions\aeblfdkhhhdcdjpifhhb...\background.js (2,954.1 KB)</span>
         </div>
         <div><span class="output"> </span><span class="crit">suno=2 | criteo=4 | tapad=4 | maze.co=3 |
             doubleclick=45</span></div>
-        <div>&nbsp;</div>
+
         <div><span class="hit">[HIT]</span> <span class="output">\optimization_guide_model_store\...\ruleset1
             (11.7 KB)</span></div>
         <div><span class="output"> </span><span class="hit">suno=1</span></div>
