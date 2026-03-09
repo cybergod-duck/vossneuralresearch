@@ -776,6 +776,8 @@
       <span class="dot" style="background:#f97316;"></span>Profiles</a>
     <a href="#scan-incidents" class="snav" data-color="#eab308" style="--nav-color:#eab308;">
       <span class="dot" style="background:#eab308;"></span>Incidents</a>
+    <a href="#scan-live" class="snav" data-color="#ff6b6b" style="--nav-color:#ff6b6b;">
+      <span class="dot" style="background:#ff6b6b;"></span>Live Capture</a>
     <a href="#scan-hp" class="snav" data-color="#22c55e" style="--nav-color:#22c55e;">
       <span class="dot" style="background:#22c55e;"></span>Remediation</a>
     <a href="#fortress-deployment" class="snav" data-color="#2563eb" style="--nav-color:#2563eb;">
@@ -965,8 +967,8 @@
         </div>
         <div class="browser-card">
           <h4>☄️ Comet</h4>
-          <div class="size">Default — Pending</div>
-          <div class="status infected">PENDING LIVE SCAN</div>
+          <div class="size">Default — 3,330 MB</div>
+          <div class="status infected">1.9 GB IndexedDB — TRACKER ARTIFACTS FOUND</div>
         </div>
       </div>
 
@@ -1171,6 +1173,154 @@
         </p>
       </div>
     </div>
+
+    <!-- MARCH 9 LIVE CAPTURE — hCAPTCHA SELF-HOSTING DISCOVERY -->
+    <div class="section" id="scan-live">
+      <div class="section-tag" style="color:#ff6b6b;">Live Network Capture — March 9, 2026</div>
+      <h2 style="margin-bottom:8px; font-size:16px;">🔴 CRITICAL FINDING: hCaptcha Self-Hosted on Suno Subdomains</h2>
+      <p style="font-size:12px; color:var(--text-sub); line-height:1.5; margin-bottom:16px;">
+        VNR performed a live network capture on <strong style="color:#fff;">March 9, 2026</strong> during an
+        authenticated
+        Suno session. The capture revealed that <strong style="color:var(--red);">hCaptcha has NOT been replaced by
+          Cloudflare Turnstile</strong> — both systems run simultaneously. More critically, Suno hosts hCaptcha
+        infrastructure on their <strong style="color:#fff;">own subdomains</strong> to evade ad blockers and privacy
+        extensions.
+      </p>
+
+      <!-- DOMAIN CASCADE -->
+      <div class="gpu-abuse"
+        style="border-left-color:#ff6b6b; background:rgba(255,107,107,0.06); border-color:rgba(255,107,107,0.25);">
+        <h3 style="color:#ff6b6b; font-size:14px;">SELF-HOSTED hCAPTCHA — BLOCKLIST EVASION</h3>
+        <p style="font-size:11px; color:var(--text-sub); margin-bottom:12px; line-height:1.5;">
+          Instead of loading from <code style="color:var(--cyan);">hcaptcha.com</code> (which can be blocked), Suno
+          serves the hCaptcha PoW engine from <strong style="color:#fff;">their own infrastructure</strong>:
+        </p>
+        <div
+          style="background:#0d1117; border-radius:6px; padding:10px 12px; font-family:'JetBrains Mono',monospace; font-size:10px; line-height:1.6; margin-bottom:12px;">
+          <div style="color:#ff6b6b; font-weight:700;"># hCaptcha served from Suno's own subdomains:</div>
+          <div><span class="crit">hcaptcha-assets-prod.suno.com</span> <span class="output">→ hCaptcha JS/HTML
+              assets</span></div>
+          <div><span class="crit">hcaptcha-endpoint-prod.suno.com</span> <span class="output">→ PoW API engine
+              (api.js)</span></div>
+          <div style="color:#555; margin-top:8px;"># Invisible iframe found during song generation:</div>
+          <div><span class="output">hcaptcha-assets-prod.suno.com/captcha/v1/.../static/</span><span
+              class="warn">hcaptcha.html#frame=challenge</span></div>
+        </div>
+        <p style="font-size:11px; color:var(--text-sub); line-height:1.5;">
+          <strong style="color:var(--orange);">Why this matters:</strong> Existing hosts-file blocklists that target
+          <code style="color:var(--cyan);">hcaptcha.com</code>, <code style="color:var(--cyan);">js.hcaptcha.com</code>,
+          <code style="color:var(--cyan);">assets.hcaptcha.com</code>
+          <strong style="color:#fff;">will NOT catch the self-hosted variant</strong>. You must also block
+          <code style="color:var(--red);">hcaptcha-assets-prod.suno.com</code> and
+          <code style="color:var(--red);">hcaptcha-endpoint-prod.suno.com</code>.
+        </p>
+      </div>
+
+      <!-- DOMAIN DELTA TABLE -->
+      <div style="margin-top:16px;">
+        <h3 style="color:#ff6b6b; font-size:13px; margin-bottom:8px;">Domain Cascade: Page Load → Song Generation</h3>
+        <p style="font-size:11px; color:var(--text-sub); margin-bottom:12px; line-height:1.5;">
+          <strong style="color:#fff;">14 domains</strong> on initial page load expanded to
+          <strong style="color:var(--red);">22 domains</strong> during song generation —
+          <strong style="color:#fff;">8 new tracker domains</strong> activated by the Create action:
+        </p>
+        <table class="process-table">
+          <thead>
+            <tr>
+              <th>Domain</th>
+              <th>Provider</th>
+              <th>Triggered By</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="abuser">
+              <td><span
+                  style="color:var(--red); font-family:'JetBrains Mono',monospace; font-size:10px;">hcaptcha-assets-prod.suno.com</span>
+              </td>
+              <td>hCaptcha (Suno-hosted)</td>
+              <td>🔴 Song Generation</td>
+            </tr>
+            <tr class="abuser">
+              <td><span
+                  style="color:var(--red); font-family:'JetBrains Mono',monospace; font-size:10px;">hcaptcha-endpoint-prod.suno.com</span>
+              </td>
+              <td>hCaptcha (Suno-hosted)</td>
+              <td>🔴 Song Generation</td>
+            </tr>
+            <tr>
+              <td><span
+                  style="font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--cyan);">analytics.google.com</span>
+              </td>
+              <td>Google</td>
+              <td>Song Generation</td>
+            </tr>
+            <tr>
+              <td><span
+                  style="font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--cyan);">googleads.g.doubleclick.net</span>
+              </td>
+              <td>Google Ads / DoubleClick</td>
+              <td>Song Generation</td>
+            </tr>
+            <tr>
+              <td><span
+                  style="font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--cyan);">bat.bing.com</span>
+              </td>
+              <td>Microsoft Bing UET</td>
+              <td>Song Generation</td>
+            </tr>
+            <tr>
+              <td><span
+                  style="font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--cyan);">b.applovin.com</span>
+              </td>
+              <td>AppLovin</td>
+              <td>Song Generation</td>
+            </tr>
+            <tr>
+              <td><span
+                  style="font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--cyan);">collector.agentio.com</span>
+              </td>
+              <td>Agentio</td>
+              <td>Song Generation</td>
+            </tr>
+            <tr>
+              <td><span
+                  style="font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--cyan);">sdk-api-v1.singular.net</span>
+              </td>
+              <td>Singular</td>
+              <td>Song Generation</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- LevelDB EVIDENCE -->
+      <div style="margin-top:16px;">
+        <h3 style="color:#ff6b6b; font-size:13px; margin-bottom:8px;">Active PoW Keys in Browser Storage (Current)</h3>
+        <p style="font-size:11px; color:var(--text-sub); margin-bottom:12px; line-height:1.5;">
+          Deep binary scan of Comet browser's Local Storage LevelDB files found
+          <strong style="color:#fff;">hCaptcha PoW configuration actively stored</strong> across
+          <strong style="color:var(--red);">dozens of origins</strong> — not just suno.com:
+        </p>
+        <div
+          style="background:#0d1117; border-radius:6px; padding:10px 12px; font-family:'JetBrains Mono',monospace; font-size:10px; line-height:1.6; margin-bottom:12px;">
+          <div style="color:#ff6b6b; font-weight:700;">$ binary-scan 000005.ldb, 000259.ldb, 000260.ldb</div>
+          <div><span class="crit">binance</span> <span class="output">— 38+ instances across 3 files</span></div>
+          <div><span class="crit">ethereum {"chainId":"0x1"}</span> <span class="output">— 41+ instances (Ethereum
+              Mainnet)</span></div>
+          <div><span class="warn">loglevel: SILENT</span> <span class="output">— paired with every ethereum entry</span>
+          </div>
+          <div><span class="hit">trust:cache:timestamp</span> <span class="output">— March 2026 timestamps
+              (active)</span></div>
+          <div style="color:#555; margin-top:6px;"># Injected into Local Storage of EVERY visited origin</div>
+          <div style="color:#555;"># loglevel SILENT = explicitly suppress console logging to hide activity</div>
+        </div>
+      </div>
+
+      <p style="font-size:11px; color:#555; font-family:'JetBrains Mono',monospace; margin-top:8px;">
+        Live capture executed: 2026-03-09 03:24–03:30 EST | 206 resources loaded | Authenticated session
+      </p>
+    </div>
+
     <!-- KEY FINDING: HP AI EXTENSION — DESTROYED -->
     <div class="section" id="scan-hp">
       <div class="section-tag" style="color:var(--green);">Remediation</div>
@@ -1256,6 +1406,11 @@
         <div style="color:#555; margin-top:8px;"># hCaptcha (cryptocurrency proof-of-work mining)</div>
         <div><span style="color:var(--red);">0.0.0.0</span> <span class="output">hcaptcha.com, js.hcaptcha.com,
             api.hcaptcha.com, api2.hcaptcha.com, assets.hcaptcha.com, newassets.hcaptcha.com</span></div>
+        <div style="color:#ff6b6b; margin-top:4px;"># hCaptcha SELF-HOSTED on Suno subdomains (discovered 2026-03-09)
+        </div>
+        <div><span style="color:var(--red);">0.0.0.0</span> <span class="output"
+            style="color:#ff6b6b;">hcaptcha-assets-prod.suno.com,
+            hcaptcha-endpoint-prod.suno.com</span></div>
         <div style="color:#555; margin-top:8px;"># Cross-device fingerprinting &amp; behavioral tracking</div>
         <div><span style="color:var(--red);">0.0.0.0</span> <span class="output">tapad.com, pixel.tapad.com,
             adsymptotic.com</span></div>

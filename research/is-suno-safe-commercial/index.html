@@ -1,23 +1,32 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>Is Suno Safe for Commercial Use? A Behavioral Risk Assessment | Voss Neural Research</title>
-    <meta name="description" content="VNR's behavioral risk assessment reveals why commercial creators should audit Suno AI before publishing. Variable Reward Architecture, IP sovereignty risks, and 71+ undisclosed trackers.">
-    <meta name="keywords" content="Is Suno safe, Suno commercial use, Suno AI risk, AI music copyright, Suno IP rights, Suno safe for musicians, Suno behavioral risk">
-    <meta property="og:title" content="Is Suno Safe for Commercial Use? A Behavioral Risk Assessment">
-    <meta property="og:description" content="VNR's behavioral risk assessment reveals why commercial creators should audit Suno AI before publishing. Variable Reward Architecture, IP sovereignty risks, and 71+ undisclosed trackers.">
-    <meta property="og:type" content="article">
-    <meta property="og:url" content="https://www.vossneuralresearch.com/research/is-suno-safe-commercial/">
-    <meta property="og:site_name" content="Voss Neural Research">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Is Suno Safe for Commercial Use? A Behavioral Risk Assessment">
-    <meta name="twitter:description" content="VNR's behavioral risk assessment reveals why commercial creators should audit Suno AI before publishing. Variable Reward Architecture, IP sovereignty risks, and 71+ undisclosed trackers.">
-    <meta name="robots" content="index, follow">
-    <meta name="author" content="Voss Neural Research LLC">
-    <link rel="canonical" href="https://www.vossneuralresearch.com/research/is-suno-safe-commercial/">
+    <meta
+        content="VNR's behavioral risk assessment reveals why commercial creators should audit Suno AI before publishing. Variable Reward Architecture, IP sovereignty risks, and 71+ undisclosed trackers."
+        name="description" />
+    <meta
+        content="Is Suno safe, Suno commercial use, Suno AI risk, AI music copyright, Suno IP rights, Suno safe for musicians, Suno behavioral risk"
+        name="keywords" />
+    <meta content="Is Suno Safe for Commercial Use? A Behavioral Risk Assessment" property="og:title" />
+    <meta
+        content="VNR's behavioral risk assessment reveals why commercial creators should audit Suno AI before publishing. Variable Reward Architecture, IP sovereignty risks, and 71+ undisclosed trackers."
+        property="og:description" />
+    <meta content="article" property="og:type" />
+    <meta content="https://www.vossneuralresearch.com/research/is-suno-safe-commercial/" property="og:url" />
+    <meta content="Voss Neural Research" property="og:site_name" />
+    <meta content="summary_large_image" name="twitter:card" />
+    <meta content="Is Suno Safe for Commercial Use? A Behavioral Risk Assessment" name="twitter:title" />
+    <meta
+        content="VNR's behavioral risk assessment reveals why commercial creators should audit Suno AI before publishing. Variable Reward Architecture, IP sovereignty risks, and 71+ undisclosed trackers."
+        name="twitter:description" />
+    <meta content="index, follow" name="robots" />
+    <meta content="Voss Neural Research LLC" name="author" />
+    <link href="https://www.vossneuralresearch.com/research/is-suno-safe-commercial/" rel="canonical" />
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -37,455 +46,645 @@
         ]
     }
     </script>
-    <link rel='icon' type='image/png' href='/vnr-icon.png'>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="/vnr-icon.png" rel="icon" type="image/png" />
     <style>
-        :root {{
-            --bg: #030303;
-            --text: #d4d4d4;
-            --text-sub: #888;
-            --accent: #40c0ff;
-            --magenta: #40c0ff;
-            --purple: #40c0ff;
-            --green: #10b981;
-            --border: rgba(64, 192, 255, .2)
-        }}
+        :root {
+                {
+                --bg: #030303;
+                --text: #d4d4d4;
+                --text-sub: #888;
+                --accent: #40c0ff;
+                --magenta: #40c0ff;
+                --purple: #40c0ff;
+                --green: #10b981;
+                --border: rgba(64, 192, 255, .2)
+            }
+        }
 
-        * {{
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0
-        }}
+        * {
+                {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0
+            }
+        }
 
-        html {{
-            scrollbar-width: none;
-            scroll-behavior: smooth
-        }}
+        html {
+                {
+                scrollbar-width: none;
+                scroll-behavior: smooth
+            }
+        }
 
-        body {{
-            background: var(--bg);
-            background-image: radial-gradient(circle at 30% 0%, rgba(64, 192, 255, .04) 0%, transparent 50%), radial-gradient(circle at 70% 100%, rgba(64, 192, 255, .03) 0%, transparent 40%);
-            color: var(--text);
-            font-family: 'Inter', sans-serif;
-            line-height: 1.8
-        }}
+        body {
+                {
+                background: var(--bg);
+                background-image: radial-gradient(circle at 30% 0%, rgba(64, 192, 255, .04) 0%, transparent 50%), radial-gradient(circle at 70% 100%, rgba(64, 192, 255, .03) 0%, transparent 40%);
+                color: var(--text);
+                font-family: 'Inter', sans-serif;
+                line-height: 1.8
+            }
+        }
 
-        .p {{
-            max-width: 760px;
-            margin: 0 auto;
-            padding: 40px 24px 80px
-        }}
+        .p {
+                {
+                max-width: 760px;
+                margin: 0 auto;
+                padding: 40px 24px 80px
+            }
+        }
 
-        .nav {{
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            padding: 20px 0;
-            margin-bottom: 40px;
-            border-bottom: 1px solid rgba(255, 255, 255, .06)
-        }}
+        .nav {
+                {
+                display: flex;
+                align-items: center;
+                gap: 16px;
+                padding: 20px 0;
+                margin-bottom: 40px;
+                border-bottom: 1px solid rgba(255, 255, 255, .06)
+            }
+        }
 
-        .nav div {{
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }}
+        .nav div {
+                {
+                display: flex;
+                align-items: center;
+                gap: 16px;
+            }
+        }
 
-        .nav a {{
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 12px;
-            color: var(--text-sub);
-            text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: .1em;
-            transition: color .2s
-        }}
+        .nav a {
+                {
+                font-family: 'JetBrains Mono', monospace;
+                font-size: 12px;
+                color: var(--text-sub);
+                text-decoration: none;
+                text-transform: uppercase;
+                letter-spacing: .1em;
+                transition: color .2s
+            }
+        }
 
-        .nav a:hover {{
-            color: var(--accent)
-        }}
+        .nav a:hover {
+                {
+                color: var(--accent)
+            }
+        }
 
-        .nav .s {{
-            color: rgba(255, 255, 255, .15)
-        }}
+        .nav .s {
+                {
+                color: rgba(255, 255, 255, .15)
+            }
+        }
 
-        .tag {{
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 11px;
-            font-weight: 700;
-            color: var(--purple);
-            text-transform: uppercase;
-            letter-spacing: .15em;
-            margin-bottom: 16px
-        }}
+        .tag {
+                {
+                font-family: 'JetBrains Mono', monospace;
+                font-size: 11px;
+                font-weight: 700;
+                color: var(--purple);
+                text-transform: uppercase;
+                letter-spacing: .15em;
+                margin-bottom: 16px
+            }
+        }
 
-        .t {{
-            font-size: 36px;
-            font-weight: 800;
-            line-height: 1.2;
-            color: #fff;
-            margin-bottom: 20px
-        }}
+        .t {
+                {
+                font-size: 36px;
+                font-weight: 800;
+                line-height: 1.2;
+                color: #fff;
+                margin-bottom: 20px
+            }
+        }
 
-        .t em, .t span {{
-            background: linear-gradient(135deg, var(--magenta), var(--purple));
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-style: normal
-        }}
+        .t em,
+        .t span {
+                {
+                background: linear-gradient(135deg, var(--magenta), var(--purple));
+                -webkit-background-clip: text;
+                background-clip: text;
+                -webkit-text-fill-color: transparent;
+                font-style: normal
+            }
+        }
 
-        .meta {{
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 12px;
-            color: var(--text-sub);
-            margin-bottom: 40px;
-            display: flex;
-            gap: 24px;
-            flex-wrap: wrap
-        }}
+        .meta {
+                {
+                font-family: 'JetBrains Mono', monospace;
+                font-size: 12px;
+                color: var(--text-sub);
+                margin-bottom: 40px;
+                display: flex;
+                gap: 24px;
+                flex-wrap: wrap
+            }
+        }
 
-        .meta strong {{
-            color: var(--accent)
-        }}
+        .meta strong {
+                {
+                color: var(--accent)
+            }
+        }
 
-        article h2 {{
-            font-size: 24px;
-            font-weight: 700;
-            color: #fff;
-            margin: 48px 0 16px;
-            padding-bottom: 8px;
-            border-bottom: 1px solid rgba(255, 255, 255, .06)
-        }}
+        article h2 {
+                {
+                font-size: 24px;
+                font-weight: 700;
+                color: #fff;
+                margin: 48px 0 16px;
+                padding-bottom: 8px;
+                border-bottom: 1px solid rgba(255, 255, 255, .06)
+            }
+        }
 
-        article h3 {{
-            font-size: 18px;
-            font-weight: 600;
-            color: #e8e8e8;
-            margin: 32px 0 12px
-        }}
+        article h3 {
+                {
+                font-size: 18px;
+                font-weight: 600;
+                color: #e8e8e8;
+                margin: 32px 0 12px
+            }
+        }
 
-        article p {{
-            margin-bottom: 20px;
-            font-size: 16px
-        }}
+        article p {
+                {
+                margin-bottom: 20px;
+                font-size: 16px
+            }
+        }
 
-        article strong {{
-            color: #fff;
-            font-weight: 600
-        }}
+        article strong {
+                {
+                color: #fff;
+                font-weight: 600
+            }
+        }
 
-        article ul {{
-            margin: 0 0 20px 20px;
-            list-style: none
-        }}
+        article ul {
+                {
+                margin: 0 0 20px 20px;
+                list-style: none
+            }
+        }
 
-        article ul li {{
-            position: relative;
-            padding-left: 20px;
-            margin-bottom: 10px;
-            font-size: 15px
-        }}
+        article ul li {
+                {
+                position: relative;
+                padding-left: 20px;
+                margin-bottom: 10px;
+                font-size: 15px
+            }
+        }
 
-        article ul li::before {{
-            content: '\25B8';
-            position: absolute;
-            left: 0;
-            color: var(--purple);
-            font-weight: bold
-        }}
+        article ul li::before {
+                {
+                content: '\25B8';
+                position: absolute;
+                left: 0;
+                color: var(--purple);
+                font-weight: bold
+            }
+        }
 
-        .eb, .evidence-box, .risk-box, .mechanism-card {{
-            background: rgba(64, 192, 255, .06);
-            border: 1px solid rgba(64, 192, 255, .2);
-            border-left: 3px solid var(--purple);
-            padding: 20px 24px;
-            margin: 24px 0;
-            border-radius: 4px
-        }}
+        .eb,
+        .evidence-box,
+        .risk-box,
+        .mechanism-card {
+                {
+                background: rgba(64, 192, 255, .06);
+                border: 1px solid rgba(64, 192, 255, .2);
+                border-left: 3px solid var(--purple);
+                padding: 20px 24px;
+                margin: 24px 0;
+                border-radius: 4px
+            }
+        }
 
-        .eb .l, .evidence-box .label, .risk-box h4, .mechanism-card h4 {{
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 10px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: .1em;
-            color: var(--purple);
-            margin-bottom: 8px
-        }}
+        .eb .l,
+        .evidence-box .label,
+        .risk-box h4,
+        .mechanism-card h4 {
+                {
+                font-family: 'JetBrains Mono', monospace;
+                font-size: 10px;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: .1em;
+                color: var(--purple);
+                margin-bottom: 8px
+            }
+        }
 
-        .eb p, .evidence-box p, .risk-box p, .mechanism-card p {{
-            font-size: 14px;
-            margin-bottom: 0
-        }}
+        .eb p,
+        .evidence-box p,
+        .risk-box p,
+        .mechanism-card p {
+                {
+                font-size: 14px;
+                margin-bottom: 0
+            }
+        }
 
-        .cta, .callout {{
-            background: rgba(64, 192, 255, .06);
-            border: 1px solid rgba(64, 192, 255, .2);
-            border-radius: 8px;
-            padding: 24px;
-            margin: 32px 0;
-            text-align: center
-        }}
+        .cta,
+        .callout {
+                {
+                background: rgba(64, 192, 255, .06);
+                border: 1px solid rgba(64, 192, 255, .2);
+                border-radius: 8px;
+                padding: 24px;
+                margin: 32px 0;
+                text-align: center
+            }
+        }
 
-        .cta a, .callout a {{
-            display: inline-block;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 14px;
-            font-weight: 700;
-            color: #fff;
-            background: linear-gradient(135deg, var(--magenta), var(--purple));
-            padding: 12px 32px;
-            border-radius: 6px;
-            text-decoration: none;
-            margin-top: 12px;
-            transition: transform .2s, box-shadow .2s
-        }}
+        .cta a,
+        .callout a {
+                {
+                display: inline-block;
+                font-family: 'JetBrains Mono', monospace;
+                font-size: 14px;
+                font-weight: 700;
+                color: #fff;
+                background: linear-gradient(135deg, var(--magenta), var(--purple));
+                padding: 12px 32px;
+                border-radius: 6px;
+                text-decoration: none;
+                margin-top: 12px;
+                transition: transform .2s, box-shadow .2s
+            }
+        }
 
-        .cta a:hover, .callout a:hover {{
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(64, 192, 255, .3)
-        }}
+        .cta a:hover,
+        .callout a:hover {
+                {
+                transform: translateY(-2px);
+                box-shadow: 0 8px 30px rgba(64, 192, 255, .3)
+            }
+        }
 
-        .risk, .stat-row {{
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
-            margin: 32px 0
-        }}
+        .risk,
+        .stat-row {
+                {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 16px;
+                margin: 32px 0
+            }
+        }
 
-        .rc, .stat-card {{
-            background: rgba(255, 255, 255, .02);
-            border: 1px solid rgba(255, 255, 255, .08);
-            border-radius: 8px;
-            padding: 20px;
-            text-align: center
-        }}
+        .rc,
+        .stat-card {
+                {
+                background: rgba(255, 255, 255, .02);
+                border: 1px solid rgba(255, 255, 255, .08);
+                border-radius: 8px;
+                padding: 20px;
+                text-align: center
+            }
+        }
 
-        .rc .lv, .stat-card .num {{
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 28px;
-            font-weight: 800
-        }}
+        .rc .lv,
+        .stat-card .num {
+                {
+                font-family: 'JetBrains Mono', monospace;
+                font-size: 28px;
+                font-weight: 800
+            }
+        }
 
-        .rc .d, .stat-card .desc {{
-            font-size: 12px;
-            color: var(--text-sub);
-            margin-top: 4px
-        }}
-        
-        .ct {{
-            width: 100%;
-            border-collapse: collapse;
-            margin: 32px 0
-        }}
+        .rc .d,
+        .stat-card .desc {
+                {
+                font-size: 12px;
+                color: var(--text-sub);
+                margin-top: 4px
+            }
+        }
 
-        .ct th {{
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: .1em;
-            color: var(--text-sub);
-            text-align: left;
-            padding: 12px 16px;
-            border-bottom: 2px solid rgba(255, 255, 255, .1)
-        }}
+        .ct {
+                {
+                width: 100%;
+                border-collapse: collapse;
+                margin: 32px 0
+            }
+        }
 
-        .ct td {{
-            padding: 14px 16px;
-            border-bottom: 1px solid rgba(255, 255, 255, .04);
-            font-size: 14px
-        }}
+        .ct th {
+                {
+                font-family: 'JetBrains Mono', monospace;
+                font-size: 12px;
+                text-transform: uppercase;
+                letter-spacing: .1em;
+                color: var(--text-sub);
+                text-align: left;
+                padding: 12px 16px;
+                border-bottom: 2px solid rgba(255, 255, 255, .1)
+            }
+        }
 
-        .ct tr:hover {{
-            background: rgba(64, 192, 255, .04)
-        }}
-        
-        .ct .bad {{ color: #ef4444; font-weight: 600 }}
-        .ct .good {{ color: var(--green); font-weight: 600 }}
-        .ct .warn {{ color: #f59e0b; font-weight: 600 }}
+        .ct td {
+                {
+                padding: 14px 16px;
+                border-bottom: 1px solid rgba(255, 255, 255, .04);
+                font-size: 14px
+            }
+        }
 
-        .ft {{
-            margin-top: 60px;
-            padding-top: 24px;
-            border-top: 1px solid rgba(255, 255, 255, .06);
-            text-align: center
-        }}
+        .ct tr:hover {
+                {
+                background: rgba(64, 192, 255, .04)
+            }
+        }
 
-        .ft a {{
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 12px;
-            color: var(--text-sub);
-            text-decoration: none
-        }}
+        .ct .bad {
+                {
+                color: #ef4444;
+                font-weight: 600
+            }
+        }
 
-        .ft .c {{
-            font-size: 11px;
-            color: #444;
-            margin-top: 12px
-        }}
+        .ct .good {
+                {
+                color: var(--green);
+                font-weight: 600
+            }
+        }
 
-        @media(max-width:600px) {{
-            .t {{
-                font-size: 26px
-            }}
+        .ct .warn {
+                {
+                color: #f59e0b;
+                font-weight: 600
+            }
+        }
 
-            .risk, .stat-row, .ct {{
-                grid-template-columns: 1fr;
-                font-size: 12px
-            }}
+        .ft {
+                {
+                margin-top: 60px;
+                padding-top: 24px;
+                border-top: 1px solid rgba(255, 255, 255, .06);
+                text-align: center
+            }
+        }
 
-            .meta {{
-                flex-direction: column;
-                gap: 8px
-            }}
-        }}
+        .ft a {
+                {
+                font-family: 'JetBrains Mono', monospace;
+                font-size: 12px;
+                color: var(--text-sub);
+                text-decoration: none
+            }
+        }
+
+        .ft .c {
+                {
+                font-size: 11px;
+                color: #444;
+                margin-top: 12px
+            }
+        }
+
+        @media(max-width:600px) {
+                {
+                .t {
+                        {
+                        font-size: 26px
+                    }
+                }
+
+                .risk,
+                .stat-row,
+                .ct {
+                        {
+                        grid-template-columns: 1fr;
+                        font-size: 12px
+                    }
+                }
+
+                .meta {
+                        {
+                        flex-direction: column;
+                        gap: 8px
+                    }
+                }
+            }
+        }
     </style>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&amp;family=JetBrains+Mono:wght@400;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/article.css">
 </head>
 
 <body>
-    <div class="p">
-        <nav class="nav">
-            <a href="/" style="display: flex; align-items: center; border:none; text-decoration:none;"><img src="/vnr-logo.png" alt="VNR Logo" style="height:24px; margin-right:8px;"></a>
-            <div>
-                <a href="/">VNR Home</a><span class="s">/</span>
-                <a href="/research/">Research</a><span class="s">/</span>
-                <a href="https://www.vossneuralresearch.com/research/is-suno-safe-commercial/" style="color:var(--purple)">This Article</a>
+    <nav class="vnr-nav">
+        <div class="vnr-nav-inner">
+            <a href="/" class="vnr-nav-logo"><img src="/vnr-logo.png" alt="VNR" style="height:44px;width:auto;"></a>
+            <div class="vnr-nav-links">
+                <a href="/">VNR SCAN</a>
+                <a href="/overview/">What AI Platforms Hide</a>
+                <a href="/overview/#research" class="active">Research</a>
+                <a href="/suno-report/">Tracker Report</a>
+                <a href="/overview/#engage">Engage</a>
+                <a href="/overview/#about">About</a>
             </div>
-        </nav>
+        </div>
+    </nav>
+    <nav id="scan-nav">
+        <a class="snav" href="#the-sovereignty-paradox-you-re-training-your-own-replacement"><span class="dot"
+                style="background:#40c0ff"></span>The Sovereignty</a>
+        <a class="snav" href="#variable-reward-architecture-the-slot-machine-in-your-daw"><span class="dot"
+                style="background:#f5a623"></span>Variable Reward</a>
+        <a class="snav" href="#the-71-tracker-problem-who-has-your-client-data"><span class="dot"
+                style="background:#10b981"></span>The 71-Tracker</a>
+        <a class="snav" href="#regulatory-exposure-connecticut-sb-1295"><span class="dot"
+                style="background:#ff4d4d"></span>Regulatory Exposure</a>
+        <a class="snav" href="#what-commercial-creators-should-do"><span class="dot"
+                style="background:#a78bfa"></span>What Commercial</a>
+        <a class="snav" href="#vnr-s-risk-designation"><span class="dot" style="background:#ec4899"></span>VNR's
+            Risk</a>
+        <div style="margin-top:24px;border-top:1px solid rgba(255,255,255,0.06);padding-top:16px;">
+            <div
+                style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#666;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;">
+                Related</div>
+            <a href="/suno-report/"
+                style="display:block;color:#ef4444;font-size:10px;font-family:'JetBrains Mono',monospace;text-decoration:none;margin-bottom:8px;opacity:0.8;">⚠
+                Tracker Report →</a>
+            <a href="/vnr-scan/"
+                style="display:block;color:#40c0ff;font-size:10px;font-family:'JetBrains Mono',monospace;text-decoration:none;opacity:0.8;">🛡
+                VNR SCAN →</a>
+        </div>
+    </nav>
 
-        <div class="tag">VNR Behavioral Risk Assessment</div>
-        <h1 class="t">Is Suno Safe for Commercial Use?<br/><em>A Behavioral Risk Assessment</em></h1>
-        <div class="meta">
-            <span>By <strong>Voss Neural Research</strong></span>
-            <span>Published: <strong>March 7, 2026</strong></span>
-            <span>Risk Level: <strong style="color:#ef4444;">HIGH</strong></span>
+
+
+
+    <div class_="container">
+        <div class="article-wrap">
+            <div class="tag">VNR Forensic Investigation</div>
+            <h1 class="t">Is Suno Safe for Commercial Use?<br /><em>A Behavioral Risk Assessment</em></h1>
+            <div class="meta">
+                <span>By <strong>Voss Neural Research</strong></span>
+                <span>Published: <strong>March 7, 2026</strong></span>
+                <span>Reading time: <strong>8 min</strong></span>
+            </div>
+            <div class="stat-row">
+                <div class="stat-card">
+                    <div class="num" style="color:#ef4444;">CAT 4</div>
+                    <div class="desc">Behavioral Risk</div>
+                </div>
+                <div class="stat-card">
+                    <div class="num" style="color:var(--magenta);">71+</div>
+                    <div class="desc">Undisclosed Trackers</div>
+                </div>
+                <div class="stat-card">
+                    <div class="num" style="color:var(--purple);">0</div>
+                    <div class="desc">IP Protections</div>
+                </div>
+            </div>
+            <article>
+                <p>If you're a professional musician, producer, or content creator considering Suno AI for commercial
+                    work,
+                    you need to read this assessment first. Voss Neural Research has completed a forensic audit of
+                    Suno's
+                    platform and a behavioral analysis of its engagement mechanics. <strong>The findings present
+                        significant
+                        risks for anyone incorporating Suno into a commercial workflow.</strong></p>
+                <h2 id="the-sovereignty-paradox-you-re-training-your-own-replacement">The Sovereignty Paradox: You're
+                    Training Your Own Replacement</h2>
+                <p>On February 12, 2026, Suno added "Interactive Chat Information" as a data collection category. This
+                    means
+                    every prompt you write, every style direction you give, every creative decision you make on the
+                    platform
+                    is now training data for Suno's AI models.</p>
+                <p>For commercial creators, this creates what VNR terms the <strong>"sovereignty paradox"</strong>: your
+                    creative process — the way you think about music, the phrases you use to describe sounds, the
+                    iterative
+                    decisions that define your artistic voice — is being captured and used to build an AI that will
+                    compete
+                    with you.</p>
+                <p>Suno effectively holds a perpetual, royalty-free license not just to your output, but to your
+                    <strong>creative process itself</strong>. The commercial implications are significant:
+                </p>
+                <ul>
+                    <li>Your unique creative methodology becomes Suno's training data</li>
+                    <li>The AI becomes better at replicating what makes your work distinctive</li>
+                    <li>No compensation mechanism exists for this value extraction</li>
+                    <li>No "opt-out" granularity distinguishes service use from model training</li>
+                </ul>
+                <h2 id="variable-reward-architecture-the-slot-machine-in-your-daw">Variable Reward Architecture: The
+                    Slot Machine in Your DAW</h2>
+                <p>VNR's behavioral analysis protocol SA-01 (Somatic Anchoring) reveals something commercial users need
+                    to
+                    understand: <strong>Suno is engineered to be addictive using the same psychological mechanics as
+                        slot
+                        machines.</strong></p>
+                <p>The platform operates on a Variable Ratio Reinforcement schedule. When you click "Generate," the
+                    quality
+                    of the output is deliberately unpredictable. Sometimes you get a stunning result on the first try.
+                    Sometimes it takes 20 iterations. This unpredictability is not a bug — it's the core engagement
+                    mechanism.</p>
+                <div class="eb">
+                    <div class="l">⚠ SA-01 Finding</div>
+                    <p>Variable Ratio Reinforcement is the most effective schedule for inducing persistent behavior.
+                        Suno's
+                        generation button delivers high-quality outputs at unpredictable intervals, increasing dopamine
+                        synthesis and anchoring users to the platform via biological response rather than utility. Under
+                        VNR's Cognitive Security Taxonomy, this is classified as a <strong>Category 4 Behavioral
+                            Risk</strong>.</p>
+                </div>
+                <p>For commercial creators charging hourly rates, this means Suno is consuming your billable time
+                    through an
+                    engagement loop designed to keep you generating — not because it's productive, but because your
+                    brain is
+                    waiting for the next dopamine hit.</p>
+                <h2 id="the-71-tracker-problem-who-has-your-client-data">The 71-Tracker Problem: Who Has Your Client
+                    Data?</h2>
+                <p>If you're using Suno for client work, your client's project details may be flowing to 71+ third
+                    parties
+                    without disclosure. Microsoft Clarity records complete session replays of your interactions. Criteo
+                    and
+                    Tapad perform cross-device tracking. Multiple unidentified analytics endpoints transmit
+                    high-frequency
+                    telemetry.</p>
+                <p>For commercial users bound by NDAs or client confidentiality agreements, using Suno may constitute a
+                    breach. Your prompts — which may contain client names, project descriptions, or creative briefs —
+                    are
+                    being captured, stored, and shared with entities you never consented to share with.</p>
+                <h2 id="regulatory-exposure-connecticut-sb-1295">Regulatory Exposure: Connecticut SB 1295</h2>
+                <p>Connecticut's SB 1295 (effective July 1, 2026) classifies "neural data" — data derived from
+                    measurement
+                    or analysis of neural activity — as sensitive data requiring opt-in consent. VNR's SA-01 research
+                    demonstrates that Suno's Variable Reward Architecture is designed to induce specific
+                    neurotransmitter
+                    responses. If regulators determine this constitutes neural data processing, commercial users could
+                    face
+                    liability for platforms that lack proper consent frameworks.</p>
+                <h2 id="what-commercial-creators-should-do">What Commercial Creators Should Do</h2>
+                <ul>
+                    <li><strong>Audit your exposure</strong> — Run VNR's VNR SCAN protocol to understand what's
+                        happening
+                        behind the interface</li>
+                    <li><strong>Review your contracts</strong> — Check whether your client agreements prohibit sharing
+                        project details with third-party AI platforms</li>
+                    <li><strong>Document your creative process</strong> — Maintain independent records of your original
+                        creative methodology before it becomes Suno's training data</li>
+                    <li><strong>Deploy tracker blocking</strong> — Use the DNS blocklist from the VNR SCAN dashboard to
+                        prevent the 71+ tracker domains from loading</li>
+                    <li><strong>Consider alternatives</strong> — Evaluate whether self-hosted AI music tools provide
+                        better
+                        IP protection</li>
+                </ul>
+                <div class="cta">
+                    <p style="font-size:14px;color:var(--text-sub);margin-bottom:8px;">Run the VNR VNR SCAN protocol</p>
+                    <a href="/vnr-scan/">Launch VNR SCAN →</a>
+                </div>
+                <h2 id="vnr-s-risk-designation">VNR's Risk Designation</h2>
+                <p>Based on our forensic audit and behavioral analysis, VNR designates Suno AI as a <strong>"High-Risk
+                        Entity"</strong> for commercial use. The platform operates with a "compliance debt" regarding
+                    emerging privacy and neural data laws, prioritizes model extraction over user sovereignty, and
+                    employs
+                    behavioral engagement mechanics that undermine productive use.</p>
+                <p>Commercial creators should proceed with extreme caution — or not at all — until Suno demonstrates
+                    transparent data practices, provides granular consent controls, and undergoes independent external
+                    oversight.</p>
+                <div class="eb"
+                    style="border-left-color:var(--accent);background:rgba(64,192,255,.06);border-color:rgba(64,192,255,.2)">
+                    <div class="l" style="color:var(--accent)">Full Evidence</div>
+                    <p>Every finding is documented with process IDs, network traces, and remediation steps: <a
+                            href="/vnr-scan/" style="color:var(--accent)">VNR SCAN</a> | <a href="/suno-report/"
+                            style="color:var(--accent)">Suno Report</a> | <a href="/research/suno-privacy-audit-2026/"
+                            style="color:var(--accent)">Privacy Audit</a></p>
+                </div>
+            </article>
 
         </div>
-
-        <div class="risk">
-<div class="rc">
-<div class="lv" style="color:#ef4444;">CAT 4</div>
-<div class="d">Behavioral Risk</div>
-</div>
-<div class="rc">
-<div class="lv" style="color:var(--magenta);">71+</div>
-<div class="d">Undisclosed Trackers</div>
-</div>
-<div class="rc">
-<div class="lv" style="color:var(--purple);">0</div>
-<div class="d">IP Protections</div>
-</div>
-</div>
-
-        <article>
-            
-<p>If you're a professional musician, producer, or content creator considering Suno AI for commercial work,
-                you need to read this assessment first. Voss Neural Research has completed a forensic audit of Suno's
-                platform and a behavioral analysis of its engagement mechanics. <strong>The findings present significant
-                    risks for anyone incorporating Suno into a commercial workflow.</strong></p>
-<h2>The Sovereignty Paradox: You're Training Your Own Replacement</h2>
-<p>On February 12, 2026, Suno added "Interactive Chat Information" as a data collection category. This means
-                every prompt you write, every style direction you give, every creative decision you make on the platform
-                is now training data for Suno's AI models.</p>
-<p>For commercial creators, this creates what VNR terms the <strong>"sovereignty paradox"</strong>: your
-                creative process — the way you think about music, the phrases you use to describe sounds, the iterative
-                decisions that define your artistic voice — is being captured and used to build an AI that will compete
-                with you.</p>
-<p>Suno effectively holds a perpetual, royalty-free license not just to your output, but to your
-                <strong>creative process itself</strong>. The commercial implications are significant:
-            </p>
-<ul>
-<li>Your unique creative methodology becomes Suno's training data</li>
-<li>The AI becomes better at replicating what makes your work distinctive</li>
-<li>No compensation mechanism exists for this value extraction</li>
-<li>No "opt-out" granularity distinguishes service use from model training</li>
-</ul>
-<h2>Variable Reward Architecture: The Slot Machine in Your DAW</h2>
-<p>VNR's behavioral analysis protocol SA-01 (Somatic Anchoring) reveals something commercial users need to
-                understand: <strong>Suno is engineered to be addictive using the same psychological mechanics as slot
-                    machines.</strong></p>
-<p>The platform operates on a Variable Ratio Reinforcement schedule. When you click "Generate," the quality
-                of the output is deliberately unpredictable. Sometimes you get a stunning result on the first try.
-                Sometimes it takes 20 iterations. This unpredictability is not a bug — it's the core engagement
-                mechanism.</p>
-<div class="eb">
-<div class="l">⚠ SA-01 Finding</div>
-<p>Variable Ratio Reinforcement is the most effective schedule for inducing persistent behavior. Suno's
-                    generation button delivers high-quality outputs at unpredictable intervals, increasing dopamine
-                    synthesis and anchoring users to the platform via biological response rather than utility. Under
-                    VNR's Cognitive Security Taxonomy, this is classified as a <strong>Category 4 Behavioral
-                        Risk</strong>.</p>
-</div>
-<p>For commercial creators charging hourly rates, this means Suno is consuming your billable time through an
-                engagement loop designed to keep you generating — not because it's productive, but because your brain is
-                waiting for the next dopamine hit.</p>
-<h2>The 71-Tracker Problem: Who Has Your Client Data?</h2>
-<p>If you're using Suno for client work, your client's project details may be flowing to 71+ third parties
-                without disclosure. Microsoft Clarity records complete session replays of your interactions. Criteo and
-                Tapad perform cross-device tracking. Multiple unidentified analytics endpoints transmit high-frequency
-                telemetry.</p>
-<p>For commercial users bound by NDAs or client confidentiality agreements, using Suno may constitute a
-                breach. Your prompts — which may contain client names, project descriptions, or creative briefs — are
-                being captured, stored, and shared with entities you never consented to share with.</p>
-<h2>Regulatory Exposure: Connecticut SB 1295</h2>
-<p>Connecticut's SB 1295 (effective July 1, 2026) classifies "neural data" — data derived from measurement
-                or analysis of neural activity — as sensitive data requiring opt-in consent. VNR's SA-01 research
-                demonstrates that Suno's Variable Reward Architecture is designed to induce specific neurotransmitter
-                responses. If regulators determine this constitutes neural data processing, commercial users could face
-                liability for platforms that lack proper consent frameworks.</p>
-<h2>What Commercial Creators Should Do</h2>
-<ul>
-<li><strong>Audit your exposure</strong> — Run VNR's VNR SCAN protocol to understand what's happening
-                    behind the interface</li>
-<li><strong>Review your contracts</strong> — Check whether your client agreements prohibit sharing
-                    project details with third-party AI platforms</li>
-<li><strong>Document your creative process</strong> — Maintain independent records of your original
-                    creative methodology before it becomes Suno's training data</li>
-<li><strong>Deploy tracker blocking</strong> — Use the DNS blocklist from the VNR SCAN dashboard to
-                    prevent the 71+ tracker domains from loading</li>
-<li><strong>Consider alternatives</strong> — Evaluate whether self-hosted AI music tools provide better
-                    IP protection</li>
-</ul>
-<div class="cta">
-<p style="font-size:14px;color:var(--text-sub);margin-bottom:8px;">Run the VNR VNR SCAN protocol</p>
-<a href="/vnr-scan/">Launch VNR SCAN →</a>
-</div>
-<h2>VNR's Risk Designation</h2>
-<p>Based on our forensic audit and behavioral analysis, VNR designates Suno AI as a <strong>"High-Risk
-                    Entity"</strong> for commercial use. The platform operates with a "compliance debt" regarding
-                emerging privacy and neural data laws, prioritizes model extraction over user sovereignty, and employs
-                behavioral engagement mechanics that undermine productive use.</p>
-<p>Commercial creators should proceed with extreme caution — or not at all — until Suno demonstrates
-                transparent data practices, provides granular consent controls, and undergoes independent external
-                oversight.</p>
-<div class="eb" style="border-left-color:var(--accent);background:rgba(64,192,255,.06);border-color:rgba(64,192,255,.2)">
-<div class="l" style="color:var(--accent)">Full Evidence</div>
-<p>Every finding is documented with process IDs, network traces, and remediation steps: <a href="/vnr-scan/" style="color:var(--accent)">VNR SCAN</a> | <a href="/suno-report/" style="color:var(--accent)">Suno Report</a> | <a href="/research/suno-privacy-audit-2026/" style="color:var(--accent)">Privacy Audit</a></p>
-</div>
-
-        </article>
-
-        <div style="margin-top:48px;display:grid;grid-template-columns:1fr 1fr;gap:16px">
-<a href="/research/suno-privacy-audit-2026/" style="display:block;background:rgba(64,192,255,.06);border:1px solid rgba(64,192,255,.2);border-radius:8px;padding:20px;text-decoration:none">
-<div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--magenta);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">
-                    📄 Privacy Audit</div>
-<div style="color:#fff;font-weight:600;font-size:14px">How Does Suno Use My Data?</div>
-<div style="color:var(--text-sub);font-size:12px;margin-top:4px">The hidden 2026 update →</div>
-</a>
-<a href="/vnr-scan/" style="display:block;background:rgba(64,192,255,.06);border:1px solid rgba(64,192,255,.2);border-radius:8px;padding:20px;text-decoration:none">
-<div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--purple);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">
-                    🛡 Live Dashboard</div>
-<div style="color:#fff;font-weight:600;font-size:14px">VNR SCAN</div>
-<div style="color:var(--text-sub);font-size:12px;margin-top:4px">Real-time forensic scan →</div>
-</a>
-</div>
-
-        <footer class="ft">
-            <a href="/">Voss Neural Research</a>
-            <p class="c">&copy; 2026 Voss Neural Research LLC. Auditing the Algorithmic Age.</p>
-        </footer>
     </div>
+    <script id="vnr-toc-js">
+        // Restored TOC JavaScript
+        const navLinks = document.querySelectorAll('.snav');
+        const sections = document.querySelectorAll('.section, h2[id]');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 120) {
+                    current = section.getAttribute('id');
+                }
+            });
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (current && link.getAttribute('href') && link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

@@ -503,26 +503,43 @@
     }
 
     /* ─── RESEARCH ─── */
-    .research-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
+    .research-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-height: 520px;
+      overflow-y: auto;
+      padding-right: 8px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(64, 192, 255, 0.3) transparent;
+    }
+
+    .research-list::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .research-list::-webkit-scrollbar-thumb {
+      background: rgba(64, 192, 255, 0.3);
+      border-radius: 4px;
     }
 
     .research-card {
-      display: block;
+      display: flex;
+      align-items: center;
+      gap: 24px;
       background: var(--panel);
       border: 1px solid var(--border);
       border-radius: 8px;
-      padding: 28px 24px;
+      padding: 20px 28px;
       text-decoration: none;
-      transition: all 0.3s;
+      transition: all 0.25s;
+      min-height: 80px;
     }
 
     .research-card:hover {
-      border-color: var(--border-hover);
-      transform: translateY(-3px);
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+      border-color: rgba(64, 192, 255, 0.4);
+      background: rgba(64, 192, 255, 0.04);
+      transform: translateX(4px);
     }
 
     .research-tag {
@@ -531,29 +548,34 @@
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.1em;
-      margin-bottom: 10px;
+      white-space: nowrap;
+      min-width: 100px;
+    }
+
+    .research-body {
+      flex: 1;
     }
 
     .research-title {
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 700;
       color: #fff;
-      margin-bottom: 8px;
-      line-height: 1.4;
+      margin-bottom: 4px;
+      line-height: 1.3;
     }
 
     .research-excerpt {
       font-size: 13px;
       color: var(--text-sub);
-      line-height: 1.6;
+      line-height: 1.5;
     }
 
     .research-link {
       font-family: 'JetBrains Mono', monospace;
       font-size: 11px;
       color: var(--accent);
-      margin-top: 14px;
-      display: block;
+      white-space: nowrap;
+      flex-shrink: 0;
     }
 
     /* ─── FOOTER ─── */
@@ -656,8 +678,8 @@
         grid-template-columns: 1fr;
       }
 
-      .research-grid {
-        grid-template-columns: 1fr;
+      .research-list {
+        max-height: none;
       }
 
       .stats-row {
@@ -899,49 +921,68 @@
       <p class="section-desc">Independent forensic research documenting the data practices of generative AI platforms.
         All findings are reproducible.</p>
     </div>
-    <div class="research-grid">
-      <a href="/" class="research-card" style="border-color: var(--accent); box-shadow: 0 0 20px rgba(64,192,255,.1);">
+    <div class="research-list">
+      <a href="/" class="research-card" style="border-color: var(--accent);">
         <div class="research-tag" style="color: var(--accent);">Flagship Tool</div>
-        <div class="research-title">VNR SCAN — Live Forensic Dashboard</div>
-        <p class="research-excerpt">Real-time forensic visibility into AI platform data collection. See exactly what
-          trackers are active, what data is being harvested, and where it goes.</p>
-        <span class="research-link">Launch VNR SCAN →</span>
+        <div class="research-body">
+          <div class="research-title">VNR SCAN — Live Forensic Dashboard</div>
+          <p class="research-excerpt">Real-time forensic visibility into AI platform data collection, trackers, and data
+            egress.</p>
+        </div>
+        <span class="research-link">Launch →</span>
       </a>
       <a href="/suno-report/" class="research-card">
         <div class="research-tag" style="color: var(--danger);">Case Study</div>
-        <div class="research-title">Suno AI Tracker Report</div>
-        <p class="research-excerpt">Complete forensic inventory of 71+ undisclosed tracking scripts, session replay, and
-          CPU mining on a major AI music platform.</p>
-        <span class="research-link">Read Full Report →</span>
+        <div class="research-body">
+          <div class="research-title">Suno AI Tracker Report</div>
+          <p class="research-excerpt">Complete forensic inventory of 71+ undisclosed tracking scripts, session replay,
+            and CPU mining.</p>
+        </div>
+        <span class="research-link">Read Report →</span>
+      </a>
+      <a href="/research/velvet-casino/" class="research-card">
+        <div class="research-tag" style="color: var(--amber);">Technical Autopsy</div>
+        <div class="research-body">
+          <div class="research-title">The Velvet Casino</div>
+          <p class="research-excerpt">How Suno uses gambling-derived mechanics — variable reward architecture, near-miss
+            effects, inference inflation — to drive compulsive engagement.</p>
+        </div>
+        <span class="research-link">Read Autopsy →</span>
       </a>
       <a href="/research/suno-privacy-audit-2026/" class="research-card">
         <div class="research-tag" style="color: var(--amber);">Whitepaper</div>
-        <div class="research-title">The Hidden 2026 Privacy Update</div>
-        <p class="research-excerpt">How Suno's February 2026 "Interactive Chat Information" update harvests creative
-          inputs for model training without consent.</p>
+        <div class="research-body">
+          <div class="research-title">The Hidden 2026 Privacy Update</div>
+          <p class="research-excerpt">How Suno's "Interactive Chat Information" update harvests creative inputs for
+            model training.</p>
+        </div>
         <span class="research-link">Read Analysis →</span>
       </a>
       <a href="/research/is-suno-safe-commercial/" class="research-card">
         <div class="research-tag" style="color: var(--amber);">Risk Assessment</div>
-        <div class="research-title">Is Suno Safe for Commercial Use?</div>
-        <p class="research-excerpt">Behavioral risk assessment for professional musicians and commercial creators
-          operating on generative AI platforms.</p>
+        <div class="research-body">
+          <div class="research-title">Is Suno Safe for Commercial Use?</div>
+          <p class="research-excerpt">Behavioral risk assessment for professional musicians and commercial creators on
+            AI platforms.</p>
+        </div>
         <span class="research-link">Read Assessment →</span>
       </a>
       <a href="/research/suno-interactive-chat-2026/" class="research-card">
         <div class="research-tag" style="color: var(--accent);">Policy Analysis</div>
-        <div class="research-title">What "Interactive Chat Information" Really Means</div>
-        <p class="research-excerpt">Forensic dissection of Suno's February 2026 privacy policy update — how your
-          creative
-          process feeds model training pipelines under CT SB 1295.</p>
+        <div class="research-body">
+          <div class="research-title">What "Interactive Chat Information" Really Means</div>
+          <p class="research-excerpt">Forensic dissection of Suno's February 2026 privacy policy update under CT SB
+            1295.</p>
+        </div>
         <span class="research-link">Read Analysis →</span>
       </a>
       <a href="/research/ai-music-sovereignty-audit-2026/" class="research-card">
         <div class="research-tag" style="color: var(--green);">Sovereignty</div>
-        <div class="research-title">AI Music Sovereignty: Why Every User Needs an Independent Audit</div>
-        <p class="research-excerpt">The definitive case for data portability, right to deletion, and independent
-          forensic
-          auditing across all generative AI music platforms.</p>
+        <div class="research-body">
+          <div class="research-title">AI Music Sovereignty: Why Every User Needs an Independent Audit</div>
+          <p class="research-excerpt">Data portability, right to deletion, and independent forensic auditing across all
+            AI music platforms.</p>
+        </div>
         <span class="research-link">Read Report →</span>
       </a>
     </div>

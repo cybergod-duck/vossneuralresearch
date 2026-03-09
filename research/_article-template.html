@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         VNR ARTICLE TEMPLATE — Standardized Format (March 2026)
+         ═══════════════════════════════════════════════════════════════
+         INSTRUCTIONS:
+         1. Copy this file into a new folder: research/your-article-slug/index.html
+         2. Replace all {{PLACEHOLDER}} values with actual content
+         3. Add TOC entries in #scan-nav matching your h2 sections
+         4. Choose 3 stats for the stat boxes
+         5. Write article content inside <article>
+         ═══════════════════════════════════════════════════════════════ -->
+
+    <title>{{ARTICLE_TITLE}} | Voss Neural Research</title>
+    <meta name="description" content="{{META_DESCRIPTION}}">
+    <meta name="keywords" content="{{KEYWORDS}}">
+    <meta property="og:title" content="{{ARTICLE_TITLE}}">
+    <meta property="og:description" content="{{META_DESCRIPTION}}">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://www.vossneuralresearch.com/research/{{SLUG}}/">
+    <meta property="og:site_name" content="Voss Neural Research">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ARTICLE_TITLE}}">
+    <meta name="twitter:description" content="{{META_DESCRIPTION}}">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Voss Neural Research LLC">
+    <link rel="canonical" href="https://www.vossneuralresearch.com/research/{{SLUG}}/">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "Organization",
+                "@id": "https://vossneuralresearch.com/#organization",
+                "name": "Voss Neural Research",
+                "url": "https://vossneuralresearch.com"
+            },
+            {
+                "@type": "Article",
+                "headline": "{{ARTICLE_TITLE}}",
+                "description": "{{META_DESCRIPTION}}",
+                "url": "https://www.vossneuralresearch.com/research/{{SLUG}}/",
+                "datePublished": "{{DATE_ISO}}",
+                "dateModified": "{{DATE_ISO}}",
+                "author": {"@id": "https://vossneuralresearch.com/#organization"},
+                "publisher": {"@id": "https://vossneuralresearch.com/#organization"},
+                "keywords": "{{KEYWORDS}}"
+            }
+        ]
+    }
+    </script>
+
+    <link rel="icon" type="image/png" href="/vnr-icon.png">
+
+    <!-- ─── INLINE STYLES (legacy per-page overrides) ─── -->
+    <style>
+        :root {
+            --bg: #030303;
+            --text: #d4d4d4;
+            --text-sub: #888;
+            --accent: #40c0ff;
+            --magenta: #40c0ff;
+            --purple: #40c0ff;
+            --green: #10b981;
+            --border: rgba(64, 192, 255, .2)
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        html {
+            scrollbar-width: none;
+            scroll-behavior: smooth
+        }
+
+        body {
+            background: var(--bg);
+            background-image: radial-gradient(circle at 30% 0%, rgba(64, 192, 255, .04) 0%, transparent 50%), radial-gradient(circle at 70% 100%, rgba(64, 192, 255, .03) 0%, transparent 40%);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.8
+        }
+
+        .tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--purple);
+            text-transform: uppercase;
+            letter-spacing: .15em;
+            margin-bottom: 16px
+        }
+
+        .t {
+            font-size: 36px;
+            font-weight: 800;
+            line-height: 1.2;
+            color: #fff;
+            margin-bottom: 20px
+        }
+
+        .t em,
+        .t span {
+            background: linear-gradient(135deg, var(--magenta), var(--purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-style: normal
+        }
+
+        .meta {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: var(--text-sub);
+            margin-bottom: 40px;
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap
+        }
+
+        .meta strong {
+            color: var(--accent)
+        }
+
+        article h2 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #fff;
+            margin: 48px 0 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(255, 255, 255, .06)
+        }
+
+        article h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #e8e8e8;
+            margin: 32px 0 12px
+        }
+
+        article p {
+            margin-bottom: 20px;
+            font-size: 16px
+        }
+
+        article strong {
+            color: #fff;
+            font-weight: 600
+        }
+
+        article ul {
+            margin: 0 0 20px 20px;
+            list-style: none
+        }
+
+        article ul li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 10px;
+            font-size: 15px
+        }
+
+        article ul li::before {
+            content: '\25B8';
+            position: absolute;
+            left: 0;
+            color: var(--purple);
+            font-weight: bold
+        }
+
+        .eb,
+        .evidence-box,
+        .risk-box,
+        .mechanism-card {
+            background: rgba(64, 192, 255, .06);
+            border: 1px solid rgba(64, 192, 255, .2);
+            border-left: 3px solid var(--purple);
+            padding: 20px 24px;
+            margin: 24px 0;
+            border-radius: 4px
+        }
+
+        .eb .l,
+        .evidence-box .label,
+        .risk-box h4,
+        .mechanism-card h4 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .1em;
+            color: var(--purple);
+            margin-bottom: 8px
+        }
+
+        .eb p,
+        .evidence-box p,
+        .risk-box p,
+        .mechanism-card p {
+            font-size: 14px;
+            margin-bottom: 0
+        }
+
+        .cta,
+        .callout {
+            background: rgba(64, 192, 255, .06);
+            border: 1px solid rgba(64, 192, 255, .2);
+            border-radius: 8px;
+            padding: 24px;
+            margin: 32px 0;
+            text-align: center
+        }
+
+        .cta a,
+        .callout a {
+            display: inline-block;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            font-weight: 700;
+            color: #fff;
+            background: linear-gradient(135deg, var(--magenta), var(--purple));
+            padding: 12px 32px;
+            border-radius: 6px;
+            text-decoration: none;
+            margin-top: 12px;
+            transition: transform .2s, box-shadow .2s
+        }
+
+        .cta a:hover,
+        .callout a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(64, 192, 255, .3)
+        }
+
+        .risk,
+        .stat-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin: 32px 0
+        }
+
+        .rc,
+        .stat-card {
+            background: rgba(255, 255, 255, .02);
+            border: 1px solid rgba(255, 255, 255, .08);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center
+        }
+
+        .rc .lv,
+        .stat-card .num {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 28px;
+            font-weight: 800
+        }
+
+        .rc .d,
+        .stat-card .desc {
+            font-size: 12px;
+            color: var(--text-sub);
+            margin-top: 4px
+        }
+
+        .ct {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 32px 0
+        }
+
+        .ct th {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: .1em;
+            color: var(--text-sub);
+            text-align: left;
+            padding: 12px 16px;
+            border-bottom: 2px solid rgba(255, 255, 255, .1)
+        }
+
+        .ct td {
+            padding: 14px 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, .04);
+            font-size: 14px
+        }
+
+        .ct tr:hover {
+            background: rgba(64, 192, 255, .04)
+        }
+
+        .ct .bad {
+            color: #ef4444;
+            font-weight: 600
+        }
+
+        .ct .good {
+            color: var(--green);
+            font-weight: 600
+        }
+
+        .ct .warn {
+            color: #f59e0b;
+            font-weight: 600
+        }
+
+        .ft {
+            margin-top: 60px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(255, 255, 255, .06);
+            text-align: center
+        }
+
+        .ft a {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: var(--text-sub);
+            text-decoration: none
+        }
+
+        .ft .c {
+            font-size: 11px;
+            color: #444;
+            margin-top: 12px
+        }
+
+        @media(max-width:600px) {
+            .t {
+                font-size: 26px
+            }
+
+            .risk,
+            .stat-row,
+            .ct {
+                grid-template-columns: 1fr;
+                font-size: 12px
+            }
+
+            .meta {
+                flex-direction: column;
+                gap: 8px
+            }
+        }
+    </style>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/article.css">
+</head>
+
+<body>
+
+    <!-- ═══════════════════════════════════════════
+         GLOBAL NAV — Do not modify
+         ═══════════════════════════════════════════ -->
+    <nav class="vnr-nav">
+        <div class="vnr-nav-inner">
+            <a href="/" class="vnr-nav-logo"><img src="/vnr-logo.png" alt="VNR" style="height:44px;width:auto;"></a>
+            <div class="vnr-nav-links">
+                <a href="/">VNR SCAN</a>
+                <a href="/overview/">What AI Platforms Hide</a>
+                <a href="/overview/#research" class="active">Research</a>
+                <a href="/suno-report/">Tracker Report</a>
+                <a href="/overview/#engage">Engage</a>
+                <a href="/overview/#about">About</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ═══════════════════════════════════════════
+         TABLE OF CONTENTS (sidebar)
+         - Add one <a class="snav"> per article section
+         - Use these dot colors in order:
+           #40c0ff, #f5a623, #10b981, #ff4d4d, #a78bfa, #ec4899, #eab308
+         - Related links go at the bottom
+         ═══════════════════════════════════════════ -->
+    <nav id="scan-nav">
+        <a class="snav" href="#{{SECTION_1_ID}}"><span class="dot" style="background:#40c0ff"></span>{{Section 1}}</a>
+        <a class="snav" href="#{{SECTION_2_ID}}"><span class="dot" style="background:#f5a623"></span>{{Section 2}}</a>
+        <a class="snav" href="#{{SECTION_3_ID}}"><span class="dot" style="background:#10b981"></span>{{Section 3}}</a>
+        <a class="snav" href="#{{SECTION_4_ID}}"><span class="dot" style="background:#ff4d4d"></span>{{Section 4}}</a>
+        <!-- Add more sections as needed with colors: #a78bfa, #ec4899, #eab308 -->
+
+        <div style="margin-top:24px;border-top:1px solid rgba(255,255,255,0.06);padding-top:16px;">
+            <div
+                style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#666;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;">
+                Related</div>
+            <a href="/suno-report/"
+                style="display:block;color:#ef4444;font-size:10px;font-family:'JetBrains Mono',monospace;text-decoration:none;margin-bottom:8px;opacity:0.8;">⚠
+                Tracker Report →</a>
+            <a href="/vnr-scan/"
+                style="display:block;color:#40c0ff;font-size:10px;font-family:'JetBrains Mono',monospace;text-decoration:none;opacity:0.8;">🛡
+                VNR SCAN →</a>
+        </div>
+    </nav>
+
+    <!-- ═══════════════════════════════════════════
+         ARTICLE CONTENT
+         ═══════════════════════════════════════════ -->
+    <div class_="container">
+        <div class="article-wrap">
+
+            <!-- TAG — Always "VNR Forensic Investigation" -->
+            <div class="tag">VNR Forensic Investigation</div>
+
+            <!-- TITLE — Use <span> or <em> for gradient text -->
+            <h1 class="t">{{Article Title Line 1}}<br><span>{{Article Title Line 2}}</span></h1>
+
+            <!-- META — Author, date, reading time -->
+            <div class="meta">
+                <span>By <strong>Voss Neural Research</strong></span>
+                <span>Published: <strong>{{Month Day, Year}}</strong></span>
+                <span>Reading time: <strong>{{X}} min</strong></span>
+            </div>
+
+            <!-- STAT BOXES — Exactly 3 stats -->
+            <div class="stat-row">
+                <div class="stat-card">
+                    <div class="num">{{STAT_1_VALUE}}</div>
+                    <div class="desc">{{Stat 1 Label}}</div>
+                </div>
+                <div class="stat-card">
+                    <div class="num">{{STAT_2_VALUE}}</div>
+                    <div class="desc">{{Stat 2 Label}}</div>
+                </div>
+                <div class="stat-card">
+                    <div class="num">{{STAT_3_VALUE}}</div>
+                    <div class="desc">{{Stat 3 Label}}</div>
+                </div>
+            </div>
+
+            <!-- ARTICLE BODY -->
+            <article>
+
+                <!-- Intro paragraph (no h2 above it) -->
+                <p>{{Opening paragraph — hook the reader with the key finding or question.}}</p>
+
+                <!-- Section 1 -->
+                <h2 id="{{SECTION_1_ID}}">{{Section 1 Title}}</h2>
+                <p>{{Section content...}}</p>
+
+                <!-- Evidence Box example -->
+                <div class="eb">
+                    <div class="l">⚠ Key Finding</div>
+                    <p>{{Evidence or key finding text}}</p>
+                </div>
+
+                <!-- Section 2 -->
+                <h2 id="{{SECTION_2_ID}}">{{Section 2 Title}}</h2>
+                <p>{{Section content...}}</p>
+
+                <!-- Section 3 -->
+                <h2 id="{{SECTION_3_ID}}">{{Section 3 Title}}</h2>
+                <p>{{Section content...}}</p>
+
+                <!-- Section 4 -->
+                <h2 id="{{SECTION_4_ID}}">{{Section 4 Title}}</h2>
+                <p>{{Section content...}}</p>
+
+                <!-- CTA Box example -->
+                <div class="cta">
+                    <p style="font-size:14px;color:var(--text-sub);margin-bottom:8px;">Run the audit yourself</p>
+                    <a href="/vnr-scan/">Launch VNR SCAN →</a>
+                </div>
+
+                <!-- Full Evidence callout example -->
+                <div class="eb"
+                    style="border-left-color:var(--accent);background:rgba(64,192,255,.06);border-color:rgba(64,192,255,.2)">
+                    <div class="l" style="color:var(--accent)">Full Evidence</div>
+                    <p>Every finding is documented with process IDs, network traces, and remediation steps:
+                        <a href="/vnr-scan/" style="color:var(--accent)">VNR SCAN</a> |
+                        <a href="/suno-report/" style="color:var(--accent)">Suno Report</a>
+                    </p>
+                </div>
+
+            </article>
+
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════
+         TOC SCROLL HIGHLIGHT SCRIPT
+         ═══════════════════════════════════════════ -->
+    <script>
+        const navLinks = document.querySelectorAll('.snav');
+        const sections = document.querySelectorAll('h2[id]');
+
+        // Click handler: smooth scroll with offset for fixed nav
+        navLinks.forEach(link => {
+            link.addEventListener('click', e => {
+                e.preventDefault();
+                const id = link.getAttribute('href').replace('#', '');
+                const target = document.getElementById(id);
+                if (target) {
+                    const offset = 64; // height of sticky nav
+                    window.scrollTo({ top: target.offsetTop - offset, behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Scroll spy: highlight active TOC item
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                if (pageYOffset >= section.offsetTop - 120) {
+                    current = section.getAttribute('id');
+                }
+            });
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (current && link.getAttribute('href') && link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>

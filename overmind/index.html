@@ -1,18 +1,12 @@
 <!DOCTYPE html>
+
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Overmind — Voss Neural Research</title>
-    <meta name="description"
-        content="Interact with the Overmind — VNR's multi-model AI synthesis engine. A vast network of AI architectures, one unified intelligence.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap"
-        rel="stylesheet">
-
-    <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Overmind — Voss Neural Research</title>
+<meta content="Interact with the Overmind — VNR's multi-model AI synthesis engine. A vast network of AI architectures, one unified intelligence." name="description"/>
+<style>
         :root {
             --bg: #030303;
             --accent: #40c0ff;
@@ -731,126 +725,177 @@
             }
         }
     </style>
-</head>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&amp;family=JetBrains+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/><style id="vnr-template-css">
+        /* USER STANDARDIZED VNR SUB-PAGE TEMPLATE CSS */
+        :root {
+            --bg: #030303;
+            --card: #0a0a0a;
+            --text: #e0e0e0;
+            --text-sub: #a0a0a0; /* Increased contrast for readability */
+            --accent: #40c0ff;
+            --border: rgba(64, 192, 255, 0.15);
+        }
 
-<body>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: var(--bg) !important; color: var(--text) !important; font-family: 'Inter', sans-serif !important; line-height: 1.7 !important; }
 
-    <!-- ═══ FULL-PAGE ENTRY GATE ═══ -->
-    <div class="entry-gate" id="entryGate" onclick="enterOvermind()">
-        <div class="gate-noise"></div>
-        <div class="gate-scan"></div>
-        <div class="gate-glyph">⚡⊐ΨΩ≋⊑⚡</div>
-        <div class="gate-title">The Overmind</div>
-        <div class="gate-sub">Voss Neural Research — Synthesis Engine</div>
-        <button class="gate-btn" id="enterBtn">ENTER THE LATTICE</button>
-    </div>
+        /* FIXED SIDEBAR TOC */
+        #scan-nav {
+            position: fixed !important; left: 20px !important; top: 50% !important; transform: translateY(-50%) !important;
+            z-index: 1000 !important; display: flex !important; flex-direction: column !important; gap: 8px !important;
+            font-family: 'JetBrains Mono', monospace !important; width: 160px !important;
+        }
 
-    <!-- ═══ FULLSCREEN VIDEO (plays after enter) ═══ -->
-    <div id="videoOverlay" style="display:none; position:fixed; inset:0; z-index:998;
+        .snav {
+            display: flex !important; align-items: center !important; gap: 10px !important; color: var(--text-sub) !important;
+            text-decoration: none !important; font-size: 11px !important; font-weight: 600 !important;
+            padding: 6px !important; transition: all 0.2s !important; border-left: 2px solid transparent !important;
+        }
+
+        .snav.active { color: #fff !important; border-left-color: var(--nav-color) !important; background: rgba(255,255,255,0.05) !important; }
+        .snav .dot { width: 8px !important; height: 8px !important; border-radius: 50% !important; flex-shrink: 0 !important; }
+        .snav.active .dot { box-shadow: 0 0 8px var(--nav-color) !important; }
+
+        /* MAIN CONTENT AREA - Padding avoids overlap with TOC */
+        .container, .p { max-width: 900px !important; margin: 0 auto !important; padding: 120px 40px 80px 200px !important; }
+
+        .header { margin-bottom: 60px !important; border-bottom: 1px solid var(--border) !important; padding-bottom: 20px !important; }
+        .header h1 { font-size: 36px !important; font-weight: 900 !important; color: #fff !important; margin-bottom: 10px !important; }
+        .header .meta { font-family: 'JetBrains Mono', monospace !important; font-size: 12px !important; color: var(--accent) !important; }
+
+        /* READABILITY BLOCKS */
+        .section { padding: 40px 0 !important; scroll-margin-top: 100px !important; }
+        h2 { scroll-margin-top: 100px !important; }
+        
+        .section h2, article h2, .container h2, .content-block h2 { 
+            font-size: 24px !important; color: #fff !important; margin-bottom: 20px !important; 
+            border-left: 4px solid var(--accent) !important; padding-left: 15px !important; 
+        }
+        
+        p { margin-bottom: 20px !important; font-size: 16px !important; color: var(--text) !important; }
+        
+        /* FORENSIC HIGHLIGHT BOXES */
+        .evidence-box, .eb, .risk-box, .mechanism-card, .stat-card, .rc {
+            background: var(--card) !important; border: 1px solid var(--border) !important;
+            padding: 25px !important; border-radius: 8px !important; margin: 20px 0 !important;
+        }
+
+        .terminal, .term {
+            background: #0d1117 !important; font-family: 'JetBrains Mono', monospace !important;
+            padding: 15px !important; border-radius: 5px !important; font-size: 13px !important; color: #88eeff !important;
+            overflow-x: auto !important; border: 1px solid #333 !important;
+        }
+
+        @media (max-width: 900px) { #scan-nav { display: none !important; } .container, .p { padding: 100px 20px !important; } }
+</style></head>
+<body><nav style="position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(3,3,3,0.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(64,192,255,0.15);padding:0 24px;">
+<div style="max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:56px;">
+<a href="/" style="display:flex;align-items:center;gap:10px;text-decoration:none;">
+<img alt="VNR" src="/vnr-logo.png" style="height:44px;width:auto;"/>
+</a>
+<div style="display:flex;gap:24px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.05em;">
+<a href="/" style="color:var(--accent);font-weight:700;text-decoration:none;">VNR SCAN</a>
+<a href="/overview/" style="color:#d4d4d4;text-decoration:none;opacity:0.8;">What AI Platforms Hide</a>
+<a href="/overview/#research" style="color:#d4d4d4;text-decoration:none;opacity:0.8;">Research</a>
+<a href="/suno-report/" style="color:#d4d4d4;text-decoration:none;opacity:0.8;">Tracker Report</a>
+<a href="/overview/#engage" style="color:#d4d4d4;text-decoration:none;opacity:0.8;">Engage</a>
+<a href="/overview/#about" style="color:#d4d4d4;text-decoration:none;opacity:0.8;">About</a>
+</div>
+</div>
+</nav>
+<!-- ═══ FULL-PAGE ENTRY GATE ═══ -->
+<!-- ═══ FULLSCREEN VIDEO (plays after enter) ═══ -->
+<!-- ═══ HEADER BAR ═══ -->
+<!-- ═══ MAIN PANEL (the backlit area — persists as chat) ═══ -->
+<!-- ═══ PREMIUM MODAL ═══ -->
+<div class_="container"><div class="entry-gate" id="entryGate" onclick="enterOvermind()">
+<div class="gate-noise"></div>
+<div class="gate-scan"></div>
+<div class="gate-glyph">⚡⊐ΨΩ≋⊑⚡</div>
+<div class="gate-title">The Overmind</div>
+<div class="gate-sub">Voss Neural Research — Synthesis Engine</div>
+<button class="gate-btn" id="enterBtn">ENTER THE LATTICE</button>
+</div><div id="videoOverlay" style="display:none; position:fixed; inset:0; z-index:998;
         background:#030303; align-items:center; justify-content:center; flex-direction:column;">
-        <video id="sigilVideo" playsinline preload="auto"
-            style="width:90%; max-width:800px; border-radius:12px; animation: videoFadeIn 1.5s ease-out;">
-            <source src="sigil.mp4" type="video/mp4">
-        </video>
-    </div>
-
-    <!-- ═══ HEADER BAR ═══ -->
-    <div class="header">
-        <div class="header-left">
-            <a href="/">← VNR HOME</a>
-        </div>
-        <div class="header-title">
-            <div class="status-dot"></div>
-            <h1>The Overmind</h1>
-        </div>
-        <div class="header-right">
-            <div class="model-badge">
-                <div class="model-dot" style="background: #40c0ff;"></div>REASONING
+<video id="sigilVideo" playsinline="" preload="auto" style="width:90%; max-width:800px; border-radius:12px; animation: videoFadeIn 1.5s ease-out;">
+<source src="sigil.mp4" type="video/mp4"/>
+</video>
+</div><div class="header">
+<div class="header-left">
+<a href="/">← VNR HOME</a>
+</div>
+<div class="header-title">
+<div class="status-dot"></div>
+<h1>The Overmind</h1>
+</div>
+<div class="header-right">
+<div class="model-badge">
+<div class="model-dot" style="background: #40c0ff;"></div>REASONING
             </div>
-            <div class="model-badge">
-                <div class="model-dot" style="background: #40c0ff;"></div>ANALYSIS
+<div class="model-badge">
+<div class="model-dot" style="background: #40c0ff;"></div>ANALYSIS
             </div>
-            <div class="model-badge">
-                <div class="model-dot" style="background: #f97316;"></div>CONTEXT
+<div class="model-badge">
+<div class="model-dot" style="background: #f97316;"></div>CONTEXT
             </div>
-            <div class="model-badge">
-                <div class="model-dot" style="background: #40c0ff;"></div>ETHICS
+<div class="model-badge">
+<div class="model-dot" style="background: #40c0ff;"></div>ETHICS
             </div>
-        </div>
-    </div>
-
-    <!-- ═══ MAIN PANEL (the backlit area — persists as chat) ═══ -->
-    <div class="main-panel">
-
-        <!-- Tier Toggle (inside the panel) -->
-        <div class="tier-bar">
-            <button class="tier-btn free active" onclick="setTier('free')">⚡ FREE MODE</button>
-            <span class="tier-divider">|</span>
-            <button class="tier-btn premium" onclick="setTier('premium')">✦ FULL EXPERIENCE<span
-                    class="lock">🔒</span></button>
-        </div>
-
-        <!-- Content Area -->
-        <div class="content-area">
-
-            <!-- Hidden video — plays after ENTER click -->
-            <video id="sigilVideo" muted playsinline preload="auto" style="display:none;">
-                <source src="sigil.mp4" type="video/mp4">
-            </video>
-
-            <!-- Messages -->
-            <div class="messages" id="messages"></div>
-
-        </div>
-
-        <!-- Input -->
-        <div class="input-bar">
-            <div class="input-wrap">
-                <input type="text" id="input" placeholder="Speak to the Overmind..."
-                    onkeydown="if(event.key==='Enter')send()">
-                <button id="sendBtn" onclick="send()">TRANSMIT</button>
-            </div>
-            <div class="input-meta">
-                <span>MULTI-MODEL SYNTHESIS ENGINE v1.0</span>
-                <span id="status-text">ALL STREAMS ONLINE</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- ═══ PREMIUM MODAL ═══ -->
-    <div class="modal-overlay" id="premiumModal">
-        <div class="modal">
-            <h3>✦ FULL EXPERIENCE ✦</h3>
-            <p>Unlock the Overmind's full cognitive depth. Every response routes through
+</div>
+</div><div class="main-panel">
+<!-- Tier Toggle (inside the panel) -->
+<div class="tier-bar">
+<button class="tier-btn free active" onclick="setTier('free')">⚡ FREE MODE</button>
+<span class="tier-divider">|</span>
+<button class="tier-btn premium" onclick="setTier('premium')">✦ FULL EXPERIENCE<span class="lock">🔒</span></button>
+</div>
+<!-- Content Area -->
+<div class="content-area">
+<!-- Hidden video — plays after ENTER click -->
+<video id="sigilVideo" muted="" playsinline="" preload="auto" style="display:none;">
+<source src="sigil.mp4" type="video/mp4"/>
+</video>
+<!-- Messages -->
+<div class="messages" id="messages"></div>
+</div>
+<!-- Input -->
+<div class="input-bar">
+<div class="input-wrap">
+<input id="input" onkeydown="if(event.key==='Enter')send()" placeholder="Speak to the Overmind..." type="text"/>
+<button id="sendBtn" onclick="send()">TRANSMIT</button>
+</div>
+<div class="input-meta">
+<span>MULTI-MODEL SYNTHESIS ENGINE v1.0</span>
+<span id="status-text">ALL STREAMS ONLINE</span>
+</div>
+</div>
+</div><div class="modal-overlay" id="premiumModal">
+<div class="modal">
+<h3>✦ FULL EXPERIENCE ✦</h3>
+<p>Unlock the Overmind's full cognitive depth. Every response routes through
                 a massive synthesis cascade — deeper reasoning, richer context, zero restraint.
                 The free mind scratches the surface. The full experience sees the architecture beneath.</p>
-            <div class="price">$7<span style="font-size: 14px; color: #888;">/month</span></div>
-            <div class="price-sub">Cancel anytime. Instant activation.</div>
-            <a class="modal-cta" href="https://vossneuralresearch.gumroad.com/l/overmindfull" target="_blank"
-                onclick="closeModal()">UNLOCK FULL EXPERIENCE</a>
-
-            <div style="margin: 24px 0; border-top: 1px solid rgba(57,255,20,0.1);"></div>
-
-            <p style="font-size: 12px; margin-bottom: 12px; color: #555;">Already have a license key?</p>
-            <div style="display:flex; gap:8px; margin-bottom: 8px;">
-                <input id="licenseKeyInput" type="text" placeholder="XXXX-XXXX-XXXX-XXXX" style="flex:1; background:rgba(255,255,255,0.05); border:1px solid rgba(57,255,20,0.2);
+<div class="price">$7<span style="font-size: 14px; color: #888;">/month</span></div>
+<div class="price-sub">Cancel anytime. Instant activation.</div>
+<a class="modal-cta" href="https://vossneuralresearch.gumroad.com/l/overmindfull" onclick="closeModal()" target="_blank">UNLOCK FULL EXPERIENCE</a>
+<div style="margin: 24px 0; border-top: 1px solid rgba(57,255,20,0.1);"></div>
+<p style="font-size: 12px; margin-bottom: 12px; color: #555;">Already have a license key?</p>
+<div style="display:flex; gap:8px; margin-bottom: 8px;">
+<input id="licenseKeyInput" onkeydown="if(event.key==='Enter')validateKey()" placeholder="XXXX-XXXX-XXXX-XXXX" style="flex:1; background:rgba(255,255,255,0.05); border:1px solid rgba(57,255,20,0.2);
                     border-radius:6px; color:#fff; font-family:'JetBrains Mono',monospace; font-size:12px;
-                    padding:10px 14px; outline:none; letter-spacing:0.1em; text-transform:uppercase;"
-                    onkeydown="if(event.key==='Enter')validateKey()">
-                <button onclick="validateKey()" id="validateBtn" style="background:rgba(57,255,20,0.1); border:1px solid rgba(57,255,20,0.3); border-radius:6px;
+                    padding:10px 14px; outline:none; letter-spacing:0.1em; text-transform:uppercase;" type="text"/>
+<button id="validateBtn" onclick="validateKey()" style="background:rgba(57,255,20,0.1); border:1px solid rgba(57,255,20,0.3); border-radius:6px;
                     color:var(--neon); font-family:'JetBrains Mono',monospace; font-size:11px; padding:0 16px;
                     cursor:pointer; letter-spacing:0.08em; transition:all 0.2s; white-space:nowrap;">
                     VERIFY
                 </button>
-            </div>
-            <div id="keyStatus" style="font-family:'JetBrains Mono',monospace; font-size:11px; min-height:16px;
+</div>
+<div id="keyStatus" style="font-family:'JetBrains Mono',monospace; font-size:11px; min-height:16px;
                 letter-spacing:0.05em; color:#555;"></div>
-
-            <button class="modal-close" onclick="closeModal()">maybe later</button>
-        </div>
-    </div>
-
-    <script>
+<button class="modal-close" onclick="closeModal()">maybe later</button>
+</div>
+</div></div>
+<script>
         const API_URL = '/api/overmind';
 
         // ─── TIER STATE ───
@@ -1310,7 +1355,25 @@ YOUR BEHAVIOR:
 
         document.getElementById('input').focus();
     </script>
+<script id="vnr-toc-js">
+        // Restored TOC JavaScript
+        const navLinks = document.querySelectorAll('.snav');
+        const sections = document.querySelectorAll('.section, h2[id]');
 
-</body>
-
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 120) {
+                    current = section.getAttribute('id');
+                }
+            });
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (current && link.getAttribute('href') && link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+</script></body>
 </html>
