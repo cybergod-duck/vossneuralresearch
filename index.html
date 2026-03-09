@@ -1014,50 +1014,39 @@
     <!-- INCIDENT LOG: Recurring Warping Events -->
     <div class="section" id="scan-incidents">
       <div class="section-tag" style="color:#eab308;">Live Incident Log</div>
-      <h2 style="margin-bottom:20px;">Recurring GPU Warping — The Tracker Damage Persists</h2>
-      <p style="font-size:14px; color:var(--text-sub); line-height:1.8; margin-bottom:20px;">
-        The following incidents were logged <strong style="color:#fff;">after</strong> the initial cleanup.
-        Despite destroying all cached tracker artifacts, the damage <strong style="color:var(--red);">recurs</strong>
-        every time Chrome re-establishes connections to tracker domains. This demonstrates that Suno-related
-        tracker scripts are not a one-time infection — they are <strong style="color:#fff;">persistent,
-          self-regenerating exploitation chains</strong> that will continue burning CPU and corrupting GPU
-        compositor state on every browsing session until the domains are permanently blocked at the DNS level.
+      <h2 style="margin-bottom:8px; font-size:16px;">Recurring GPU Warping — The Tracker Damage Persists</h2>
+      <p style="font-size:12px; color:var(--text-sub); line-height:1.5; margin-bottom:10px;">
+        Incidents logged <strong style="color:#fff;">after</strong> cleanup.
+        Despite destroying cached tracker artifacts, damage <strong style="color:var(--red);">recurs</strong>
+        every time Chrome reconnects to tracker domains — <strong style="color:#fff;">persistent, self-regenerating
+          exploitation chains</strong> that burn CPU and corrupt GPU compositor state until DNS-blocked.
       </p>
 
       <!-- Incident 1: March 7 2026, 23:06 EST -->
       <div class="gpu-abuse"
         style="border-left-color:var(--red); background:rgba(239,68,68,0.06); border-color:rgba(239,68,68,0.25);">
-        <h3 style="color:var(--red);">🔴 INCIDENT — 2026-03-07 23:06 EST</h3>
-        <p style="font-size:13px; color:var(--text-sub); margin-bottom:12px; line-height:1.8;">
-          User reported <strong style="color:#fff;">desktop-wide window warping</strong> resuming during
-          active
-          Suno browsing session. Process audit revealed <strong style="color:var(--red);">two Chrome renderer
-            processes</strong> consuming extreme CPU time — consistent with the Microsoft Clarity
-          MutationObserver feedback loop documented in Stage 3 below.
+        <h3 style="color:var(--red); font-size:14px;">🔴 INCIDENT — 2026-03-07 23:06 EST</h3>
+        <p style="font-size:11px; color:var(--text-sub); margin-bottom:8px; line-height:1.5;">
+          <strong style="color:#fff;">Desktop-wide window warping</strong> during Suno session. <strong
+            style="color:var(--red);">Two Chrome renderers</strong> consuming extreme CPU — Clarity MutationObserver
+          loop.
         </p>
         <div
-          style="background:#0d1117; border-radius:6px; padding:20px; font-family:'JetBrains Mono',monospace; font-size:12px; line-height:2; margin-bottom:12px;">
+          style="background:#0d1117; border-radius:6px; padding:10px 12px; font-family:'JetBrains Mono',monospace; font-size:10px; line-height:1.6; margin-bottom:8px;">
           <div style="color:var(--cyan);">$ Get-Process chrome | Sort CPU -Desc | Select -First 3</div>
-          <div>&nbsp;</div>
-          <div><span class="hit">[PID 17840]</span> <span class="output">CPU: </span><span class="crit">314.4
-              seconds</span><span class="output"> | RAM: 93.6 MB | Handles: 773</span></div>
-          <div><span class="hit">[PID 600]</span> <span class="output"> CPU: </span><span class="crit">307.8
-              seconds</span><span class="output"> | RAM: 42.0 MB | Handles: </span><span class="crit">1,733</span></div>
-          <div><span class="hit">[PID 42704]</span> <span class="output">CPU: </span><span class="warn">168.8
-              seconds</span><span class="output"> | RAM: 58.5 MB | Handles: 374</span></div>
-          <div>&nbsp;</div>
+          <div><span class="hit">[PID 17840]</span> <span class="output">CPU:</span><span class="crit">314.4s</span>
+            <span class="output">RAM:93.6MB Handles:773</span></div>
+          <div><span class="hit">[PID 600]</span> <span class="output">CPU:</span><span class="crit">307.8s</span> <span
+              class="output">RAM:42.0MB Handles:</span><span class="crit">1,733</span></div>
+          <div><span class="hit">[PID 42704]</span> <span class="output">CPU:</span><span class="warn">168.8s</span>
+            <span class="output">RAM:58.5MB Handles:374</span></div>
           <div style="color:var(--green);">$ Stop-Process -Id 17840, 600, 42704 -Force</div>
-          <div style="color:var(--green);">✓ GPU compositor loop terminated — warping stopped immediately
-          </div>
+          <div style="color:var(--green);">✓ Warping stopped immediately</div>
         </div>
-        <p style="font-size:12px; color:var(--text-sub); line-height:1.7;">
-          <strong style="color:var(--orange);">Analysis:</strong> PID 600 accumulated <strong style="color:#fff;">1,733
-            handles</strong> —
-          a signature of the Clarity session replay loop. Normal Chrome renderer processes hold ~200-400
-          handles.
-          The 4x handle inflation indicates continuous DOM serialization → mutation → repaint cycling.
-          Combined CPU burn across the three processes: <strong style="color:var(--red);">791 seconds</strong>
-          (13.2 minutes of solid-core computation consumed by tracker activity alone).
+        <p style="font-size:10px; color:var(--text-sub); line-height:1.4;">
+          <strong style="color:var(--orange);">Analysis:</strong> PID 600: <strong style="color:#fff;">1,733
+            handles</strong> (4x normal) — Clarity replay signature. Combined CPU burn: <strong
+            style="color:var(--red);">791s</strong> (13.2 min).
         </p>
         <p style="font-size:11px; color:#555; font-family:'JetBrains Mono',monospace; margin-top:8px;">
           Incident logged by VNR SCAN Protocol v1.0 | Automated process kill executed
@@ -1068,42 +1057,28 @@
       <div id="scan-incidents-2" style="scroll-margin-top:72px;"></div>
       <div class="gpu-abuse"
         style="border-left-color:var(--orange); background:rgba(249,115,22,0.06); border-color:rgba(249,115,22,0.25); margin-top:16px;">
-        <h3 style="color:var(--orange);">🟠 INCIDENT — 2026-03-07 23:24 EST — CROSS-BROWSER PERSISTENCE</h3>
-        <p style="font-size:13px; color:var(--text-sub); margin-bottom:12px; line-height:1.8;">
-          <strong style="color:#fff;">Screen warping persisted after Chrome was killed.</strong>
-          Process audit revealed the GPU compositor abuse had <strong style="color:var(--orange);">migrated to
-            Brave Browser</strong>, despite Brave Shields being active. Three Brave renderer processes were
-          consuming extreme CPU — the user was simply chatting with an AI (Grok on x.ai), yet the
-          tracker scripts embedded in the page were running the same MutationObserver feedback loop
-          documented in Chrome.
+        <h3 style="color:var(--orange); font-size:14px;">🟠 INCIDENT — 2026-03-07 23:24 EST — CROSS-BROWSER</h3>
+        <p style="font-size:11px; color:var(--text-sub); margin-bottom:8px; line-height:1.5;">
+          <strong style="color:#fff;">Warping persisted after Chrome kill.</strong> GPU abuse <strong
+            style="color:var(--orange);">migrated to Brave</strong> despite Shields. Same MutationObserver loop in Brave
+          renderers.
         </p>
         <div
-          style="background:#0d1117; border-radius:6px; padding:20px; font-family:'JetBrains Mono',monospace; font-size:12px; line-height:2; margin-bottom:12px;">
+          style="background:#0d1117; border-radius:6px; padding:10px 12px; font-family:'JetBrains Mono',monospace; font-size:10px; line-height:1.6; margin-bottom:8px;">
           <div style="color:var(--cyan);">$ Get-Process brave | Sort CPU -Desc | Select -First 3</div>
-          <div>&nbsp;</div>
-          <div><span class="hit">[PID 7268]</span> <span class="output">CPU: </span><span class="crit">858.8
-              seconds</span><span class="output"> | RAM: 437.9 MB | Handles: 543</span></div>
-          <div><span class="hit">[PID 31236]</span> <span class="output">CPU: </span><span class="crit">804.9
-              seconds</span><span class="output"> | RAM: 105.2 MB | Handles: 483</span></div>
-          <div><span class="hit">[PID 33348]</span> <span class="output">CPU: </span><span class="warn">438.1
-              seconds</span><span class="output"> | RAM: 149.7 MB | Handles: </span><span class="crit">1,816</span>
+          <div><span class="hit">[PID 7268]</span> <span class="output">CPU:</span><span class="crit">858.8s</span>
+            <span class="output">RAM:437.9MB Handles:543</span></div>
+          <div><span class="hit">[PID 31236]</span> <span class="output">CPU:</span><span class="crit">804.9s</span>
+            <span class="output">RAM:105.2MB Handles:483</span></div>
+          <div><span class="hit">[PID 33348]</span> <span class="output">CPU:</span><span class="warn">438.1s</span>
+            <span class="output">RAM:149.7MB Handles:</span><span class="crit">1,816</span></div>
+          <div style="color:var(--orange);">Combined: 2,101.8s (35 min) | PID 33348: 1,816 handles — Clarity confirmed
           </div>
-          <div>&nbsp;</div>
-          <div style="color:var(--orange);">Combined CPU burn: 2,101.8 seconds (35 minutes)</div>
-          <div style="color:var(--orange);">PID 33348 handles: 1,816 — Clarity MutationObserver signature
-            confirmed</div>
         </div>
-        <p style="font-size:12px; color:var(--text-sub); line-height:1.7;">
-          <strong style="color:var(--red);">Critical Finding:</strong> Brave Shields block <em>network
-            requests</em> to
-          tracker domains, but cannot prevent tracker scripts already embedded in the page source from
-          executing.
-          The Clarity session replay script is loaded inline — not from an external domain — so shield-based
-          blocking is <strong style="color:#fff;">fundamentally insufficient</strong>. The MutationObserver
-          feedback loop runs locally in the renderer process regardless of network-level blocking.
-          <strong style="color:#fff;">This is why a purpose-built browser (Project Fortress) is
-            necessary</strong> —
-          it must strip these scripts at the DOM parsing layer, not the network layer.
+        <p style="font-size:10px; color:var(--text-sub); line-height:1.4;">
+          <strong style="color:var(--red);">Critical:</strong> Shields block network requests but not inline scripts.
+          Clarity runs locally — shield-based blocking is <strong style="color:#fff;">fundamentally
+            insufficient</strong>. Requires DOM-layer stripping (Project Fortress).
         </p>
         <p style="font-size:11px; color:#555; font-family:'JetBrains Mono',monospace; margin-top:8px;">
           Incident logged by VNR SCAN Protocol v1.0 | User activity: AI chat (Grok/x.ai) — NOT Suno
@@ -1113,45 +1088,29 @@
       <!-- Incident 3: March 7 2026, 23:32 EST — MEMORY EXHAUSTION ROOT CAUSE -->
       <div class="gpu-abuse"
         style="border-left-color:var(--cyan); background:rgba(64,192,255,0.06); border-color:rgba(64,192,255,0.25); margin-top:16px;">
-        <h3 style="color:var(--cyan);">🔵 ROOT CAUSE — 2026-03-07 23:32 EST — GPU COMPOSITOR MEMORY STARVATION
-        </h3>
-        <p style="font-size:13px; color:var(--text-sub); margin-bottom:12px; line-height:1.8;">
-          Deep system analysis revealed the underlying mechanism: <strong style="color:#fff;">system memory
-            exhaustion</strong>. The machine (13.7 GB total RAM) had only <strong style="color:var(--red);">0.9 GB
-            free</strong>, triggering Windows Memory Compression and disk paging. When the
-          Desktop Window Manager (DWM) cannot allocate GPU compositor surfaces in time, it drops or
-          corrupts frame geometry — producing the visible "window warping" across the entire desktop.
+        <h3 style="color:var(--cyan); font-size:14px;">🔵 ROOT CAUSE — 2026-03-07 23:32 EST — MEMORY STARVATION</h3>
+        <p style="font-size:11px; color:var(--text-sub); margin-bottom:8px; line-height:1.5;">
+          <strong style="color:#fff;">System memory exhaustion:</strong> 13.7 GB total, only <strong
+            style="color:var(--red);">0.9 GB free</strong>. DWM cannot allocate GPU surfaces → frame geometry corruption
+          → desktop-wide warping.
         </p>
         <div
-          style="background:#0d1117; border-radius:6px; padding:20px; font-family:'JetBrains Mono',monospace; font-size:12px; line-height:2; margin-bottom:12px;">
-          <div style="color:var(--cyan);">SYSTEM MEMORY MAP — 13.7 GB Total | 0.9 GB Free</div>
-          <div>&nbsp;</div>
-          <div><span class="output">Dev tooling (LSP + IDE) </span><span class="crit"> 3,900 MB (28.5%)</span>
+          style="background:#0d1117; border-radius:6px; padding:10px 12px; font-family:'JetBrains Mono',monospace; font-size:10px; line-height:1.5; margin-bottom:8px;">
+          <div style="color:var(--cyan);">MEMORY MAP — 13.7 GB Total | 0.9 GB Free</div>
+          <div><span class="output">Dev tooling (LSP+IDE)</span> <span class="crit">3,900MB (28.5%)</span></div>
+          <div><span class="output">Comet (6 proc)</span> <span class="warn">815MB</span> | <span
+              class="output">Discord</span> <span class="warn">610MB</span> | <span class="output">Brave</span> <span
+              class="warn">512MB</span></div>
+          <div><span class="output">Dropbox</span> 150MB | <span class="output">OBS</span> 130MB | <span
+              class="output">Defender</span> 166MB | <span class="output">DWM</span> 98MB</div>
+          <div><span class="output">Memory Compression ⚠</span> <span class="crit">ACTIVE — swapping to disk</span>
           </div>
-          <div><span class="output">Comet (6 processes) </span><span class="warn"> 815 MB (6.0%)</span></div>
-          <div><span class="output">Discord </span><span class="warn"> 610 MB (4.5%)</span></div>
-          <div><span class="output">Brave Browser </span><span class="warn"> 512 MB (3.7%)</span></div>
-          <div><span class="output">Dropbox sync </span><span class="output"> 150 MB (1.1%)</span></div>
-          <div><span class="output">OBS (screen capture) </span><span class="output"> 130 MB (0.9%)</span>
-          </div>
-          <div><span class="output">Windows Defender </span><span class="output"> 166 MB (1.2%)</span></div>
-          <div><span class="output">DWM (GPU compositor) </span><span class="output"> 98 MB (0.7%)</span>
-          </div>
-          <div><span class="output">Memory Compression ⚠ </span><span class="crit"> 120 MB (ACTIVE)</span>
-          </div>
-          <div>&nbsp;</div>
-          <div style="color:var(--red);">Windows Memory Compression ACTIVE — system is swapping to disk</div>
-          <div style="color:var(--red);">DWM surface allocation delayed → frame geometry corruption</div>
+          <div style="color:var(--red);">DWM surface allocation delayed → frame corruption</div>
         </div>
-        <p style="font-size:12px; color:var(--text-sub); line-height:1.7;">
-          <strong style="color:var(--cyan);">Compounding factors:</strong> The tracker-induced CPU burn
-          (Incidents 1 & 2)
-          forces browser renderer processes to inflate their memory footprint with DOM serialization buffers.
-          This memory inflation — combined with the baseline load of modern development/communication tools —
-          pushes total consumption past the system's 13.7 GB ceiling. OBS's continuous screen capture adds
-          constant GPU composite pressure on top of the memory starvation. The result is <strong
-            style="color:#fff;">desktop-wide geometry corruption</strong> that persists until either the
-          tracker loops are killed or sufficient memory is freed.
+        <p style="font-size:10px; color:var(--text-sub); line-height:1.4;">
+          <strong style="color:var(--cyan);">Compounding:</strong> Tracker CPU burn inflates renderer memory → pushes
+          past 13.7 GB ceiling → <strong style="color:#fff;">desktop-wide geometry corruption</strong> until trackers
+          killed or memory freed.
         </p>
         <p style="font-size:11px; color:#555; font-family:'JetBrains Mono',monospace; margin-top:8px;">
           Root cause analysis by VNR SCAN Protocol v1.0 | Full process inventory preserved
