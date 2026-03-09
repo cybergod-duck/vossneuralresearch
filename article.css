@@ -294,8 +294,8 @@ blockquote {
 .key-stats,
 .stats-row {
   display: grid !important;
-  grid-template-columns: repeat(3, 1fr) !important;
-  gap: 16px !important;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)) !important;
+  gap: 12px !important;
   margin: 24px 0 !important;
 }
 
@@ -303,11 +303,10 @@ blockquote {
 .stat-box {
   background: rgba(64, 192, 255, 0.04) !important;
   border: 1px solid var(--border) !important;
-  border-radius: 10px !important;
-  padding: 24px 20px !important;
+  border-radius: 8px !important;
+  padding: 16px 12px !important;
   text-align: center !important;
   border-top: 3px solid var(--accent) !important;
-  aspect-ratio: 1.2 !important;
   display: flex !important;
   flex-direction: column !important;
   justify-content: center !important;
@@ -324,13 +323,18 @@ blockquote {
   border-top-color: var(--amber) !important;
 }
 
+.stat-card:nth-child(4),
+.stat-box:nth-child(4) {
+  border-top-color: #a78bfa !important;
+}
+
 .stat-card .num {
   font-family: 'JetBrains Mono', monospace !important;
-  font-size: 32px !important;
+  font-size: 22px !important;
   font-weight: 900 !important;
   color: var(--accent) !important;
   line-height: 1 !important;
-  margin-bottom: 8px !important;
+  margin-bottom: 6px !important;
 }
 
 .stat-card:nth-child(2) .num {
@@ -341,12 +345,17 @@ blockquote {
   color: var(--amber) !important;
 }
 
+.stat-card:nth-child(4) .num {
+  color: #a78bfa !important;
+}
+
 .stat-card .desc,
 .stat-card .d {
-  font-size: 15px !important;
+  font-size: 11px !important;
   font-weight: 700 !important;
   color: #fff !important;
-  letter-spacing: 0.02em !important;
+  letter-spacing: 0.04em !important;
+  text-transform: uppercase !important;
 }
 
 .terminal,
