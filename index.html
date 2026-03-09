@@ -1035,11 +1035,13 @@
           style="background:#0d1117; border-radius:6px; padding:10px 12px; font-family:'JetBrains Mono',monospace; font-size:10px; line-height:1.6; margin-bottom:8px;">
           <div style="color:var(--cyan);">$ Get-Process chrome | Sort CPU -Desc | Select -First 3</div>
           <div><span class="hit">[PID 17840]</span> <span class="output">CPU:</span><span class="crit">314.4s</span>
-            <span class="output">RAM:93.6MB Handles:773</span></div>
+            <span class="output">RAM:93.6MB Handles:773</span>
+          </div>
           <div><span class="hit">[PID 600]</span> <span class="output">CPU:</span><span class="crit">307.8s</span> <span
               class="output">RAM:42.0MB Handles:</span><span class="crit">1,733</span></div>
           <div><span class="hit">[PID 42704]</span> <span class="output">CPU:</span><span class="warn">168.8s</span>
-            <span class="output">RAM:58.5MB Handles:374</span></div>
+            <span class="output">RAM:58.5MB Handles:374</span>
+          </div>
           <div style="color:var(--green);">$ Stop-Process -Id 17840, 600, 42704 -Force</div>
           <div style="color:var(--green);">✓ Warping stopped immediately</div>
         </div>
@@ -1067,11 +1069,14 @@
           style="background:#0d1117; border-radius:6px; padding:10px 12px; font-family:'JetBrains Mono',monospace; font-size:10px; line-height:1.6; margin-bottom:8px;">
           <div style="color:var(--cyan);">$ Get-Process brave | Sort CPU -Desc | Select -First 3</div>
           <div><span class="hit">[PID 7268]</span> <span class="output">CPU:</span><span class="crit">858.8s</span>
-            <span class="output">RAM:437.9MB Handles:543</span></div>
+            <span class="output">RAM:437.9MB Handles:543</span>
+          </div>
           <div><span class="hit">[PID 31236]</span> <span class="output">CPU:</span><span class="crit">804.9s</span>
-            <span class="output">RAM:105.2MB Handles:483</span></div>
+            <span class="output">RAM:105.2MB Handles:483</span>
+          </div>
           <div><span class="hit">[PID 33348]</span> <span class="output">CPU:</span><span class="warn">438.1s</span>
-            <span class="output">RAM:149.7MB Handles:</span><span class="crit">1,816</span></div>
+            <span class="output">RAM:149.7MB Handles:</span><span class="crit">1,816</span>
+          </div>
           <div style="color:var(--orange);">Combined: 2,101.8s (35 min) | PID 33348: 1,816 handles — Clarity confirmed
           </div>
         </div>
@@ -1586,7 +1591,8 @@
         const scrollY = window.scrollY + 120;
         let current = sections[0];
         for (let i = sections.length - 1; i >= 0; i--) {
-          if (sections[i].el.offsetTop <= scrollY) {
+          const elTop = sections[i].el.getBoundingClientRect().top + window.scrollY;
+          if (elTop <= scrollY) {
             current = sections[i];
             break;
           }
