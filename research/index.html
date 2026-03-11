@@ -93,8 +93,25 @@
       background: #12122a;
     }
 
+    @keyframes border-glow-alert {
+      0% {
+        box-shadow: 0 0 0 0 rgba(255, 77, 77, 0);
+        border-color: rgba(255, 77, 77, 0.4);
+      }
+
+      50% {
+        box-shadow: 0 0 20px 2px rgba(255, 77, 77, 0.4), inset 0 0 10px 0 rgba(255, 77, 77, 0.1);
+        border-color: rgba(255, 77, 77, 1);
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(255, 77, 77, 0);
+        border-color: rgba(255, 77, 77, 0.4);
+      }
+    }
+
     .article-card.featured {
-      border-color: #ff4d4d;
+      animation: border-glow-alert 2.5s infinite ease-in-out;
     }
 
     .card-tag {
@@ -131,6 +148,29 @@
       color: #40c0ff;
       white-space: nowrap;
       flex-shrink: 0;
+    }
+
+    @keyframes pulse-red {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+
+      50% {
+        transform: scale(1.3);
+        opacity: 0.8;
+      }
+
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .pulse-alarm {
+      display: inline-block;
+      animation: pulse-red 1.5s infinite ease-in-out;
+      margin-right: 4px;
     }
 
     .page-footer {
@@ -174,11 +214,21 @@
       <div class="article-list">
 
         <a href="/research/suno-har-capture/" class="article-card featured">
-          <div class="card-tag" style="color:#ff4d4d;">🔴 NEW</div>
+          <div class="card-tag" style="color:#ff4d4d;"><span class="pulse-alarm">🚨</span> BREAKING</div>
           <div class="card-body">
             <div class="card-title">78 POST Requests Per Minute: Inside Suno's Data Exfiltration Pipeline</div>
             <p class="card-desc">HAR capture analysis reveals 2,149 requests in 17 minutes — actual payloads showing
               user IDs, clip IDs, and creative process data sent to 15+ trackers.</p>
+          </div>
+          <span class="card-arrow">Read Analysis →</span>
+        </a>
+
+        <a href="/research/tracker-persistence-step-zero/" class="article-card">
+          <div class="card-tag" style="color:#ff4d4d;">🔴 NEW</div>
+          <div class="card-body">
+            <div class="card-title">The "Step Zero" Problem: Tracker Persistence</div>
+            <p class="card-desc">Suno's tracking infrastructure prioritizes re-establishing connections continuously,
+              resulting in extreme system degradation when blocked.</p>
           </div>
           <span class="card-arrow">Read Analysis →</span>
         </a>
