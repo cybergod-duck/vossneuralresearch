@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Four-Way Forensic Audit: Suno vs ElevenLabs vs Midjourney vs Udio | Voss Neural Research</title>
+    <meta name="description"
+        content="Comparative HAR forensic analysis of Suno, ElevenLabs, Midjourney, and Udio. POST ratios, tracker counts, PII leakage, and proxied analytics — parsed through the same engine.">
+    <meta property="og:title" content="Four-Way Forensic Audit: Surveillance in Creative AI">
+    <meta property="og:description"
+        content="Suno's 62.2% POST ratio and 24 trackers dwarf the competition. Comparative HAR analysis of four major creative AI platforms.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://www.vossneuralresearch.com/research/comparative-platform-audit/">
+    <meta property="og:site_name" content="Voss Neural Research">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Four-Way Forensic Audit: Surveillance in Creative AI">
+    <meta name="twitter:description"
+        content="Suno's 62.2% POST ratio and 24 trackers dwarf the competition. Comparative HAR analysis of four major creative AI platforms.">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Marcus J.D. — Voss Neural Research LLC">
+    <link rel="canonical" href="https://www.vossneuralresearch.com/research/comparative-platform-audit/">
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Four-Way Forensic Audit: Suno vs ElevenLabs vs Midjourney vs Udio — Surveillance in Creative AI",
+    "description": "Comparative HAR forensic analysis of four major creative AI platforms. POST ratios, tracker counts, PII leakage, and proxied analytics parsed through the same engine.",
+    "author": {
+      "@type": "Person",
+      "name": "Marcus J.D.",
+      "jobTitle": "Lead Systems Architect",
+      "affiliation": {
+        "@type": "Organization",
+        "name": "Voss Neural Research LLC",
+        "url": "https://www.vossneuralresearch.com"
+      }
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Voss Neural Research LLC"
+    },
+    "datePublished": "2026-03-11",
+    "keywords": "Suno, ElevenLabs, Midjourney, Udio, HAR analysis, tracker forensics, PII leakage, creative AI, surveillance, privacy audit"
+  }
+  </script>
+    <link rel='icon' type='image/png' href='../../vnr-icon.png'>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../../article.css">
+    <style>
+        :root {
+            --danger: #ef4444;
+            --amber: #f59e0b;
+            --green: #10b981;
+            --accent: #40c0ff;
+        }
+
+        .tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: .15em;
+            margin-bottom: 16px;
+        }
+
+        .t {
+            font-size: 34px;
+            font-weight: 900;
+            line-height: 1.2;
+            color: #fff;
+            margin-bottom: 16px;
+        }
+
+        .t .gradient {
+            background: linear-gradient(135deg, var(--accent), var(--green));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .meta {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: var(--text-sub);
+            margin-bottom: 40px;
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .meta strong {
+            color: var(--accent);
+        }
+
+        .evidence-box.danger {
+            border-left-color: var(--danger) !important;
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.08) 0%, rgba(3, 3, 3, 0.95) 60%) !important;
+        }
+
+        .evidence-box.amber {
+            border-left-color: var(--amber) !important;
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, rgba(3, 3, 3, 0.95) 60%) !important;
+        }
+
+        .evidence-box .label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .1em;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .evidence-box.danger .label {
+            color: var(--danger);
+        }
+
+        .evidence-box.amber .label {
+            color: var(--amber);
+        }
+
+        .evidence-box p {
+            font-size: 14px;
+            margin-bottom: 0;
+        }
+
+        /* Stat card grid for comparative metrics */
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin: 24px 0;
+        }
+
+        @media (max-width: 700px) {
+            .stat-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .stat-card h3 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        .stat-card .platform-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            padding: 3px 0;
+        }
+
+        .stat-card .platform-row .val {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+        }
+
+        .val.critical { color: var(--danger); }
+        .val.high { color: var(--amber); }
+        .val.medium { color: #a78bfa; }
+        .val.low { color: var(--green); }
+
+        /* Threat ranking list */
+        .threat-list {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        .threat-list li {
+            padding: 14px 18px;
+            margin-bottom: 8px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .threat-list li:first-child {
+            border-left: 3px solid var(--danger);
+        }
+
+        .threat-list li:nth-child(2) {
+            border-left: 3px solid var(--amber);
+        }
+
+        .threat-list li:nth-child(3) {
+            border-left: 3px solid #a78bfa;
+        }
+
+        .threat-list li:last-child {
+            border-left: 3px solid var(--green);
+        }
+
+        .threat-badge {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 3px;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+        }
+
+        .badge-critical { background: rgba(239,68,68,.15); color: var(--danger); }
+        .badge-high { background: rgba(245,158,11,.15); color: var(--amber); }
+        .badge-medium { background: rgba(167,139,250,.15); color: #a78bfa; }
+        .badge-low { background: rgba(16,185,129,.15); color: var(--green); }
+
+        /* Comparison table */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+            font-size: 13px;
+        }
+
+        .comparison-table th {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .06em;
+            padding: 12px 14px;
+            text-align: left;
+            border-bottom: 2px solid var(--border);
+            color: var(--accent);
+        }
+
+        .comparison-table td {
+            padding: 10px 14px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .comparison-table tr:hover {
+            background: rgba(64, 192, 255, 0.03);
+        }
+
+        .comparison-table .worst {
+            color: var(--danger);
+            font-weight: 700;
+        }
+
+        .comparison-table .best {
+            color: var(--green);
+        }
+
+        /* Platform section headers */
+        .platform-verdict {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .1em;
+            padding: 4px 10px;
+            border-radius: 3px;
+            display: inline-block;
+            margin-bottom: 16px;
+        }
+
+        .verdict-critical { background: rgba(239,68,68,.12); color: var(--danger); }
+        .verdict-high { background: rgba(245,158,11,.12); color: var(--amber); }
+        .verdict-medium { background: rgba(167,139,250,.12); color: #a78bfa; }
+        .verdict-low { background: rgba(16,185,129,.12); color: var(--green); }
+    </style>
+</head>
+
+<body>
+    <nav class="vnr-nav">
+        <div class="vnr-nav-inner">
+            <a href="/" class="vnr-nav-logo"><img src="../../CROP-vnr-logo.PNG" alt="VNR"
+                    style="height:44px;width:auto;"></a>
+            <div class="vnr-nav-links">
+                <a href="/" class="vnr-live-link">VNR LIVE</a>
+                <a href="/research/" class="active">Research</a>
+                <a href="/suno-report/">Tracker Report</a>
+                <a href="/engage/">Engage</a>
+                <a href="/about/">About</a>
+            </div>
+        </div>
+    </nav>
+    <nav id="scan-nav">
+        <a class="snav" href="#overview"><span class="dot" style="background:#40c0ff"></span>Overview</a>
+        <a class="snav" href="#master-table"><span class="dot" style="background:#f59e0b"></span>Master Table</a>
+        <a class="snav" href="#threat-ranking"><span class="dot" style="background:#ef4444"></span>Threat Ranking</a>
+        <a class="snav" href="#suno"><span class="dot" style="background:#ef4444"></span>Suno</a>
+        <a class="snav" href="#udio"><span class="dot" style="background:#f59e0b"></span>Udio</a>
+        <a class="snav" href="#elevenlabs"><span class="dot" style="background:#a78bfa"></span>ElevenLabs</a>
+        <a class="snav" href="#midjourney"><span class="dot" style="background:#10b981"></span>Midjourney</a>
+        <a class="snav" href="#conclusion"><span class="dot" style="background:#40c0ff"></span>Conclusion</a>
+        <a class="snav" href="#methodology"><span class="dot" style="background:#40c0ff"></span>Methodology</a>
+        <div style="margin-top:24px;border-top:1px solid rgba(255,255,255,0.06);padding-top:16px;">
+            <div
+                style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#666;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;">
+                Related</div>
+            <a href="/research/suno-har-capture/"
+                style="display:block;color:#ef4444;font-size:10px;font-family:'JetBrains Mono',monospace;text-decoration:none;margin-bottom:8px;opacity:0.8;">&#9888;
+                78 POST Requests &rarr;</a>
+            <a href="/suno-report/"
+                style="display:block;color:#f59e0b;font-size:10px;font-family:'JetBrains Mono',monospace;text-decoration:none;margin-bottom:8px;opacity:0.8;">&#128269;
+                Tracker Report &rarr;</a>
+            <a href="/"
+                style="display:block;color:#40c0ff;font-size:10px;font-family:'JetBrains Mono',monospace;text-decoration:none;opacity:0.8;">&#128737;
+                VNR LIVE &rarr;</a>
+        </div>
+    </nav>
+
+    <div class="article-wrap">
+        <div class="tag">VNR Comparative Forensic Investigation</div>
+        <h1 class="t"><span class="gradient">Four-Way Forensic Audit</span>: Surveillance in Creative AI</h1>
+        <div class="meta">
+            <span>By <strong>Marcus J.D.</strong> — Lead Systems Architect</span>
+            <span>Published: <strong>March 11, 2026</strong></span>
+            <span>Report: <strong>VNR-CA-2026-01</strong></span>
+            <span>Reading time: <strong>12 min</strong></span>
+        </div>
+        <div class="stat-row">
+            <div class="stat-card">
+                <div class="num" style="color:var(--danger);">4</div>
+                <div class="desc">Platforms Audited</div>
+            </div>
+            <div class="stat-card">
+                <div class="num" style="color:var(--amber);">2,596</div>
+                <div class="desc">Total Requests Parsed</div>
+            </div>
+            <div class="stat-card">
+                <div class="num" style="color:var(--green);">39</div>
+                <div class="desc">Trackers Identified</div>
+            </div>
+            <div class="stat-card">
+                <div class="num" style="color:var(--accent);">666</div>
+                <div class="desc">PII Leak Entries</div>
+            </div>
+        </div>
+        <article>
+            <h2 id="overview">Overview: Unmasking Surveillance in Creative AI</h2>
+            <p>At Voss Neural Research, we don't just audit platforms — we dissect them. Our latest comparative forensic
+                audit targets four heavyweights in the creative AI space: <strong>Suno</strong>,
+                <strong>ElevenLabs</strong>, <strong>Midjourney</strong>, and <strong>Udio</strong>. Using our
+                proprietary Antigravity Forensic Engine and VOSS Protocol, we've captured, parsed, and analyzed HTTP
+                Archive (HAR) data to expose the hidden surveillance mechanisms these platforms deploy.</p>
+            <p>This isn't about features or user experience — it's about what's happening under the hood, behind the
+                curtain of "free" or "freemium" services. The results are stark. While all platforms exhibit some level
+                of data collection, one stands out as a <strong>surveillance juggernaut</strong>. If you're using these
+                tools to create music, art, or voiceovers, you're also feeding a machine that may be harvesting far more
+                than your prompts.</p>
+
+            <h2 id="master-table">Master Comparison Table</h2>
+            <p>Our audit hinges on hard metrics extracted from live HAR captures. These numbers aren't guesses — they're
+                forensic evidence of how these platforms behave in real-world usage.</p>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>Suno</th>
+                        <th>Udio</th>
+                        <th>ElevenLabs</th>
+                        <th>Midjourney</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Total Requests</td>
+                        <td class="worst">2,104</td>
+                        <td>357</td>
+                        <td>87</td>
+                        <td class="best">48</td>
+                    </tr>
+                    <tr>
+                        <td>POST Requests</td>
+                        <td class="worst">1,308</td>
+                        <td>188</td>
+                        <td>38</td>
+                        <td class="best">11</td>
+                    </tr>
+                    <tr>
+                        <td>POST Ratio</td>
+                        <td class="worst">62.2%</td>
+                        <td>52.7%</td>
+                        <td>43.7%</td>
+                        <td class="best">22.9%</td>
+                    </tr>
+                    <tr>
+                        <td>POSTs / min</td>
+                        <td class="worst">37.3</td>
+                        <td>9.8</td>
+                        <td>30.5</td>
+                        <td class="best">20.7</td>
+                    </tr>
+                    <tr>
+                        <td>3rd-Party Domains</td>
+                        <td class="worst">17</td>
+                        <td>3</td>
+                        <td class="best">1</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>Trackers Detected</td>
+                        <td class="worst">24</td>
+                        <td>6</td>
+                        <td class="best">4</td>
+                        <td>5</td>
+                    </tr>
+                    <tr>
+                        <td>PII Leakage (entries)</td>
+                        <td class="worst">600</td>
+                        <td>32</td>
+                        <td>26</td>
+                        <td class="best">8</td>
+                    </tr>
+                    <tr>
+                        <td>Proxied Analytics</td>
+                        <td class="worst">203</td>
+                        <td>22</td>
+                        <td>13</td>
+                        <td class="best">0</td>
+                    </tr>
+                    <tr>
+                        <td>Upload (exfil)</td>
+                        <td class="worst">3.82 MB</td>
+                        <td>0.4 MB</td>
+                        <td>0.27 MB</td>
+                        <td class="best">0.03 MB</td>
+                    </tr>
+                    <tr>
+                        <td>Download</td>
+                        <td class="worst">110.07 MB</td>
+                        <td>4.22 MB</td>
+                        <td>0.82 MB</td>
+                        <td>7.55 MB</td>
+                    </tr>
+                    <tr>
+                        <td>Capture Duration</td>
+                        <td>35.1 min</td>
+                        <td>19.2 min</td>
+                        <td>1.2 min</td>
+                        <td>0.5 min</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="evidence-box danger">
+                <div class="label">Key Takeaway</div>
+                <p>Suno's numbers — 2,104 requests, 62.2% POST ratio, 17 third-party domains, 600 PII leakage entries
+                    — scream surveillance overreach. Compare that to Midjourney's lean profile (48 requests, 22.9% POST
+                    ratio, 0.03 MB upload), and it's clear we're dealing with vastly different beasts.</p>
+            </div>
+
+            <h2 id="threat-ranking">Threat Ranking: Who's Watching You?</h2>
+            <p>Based on our analysis, we've ranked these platforms by their privacy threat level. This isn't about
+                usability or output quality — it's about how much of your data they're siphoning and who they're sharing
+                it with.</p>
+
+            <ol class="threat-list">
+                <li>
+                    <span class="threat-badge badge-critical">⛔ CRITICAL</span>
+                    <span><strong>Suno</strong> — POST Ratio: 62.2% | 3rd-Party Domains: 17 | Trackers: 24 | PII: 600
+                        entries</span>
+                </li>
+                <li>
+                    <span class="threat-badge badge-high">🔴 HIGH</span>
+                    <span><strong>Udio</strong> — POST Ratio: 52.7% | 3rd-Party Domains: 3 | Trackers: 6 | Mixpanel IP
+                        capture</span>
+                </li>
+                <li>
+                    <span class="threat-badge badge-medium">🟡 MEDIUM</span>
+                    <span><strong>ElevenLabs</strong> — POST Ratio: 43.7% | 3rd-Party Domains: 1 | PostHog adblock
+                        evasion</span>
+                </li>
+                <li>
+                    <span class="threat-badge badge-low">🟢 LOW</span>
+                    <span><strong>Midjourney</strong> — POST Ratio: 22.9% | 3rd-Party Domains: 3 | Standard
+                        analytics</span>
+                </li>
+            </ol>
+
+            <h2 id="suno">⛔ Suno: A Surveillance Juggernaut</h2>
+            <div class="platform-verdict verdict-critical">Threat Level: CRITICAL</div>
+            <p>Suno isn't just a creative AI platform — it's a <strong>data-harvesting machine</strong>. Our audit
+                reveals an unprecedented level of surveillance infrastructure, with a staggering 2,104 total requests
+                over a 35.1-minute capture, 62.2% of which are POST requests (1,308). That's <strong>37.3 POSTs per
+                    minute</strong>, a clear indicator of aggressive data exfiltration. Suno connects to 17 third-party
+                domains and embeds 24 distinct trackers, including heavyweights like <strong>Tapad Identity Graph (484
+                    requests)</strong> and <strong>TikTok pixels (203 requests)</strong>.</p>
+
+            <div class="evidence-box danger">
+                <div class="label">Critical Finding</div>
+                <p>Suno's 600 PII leakage entries expose sensitive user data — including <code>email</code>,
+                    <code>first_name</code>, <code>last_name</code>, <code>phone</code>, and <code>user_id</code> —
+                    across endpoints like <code>auth.suno.com</code> and <code>studio-api.prod.suno.com</code>. This is
+                    a direct privacy violation at industrial scale.</p>
+            </div>
+
+            <p>Then there's the proxied analytics: <strong>203 disguised POSTs</strong> to endpoints like
+                <code>analytics.tiktok.com/api/v2/pixel/inter</code>, funneling data to advertisers under the radar.
+                Suno also uploads <strong>3.82 MB</strong> of data during our capture — orders of magnitude more than
+                the others.</p>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>POST Destination</th>
+                        <th>Count</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>studio-api.prod.suno.com</code></td>
+                        <td class="worst">637</td>
+                    </tr>
+                    <tr>
+                        <td><code>analytics.tiktok.com</code></td>
+                        <td class="worst">203</td>
+                    </tr>
+                    <tr>
+                        <td><code>m-stratovibe.prod.suno.com</code></td>
+                        <td>95</td>
+                    </tr>
+                    <tr>
+                        <td><code>bat.bing.com</code> / <code>k.clarity.ms</code></td>
+                        <td>63 each</td>
+                    </tr>
+                    <tr>
+                        <td><code>b.applovin.com</code></td>
+                        <td>53</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>Suno's surveillance apparatus is unmatched in the creative AI sector. From Microsoft Clarity GPU loops to
+                hCaptcha proof-of-work mining, this platform is a privacy minefield. If you're using Suno, you're not
+                just creating music — you're <strong>funding a data broker</strong>.</p>
+
+            <h2 id="udio">🔴 Udio: Closer to Suno Than You'd Like</h2>
+            <div class="platform-verdict verdict-high">Threat Level: HIGH</div>
+            <p>Udio lands in the high-threat category, with 357 total requests over a 19.2-minute capture and a
+                troubling <strong>52.7% POST ratio</strong> (188 POSTs). It connects to 3 third-party domains and
+                deploys 6 trackers, including Sentry (15 requests) and <strong>Tapad Identity Graph</strong> (1 request)
+                — the same cross-device tracker Suno leans on heavily.</p>
+
+            <div class="evidence-box danger">
+                <div class="label">Alert</div>
+                <p>Udio uses a Mixpanel proxy at <code>mp.udio.com/track/</code> with explicit IP capture
+                    (<code>?ip=1</code>) in 22 POSTs. This mirrors Suno's aggressive profiling tactics. The
+                    <code>verbose=1</code> flag suggests they're actively debugging their tracking pipeline — not hiding
+                    it, but perfecting it.</p>
+            </div>
+
+            <p>We flagged 32 PII leakage entries, exposing <code>email</code>, <code>phone</code>, and
+                <code>user_id</code> via endpoints like <code>api.udio.com/auth/v1/token</code>. Udio's behavior isn't
+                as egregious as Suno's, but it's cut from the same cloth.</p>
+
+            <h2 id="elevenlabs">🟡 ElevenLabs: Minimal Footprint, Hidden Tricks</h2>
+            <div class="platform-verdict verdict-medium">Threat Level: MEDIUM</div>
+            <p>ElevenLabs presents a lighter profile compared to Suno, with only 87 total requests over a 1.2-minute
+                capture and a 43.7% POST ratio (38 POSTs). It connects to just 1 third-party domain
+                (<code>firestore.googleapis.com</code>) and deploys 4 trackers. However, don't let the numbers fool you
+                — ElevenLabs isn't clean.</p>
+
+            <div class="evidence-box amber">
+                <div class="label">Adblock Evasion Detected</div>
+                <p>ElevenLabs employs a <strong>disguised PostHog proxy</strong> under the path
+                    <code>/dachshund/</code>, with 13 POSTs bypassing adblockers by design. The endpoint
+                    <code>elevenlabs.io/dachshund/750915/i/v0/e/</code> uses gzip-compressed payloads of up to 73 KB —
+                    this is deliberate adblock evasion infrastructure, not incidental analytics.</p>
+            </div>
+
+            <p>We detected 26 PII leakage entries, exposing <code>email</code>, <code>first_name</code>,
+                <code>geo_location</code>, and <code>user_id</code> via endpoints like
+                <code>api.us.elevenlabs.io/v1/auth-account</code>. The obfuscation tactics suggest intent to hide
+                tracking from casual observers.</p>
+
+            <h2 id="midjourney">🟢 Midjourney: The Cleanest of the Bunch</h2>
+            <div class="platform-verdict verdict-low">Threat Level: LOW</div>
+            <p>Midjourney stands out as the least invasive platform in this audit. With just 48 total requests over a
+                0.5-minute capture and a low <strong>22.9% POST ratio</strong> (11 POSTs), it's a stark contrast to
+                Suno's bloat. Midjourney connects to 3 third-party domains and uses 5 trackers, primarily Amplitude (9
+                requests). Data exfiltration is minimal, with only <strong>0.03 MB uploaded</strong>.</p>
+            <p>We identified 8 PII leakage entries, exposing <code>email</code>, <code>phone</code>, and
+                <code>user_id</code> via the explore and firebase-login API endpoints. While not ideal, this is a far
+                cry from Suno's 600 entries. Midjourney's approach appears to prioritize functionality over
+                surveillance.</p>
+
+            <h2 id="conclusion">Conclusion: Suno Sets a Dangerous Precedent</h2>
+            <p>Our forensic audit paints a damning picture of the creative AI landscape. Suno stands alone as a
+                surveillance titan, with a 62.2% POST ratio, 24 trackers, 600 PII-leaking responses, and 203 proxied
+                analytics endpoints — numbers that <strong>dwarf</strong> its peers. Its reliance on Tapad Identity
+                Graph (484 requests) and TikTok pixel POSTs (203) reveals an infrastructure built for data brokering,
+                not just music generation. This is unprecedented in the sector and a clear warning to users.</p>
+            <p>Udio, with a 52.7% POST ratio and Mixpanel proxies capturing IP data, is the closest to Suno's model.
+                ElevenLabs, while less invasive, employs adblock-evasion tactics via disguised PostHog proxies. Midjourney
+                emerges as the cleanest, with a low 22.9% POST ratio and standard Amplitude analytics, but even it
+                isn't immune to PII leakage.</p>
+
+            <div class="evidence-box danger">
+                <div class="label">The Verdict</div>
+                <p>If you value privacy, tread carefully. Suno's apparatus is a glaring red flag for the industry,
+                    normalizing aggressive surveillance under the guise of "free" tools. At VNR, we'll continue to
+                    expose these practices and hold platforms accountable.</p>
+            </div>
+
+            <h2 id="methodology">Methodology: How We Caught Them</h2>
+            <p>At Voss Neural Research, transparency in our methods is non-negotiable. This audit was conducted using
+                HTTP Archive (HAR) captures — a standardized format for recording web traffic. We deployed controlled
+                browser sessions for each platform over consistent usage scenarios (account login, content generation,
+                session idle). Captures spanned varying durations to reflect real-world interaction patterns.</p>
+            <p>Raw HAR data was parsed through our <strong>Antigravity Forensic Engine</strong>, a custom-built tool for
+                dissecting web traffic. We filtered cross-session contamination by URL hostname and Referer headers to
+                ensure accuracy. Metrics like POST ratios, third-party domains, and PII leakage were extracted
+                programmatically, with manual validation for critical findings.</p>
+            <p>Our analysis adheres to the <strong>VOSS Protocol</strong>, VNR's internal standard for forensic
+                auditing:</p>
+            <ul>
+                <li><strong>Repeatability:</strong> Standardized capture and parsing methods to ensure consistent
+                    results.</li>
+                <li><strong>Granularity:</strong> Deep inspection of request methods, payloads, and response headers for
+                    hidden tracking.</li>
+                <li><strong>Attribution:</strong> Mapping data flows to specific domains, trackers, and endpoints for
+                    accountability.</li>
+            </ul>
+            <p>If platforms dispute our findings, we're ready to publish the raw HAR logs (anonymized for user safety) to
+                back every claim. This isn't speculation — it's evidence, captured and analyzed with surgical
+                precision.</p>
+        </article>
+    </div>
+
+    <div style="max-width:760px;margin:40px auto;padding:0 24px;text-align:center;">
+        <p style="font-size:11px;color:#666;">&copy; 2026 Voss Neural Research LLC</p>
+    </div>
+
+    <script>
+        // Sidebar nav scroll spy
+        const sections = document.querySelectorAll('[id]');
+        const navLinks = document.querySelectorAll('#scan-nav .snav');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(s => {
+                if (window.scrollY >= s.offsetTop - 120) current = s.id;
+            });
+            navLinks.forEach(a => {
+                a.classList.remove('act');
+                if (a.getAttribute('href') === '#' + current) a.classList.add('act');
+            });
+        });
+    </script>
+</body>
+
+</html>
