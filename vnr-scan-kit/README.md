@@ -1,72 +1,55 @@
-# VNR SCAN — Cleanup Kit
-## Suno AI Tracker Removal & DNS Protection
+# VNR SCAN Cleanup Kit
 
-Published by Voss Neural Research | www.vossneuralresearch.com
+**Voss Neural Research LLC** — www.vossneuralresearch.com
 
----
+Neutralize the 71+ tracker stack and resource exploitation documented on AI music platforms. This kit includes DNS-level blocking, browser artifact cleanup, and an intelligent scan/verify system.
 
-## ⚠️ STEP ZERO — DELETE SUNO
+## Quick Start (Recommended)
 
-Before running anything:
+Run the Python-based intelligent scanner — it handles everything automatically:
 
-1. Open Suno.com on your PHONE (cellular data, NOT your home WiFi)
-2. Delete your account entirely
-3. Do NOT visit Suno.com on your computer again
+```
+python vnr_scan.py
+```
 
-No cleanup tool can protect you while the source remains active.
-This is the only way to ensure your CPU's safety and guarantee
-that VNR SCAN is effective.
+**Requirements:** Python 3.8+ and Administrator privileges.
 
----
+### Modes
 
-## Step 1: Run LOCKER Mode (DNS Blocklist)
+| Command | What it does |
+|---|---|
+| `python vnr_scan.py` | Full pipeline: Scan → Clean → Verify → Diagnose |
+| `python vnr_scan.py --scan-only` | Forensic scan only (no modifications) |
+| `python vnr_scan.py --no-report` | Skip saving JSON report file |
 
-Right-click `install-locker.bat` → **Run as Administrator**
+### What VNR SCAN v2 Does
 
-This adds 23 tracker domains to your Windows hosts file, permanently
-blocking them at the DNS level. No browser extension, shield, or
-VPN can match this — it blocks BEFORE the request leaves your machine.
+1. **SCAN** — Detects tracker artifacts across Chrome, Brave, Edge, and Comet. Searches LevelDB files for 16 tracker keywords, checks Service Worker caches, artifact directories, DNS LOCKER status, and system-level remnants.
 
-Blocked domains include:
-- hCaptcha (crypto mining infrastructure)
-- Microsoft Clarity (GPU-abusing session replay)
-- Braze, Criteo, Tapad (cross-device fingerprinting)
-- Google Ads, DoubleClick (ad tracking)
-- Sentry, Datadog, Segment, Amplitude (telemetry)
+2. **CLEAN** — Kills browser processes, removes infected LevelDB files, purges Service Worker caches, deletes artifact directories, installs the DNS LOCKER (23 domains), and flushes DNS.
 
-## Step 2: Clean Browser Profiles
+3. **VERIFY** — Re-scans everything and diffs against the pre-clean state. Tells you exactly what was fixed and what wasn't.
 
-Right-click `browser-cleanup.bat` → **Run as Administrator**
+4. **DIAGNOSE** — If cleanup didn't fully work, explains *why* (locked files, re-seeding, missing admin rights) and tells you exactly what to do next.
 
-This removes tracker artifacts from Chrome, Brave, and Edge:
-- Extension caches and CRX files
-- Optimization guide model stores
-- Code caches containing tracker scripts
-- ActorSafetyLists with embedded tracker references
+## Standalone Scripts (Legacy)
 
-**Close all browsers before running.**
+These batch scripts are included as fallbacks if Python is not available:
 
-## Step 3: Verify Clean
+| Script | Purpose |
+|---|---|
+| `install-locker.bat` | Block 23 tracker domains via hosts file |
+| `browser-cleanup.bat` | Remove cached tracker artifacts from browsers |
+| `verify-clean.bat` | Basic 3-point verification check |
 
-Right-click `verify-clean.bat` → **Run as Administrator**
+Run each script as Administrator.
 
-This scans your system and reports:
-- Whether LOCKER Mode is active
-- Whether tracker artifacts remain
-- Current DNS resolution status for blocked domains
+## Step Zero
 
----
+**Before running any cleanup:** Delete your account on the tracked platform and stop visiting it. The tracker stack (hCaptcha + Microsoft Clarity) re-seeds itself into your browser profile on every page load, making cleanup impossible while the source is active.
 
-## What This Kit Does NOT Do
+## Full Evidence
 
-- It does not modify your browser settings
-- It does not install any software
-- It does not transmit any data
-- It does not require an internet connection
-
-Everything runs locally on your machine.
-
-## Support
-
-Full forensic evidence: https://www.vossneuralresearch.com/
-Contact: admin@vossneuralresearch.com
+- Forensic Report: https://www.vossneuralresearch.com/research/suno-har-capture/
+- Technical Dashboard: https://www.vossneuralresearch.com/vnr-scan/
+- Source Code: https://github.com/cybergod-duck/vossneuralresearch
