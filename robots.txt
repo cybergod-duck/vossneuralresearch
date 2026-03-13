@@ -1,6 +1,6 @@
 User-agent: *
 Allow: /
-Sitemap: https://www.vossneuralresearch.com/sitemap.xml
+Sitemap: https://vossneuralresearch.com/sitemap.xml
 
 # Voss Neural Research LLC
 # AI Behavioral Research & Adversarial Auditing
