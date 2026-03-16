@@ -1,6 +1,22 @@
 {
   "redirects": [
     {
+      "source": "/:path(.*)",
+      "has": [{ "type": "host", "value": "www.vossneuralresearch.com" }],
+      "destination": "https://vossneuralresearch.com/:path",
+      "permanent": true
+    },
+    {
+      "source": "/overview",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/overview/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
       "source": "/kraken",
       "destination": "https://gum.new/gum/cmm899sv3000304jycuyd48dl",
       "permanent": false
