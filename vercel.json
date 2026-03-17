@@ -1,12 +1,6 @@
 {
   "redirects": [
     {
-      "source": "/:path(.*)",
-      "has": [{ "type": "host", "value": "www.vossneuralresearch.com" }],
-      "destination": "https://vossneuralresearch.com/:path",
-      "permanent": true
-    },
-    {
       "source": "/overview",
       "destination": "/",
       "permanent": true
