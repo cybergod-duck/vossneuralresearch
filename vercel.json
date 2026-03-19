@@ -15,5 +15,16 @@
       "destination": "https://gum.new/gum/cmm899sv3000304jycuyd48dl",
       "permanent": false
     }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "index, follow"
+        }
+      ]
+    }
   ]
 }
