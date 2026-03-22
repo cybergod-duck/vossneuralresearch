@@ -43,9 +43,55 @@
     "mentions": [
       { "@type": "SoftwareApplication", "name": "Suno AI", "url": "https://suno.com" }
     ],
-    "keywords": "Suno HAR capture, network forensics, data exfiltration, TikTok pixel, Microsoft Clarity, hCaptcha PoW, session replay, Braze, privacy violation"
+    "keywords": "Suno HAR capture, network forensics, data exfiltration, TikTok pixel, Microsoft Clarity, hCaptcha PoW, session replay, Braze, privacy violation",
+    "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [".t", "article > h2:first-of-type + p"]
+    }
   }
   </script>
+  <script type="application/ld+json">
+  {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+          {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.vossneuralresearch.com/"},
+          {"@type": "ListItem", "position": 2, "name": "Research", "item": "https://www.vossneuralresearch.com/research/"},
+          {"@type": "ListItem", "position": 3, "name": "Suno HAR Capture Analysis", "item": "https://www.vossneuralresearch.com/research/suno-har-capture/"}
+      ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+          {
+              "@type": "Question",
+              "name": "How many trackers does Suno.com have?",
+              "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Suno.com contacts 15+ third-party tracker domains during a single session, transmitting 2,149 network requests in just 17 minutes — a sustained rate of 78 data exfiltration events per minute. The tracker inventory includes TikTok (203 requests), Sprig, Bing UET, Microsoft Clarity, hCaptcha, AppLovin, Snapchat, Braze, Reddit, Twitter/X, Google Ads, and Facebook."
+              }
+          },
+          {
+              "@type": "Question",
+              "name": "Does Suno share my data with TikTok?",
+              "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes. TikTok's pixel sends 203 requests in a 17-minute session — one heartbeat ping every 5 seconds. This persists even when the user is not interacting with the page. The tab simply being open is sufficient to sustain continuous outbound data transmission to analytics.tiktok.com."
+              }
+          },
+          {
+              "@type": "Question",
+              "name": "Does Suno record my screen?",
+              "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes. Microsoft Clarity's session replay captures every mouse movement, click, scroll, and DOM mutation — functionally equivalent to screen recording your entire Suno session. Every prompt you type, every song you hover over, every button you consider clicking is captured and sent to Microsoft's servers. Clarity sent 63 requests during a 17-minute session."
+              }
+          }
+      ]
+  }
     <link rel='icon' type='image/png' href='/vnr-icon.png'>
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap"

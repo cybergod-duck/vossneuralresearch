@@ -53,7 +53,48 @@
                     {"@type": "SoftwareApplication", "name": "Microsoft Clarity"}
                 ],
                 "about": {"@type": "Thing", "name": "AI Data Privacy", "description": "Privacy and data sovereignty in generative AI platforms"},
-                "keywords": "Suno AI privacy, Suno data collection 2026, Is Suno safe, Suno privacy update, Suno trackers, hCaptcha proof-of-work computation, Microsoft Clarity GPU abuse"
+                "keywords": "Suno AI privacy, Suno data collection 2026, Is Suno safe, Suno privacy update, Suno trackers, hCaptcha proof-of-work computation, Microsoft Clarity GPU abuse",
+                "speakable": {
+                    "@type": "SpeakableSpecification",
+                    "cssSelector": [".t", "article > p:first-of-type"]
+                }
+            },
+            {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.vossneuralresearch.com/"},
+                    {"@type": "ListItem", "position": 2, "name": "Research", "item": "https://www.vossneuralresearch.com/research/"},
+                    {"@type": "ListItem", "position": 3, "name": "Suno Privacy Audit 2026", "item": "https://www.vossneuralresearch.com/research/suno-privacy-audit-2026/"}
+                ]
+            },
+            {
+                "@type": "FAQPage",
+                "mainEntity": [
+                    {
+                        "@type": "Question",
+                        "name": "How does Suno AI use my data?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Suno AI harvests your text prompts, edit history, and creative decision trees through a category called 'Interactive Chat Information,' added in a quiet February 2026 privacy update. This data is used to train Suno's proprietary models. Your creative process — the way you think about music, the words you choose, the iterations you explore — is being collected as training data."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Does Suno AI track me in incognito mode?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Yes. Suno's tracker stack bypasses browser privacy modes using SharedWorker API (persistent worker threads surviving tab closures), BroadcastChannel API (cross-tab communication persisting identification tokens), and browser fingerprinting (hardware characteristics, canvas rendering signatures, WebGL capabilities). When you open an incognito window, you believe you're anonymous — on Suno, you're not."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Is Suno doing cryptocurrency mining on my computer?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Suno deploys hCaptcha which executes proof-of-work (PoW) computational challenges on your CPU every time you load a page. This is functionally cryptocurrency mining — your processor performs computational work that generates value for hCaptcha's network, and you pay for it in electricity and hardware wear. This computational work is not disclosed in Suno's Terms of Service or Privacy Policy."
+                        }
+                    }
+                ]
             }
         ]
     }

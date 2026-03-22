@@ -44,6 +44,35 @@
                 "author": {"@id": "https://www.vossneuralresearch.com/#organization"},
                 "publisher": {"@id": "https://www.vossneuralresearch.com/#organization"},
                 "keywords": "suno, tracker, persistence"
+            },
+            {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.vossneuralresearch.com/"},
+                    {"@type": "ListItem", "position": 2, "name": "Research", "item": "https://www.vossneuralresearch.com/research/"},
+                    {"@type": "ListItem", "position": 3, "name": "The Step Zero Problem", "item": "https://www.vossneuralresearch.com/research/tracker-persistence-step-zero/"}
+                ]
+            },
+            {
+                "@type": "FAQPage",
+                "mainEntity": [
+                    {
+                        "@type": "Question",
+                        "name": "Do Suno trackers persist after closing the browser?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Yes. Suno's tracking infrastructure uses a persistence mechanism called the 'Step Zero' problem — trackers regenerate via first-party proxy infrastructure (m-stratovibe.prod.suno.com) immediately after cleanup attempts. Standard cookie clearing and browser extension blockers are actively defeated. Hidden background iframes and continuous heartbeat pings every ~5 seconds re-establish tracker connections even after removal."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "How do I remove Suno tracker data?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Browser-level cleanup (clearing cache, deleting cookies, using ad blockers) is insufficient because Suno's tracker infrastructure actively regenerates. The only effective defense is OS-level DNS blocking — a protocol called 'Locker Mode' that severs tracker connections at the network and hosts file layer. Voss Neural Research developed the VNR SCAN tool, which automates this process: it scans for tracker artifacts, cleans infected browser profiles, installs DNS-level blocks, and verifies the cleanup worked."
+                        }
+                    }
+                ]
             }
         ]
     }
