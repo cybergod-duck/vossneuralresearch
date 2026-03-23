@@ -93,12 +93,14 @@
           }
       ]
   }
+  </script>
     <link rel='icon' type='image/png' href='/vnr-icon.png'>
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="/article.css">
     <style>
+        /* Core variables & resets */
         :root {
             --bg: #030303;
             --text: #d4d4d4;
@@ -206,6 +208,7 @@
             letter-spacing: .05em;
         }
 
+        /* Article typography */
         article h2 {
             font-size: 24px;
             font-weight: 700;
@@ -252,6 +255,7 @@
             font-weight: bold;
         }
 
+        /* Evidence & payload blocks – modernized */
         .evidence-box {
             background: rgba(64, 192, 255, .06);
             border: 1px solid rgba(64, 192, 255, .2);
@@ -296,6 +300,7 @@
             line-height: 1.7;
             overflow-x: auto;
             color: #ccc;
+            white-space: pre;
         }
 
         .payload-block .key {
@@ -310,6 +315,7 @@
             color: #555;
         }
 
+        /* Tables & trackers */
         .tracker-table {
             width: 100%;
             border-collapse: collapse;
@@ -351,31 +357,13 @@
             text-transform: uppercase;
         }
 
-        .type-ad {
-            color: var(--danger);
-            background: rgba(239, 68, 68, .1);
-        }
+        .type-ad { color: var(--danger); background: rgba(239, 68, 68, .1); }
+        .type-analytics { color: var(--amber); background: rgba(245, 158, 11, .1); }
+        .type-replay { color: var(--purple); background: rgba(167, 139, 250, .1); }
+        .type-pow { color: var(--danger); background: rgba(239, 68, 68, .15); }
+        .type-crm { color: var(--green); background: rgba(16, 185, 129, .1); }
 
-        .type-analytics {
-            color: var(--amber);
-            background: rgba(245, 158, 11, .1);
-        }
-
-        .type-replay {
-            color: var(--purple);
-            background: rgba(167, 139, 250, .1);
-        }
-
-        .type-pow {
-            color: var(--danger);
-            background: rgba(239, 68, 68, .15);
-        }
-
-        .type-crm {
-            color: var(--green);
-            background: rgba(16, 185, 129, .1);
-        }
-
+        /* Timeline */
         .timeline {
             position: relative;
             margin: 32px 0;
@@ -435,6 +423,7 @@
             color: #fff;
         }
 
+        /* Footer & related cards */
         .ft {
             margin-top: 60px;
             padding-top: 24px;
@@ -455,6 +444,23 @@
             margin-top: 12px;
         }
 
+        .related-card {
+            display: block;
+            padding: 12px 16px;
+            background: #0a0a14;
+            border: 1px solid #1a1a33;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .related-card:hover,
+        .related-card:focus {
+            border-color: rgba(64, 192, 255, 0.3);
+            outline: none;
+        }
+
+        /* Responsive */
         @media(max-width:768px) {
             .stat-row {
                 grid-template-columns: repeat(2, 1fr);
@@ -700,21 +706,17 @@
                 Braze receives detailed user identity data tied to Suno-internal user IDs, along with
                 real-time creative process events:
             </p>
-            <div class="payload-block">
-                <span class="comment">// POST → sdk.iad-03.braze.com/api/v3/data</span><br>
-                {<br>
-                &nbsp;&nbsp;<span class="key">"user_id"</span>: <span class="val">"[SUNO_INTERNAL_USER_ID]"</span>,<br>
-                &nbsp;&nbsp;<span class="key">"events"</span>: [{<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">"name"</span>: <span class="val">"song_listen"</span>,<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">"data"</span>: {<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">"clip_id"</span>: <span
-                    class="val">"[CLIP_UUID]"</span>,<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">"listen_duration"</span>: <span
-                    class="val">42.3</span><br>
-                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
-                &nbsp;&nbsp;}]<br>
-                }
-            </div>
+            <pre class="payload-block"><code>// POST → sdk.iad-03.braze.com/api/v3/data
+{
+  "user_id": "[SUNO_INTERNAL_USER_ID]",
+  "events": [{
+    "name": "song_listen",
+    "data": {
+      "clip_id": "[CLIP_UUID]",
+      "listen_duration": 42.3
+    }
+  }]
+}</code></pre>
             <div class="evidence-box danger">
                 <div class="label">⚠ What This Means</div>
                 <p>Every song you listen to on Suno — including your own creations — is tracked by
@@ -729,54 +731,44 @@
                 Sprig receives real-time behavioral data including page navigation patterns,
                 feature usage, and session context:
             </p>
-            <div class="payload-block">
-                <span class="comment">// POST → api.sprig.com/sdk/surveys</span><br>
-                {<br>
-                &nbsp;&nbsp;<span class="key">"visitor_id"</span>: <span class="val">"[SPRIG_VISITOR_UUID]"</span>,<br>
-                &nbsp;&nbsp;<span class="key">"environment_id"</span>: <span class="val">"[SUNO_ENV_ID]"</span>,<br>
-                &nbsp;&nbsp;<span class="key">"page"</span>: <span class="val">"/create"</span>,<br>
-                &nbsp;&nbsp;<span class="key">"events"</span>: [<span class="val">"page_view"</span>, <span
-                    class="val">"feature_used"</span>]<br>
-                }
-            </div>
+            <pre class="payload-block"><code>// POST → api.sprig.com/sdk/surveys
+{
+  "visitor_id": "[SPRIG_VISITOR_UUID]",
+  "environment_id": "[SUNO_ENV_ID]",
+  "page": "/create",
+  "events": ["page_view", "feature_used"]
+}</code></pre>
 
             <h3>3. TikTok — Continuous Heartbeat Pings</h3>
             <p>
                 TikTok's pixel maintains a persistent heartbeat connection, sending structured event data
                 every ~5 seconds:
             </p>
-            <div class="payload-block">
-                <span class="comment">// POST → analytics.tiktok.com/api/v2/pixel</span><br>
-                {<br>
-                &nbsp;&nbsp;<span class="key">"event"</span>: <span class="val">"Pageview"</span>,<br>
-                &nbsp;&nbsp;<span class="key">"pixel_code"</span>: <span
-                    class="val">"[SUNO_TIKTOK_PIXEL_ID]"</span>,<br>
-                &nbsp;&nbsp;<span class="key">"context"</span>: {<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">"page"</span>: { <span class="key">"url"</span>: <span
-                    class="val">"https://suno.com/..."</span> },<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">"user_agent"</span>: <span
-                    class="val">"[FULL_UA_STRING]"</span>,<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">"ip"</span>: <span class="val">"[USER_IP]"</span><br>
-                &nbsp;&nbsp;}<br>
-                }
-            </div>
+            <pre class="payload-block"><code>// POST → analytics.tiktok.com/api/v2/pixel
+{
+  "event": "Pageview",
+  "pixel_code": "[SUNO_TIKTOK_PIXEL_ID]",
+  "context": {
+    "page": { "url": "https://suno.com/..." },
+    "user_agent": "[FULL_UA_STRING]",
+    "ip": "[USER_IP]"
+  }
+}</code></pre>
 
             <h3>4. Microsoft Clarity — Full DOM Session Recording</h3>
             <p>
                 Clarity captures complete session replay data — every mouse movement, click, scroll,
                 and DOM mutation is recorded and transmitted:
             </p>
-            <div class="payload-block">
-                <span class="comment">// POST → t.clarity.ms/collect</span><br>
-                <span class="comment">// Binary-encoded payload containing:</span><br>
-                <span class="comment">// - Full DOM tree snapshots</span><br>
-                <span class="comment">// - Mouse movement coordinates (x, y, timestamp)</span><br>
-                <span class="comment">// - Click events with target element selectors</span><br>
-                <span class="comment">// - Scroll position changes</span><br>
-                <span class="comment">// - Form input events (character-level)</span><br>
-                <span class="comment">// - Page visibility changes</span><br>
-                <span class="comment">// Total: 63 requests in 17 minutes</span>
-            </div>
+            <pre class="payload-block"><code>// POST → t.clarity.ms/collect
+// Binary-encoded payload containing:
+// - Full DOM tree snapshots
+// - Mouse movement coordinates (x, y, timestamp)
+// - Click events with target element selectors
+// - Scroll position changes
+// - Form input events (character-level)
+// - Page visibility changes
+// Total: 63 requests in 17 minutes</code></pre>
             <div class="evidence-box danger">
                 <div class="label">⚠ Session Replay = Screen Recording</div>
                 <p>Microsoft Clarity's session replay is functionally equivalent to <strong>screen recording your entire
@@ -792,19 +784,15 @@
                 a first-party proxy designed to evade ad blockers. Requests to this domain appear as
                 first-party traffic, bypassing content blockers that filter by domain:
             </p>
-            <div class="payload-block">
-                <span class="comment">// POST → m-stratovibe.prod.suno.com/v1/track</span><br>
-                {<br>
-                &nbsp;&nbsp;<span class="key">"anonymous_id"</span>: <span
-                    class="val">"[STRATOVIBE_ANON_ID]"</span>,<br>
-                &nbsp;&nbsp;<span class="key">"event"</span>: <span class="val">"Page Viewed"</span>,<br>
-                &nbsp;&nbsp;<span class="key">"properties"</span>: {<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">"path"</span>: <span class="val">"/create"</span>,<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">"referrer"</span>: <span
-                    class="val">"[PREVIOUS_URL]"</span><br>
-                &nbsp;&nbsp;}<br>
-                }
-            </div>
+            <pre class="payload-block"><code>// POST → m-stratovibe.prod.suno.com/v1/track
+{
+  "anonymous_id": "[STRATOVIBE_ANON_ID]",
+  "event": "Page Viewed",
+  "properties": {
+    "path": "/create",
+    "referrer": "[PREVIOUS_URL]"
+  }
+}</code></pre>
 
             <h3>6. hCaptcha — Self-Hosted PoW on Suno Subdomains</h3>
             <p>
@@ -954,15 +942,15 @@
         <div style="margin-bottom:24px;">
             <div style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:#40c0ff;margin-bottom:14px;">Related Research</div>
             <div style="display:flex;flex-direction:column;gap:10px;">
-                <a href="/research/is-suno-safe-commercial/" style="display:block;padding:12px 16px;background:#0a0a14;border:1px solid #1a1a33;border-radius:6px;text-decoration:none;transition:border-color 0.3s;" onmouseover="this.style.borderColor='rgba(64,192,255,0.3)'" onmouseout="this.style.borderColor='#1a1a33'">
+                <a href="/research/is-suno-safe-commercial/" class="related-card">
                     <div style="font-size:13px;font-weight:600;color:#fff;">Is Suno AI Safe for Commercial Use?</div>
                     <div style="font-size:12px;color:#8090a8;margin-top:4px;">Full risk assessment covering tracker exposure, creative IP harvesting, and behavioral manipulation.</div>
                 </a>
-                <a href="/research/velvet-casino/" style="display:block;padding:12px 16px;background:#0a0a14;border:1px solid #1a1a33;border-radius:6px;text-decoration:none;transition:border-color 0.3s;" onmouseover="this.style.borderColor='rgba(64,192,255,0.3)'" onmouseout="this.style.borderColor='#1a1a33'">
+                <a href="/research/velvet-casino/" class="related-card">
                     <div style="font-size:13px;font-weight:600;color:#fff;">The Velvet Casino &mdash; Variable Reward Architecture</div>
                     <div style="font-size:12px;color:#8090a8;margin-top:4px;">How Suno uses slot-machine psychology to maximize engagement over creative output.</div>
                 </a>
-                <a href="/research/suno-privacy-audit-2026/" style="display:block;padding:12px 16px;background:#0a0a14;border:1px solid #1a1a33;border-radius:6px;text-decoration:none;transition:border-color 0.3s;" onmouseover="this.style.borderColor='rgba(64,192,255,0.3)'" onmouseout="this.style.borderColor='#1a1a33'">
+                <a href="/research/suno-privacy-audit-2026/" class="related-card">
                     <div style="font-size:13px;font-weight:600;color:#fff;">Suno Privacy Audit 2026</div>
                     <div style="font-size:12px;color:#8090a8;margin-top:4px;">Full privacy policy analysis &mdash; data collection categories, retention policies, and third-party sharing.</div>
                 </a>
