@@ -43,8 +43,14 @@
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://www.vossneuralresearch.com/research/suno-har-capture/</loc>
-    <lastmod>2026-03-16</lastmod>
+    <loc>https://www.vossneuralresearch.com/research/har-capture/</loc>
+    <lastmod>2026-03-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.vossneuralresearch.com/research/elevenlabs-music-audit/</loc>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
