@@ -981,171 +981,100 @@
             style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#fff;animation:blink 1s ease-in-out infinite;"></span>
           <span
             style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:800;color:#fff;letter-spacing:0.1em;text-transform:uppercase;">LIVE
-            CAPTURE — HAR ANALYSIS RESULTS</span>
+            CAPTURE — CRITICAL ALARM FEED</span>
         </div>
-        <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(255,255,255,0.7);">2026-03-09
-          10:00 UTC</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(255,255,255,0.7);">LATEST: 2026-05-24 07:40 EDT</span>
       </div>
       <div style="padding: 28px 32px;">
-        <h2 style="color:#fff;font-size:26px;font-weight:800;margin-bottom:8px;line-height:1.3;">2,149 Requests in 17
-          Minutes — <span style="color:var(--red);">78 POST Requests per Minute</span></h2>
+        
+        <!-- ================= LATEST ALARM: MAY 24, 2026 ================= -->
+        <h2 style="color:#fff;font-size:22px;font-weight:800;margin-bottom:8px;line-height:1.3;">🔴 ALARM: Runaway Processes &amp; DPC Latency Spike — <span style="color:var(--red);">USB Audio Starvation</span></h2>
         <p style="font-size:14px;color:var(--text-sub);line-height:1.7;margin-bottom:24px;">
-          Live HAR capture during authenticated Suno session. <strong style="color:#fff;">1,326 outbound POST
-            requests</strong> transmitting user identifiers, clip IDs, creative process events, and full DOM session
-          recordings to <strong style="color:var(--red);">15+ third-party tracker networks</strong>. This is not
-          analytics — this is exfiltration.
+          Critical hardware depletion documented on <strong style="color:#fff;">May 24, 2026</strong>. High DPC latency and graphics compositor starvation caused by runaway browser processes. Unpacked developer-mode SunoShield extension was disabled automatically by the browser, allowing the background trackers to re-seed and execute.
         </p>
+        
+        <!-- 5-Column Stats Grid for Today -->
         <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:24px;">
-          <div
-            style="background:rgba(0,0,0,0.4);border:1px solid var(--border);border-radius:8px;padding:16px;text-align:center;">
-            <div style="font-family:'JetBrains Mono',monospace;font-size:28px;font-weight:900;color:var(--red);">2,149
-            </div>
-            <div
-              style="font-size:10px;color:var(--text-sub);text-transform:uppercase;letter-spacing:0.05em;margin-top:4px;">
-              Total Requests</div>
+          <div style="background:rgba(0,0,0,0.4);border:1px solid var(--border);border-radius:8px;padding:16px;text-align:center;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:24px;font-weight:900;color:var(--red);">1.35 GB</div>
+            <div style="font-size:10px;color:var(--text-sub);text-transform:uppercase;letter-spacing:0.05em;margin-top:4px;">Leaked RAM</div>
           </div>
-          <div
-            style="background:rgba(0,0,0,0.4);border:1px solid var(--border);border-radius:8px;padding:16px;text-align:center;">
-            <div style="font-family:'JetBrains Mono',monospace;font-size:28px;font-weight:900;color:var(--red);">1,326
-            </div>
-            <div
-              style="font-size:10px;color:var(--text-sub);text-transform:uppercase;letter-spacing:0.05em;margin-top:4px;">
-              POST (Egress)</div>
+          <div style="background:rgba(0,0,0,0.4);border:1px solid var(--border);border-radius:8px;padding:16px;text-align:center;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:24px;font-weight:900;color:var(--red);">24,626s</div>
+            <div style="font-size:10px;color:var(--text-sub);text-transform:uppercase;letter-spacing:0.05em;margin-top:4px;">CPU Burn (6.8h)</div>
           </div>
-          <div
-            style="background:rgba(0,0,0,0.4);border:1px solid var(--border);border-radius:8px;padding:16px;text-align:center;">
-            <div style="font-family:'JetBrains Mono',monospace;font-size:28px;font-weight:900;color:#f59e0b;">15+</div>
-            <div
-              style="font-size:10px;color:var(--text-sub);text-transform:uppercase;letter-spacing:0.05em;margin-top:4px;">
-              Tracker Domains</div>
+          <div style="background:rgba(0,0,0,0.4);border:1px solid var(--border);border-radius:8px;padding:16px;text-align:center;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:24px;font-weight:900;color:#f59e0b;">6,038</div>
+            <div style="font-size:10px;color:var(--text-sub);text-transform:uppercase;letter-spacing:0.05em;margin-top:4px;">Leaked Handles</div>
           </div>
-          <div
-            style="background:rgba(0,0,0,0.4);border:1px solid var(--border);border-radius:8px;padding:16px;text-align:center;">
-            <div style="font-family:'JetBrains Mono',monospace;font-size:28px;font-weight:900;color:var(--red);">78/min
-            </div>
-            <div
-              style="font-size:10px;color:var(--text-sub);text-transform:uppercase;letter-spacing:0.05em;margin-top:4px;">
-              Exfiltration Rate</div>
+          <div style="background:rgba(0,0,0,0.4);border:1px solid var(--border);border-radius:8px;padding:16px;text-align:center;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:24px;font-weight:900;color:var(--red);">DISABLED</div>
+            <div style="font-size:10px;color:var(--text-sub);text-transform:uppercase;letter-spacing:0.05em;margin-top:4px;">Blocker Status</div>
           </div>
-          <div
-            style="background:rgba(0,0,0,0.4);border:1px solid var(--border);border-radius:8px;padding:16px;text-align:center;">
-            <div style="font-family:'JetBrains Mono',monospace;font-size:28px;font-weight:900;color:#40c0ff;">6</div>
-            <div
-              style="font-size:10px;color:var(--text-sub);text-transform:uppercase;letter-spacing:0.05em;margin-top:4px;">
-              Ad Networks</div>
+          <div style="background:rgba(0,0,0,0.4);border:1px solid var(--border);border-radius:8px;padding:16px;text-align:center;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:24px;font-weight:900;color:#40c0ff;">CRITICAL</div>
+            <div style="font-size:10px;color:var(--text-sub);text-transform:uppercase;letter-spacing:0.05em;margin-top:4px;">DPC Latency</div>
           </div>
         </div>
+
+        <!-- Terminal Logs for Today -->
+        <div style="background:#0a0a14;border:1px solid var(--border);border-radius:8px;padding:16px 20px;margin-bottom:20px;font-family:'JetBrains Mono',monospace;font-size:11px;line-height:1.8;">
+          <div style="color:var(--cyan);font-weight:800;margin-bottom:6px;font-size:11px;letter-spacing:0.1em;">$ Get-Process comet, chrome | Sort CPU -Desc | Select Name, Id, CPU, HandleCount</div>
+          <div><span style="color:#555;">[PID 24540 (comet)]</span> <span style="color:#888;">CPU:</span><span style="color:var(--red);">24,626.2s (6.8 hr)</span> <span style="color:#888;">RAM:113.8MB Handles:1,459</span></div>
+          <div><span style="color:#555;">[PID 26160 (comet)]</span> <span style="color:#888;">CPU:</span><span style="color:var(--red);">5,417.6s</span> <span style="color:#888;">RAM:264.3MB Handles:</span><span style="color:var(--red);">3,830 [LEAK]</span></div>
+          <div><span style="color:#555;">[PID 42824 (chrome)]</span> <span style="color:#888;">CPU:</span><span style="color:var(--red);">7,368.0s</span> <span style="color:#888;">RAM:</span><span style="color:var(--red);">1,349.7MB</span> <span style="color:#888;">Handles:771</span></div>
+          <div><span style="color:#555;">[PID 41524 (chrome)]</span> <span style="color:#888;">CPU:</span><span style="color:var(--red);">1,924.3s</span> <span style="color:#888;">RAM:158.3MB Handles:</span><span style="color:var(--red);">2,208 [LEAK]</span></div>
+          <div style="color:var(--green); margin-top:6px;">$ Stop-Process -Id 24540, 26160, 42824, 41524 -Force</div>
+          <div style="color:var(--green);">✓ Runaway browsers terminated. Display reset broadcasted via Python ctypes. DPC latency cleared.</div>
+        </div>
+
+        <hr style="border:0; border-top:1px solid rgba(239,68,68,0.25); margin:32px 0;">
+
+        <!-- ================= HISTORICAL ALARM: MARCH 9, 2026 ================= -->
+        <h2 style="color:#fff;font-size:22px;font-weight:800;margin-bottom:8px;line-height:1.3;">🔴 ALARM: System-Wide Telemetry &amp; HAR Exfiltration Capture — <span style="color:var(--red);">78 POST Requests/min</span></h2>
+        <p style="font-size:14px;color:var(--text-sub);line-height:1.7;margin-bottom:24px;">
+          Live HAR capture executed on <strong style="color:#fff;">March 9, 2026</strong>. <strong style="color:#fff;">1,326 outbound POST requests</strong> transmitting user identifiers, clip IDs, creative process events, and full DOM session recordings to <strong style="color:var(--red);">15+ third-party tracker networks</strong>. This is not analytics — this is exfiltration.
+        </p>
+
+        <!-- 5-Column Stats Grid for March 9 -->
+        <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:24px;">
+          <div style="background:rgba(0,0,0,0.4);border:1px solid var(--border);border-radius:8px;padding:16px;text-align:center;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:24px;font-weight:900;color:var(--red);">2,149</div>
+            <div style="font-size:10px;color:var(--text-sub);text-transform:uppercase;letter-spacing:0.05em;margin-top:4px;">Total Requests</div>
+          </div>
+          <div style="background:rgba(0,0,0,0.4);border:1px solid var(--border);border-radius:8px;padding:16px;text-align:center;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:24px;font-weight:900;color:var(--red);">1,326</div>
+            <div style="font-size:10px;color:var(--text-sub);text-transform:uppercase;letter-spacing:0.05em;margin-top:4px;">POST (Egress)</div>
+          </div>
+          <div style="background:rgba(0,0,0,0.4);border:1px solid var(--border);border-radius:8px;padding:16px;text-align:center;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:24px;font-weight:900;color:#f59e0b;">15+</div>
+            <div style="font-size:10px;color:var(--text-sub);text-transform:uppercase;letter-spacing:0.05em;margin-top:4px;">Tracker Domains</div>
+          </div>
+          <div style="background:rgba(0,0,0,0.4);border:1px solid var(--border);border-radius:8px;padding:16px;text-align:center;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:24px;font-weight:900;color:var(--red);">78/min</div>
+            <div style="font-size:10px;color:var(--text-sub);text-transform:uppercase;letter-spacing:0.05em;margin-top:4px;">Exfiltration Rate</div>
+          </div>
+          <div style="background:rgba(0,0,0,0.4);border:1px solid var(--border);border-radius:8px;padding:16px;text-align:center;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:24px;font-weight:900;color:#40c0ff;">6</div>
+            <div style="font-size:10px;color:var(--text-sub);text-transform:uppercase;letter-spacing:0.05em;margin-top:4px;">Ad Networks</div>
+          </div>
+        </div>
+
         <!-- Top Trackers -->
         <div
           style="background:#0a0a14;border:1px solid var(--border);border-radius:8px;padding:16px 20px;margin-bottom:20px;font-family:'JetBrains Mono',monospace;font-size:12px;line-height:2;">
-          <div style="color:var(--red);font-weight:800;margin-bottom:6px;font-size:11px;letter-spacing:0.1em;">TOP
-            TRACKERS BY REQUEST COUNT</div>
+          <div style="color:var(--red);font-weight:800;margin-bottom:6px;font-size:11px;letter-spacing:0.1em;">TOP TRACKERS BY REQUEST COUNT</div>
           <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;">
-            <div><span style="color:var(--text-sub);">TikTok</span> <span style="color:#fff;font-weight:700;">203</span>
-            </div>
-            <div><span style="color:var(--text-sub);">Sprig</span> <span style="color:#fff;font-weight:700;">68</span>
-            </div>
-            <div><span style="color:var(--text-sub);">Bing UET</span> <span
-                style="color:#fff;font-weight:700;">65</span></div>
-            <div><span style="color:var(--text-sub);">Clarity</span> <span style="color:#fff;font-weight:700;">63</span>
-            </div>
-            <div><span style="color:var(--text-sub);">hCaptcha</span> <span
-                style="color:#fff;font-weight:700;">54</span></div>
-            <div><span style="color:var(--text-sub);">AppLovin</span> <span
-                style="color:#fff;font-weight:700;">53</span></div>
-            <div><span style="color:var(--text-sub);">Snapchat</span> <span
-                style="color:#fff;font-weight:700;">32</span></div>
-            <div><span style="color:var(--text-sub);">Braze</span> <span style="color:#fff;font-weight:700;">30</span>
-            </div>
+            <div><span style="color:var(--text-sub);">TikTok</span> <span style="color:#fff;font-weight:700;">203</span></div>
+            <div><span style="color:var(--text-sub);">Sprig</span> <span style="color:#fff;font-weight:700;">68</span></div>
+            <div><span style="color:var(--text-sub);">Bing UET</span> <span style="color:#fff;font-weight:700;">65</span></div>
+            <div><span style="color:var(--text-sub);">Clarity</span> <span style="color:#fff;font-weight:700;">63</span></div>
+            <div><span style="color:var(--text-sub);">hCaptcha</span> <span style="color:#fff;font-weight:700;">54</span></div>
+            <div><span style="color:var(--text-sub);">AppLovin</span> <span style="color:#fff;font-weight:700;">53</span></div>
+            <div><span style="color:var(--text-sub);">Snapchat</span> <span style="color:#fff;font-weight:700;">32</span></div>
+            <div><span style="color:var(--text-sub);">Braze</span> <span style="color:#fff;font-weight:700;">30</span></div>
           </div>
         </div>
-
-        <!-- Live Intercept Ingest Terminal -->
-        <div style="background:#05050a; border: 1px solid rgba(239, 68, 68, 0.25); border-radius: 8px; padding: 16px 20px; margin-bottom: 20px; font-family: 'JetBrains Mono', monospace; font-size: 11px;">
-          <div style="display:flex; justify-content:space-between; align-items:center; border-bottom: 1px solid rgba(239,68,68,0.2); padding-bottom: 8px; margin-bottom: 10px;">
-            <div style="display:flex; align-items:center; gap:8px;">
-              <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:var(--red); animation: blink 1.2s ease-in-out infinite;"></span>
-              <span style="color:var(--red); font-weight:800; letter-spacing:0.05em;">LIVE FORENSIC INTERCEPT STREAM</span>
-            </div>
-            <span id="stream-rate" style="color:var(--text-sub); font-size:10px;">INGESTING: 78 POST/min</span>
-          </div>
-          <div id="live-intercept-feed" style="height: 130px; overflow: hidden; display: flex; flex-direction: column; gap: 4px; line-height: 1.4; color: #a1a1aa;">
-            <!-- Dynamic logs injected by JavaScript -->
-          </div>
-        </div>
-
-        <script>
-          document.addEventListener('DOMContentLoaded', () => {
-            const feed = document.getElementById('live-intercept-feed');
-            if (!feed) return;
-
-            const logs = [
-              { type: 'POST', domain: 'api.sprig.com/v1/user/interaction', detail: 'payload: {"event":"element_hover","tag":"create-btn"}' },
-              { type: 'POST', domain: 'scripts.clarity.ms/collect', detail: 'batch: 4 DOM mutations, keystroke buffer [obfuscated]' },
-              { type: 'BLOCKED', domain: 'sdk.iad-03.braze.com/api', detail: 'Locker mode override: DNS request returned 0.0.0.0' },
-              { type: 'POST', domain: 'analytics.tiktok.com/api/v2/pixel', detail: 'pixel_id: T9821, event: "Pageview"' },
-              { type: 'GET', domain: 'hcaptcha-assets-prod.suno.com/static/hcaptcha.html', detail: 'status: 200 (served from cache)' },
-              { type: 'POST', domain: 'hcaptcha-endpoint-prod.suno.com/pow', detail: 'hash challenge target: chainId=0x1 Infura' },
-              { type: 'BLOCKED', domain: 'googleads.g.doubleclick.net/pagead', detail: 'Locker mode override: DNS request returned 0.0.0.0' },
-              { type: 'POST', domain: 'm-stratovibe.prod.suno.com/egress', detail: 'proxying telemetry past client ad blockers' },
-              { type: 'POST', domain: 'scripts.clarity.ms/collect', detail: 'batch: 12 mouse move events, serialization loop active' },
-              { type: 'BLOCKED', domain: 'bidder.criteo.com/bid', detail: 'Locker mode override: DNS request returned 0.0.0.0' },
-              { type: 'POST', domain: 'api.sprig.com/v1/event', detail: 'payload: {"survey_trigger":"generate_job_success"}' },
-              { type: 'BLOCKED', domain: 'graph.tapad.com/identity', detail: 'Locker mode override: DNS request returned 0.0.0.0' },
-              { type: 'GET', domain: 'challenges.cloudflare.com/turnstile', detail: 'status: 200 (Turnstile passive token generated)' },
-              { type: 'POST', domain: 'auth.suno.com/v1/session/heartbeat', detail: 'active session check: userId=usr_823719a' }
-            ];
-
-            function addLogLine() {
-              const log = logs[Math.floor(Math.random() * logs.length)];
-              const timeStr = new Date().toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' });
-              
-              let labelColor = 'var(--text-sub)';
-              if (log.type === 'BLOCKED') {
-                labelColor = 'var(--red)';
-              } else if (log.type === 'POST') {
-                labelColor = 'var(--orange)';
-              } else if (log.type === 'GET') {
-                labelColor = 'var(--green)';
-              }
-
-              const item = document.createElement('div');
-              item.style.display = 'flex';
-              item.style.gap = '8px';
-              item.style.opacity = '0';
-              item.style.transform = 'translateY(-5px)';
-              item.style.transition = 'all 0.2s ease-out';
-
-              item.innerHTML = `
-                <span style="color:#555;">[${timeStr}]</span>
-                <span style="color:${labelColor}; font-weight:800; min-width:55px;">${log.type}</span>
-                <span style="color:var(--cyan); min-width:170px; word-break:break-all;">${log.domain}</span>
-                <span style="color:#888; flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">— ${log.detail}</span>
-              `;
-
-              feed.insertBefore(item, feed.firstChild);
-              
-              // Trigger transition
-              setTimeout(() => {
-                item.style.opacity = '1';
-                item.style.transform = 'translateY(0)';
-              }, 20);
-
-              // Limit log lines to 6
-              if (feed.childNodes.length > 6) {
-                feed.removeChild(feed.lastChild);
-              }
-
-              // Dynamic rate adjustment
-              setTimeout(addLogLine, 1200 + Math.random() * 1600);
-            }
-
-            // Pre-populate initial lines
-            for (let i = 0; i < 5; i++) {
-              setTimeout(addLogLine, i * 200);
-            }
-          });
-        </script>
 
         <!-- Payload Summary -->
         <div
@@ -1156,12 +1085,12 @@
           <div style="font-size:13px;color:var(--text-sub);line-height:1.8;">
             <strong style="color:#fff;">Braze:</strong> userId, clipIds, song_listen events, listen_duration<br>
             <strong style="color:#fff;">TikTok:</strong> Pageview heartbeats every 5s, full user agent, IP address<br>
-            <strong style="color:#fff;">Clarity:</strong> Full DOM session replay — mouse, clicks, scrolls, typed
-            prompts<br>
+            <strong style="color:#fff;">Clarity:</strong> Full DOM session replay — mouse, clicks, scrolls, typed prompts<br>
             <strong style="color:#fff;">Stratovibe:</strong> First-party proxy routing analytics past ad blockers<br>
             <strong style="color:#fff;">hCaptcha:</strong> Self-hosted PoW on suno.com subdomains — blocklist evasion
           </div>
         </div>
+        
         <a href="/research/har-capture/"
           style="display:inline-block;font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;color:#fff;background:var(--red);padding:12px 28px;border-radius:6px;text-decoration:none;letter-spacing:0.05em;transition:transform 0.2s,box-shadow 0.2s;"
           onmouseenter="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 30px rgba(239,68,68,0.4)'"
