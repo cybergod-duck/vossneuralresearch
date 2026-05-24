@@ -1499,6 +1499,32 @@
           Research
         </p>
       </div>
+
+      <!-- Incident 5: May 24 2026, 06:40 EST — RUNAWAY COMET & CHROME MEMORY LEAK -->
+      <div class="gpu-abuse"
+        style="border-left-color:var(--red); background:rgba(239,68,68,0.06); border-color:rgba(239,68,68,0.25); margin-top:16px;">
+        <h3 style="color:var(--red); font-size:14px;">🔴 INCIDENT — 2026-05-24 06:40 EST — RUNAWAY COMET &amp; CHROME LEAK</h3>
+        <p style="font-size:11px; color:var(--text-sub); margin-bottom:8px; line-height:1.5;">
+          <strong style="color:#fff;">Audio interface distortion &amp; mouse stuttering:</strong> High DPC latency and graphics compositor starvation caused by runaway browser processes.
+          Unpacked developer-mode SunoShield extension was disabled/uninstalled automatically by the browser, allowing the background trackers to re-seed.
+        </p>
+        <div
+          style="background:#0d1117; border-radius:6px; padding:10px 12px; font-family:'JetBrains Mono',monospace; font-size:10px; line-height:1.6; margin-bottom:8px;">
+          <div style="color:var(--cyan);">$ Get-Process comet, chrome | Sort CPU -Desc | Select Name, Id, CPU, HandleCount</div>
+          <div><span class="hit">[PID 24540 (comet)]</span> <span class="output">CPU:</span><span class="crit">24,626.2s (6.8 hr)</span> <span class="output">RAM:113.8MB Handles:1,459</span></div>
+          <div><span class="hit">[PID 26160 (comet)]</span> <span class="output">CPU:</span><span class="crit">5,417.6s</span> <span class="output">RAM:264.3MB Handles:</span><span class="crit">3,830 [LEAK]</span></div>
+          <div><span class="hit">[PID 42824 (chrome)]</span> <span class="output">CPU:</span><span class="crit">7,368.0s</span> <span class="output">RAM:</span><span class="crit">1,349.7MB</span> <span class="output">Handles:771</span></div>
+          <div><span class="hit">[PID 41524 (chrome)]</span> <span class="output">CPU:</span><span class="crit">1,924.3s</span> <span class="output">RAM:158.3MB Handles:</span><span class="crit">2,208 [LEAK]</span></div>
+          <div style="color:var(--green);">$ Stop-Process -Id 24540, 26160, 42824, 41524 -Force</div>
+          <div style="color:var(--green);">✓ Runaway browsers terminated. Display reset broadcasted via Python ctypes. DPC latency cleared.</div>
+        </div>
+        <p style="font-size:10px; color:var(--text-sub); line-height:1.4;">
+          <strong style="color:var(--orange);">Impact:</strong> Starved USB audio engine driver, causing audio buffer underruns (loud digital noise/static) and input lag (mouse jumps).
+        </p>
+        <p style="font-size:11px; color:#555; font-family:'JetBrains Mono',monospace; margin-top:8px;">
+          Incident logged by VNR SCAN Protocol v2.0 | Action: Browsers terminated and display settings refreshed
+        </p>
+      </div>
     </div>
 
     <!-- MARCH 9 LIVE CAPTURE — hCAPTCHA SELF-HOSTING DISCOVERY -->
