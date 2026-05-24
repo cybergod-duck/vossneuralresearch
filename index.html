@@ -1059,6 +1059,94 @@
             </div>
           </div>
         </div>
+
+        <!-- Live Intercept Ingest Terminal -->
+        <div style="background:#05050a; border: 1px solid rgba(239, 68, 68, 0.25); border-radius: 8px; padding: 16px 20px; margin-bottom: 20px; font-family: 'JetBrains Mono', monospace; font-size: 11px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; border-bottom: 1px solid rgba(239,68,68,0.2); padding-bottom: 8px; margin-bottom: 10px;">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:var(--red); animation: blink 1.2s ease-in-out infinite;"></span>
+              <span style="color:var(--red); font-weight:800; letter-spacing:0.05em;">LIVE FORENSIC INTERCEPT STREAM</span>
+            </div>
+            <span id="stream-rate" style="color:var(--text-sub); font-size:10px;">INGESTING: 78 POST/min</span>
+          </div>
+          <div id="live-intercept-feed" style="height: 130px; overflow: hidden; display: flex; flex-direction: column; gap: 4px; line-height: 1.4; color: #a1a1aa;">
+            <!-- Dynamic logs injected by JavaScript -->
+          </div>
+        </div>
+
+        <script>
+          document.addEventListener('DOMContentLoaded', () => {
+            const feed = document.getElementById('live-intercept-feed');
+            if (!feed) return;
+
+            const logs = [
+              { type: 'POST', domain: 'api.sprig.com/v1/user/interaction', detail: 'payload: {"event":"element_hover","tag":"create-btn"}' },
+              { type: 'POST', domain: 'scripts.clarity.ms/collect', detail: 'batch: 4 DOM mutations, keystroke buffer [obfuscated]' },
+              { type: 'BLOCKED', domain: 'sdk.iad-03.braze.com/api', detail: 'Locker mode override: DNS request returned 0.0.0.0' },
+              { type: 'POST', domain: 'analytics.tiktok.com/api/v2/pixel', detail: 'pixel_id: T9821, event: "Pageview"' },
+              { type: 'GET', domain: 'hcaptcha-assets-prod.suno.com/static/hcaptcha.html', detail: 'status: 200 (served from cache)' },
+              { type: 'POST', domain: 'hcaptcha-endpoint-prod.suno.com/pow', detail: 'hash challenge target: chainId=0x1 Infura' },
+              { type: 'BLOCKED', domain: 'googleads.g.doubleclick.net/pagead', detail: 'Locker mode override: DNS request returned 0.0.0.0' },
+              { type: 'POST', domain: 'm-stratovibe.prod.suno.com/egress', detail: 'proxying telemetry past client ad blockers' },
+              { type: 'POST', domain: 'scripts.clarity.ms/collect', detail: 'batch: 12 mouse move events, serialization loop active' },
+              { type: 'BLOCKED', domain: 'bidder.criteo.com/bid', detail: 'Locker mode override: DNS request returned 0.0.0.0' },
+              { type: 'POST', domain: 'api.sprig.com/v1/event', detail: 'payload: {"survey_trigger":"generate_job_success"}' },
+              { type: 'BLOCKED', domain: 'graph.tapad.com/identity', detail: 'Locker mode override: DNS request returned 0.0.0.0' },
+              { type: 'GET', domain: 'challenges.cloudflare.com/turnstile', detail: 'status: 200 (Turnstile passive token generated)' },
+              { type: 'POST', domain: 'auth.suno.com/v1/session/heartbeat', detail: 'active session check: userId=usr_823719a' }
+            ];
+
+            function addLogLine() {
+              const log = logs[Math.floor(Math.random() * logs.length)];
+              const timeStr = new Date().toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' });
+              
+              let labelColor = 'var(--text-sub)';
+              if (log.type === 'BLOCKED') {
+                labelColor = 'var(--red)';
+              } else if (log.type === 'POST') {
+                labelColor = 'var(--orange)';
+              } else if (log.type === 'GET') {
+                labelColor = 'var(--green)';
+              }
+
+              const item = document.createElement('div');
+              item.style.display = 'flex';
+              item.style.gap = '8px';
+              item.style.opacity = '0';
+              item.style.transform = 'translateY(-5px)';
+              item.style.transition = 'all 0.2s ease-out';
+
+              item.innerHTML = `
+                <span style="color:#555;">[${timeStr}]</span>
+                <span style="color:${labelColor}; font-weight:800; min-width:55px;">${log.type}</span>
+                <span style="color:var(--cyan); min-width:170px; word-break:break-all;">${log.domain}</span>
+                <span style="color:#888; flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">— ${log.detail}</span>
+              `;
+
+              feed.insertBefore(item, feed.firstChild);
+              
+              // Trigger transition
+              setTimeout(() => {
+                item.style.opacity = '1';
+                item.style.transform = 'translateY(0)';
+              }, 20);
+
+              // Limit log lines to 6
+              if (feed.childNodes.length > 6) {
+                feed.removeChild(feed.lastChild);
+              }
+
+              // Dynamic rate adjustment
+              setTimeout(addLogLine, 1200 + Math.random() * 1600);
+            }
+
+            // Pre-populate initial lines
+            for (let i = 0; i < 5; i++) {
+              setTimeout(addLogLine, i * 200);
+            }
+          });
+        </script>
+
         <!-- Payload Summary -->
         <div
           style="background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.3);border-left:3px solid var(--red);border-radius:6px;padding:16px 20px;margin-bottom:20px;">
