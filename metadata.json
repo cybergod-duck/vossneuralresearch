@@ -1,0 +1,6 @@
+{
+  "name": "Dopamine and AI Scaffolds Hub",
+  "description": "An interactive research companion exploring Methamphetamine addiction rewiring, dopamine dynamics, and the Voss Protocols for mitigating AI dependency.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

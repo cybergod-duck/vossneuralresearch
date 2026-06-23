@@ -1,32 +1,8 @@
-# Vercel
-.vercel
-
-# Environment
-.env*.local
-
-# Internal R&D
-Internal R&D/
-
-# Python
-venv/
-__pycache__/
-*.pyc
-
-# Dev artifacts in research
-research/*.py
-research/*.log
-research/*.txt
-research/__pycache__/
-
-# Internal strategy docs (DO NOT EXPOSE)
-search_authority_strategy.md
-
-# Node
 node_modules/
-
-# OS
+build/
+dist/
+coverage/
 .DS_Store
-Thumbs.db
-
-# Agent/IDE
-.agent/
+*.log
+.env*
+!.env.example
