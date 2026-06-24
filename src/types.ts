@@ -1,3 +1,36 @@
+export interface StudyWeekData {
+  week: number;
+  ghb: number;
+  meth: number;
+  clobromazolam: number;
+  compositeIndex: number;
+  aiSessions: number;
+  promptInterval: number;
+}
+
+export interface TimelineMilestone {
+  id: string;
+  title: string;
+  period: string;
+  description: string;
+  journalLog: string;
+  metrics?: {
+    label: string;
+    value: string;
+    change?: string;
+  }[];
+}
+
+export interface PathwayNode {
+  id: string;
+  label: string;
+  subtitle: string;
+  description: string;
+  neurobiology: string;
+  iconName: string;
+  color: string;
+}
+
 export interface DemographicProfile {
   id: string;
   name: string;

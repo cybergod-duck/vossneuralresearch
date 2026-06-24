@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://vossneuralresearch.com/sitemap.xml

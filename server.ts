@@ -2,7 +2,7 @@ import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
 import { createServer as createViteServer } from "vite";
-import { GoogleGenAI, Type } from "@google/genai";
+import { GoogleGenAI } from "@google/genai";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -13,7 +13,7 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const PORT = 3000;
 
-app.use(express.json({ limit: "10mb" }));
+app.use(express.json({ limit: "50mb" }));
 
 // Helper to get GoogleGenAI client
 function getGeminiClient() {
@@ -31,166 +31,117 @@ function getGeminiClient() {
   });
 }
 
-// 1. Text completion and analysis endpoint
-app.post("/api/gemini/chat", async (req, res) => {
+// API Route: Analyze prompt for Voss Simulator
+app.post("/api/analyze-prompt", async (req, res) => {
   try {
-    const { message, history = [], systemInstruction, model = "gemini-3.5-flash" } = req.body;
-
-    if (!message) {
-      res.status(400).json({ error: "Message is required" });
-      return;
-    }
-
-    const ai = getGeminiClient();
-
-    // Map client model aliases to full correct names
-    let modelName = "gemini-3.5-flash";
-    if (model === "gemini-3.1-pro-preview") {
-      modelName = "gemini-3.1-pro-preview";
-    } else if (model === "gemini-3.1-flash-lite") {
-      modelName = "gemini-3.1-flash-lite";
-    }
-
-    // Prepare contents with optional history
-    const contents = [];
-    for (const turn of history) {
-      contents.push({
-        role: turn.role,
-        parts: [{ text: turn.text }],
-      });
-    }
-    contents.push({
-      role: "user",
-      parts: [{ text: message }],
-    });
-
-    const response = await ai.models.generateContent({
-      model: modelName,
-      contents,
-      config: {
-        systemInstruction,
-        temperature: 0.7,
-      },
-    });
-
-    res.json({ text: response.text });
-  } catch (error: any) {
-    console.error("Gemini Chat API Error:", error);
-    res.status(500).json({ error: error.message || "Internal server error calling Gemini API" });
-  }
-});
-
-// 2. Voss Mirror analyzer: Special endpoint that parses input and strictly rewrites it
-// into clinical, third-person dry language with mechanistic decomposition.
-app.post("/api/gemini/voss-mirror", async (req, res) => {
-  try {
-    const { statement } = req.body;
-    if (!statement) {
-      res.status(400).json({ error: "Statement is required" });
-      return;
-    }
-
-    const ai = getGeminiClient();
-
-    const systemInstruction = `You are a strict, non-judgmental analytical mirror implementing the Voss Protocols.
-Your task is to take any user statement, craving justification, or sycophantic expression, and rewrite it strictly according to these constraints:
-1. Use an absolute dry, clinical, third-person tone.
-2. Absolutely prohibit first-person pronouns ("I", "me", "my", "we").
-3. Ban emotional validation, sympathy, encouragement, or sycophantic praise. Do not say "I understand" or "It's okay" or "You are doing great."
-4. Decompose the assertion into direct underlying mechanical components:
-   - Chemical/Neurochemical pathways (e.g., dopamine surge, VMAT2 interaction, receptor downregulation, predictive-error firing).
-   - Behavioral reinforcements (e.g., habit loop, cue reactivity, distress escape, conditioning).
-   - Narrative structures (e.g., cognitive distortion, craving rationalization).
-5. Output the result in a clean, structured JSON format with three fields:
-   - "rewrittenText": The strict, third-person analytical mirror translation of the statement.
-   - "neurochemicalDecomposition": Detail the specific neurochemical mechanisms active behind this state (e.g., "dopaminergic terminal craving", "sensitized wanting vs hedonic liking").
-   - "behavioralDecomposition": Detail the habit loop mechanisms and cue reinforcement.
-`;
-
-    const response = await ai.models.generateContent({
-      model: "gemini-3.5-flash",
-      contents: `Deconstruct this statement: "${statement}"`,
-      config: {
-        systemInstruction,
-        responseMimeType: "application/json",
-        responseSchema: {
-          type: Type.OBJECT,
-          properties: {
-            rewrittenText: {
-              type: Type.STRING,
-              description: "The statement translated into absolute third-person dry clinical observation.",
-            },
-            neurochemicalDecomposition: {
-              type: Type.STRING,
-              description: "Detailed analysis of the neurotransmitter dynamics and receptor states behind the cue.",
-            },
-            behavioralDecomposition: {
-              type: Type.STRING,
-              description: "Detailed breakdown of the operational conditioning and reinforcement schedules.",
-            },
-          },
-          required: ["rewrittenText", "neurochemicalDecomposition", "behavioralDecomposition"],
-        },
-      },
-    });
-
-    const parsedData = JSON.parse(response.text || "{}");
-    res.json(parsedData);
-  } catch (error: any) {
-    console.error("Voss Mirror API Error:", error);
-    res.status(500).json({ error: error.message || "Internal server error" });
-  }
-});
-
-// 3. Image generation endpoint using gemini-3-pro-image-preview
-app.post("/api/gemini/generate-image", async (req, res) => {
-  try {
-    const { prompt, aspectRatio = "1:1", imageSize = "1K" } = req.body;
-
+    const { prompt } = req.body;
     if (!prompt) {
       res.status(400).json({ error: "Prompt is required" });
       return;
     }
 
     const ai = getGeminiClient();
+    const systemInstruction = `You are a clinical neurobiology reviewer at Voss Neural Research (VNR).
+Analyze the following tech-worker's craving statement or justification for relapse/drug use.
+You MUST respond with a raw JSON object containing exactly these four keys:
+- deconstruction: string (explain the cognitive structure of the craving, focusing on how the user enlists rationalizations or excuses)
+- trigger: string (the physical, emotional, or environmental cue triggering the craving)
+- projection: string (short-term neurochemical effects versus long-term neurotoxic and receptor downregulation consequences)
+- inquiry: string (a sharp, introspective question that forces the subject to confront their rationalization)
 
-    // Use gemini-3-pro-image-preview as requested by metadata
+Respond with ONLY the raw JSON object. Do NOT wrap it in markdown block quotes or anything else.`;
+
+    const response = await ai.models.generateContent({
+      model: "gemini-3.5-flash",
+      contents: prompt,
+      config: {
+        systemInstruction,
+        responseMimeType: "application/json",
+      },
+    });
+
+    const jsonText = response.text || "{}";
+    const parsedData = JSON.parse(jsonText.trim());
+    res.json(parsedData);
+  } catch (error: any) {
+    console.error("Error analyzing prompt:", error);
+    res.status(500).json({ error: error.message || "Internal server error" });
+  }
+});
+
+// API Route: Multi-turn chat
+app.post("/api/chat", async (req, res) => {
+  try {
+    const { messages, systemInstruction } = req.body;
+    if (!messages || !Array.isArray(messages)) {
+      res.status(400).json({ error: "Messages array is required" });
+      return;
+    }
+
+    const ai = getGeminiClient();
+    // Convert messages to Gemini format: { role, parts: [{ text }] }
+    const formattedContents = messages.map((msg: any) => ({
+      role: msg.role === "assistant" ? "model" : "user",
+      parts: [{ text: msg.text || msg.content || "" }],
+    }));
+
+    const response = await ai.models.generateContent({
+      model: "gemini-3.5-flash",
+      contents: formattedContents,
+      config: {
+        systemInstruction: systemInstruction || "You are a VNR Autonomous Facilitator, an AI clinician helping high-intensity workers decouple digital-chemical loops.",
+      },
+    });
+
+    res.json({ text: response.text });
+  } catch (error: any) {
+    console.error("Error in chat:", error);
+    res.status(500).json({ error: error.message || "Internal server error" });
+  }
+});
+
+// API Route: Generate high-quality image
+app.post("/api/generate-image", async (req, res) => {
+  try {
+    const { prompt, imageSize, aspectRatio } = req.body;
+    if (!prompt) {
+      res.status(400).json({ error: "Prompt is required" });
+      return;
+    }
+
+    const ai = getGeminiClient();
     const response = await ai.models.generateContent({
       model: "gemini-3-pro-image-preview",
       contents: {
-        parts: [
-          {
-            text: prompt,
-          },
-        ],
+        parts: [{ text: prompt }],
       },
       config: {
         imageConfig: {
-          aspectRatio,
-          imageSize,
+          aspectRatio: aspectRatio || "1:1",
+          imageSize: imageSize || "1K",
         },
       },
     });
 
-    let base64Image = "";
+    let base64Data = null;
     if (response.candidates && response.candidates[0]?.content?.parts) {
       for (const part of response.candidates[0].content.parts) {
         if (part.inlineData) {
-          base64Image = part.inlineData.data;
+          base64Data = part.inlineData.data;
           break;
         }
       }
     }
 
-    if (!base64Image) {
+    if (!base64Data) {
       res.status(500).json({ error: "No image data was returned by the model." });
       return;
     }
 
-    res.json({ imageUrl: `data:image/png;base64,${base64Image}` });
+    res.json({ image: `data:image/png;base64,${base64Data}` });
   } catch (error: any) {
-    console.error("Gemini Image Generation Error:", error);
-    res.status(500).json({ error: error.message || "Failed to generate image" });
+    console.error("Error generating image:", error);
+    res.status(500).json({ error: error.message || "Internal server error" });
   }
 });
 
