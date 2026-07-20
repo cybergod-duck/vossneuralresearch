@@ -8,10 +8,11 @@ import { VnrLabs } from "./components/VnrLabs";
 import { FundingModal } from "./components/FundingModal";
 import PaperReader from "./components/PaperReader";
 import GrantPortal from "./components/GrantPortal";
+import { VnrLive } from "./components/VnrLive";
 import { Activity, ShieldAlert, Brain, ChevronDown, Award } from "lucide-react";
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState<"showcase" | "library" | "grant">("showcase");
+  const [activeTab, setActiveTab] = useState<"showcase" | "library" | "grant" | "vnrlive">("showcase");
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "instant" as any });
@@ -52,6 +53,16 @@ export default function App() {
               }`}
             >
               Showcase
+            </button>
+            <button
+              onClick={() => setActiveTab("vnrlive")}
+              className={`px-3 py-1.5 rounded-lg text-[10px] sm:text-xs font-mono tracking-wider transition-all cursor-pointer ${
+                activeTab === "vnrlive"
+                  ? "bg-voss-cyan text-slate-950 font-bold shadow-md shadow-voss-cyan/15"
+                  : "text-slate-400 hover:text-white"
+              }`}
+            >
+              VNR LIVE
             </button>
             <button
               onClick={() => setActiveTab("library")}
@@ -167,6 +178,8 @@ export default function App() {
         {activeTab === "library" && <PaperReader />}
 
         {activeTab === "grant" && <GrantPortal />}
+
+        {activeTab === "vnrlive" && <VnrLive />}
       </main>
 
       {/* FOOTER */}
